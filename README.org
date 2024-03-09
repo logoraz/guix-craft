@@ -1,0 +1,5 @@
+#+TITLE: =(define (guix-conf system . home) ...)=
+
+* Introduction
+
+My personal Guix System Configuration & Home Configuration... a WIP.
