@@ -3,7 +3,7 @@
              (gnu services)
              (nongnu packages linux))
 
-(use-service-modules desktop ssh xorg)
+(use-service-modules wm desktop ssh xorg)
 
 (operating-system
  (kernel linux)
@@ -21,20 +21,22 @@
                (supplementary-groups '("wheel" "netdev" "audio" "video")))
               %base-user-accounts))
 
- (packages (cons*
+ (packages (append
             (map specification->package
                  (list
+                  emacs ccl
                   ;; window manager
-                  emacs emacs-exwm emacs-desktop-environment
+                  sbcl stumpwm
                   ;; for HTTPS access
                   nss-certs))
             %base-packages))
 
- (services (cons*
-            (service openssh-service-type)
-            (set-xorg-configuration
-             (xorg-configuration
-              (keyboard-layout keyboard-layout)))
+ (services (append
+            (list
+             (service openssh-service-type)
+             (set-xorg-configuration
+              (xorg-configuration
+               (keyboard-layout keyboard-layout))))
             %desktop-services))
 
  (bootloader (bootloader-configuration
