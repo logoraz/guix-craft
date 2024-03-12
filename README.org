@@ -2,4 +2,46 @@
 
 * Introduction
 
-My personal Guix System Configuration & Home Configuration... a WIP.
+  My personal Guix System Configuration & Home Configuration... a WIP.
+
+** Core Packages/Services - system.scm
+
+  Packages that are specified in 'system.scm':
+
+  - 1. emacs
+  - 2. git
+  - 3. guile
+  - 4. ccl
+  - 5. sbcl
+  - 6. stumpwm
+  - 7. nss-certs
+  - 8. %base-packages
+
+  Services that are specified in 'system.scm':
+
+  - 1. openssh (via openssh-service-type)
+  - 2. xorg (via set-xorg-configuration)
+  - 3. %desktop-services
+
+** User Packages - home.scm
+
+  See 'home.scm' for all the packages specified therein.
+
+** Administration
+
+
+  #+begin_src bash
+
+    guix pull
+    guix pull --delete-generations
+    sudo guix system reconfigure guix.system.scm
+    sudo guix system delete-generations
+    guix home reconfigure guix.home.scm
+    guix home delete-generations
+    guix upgrade
+    guix package --delete-generations
+    guix gc
+    guix gc -d1w # delete generations older than 1 week
+    df -h
+
+  #+end_src

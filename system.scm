@@ -3,7 +3,7 @@
              (gnu services)
              (nongnu packages linux))
 
-(use-service-modules wm desktop ssh xorg)
+(use-service-modules desktop ssh xorg)
 
 (operating-system
  (kernel linux)
@@ -24,11 +24,12 @@
  (packages (append
             (map specification->package
                  (list
-                  emacs ccl
+                  ;; Core programs
+                  "emacs" "git" "guile" "ccl"
                   ;; window manager
-                  sbcl stumpwm
+                  "sbcl" "stumpwm"
                   ;; for HTTPS access
-                  nss-certs))
+                  "nss-certs"))
             %base-packages))
 
  (services (append
@@ -61,5 +62,5 @@
                  (device (uuid
                           "56c2d13f-1179-4786-a138-3c5835e5739c"
                           'ext4))
-                 (type "ext4")))
-               %base-file-systems))
+                 (type "ext4"))
+                %base-file-systems)))
