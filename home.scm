@@ -67,7 +67,7 @@
               "emacs-vterm"
               "texlive-latex"
               "texlive-collection-latex"
-              "texlive"
+              ;; "texlive"
               "gnupg"
               "gstreamer"
               "xrdb"
