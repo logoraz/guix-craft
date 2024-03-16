@@ -32,7 +32,7 @@
 
 ** Installation
 
-  Ref:
+  A rough draft of Guix System installation using nongnu linux kernel.
 
 *** Download =.iso=
 
