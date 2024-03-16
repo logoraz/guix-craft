@@ -1,4 +1,7 @@
 #!/bin/sh
+# Setup:
+# ln -f ~/repos/guix-craft/config/stumpwm/start-stumpwm.sh \
+#       ~/.config/stumpwm/start-stumpwm.sh
 
 # Disable access control for the current user
 #xhost +SI:localuser:$USER
@@ -12,8 +15,11 @@
 # Set fallback pointer
 xsetroot -cursor_name left_ptr
 
+# Set sound to ALSA
+export SDL_AUDIODRIVER=alsa
+
 # Fix scrolling on some GTK3 applications
-#export GDK_CORE_DEVICE_EVENTS=1
+export GDK_CORE_DEVICE_EVENTS=1
 
 # Enable screen compositing
 picom &
@@ -28,6 +34,5 @@ xss-lock -- slock &
 # xrandr
 
 # See: https://mail.gnu.org/archive/html/bug-guix/2023-04/msg00227.html
-#exec stumpwm
 exec sbcl --no-userinit --non-interactive --eval '(require :asdf)' \
      --eval '(asdf:load-system "stumpwm")' --eval '(stumpwm:stumpwm)'

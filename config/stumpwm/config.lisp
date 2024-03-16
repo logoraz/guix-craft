@@ -1,7 +1,7 @@
 ;;;; -*- mode: stumpwm-mode -*-
 ;;;; Stump WM Configuration File
 ;;; Setup:
-;;; ln -s ~/.config/emacs/stumpwm/config.lisp ~/.config/stumpwm/config
+;;; ln -f ~/repos/guix-craft/config/stumpwm/config.lisp ~/.config/stumpwm/config
 
 ;;;  --- Initialization ---
 
@@ -46,9 +46,8 @@
 ;;;  --- Key Bindings ---
 
 ;; Enable multiple keyboard layouts (English and TBD)
-;; (load-module "kbd-layouts")
-;; (kbd-layouts:keyboard-layout-list "us")
-;; (setf kbd-layouts:*caps-lock-behavior* :ctrl)
+(load-module "kbd-layouts")
+(kbd-layouts:keyboard-layout-list "us")
 
 ;; Run xmodmap to remap keys
 ;; (run-shell-command "xmodmap ~/.dotfiles/.config/i3/Xmodmap")
