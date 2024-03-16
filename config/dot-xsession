@@ -1,4 +1,4 @@
 # Setup:
-# ln -s ~/.config/emacs/stumpwm/.xsession ~/.xsession
+# ln -f ~/repos/guix-craft/config/dot-xsession ~/.xsession
 
 /home/raiz/.config/stumpwm/start-stumpwm.sh

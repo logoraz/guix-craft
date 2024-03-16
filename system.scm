@@ -1,5 +1,7 @@
 ;;;; System-wide Configuration
+;; GUIX System Configuration
 ;;
+
 (use-modules (gnu)
 	     (gnu packages)
              (gnu packages cups)
