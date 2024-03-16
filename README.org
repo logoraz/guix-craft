@@ -27,12 +27,13 @@
   Ref: https://systemcrafters.net/craft-your-system-with-guix/full-system-install/
 
 *** Download =.iso=
-       https://github.com/SystemCrafters/guix-installer/releases/tag/v202308290335
+
+   https://github.com/SystemCrafters/guix-installer/releases/tag/v202308290335
 
 *** Create usb installation media
 
-     - =$ sudo dd if=guix-installer-<date number>.iso of=/dev/sdX status=progress=
-     - =$ sync=
+   - =$ sudo dd if=guix-installer-<date number>.iso of=/dev/sdX status=progress=
+   - =$ sync=
 
 *** Graphical Installer
 
@@ -98,6 +99,10 @@
 
 ** Deploy
 
+   Plan is to configure Home services to deloy, i.e create all necessary locations
+   and copy configs to their proper locations (i.e. =.xsession=, stumpwm =config= and
+   =start-stumpwm.sh=, and Nyxt's =config.lisp=) - a WIP...
+
   #+begin_src bash
 
     # Get guix home setup
@@ -123,5 +128,17 @@
     guix gc
     # guix gc -d1w # delete generations older than 1 week
     df -h
+
+    # Copy or Link files to the system locations where they need to be accessed:
+    # needed to start your StumpWM from gdm:
+    ln -f ~/repos/guix-craft/config/dot-xsession ~/.xsession
+    # Get StumpWM stuff in place
+    mkdir ~/.config/stumpwm
+    ln -f ~/repos/guix-craft/config/stumpwm/config.lisp ~/.config/stumpwm/config
+    lf -f ~/repos/guix-craft/config/stumpwm/start-stumpwm.sh \
+          ~/.config/stumpwm/start-stumpwm.sh
+    # Setup Nyxt
+    mkdir ~/.config/nyxt
+    ln -f ~/repos/guix-craft/config/nyxt/config.lisp ~/.config/nyxt/config.lisp
 
   #+end_src
