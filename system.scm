@@ -1,9 +1,14 @@
+;;;; System-wide Configuration
+;;
 (use-modules (gnu)
-             (gnu packages) ;; to use specification->package
+	     (gnu packages)
+             (gnu packages cups)
              (gnu services)
-             (nongnu packages linux))
-
-(use-service-modules desktop ssh xorg)
+             (gnu services cups)
+             (gnu services desktop)
+             (gnu services ssh)
+             (gnu services xorg)
+	     (nongnu packages linux))
 
 (operating-system
  (kernel linux)
@@ -11,56 +16,66 @@
  (locale "en_US.utf8")
  (timezone "America/Los_Angeles")
  (keyboard-layout (keyboard-layout "us"))
- (host-name "thinkpad")
-
- (users (cons (user-account
-               (name "erik")
-               (comment "Erik Almaraz")
-               (group "users")
-               (home-directory "/home/erik")
-               (supplementary-groups '("wheel" "netdev" "audio" "video")))
-              %base-user-accounts))
-
- (packages (append
-            (map specification->package
-                 (list
-                  ;; Core programs
-                  "emacs" "git" "guile" "ccl"
-                  ;; window manager
-                  "sbcl" "stumpwm"
-                  ;; for HTTPS access
-                  "nss-certs"))
-            %base-packages))
-
- (services (append
-            (list
-             (service openssh-service-type)
-             (set-xorg-configuration
-              (xorg-configuration
-               (keyboard-layout keyboard-layout))))
-            %desktop-services))
+ (host-name "logos")
+ 
+ ;; List of user accounts ('root' is implicit).
+ (users (append
+         (list (user-account
+                (name "raiz")
+                (comment "Erik P. Almaraz")
+                (group "users")
+                (home-directory "/home/raiz")
+                (supplementary-groups '("wheel" "netdev" "audio" "video"))))
+         %base-user-accounts))
 
  (bootloader (bootloader-configuration
               (bootloader grub-efi-bootloader)
               (targets (list "/boot/efi"))
               (keyboard-layout keyboard-layout)))
 
- (swap-devices (list
-                (swap-space
-                 (target (uuid
-                          "250048df-e256-406e-8d7d-f7005496ab94")))))
+ (swap-devices (list (swap-space
+                      (target (uuid
+                               "1d78e3c5-3776-4774-bfad-dc0850a21f1c")))))
 
- (file-systems (cons*
-                (file-system
-                 (mount-point "/boot/efi")
-                 (device (uuid
-                          "0E5C-C5DD"
-                          'fat32))
-                 (type "vfat"))
-                (file-system
-                 (mount-point "/")
-                 (device (uuid
-                          "56c2d13f-1179-4786-a138-3c5835e5739c"
-                          'ext4))
-                 (type "ext4"))
-                %base-file-systems)))
+  ;; Use 'blkid' to find unique file system identifiers ("UUIDs").
+ (file-systems (append
+                (list (file-system
+                       (mount-point "/boot/efi")
+                       (device (uuid "0E5C-C5DD"
+                                'fat32))
+                       (type "vfat"))
+                      (file-system
+                       (mount-point "/")
+                       (device (uuid
+                                "4d080674-56cf-4eb0-a6d4-a9e6827aa957"
+                                'ext4))
+                       (type "ext4"))
+                      (file-system
+                       (mount-point "/home")
+                       (device (uuid
+                                "58e6f2e5-89af-4e8c-abfd-9dc7714b2513"
+                                'ext4))
+                       (type "ext4")))
+		%base-file-systems))
+
+ ;; Use 'guix search KEYWORD' to search for packages.
+ (packages (append
+            (map specification->package
+                 (list
+                  ;; Add other system-wide packages here...
+                  "nss-certs"))
+            %base-packages))
+
+ ;; Use 'guix system search KEYWORD' to search for system services.
+ (services (append
+            (list (service cups-service-type
+                           (cups-configuration
+                            (web-interface? #t)
+                            (default-paper-size "Letter")
+                            (extensions (list cups-filters hplip-minimal))))
+                  ;; TODO configure OpenSSH - `openssh-configuration'
+                  (service openssh-service-type)
+                  ;; See: https://guix.gnu.org/manual/en/html_node/X-Window.html
+                  (set-xorg-configuration
+                   (xorg-configuration (keyboard-layout keyboard-layout))))
+            %desktop-services)))
