@@ -1,47 +1,127 @@
-#+TITLE: =(define (guix-conf system . home) ...)=
+#+TITLE: =(define (guix-craft system . home) ...)=
 
 * Introduction
 
-  My personal Guix System Configuration & Home Configuration... a WIP.
+  My personal Guix System & Home Configuration - a WIP.
 
 ** Core Packages/Services - system.scm
 
   Packages that are specified in 'system.scm':
 
-  - 1. emacs
-  - 2. git
-  - 3. guile
-  - 4. ccl
-  - 5. sbcl
-  - 6. stumpwm
-  - 7. nss-certs
-  - 8. %base-packages
+  - 1. nss-certs
+  - 2. %base-packages
 
   Services that are specified in 'system.scm':
 
   - 1. openssh (via openssh-service-type)
   - 2. xorg (via set-xorg-configuration)
-  - 3. %desktop-services
+  - 3. cups (via cups-service-type
+  - 4. %desktop-services
 
 ** User Packages - home.scm
 
   See 'home.scm' for all the packages specified therein.
 
-** Administration
+** Installation
 
+  Ref: https://systemcrafters.net/craft-your-system-with-guix/full-system-install/
+
+*** Download =.iso=
+       https://github.com/SystemCrafters/guix-installer/releases/tag/v202308290335
+
+*** Create usb installation media
+
+     - =$ sudo dd if=guix-installer-<date number>.iso of=/dev/sdX status=progress=
+     - =$ sync=
+
+*** Graphical Installer
+
+   - 1.  Boot into installation media and load GUIX
+   - 2.  Choose graphical installer
+   - 3.  Enter basic system details
+   - 4.  Network setup - select "WiFi", select network and connect.
+   - 5.  Enable substitute servers (recommended)
+   - 6.  Create a user
+   - 7.  Choose a desktop environment
+         Since we will be deploying our setup with StumpWM, this doesn't really
+         matter - just choose "EXWM", we will be using the system.scm here and not
+         the auto-generated "config.scm" from the installer. Mainly using installer
+         to connect to wifi and partition the disk...
+   - 8.  Service selection
+         - OpenSSH: Enables SSH access to this machine
+         - CUPS: Network printer access
+   - 9.  Partitioning the disk
+         - Used option that splits the disk into two segments, with "HOME" as separate
+           partition, did not select option with encryption - I already have enough
+           passwords to store...
+   - 10. Editing the generated configuration
+         - A screen with the final configuration will show from our system install.
+         - At this point switch to a different TTY, namely =Ctrl+Alt+F5=
+         - Once switched to TTY5, press Enter to get into the shell.
+         - The generated configuration is located in =/mnt/etc/config.scm=
+         - =cd= to =/mnt/etc/=, let's clone this repo there
+         - =$ git clone https://github.com/del-raiz/guix-craft.git=
+         - Rename auto-generated config: =mv config.scm auto-config.scm=
+         - Let's copy our's here: =cp guix-craft/system.scm .=
+         - Be sure to edit this file with the information from your auto-generated
+           config.scm file, i.e. replace the following sections with what is in
+           the auto-generated =config.scm=:
+           -  locale, timezone, keyboard-layout, host-name,
+              users, bootloader, swap-devices, and file-systems.
+           - keep everything else the same
+         - We will use the =channels.scm= that came wit the installer as they are
+           locked to a certain commit and guaranteed to work!
+         - You can now delete the cloned repo - we will need to clone it again
+           to deploy our guix home configuration.
+   - 11. System Installation
+         - First setup the Guild build daemon to target the new system partition:
+           =$ herd start cow-store /mnt=
+         - Save channel configuration used to create installer image to the new
+           machine:
+           =$ cp /etc/channels.scm /mnt/etc/=
+           =$ chmod +w /mnt/etc/channels.scm/=
+         - Now Install your system configuration, using the original =channels.scm=
+           file and our edited =system.scm=
+           =$ guix time-machine -C /mnt/etc/channels.scm -- \
+              system init /mnt/etc/system.scm /mnt=
+         - Once everything is done, restart your computer (remember to remove the
+           installation media):
+           - =$ reboot=
+    - 12. Booting into the new system
+          - The system will boot up and gdm will start (TTY7), switch to TTY5:
+            =Ctrl+Alt+F5=
+            - login as root, enter password you created during graphical installer.
+            - Next let's change passwords for root and the user:
+            - =$ passwd=
+            - =$ passwd <username>=
+            - Now we are ready to deploy the GUIX home system - see the next section.
+
+** Deploy
 
   #+begin_src bash
 
+    # Get guix home setup
+    mkdir ~/repos/
+    cd ~/repos
+    git clone https://github.com/del-raiz/guix-craft.git
+    cd guix-craft/
+    # Copy channels.scm to ~/.config/guix
+    cp ./channels.scm ~/.config/guix/
+    # You can delete you channels.scm and system.scm in /etc/ if still there...
+    # that is the default location where they are stored, note that Guix checks
+    # ~/.config/guix for channels.scm and if it doesn't exits, it defaults to
+    # /etc/channels.scm.
+
     guix pull
     guix pull --delete-generations
-    sudo guix system reconfigure guix.system.scm
+    sudo -E guix system reconfigure system.scm
     sudo guix system delete-generations
-    guix home reconfigure guix.home.scm
+    guix home reconfigure home.scm
     guix home delete-generations
     guix upgrade
     guix package --delete-generations
     guix gc
-    guix gc -d1w # delete generations older than 1 week
+    # guix gc -d1w # delete generations older than 1 week
     df -h
 
   #+end_src
