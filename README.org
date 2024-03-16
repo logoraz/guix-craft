@@ -2,7 +2,10 @@
 
 * Introduction
 
-  My personal Guix System & Home Configuration - a WIP.
+  My personal Guix System & Home Configuration with StumpWM and Nyxt.  The goal is
+  to have a system that incorporates as much Lisp configurations as possible, i.e.
+  Guile Scheme, Common Lisp (StumpWM & Nyxt), Emacs Lisp.  Those three alone
+  encapsulates 99% of my workflow (Emacs being the workhorse!)...
 
 ** Core Packages/Services - system.scm
 
@@ -24,7 +27,7 @@
 
 ** Installation
 
-  Ref: https://systemcrafters.net/craft-your-system-with-guix/full-system-install/
+  Ref:
 
 *** Download =.iso=
 
@@ -142,3 +145,28 @@
     ln -f ~/repos/guix-craft/config/nyxt/config.lisp ~/.config/nyxt/config.lisp
 
   #+end_src
+
+
+* References
+
+  - 1. Guix System Installation & Home Configurations:
+
+    - https://systemcrafters.net/craft-your-system-with-guix/full-system-install/
+
+    - https://github.com/iambumblehead/guix-home
+
+  - 2. StumpWM Configurations & Hacks:
+
+    - https://config.phundrak.com/stumpwm
+
+    - https://mail.gnu.org/archive/html/bug-guix/2023-04/msg00227.html
+
+  - 3. Nyxt Configuration
+
+    - https://nyxt.atlas.engineer/documentation
+
+    - https://www.youtube.com/@nyxt-browser
+
+  - 4. Emacs & Guix
+
+    - https://www.youtube.com/@systemcrafters
