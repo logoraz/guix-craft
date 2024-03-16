@@ -1,0 +1,4 @@
+# Setup:
+# ln -s ~/.config/emacs/stumpwm/.xsession ~/.xsession
+
+/home/raiz/.config/stumpwm/start-stumpwm.sh
