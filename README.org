@@ -2,10 +2,11 @@
 
 * Introduction
 
-  My personal Guix System & Home Configuration with StumpWM and Nyxt.  The goal is
-  to have a system that incorporates as much Lisp configurations as possible, i.e.
+  My personal Guix System & Home Configuration with StumpWM and Nyxt!
+
+  The goal is to have a system that incorporates as much Lisp as possible, i.e.
   Guile Scheme, Common Lisp (StumpWM & Nyxt), Emacs Lisp.  Those three alone
-  encapsulates 99% of my workflow (Emacs being the workhorse!)...
+  encapsulates approximately 99% of my workflow (Emacs being the workhorse!)...
 
 ** Core Packages/Services - system.scm
 
@@ -18,12 +19,16 @@
 
   - 1. openssh (via openssh-service-type)
   - 2. xorg (via set-xorg-configuration)
-  - 3. cups (via cups-service-type
+  - 3. cups (via cups-service-type)
   - 4. %desktop-services
 
 ** User Packages - home.scm
 
-  See 'home.scm' for all the packages specified therein.
+  See 'home.scm' for all the packages specified therein. Note that StumpWM is
+  deployed in Guix Home, contrary to how the `Guix Cookbook` details how to setup
+  StumpWM - which fails miserably... To also run StumpWM without errors using
+  contrib modules, it has to be deployed in Home for the 'hack' provided in the
+  references below to work.
 
 ** Installation
 
