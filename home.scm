@@ -5,6 +5,8 @@
              (gnu packages)
              (gnu services)
              (guix gexp)
+             (gnu home services desktop)
+             (gnu home services sound)
              (gnu home services shells))
 
 (define %packages
@@ -12,7 +14,7 @@
    ;; Dev Tools / IDE
    "ccl"  "guile"  "gdb"  "make"  "binutils"
    "git"  "curl"   "git:send-email"
-   "guile-ares-rs" "guile-hoot"
+   "guile-ares-rs" "guile-hoot" "xterm"
    ;; Fonts
    "font-fira-code"  "font-iosevka-aile"
    "font-dejavu"     "font-google-material-design-icons"
@@ -21,7 +23,7 @@
    "gnupg"      "pinentry"         "keepassxc"
    "gstreamer"  "gst-plugins-good" "gst-plugins-bad" "gst-libav"
    ;; Mail
-   "isync"      "msmtp"            "mu"
+   "isync"  "msmtp"  "mu"
    ;; Apps
    "vlc"  "gnucash"  "gimp"  "inkscape"
    ;; Documents
@@ -29,12 +31,12 @@
    "texlive-collection-latexrecommended"
    "texlive-collection-fontsrecommended"
    ;; Windows System Utils
-   "xset"          "xhost"       "feh"
-   "picom"         "xrandr"      "xrdb"
-   "alsa-utils"    "playerctl"   "pavucontrol" "pasystray"
-   "xss-lock"      "slock"
-   "scrot"         "lm-sensors"  "libnotify"
-   "brightnessctl" "nm-tray"     "blueman"
+   "xset"           "xhost"        "xinput"     "xss-lock"
+   "xsetroot"       "xrandr"       "xrdb"
+   "picom"          "feh"          "slock"
+   "pipewire"       "wireplumber"  "playerctl"
+   "scrot"          "lm-sensors"   "libnotify"
+   "brightnessctl"  "blueman"
    "xcursor-themes"))
 
 (define %stumpwm-packages
@@ -44,8 +46,8 @@
    ;; WM Support Modules
    "sbcl-stumpwm-ttf-fonts"   "sbcl-stumpwm-kbd-layouts"
    "sbcl-stumpwm-swm-gaps"    "sbcl-stumpwm-globalwindows"
-   "sbcl-stumpwm-pamixer"     "sbcl-stumpwm-notify"
-   "sbcl-stumpwm-screenshot"  "sbcl-stumpwm-winner-mode"
+   "sbcl-stumpwm-notify"      "sbcl-stumpwm-winner-mode"
+   "sbcl-stumpwm-screenshot"  "sbcl-parse-float"
    ;; mode-line support
    "sbcl-stumpwm-cpu"  "sbcl-stumpwm-mem"   "sbcl-stumpwm-disk"
    "sbcl-stumpwm-net"  "sbcl-stumpwm-wifi"  "sbcl-stumpwm-hostname"
@@ -77,6 +79,9 @@
  ;; services, run 'guix home search KEYWORD' in a terminal.
  (services
   (list
+   (service home-x11-service-type)
+   (service home-dbus-service-type)
+   (service home-pipewire-service-type)
    (service home-bash-service-type
             (home-bash-configuration
 	     (guix-defaults? #f)

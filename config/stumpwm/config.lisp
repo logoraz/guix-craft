@@ -14,6 +14,7 @@
 (set-module-dir (concat +guix-share-path+
                         "common-lisp/sbcl/"))
 
+
 ;;;  --- Environment setup ---
 
 ;; Set up Groups
@@ -43,16 +44,6 @@
       *message-window-y-padding* 10
       *message-window-gravity    :top)
 
-;;;  --- Key Bindings ---
-
-;; Enable multiple keyboard layouts (English and TBD)
-(load-module "kbd-layouts")
-(kbd-layouts:keyboard-layout-list "us")
-
-;; Run xmodmap to remap keys
-;; (run-shell-command "xmodmap ~/.dotfiles/.config/i3/Xmodmap")
-
-;; Set some super key bindings
 
 ;;;  --- Visual Enhancements ---
 
@@ -77,6 +68,7 @@
            :family "Fira Code"
            :subfamily "Regular" :size 11))
 
+
 ;;;  --- Mode line ---
 
 ;; Set mode line colors
@@ -87,15 +79,78 @@
 (when *initializing*
   (mode-line))
 
+
 ;;;  --- Window Placement Rules ---
 
 ;;
 
 ;;;  --- Start initial applications ---
-
-;; (run-shell-command "polybar panel")
 (run-shell-command "feh --bg-scale ~/desktop/wallpapers/sunset-mountain.jpg ")
-;; (run-shell-command "dunst")
-;; (run-shell-command "nm-applet")
-;; (run-shell-command "pasystray")
 
+
+;;;  --- Key Bindings ---
+
+;; Enable multiple keyboard layouts (English and TBD)
+(load-module "kbd-layouts")
+(kbd-layouts:keyboard-layout-list "us")
+
+;; Run xmodmap to remap keys
+;; (run-shell-command "xmodmap ~/.dotfiles/.config/i3/Xmodmap")
+
+;; Audio Controls
+(defparameter *step* 5)
+(defparameter *wpctl-path* "/home/raiz/.guix-home/profile/bin/wpctl")
+(defparameter *default-sink-id* "@DEFAULT_AUDIO_SINK@")
+(defparameter *default-source-id* "@DEFAULT_AUDIO_SOURCE@")
+
+(defun run (args &optional (wait-output nil))
+  (if wait-output
+      (with-output-to-string (s)
+        (sb-ext:run-program *wpctl-path* args :wait t :output s))
+      (sb-ext:run-program *wpctl-path* args :wait nil)))
+
+(defun volume-up (device-id step)
+  (run (list "set-volume" device-id (format nil "~D%+" step))))
+
+(defun volume-down (device-id step)
+  (run (list "set-volume" device-id (format nil "~D%-" step))))
+
+(defun toggle-mute (device-id)
+  (run (list "set-mute" device-id "toggle")))
+
+(defcommand wpctl-volume-up () ()
+  "Increase the volume by N points"
+  (volume-up *default-sink-id* *step*))
+
+(defcommand wpctl-volume-down () ()
+  "Decrease the volume by N points"
+  (volume-down *default-sink-id* *step*))
+
+(defcommand wpctl-toggle-mute () ()
+  "Toggle Mute"
+  (toggle-mute *default-sink-id*))
+
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "wpctl-volume-up")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "wpctl-volume-down")
+(define-key *top-map* (kbd "XF86AudioMute") "wpctl-toggle-mute")
+
+;; Brightness Controls
+;; brightnessct
+
+(define-key *top-map* (kbd "XF86MonBrightnessDown")
+            "exec brightnessctl set 5%-")
+(define-key *top-map* (kbd "XF86MonBrightnessUp")
+            "exec brightnessctl set +5%")
+
+;; Groups
+
+(define-key *top-map* (kbd "s-1") "gselect 1")
+(define-key *top-map* (kbd "s-2") "gselect 2")
+(define-key *top-map* (kbd "s-3") "gselect 3")
+(define-key *top-map* (kbd "s-4") "gselect 4")
+(define-key *top-map* (kbd "s-5") "gselect 5")
+
+
+;; Applications
+
+(define-key *top-map* (kbd "s-n") "exec nyxt")
