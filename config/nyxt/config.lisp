@@ -13,9 +13,7 @@
            (setf (slot-value browser 'restore-session-on-startup-p) nil))
 
 ;;; Password Management
-;; keepassxc (or password-store)
-
-;;; KeePassXC Configuration -example-
+;; KeePassXC Configuration -example-
 
 ;; (defmethod initialize-instance :after
 ;;            ((interface password:keepassxc-interface)

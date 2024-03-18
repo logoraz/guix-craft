@@ -9,11 +9,56 @@
 (setf *default-package* :stumpwm)
 
 ;; --- Add StumpWM module paths (for GUIX) ---
-(defconstant +guix-share-path+ "/home/raiz/.guix-home/profile/share/")
-
+(defconstant +guix-share-path+ (concat (getenv "HOME")
+                                       "/.guix-home/profile/share/"))
 (set-module-dir (concat +guix-share-path+
                         "common-lisp/sbcl/"))
 
+;; A startup message can be used when initializing StumpWM, for now set to nil.
+;; (setf *startup-message* nil)
+
+;; TODO: Determine what the value of AltGr key is and then let's set it.
+;; (setf *altgr-offset* 4)
+;; (register-altgr-as-modifier)
+
+;; --- Initialize Xorg resources ---
+;; (run-shell-command "autostart")
+;; todo - put in autostart script...
+(run-shell-command "feh --bg-scale ~/desktop/wallpapers/sunset-mountain.jpg ")
+;; Run xmodmap to remap keys
+;; (run-shell-command "xmodmap ~/.xmodmap")
+(run-shell-command "xrdb -load ~/.Xresources")
+;; (run-shell-command "xsetroot -cursor_name left_ptr")
+;; (run-shell-command "xset b off")
+;; (run-shell-command "xset s off")
+;; (run-shell-command "export GDK_CORE_DEVICE_EVENTS=1")
+;; (run-shell-command "xss-lock -- slock &")
+;; (run-shell-command "picom &")
+
+
+;; --- Load in custom file modules ---
+
+;; (load "~/.config/stumpwm/modules/bluetooth.lisp")
+(load "~/.config/stumpwm/modules/audio-wpctl.lisp")
+;; (load "~/.config/stumpwm/modules/commands.lisp")
+;; (load "~/.config/stumpwm/modules/placement.lisp")
+;; (load "~/.config/stumpwm/modules/keybindings.lisp")
+;; (load "~/.config/stumpwm/modules/theme.lisp")
+;; (load "~/.config/stumpwm/modules/utilities.lisp")
+(load "~/.config/stumpwm/modules/modeline.lisp")
+;; (load "~/.config/stumpwm/modules/systemd.lisp")
+
+;; Start the mode line
+(when *initializing*
+  (mode-line))
+
+;; Mouse click should focus the window
+(setf *mouse-focus-policy* :click
+      *float-window-modifier* :SUPER)
+
+
+;; Notify that everything is ready!
+;; (setf *startup-message* "StumpWM is ready!")
 
 ;;;  --- Environment setup ---
 
@@ -33,10 +78,6 @@
 
 ;; Change the prefix key to Super-d
 (set-prefix-key (kbd "s-d"))
-
-;; Mouse click should focus the window
-(setf *mouse-focus-policy* :click
-      *float-window-modifier* :SUPER)
 
 ;; Show messages in the center
 (setq *input-window-gravity*     :top
@@ -61,31 +102,13 @@
 (load-module "ttf-fonts")
 (setf xft:*font-dirs* (list (concat +guix-share-path+ "fonts/"))
       clx-truetype:+font-cache-filename+ (concat (getenv "HOME")
-                                                 "/.fonts/font-cache.sexp"))
+                                                 "/.local/share/fonts/"
+                                                 "font-cache.sexp"))
 (xft:cache-fonts)
 (set-font (make-instance
            'xft:font
            :family "Fira Code"
            :subfamily "Regular" :size 11))
-
-
-;;;  --- Mode line ---
-
-;; Set mode line colors
-(setf *mode-line-background-color* "#272C37"
-      *mode-line-foreground-color* "#d8dee9")
-
-;; Start the mode line
-(when *initializing*
-  (mode-line))
-
-
-;;;  --- Window Placement Rules ---
-
-;;
-
-;;;  --- Start initial applications ---
-(run-shell-command "feh --bg-scale ~/desktop/wallpapers/sunset-mountain.jpg ")
 
 
 ;;;  --- Key Bindings ---
@@ -94,42 +117,8 @@
 (load-module "kbd-layouts")
 (kbd-layouts:keyboard-layout-list "us")
 
-;; Run xmodmap to remap keys
-;; (run-shell-command "xmodmap ~/.dotfiles/.config/i3/Xmodmap")
 
 ;; Audio Controls
-(defparameter *step* 5)
-(defparameter *wpctl-path* "/home/raiz/.guix-home/profile/bin/wpctl")
-(defparameter *default-sink-id* "@DEFAULT_AUDIO_SINK@")
-(defparameter *default-source-id* "@DEFAULT_AUDIO_SOURCE@")
-
-(defun run (args &optional (wait-output nil))
-  (if wait-output
-      (with-output-to-string (s)
-        (sb-ext:run-program *wpctl-path* args :wait t :output s))
-      (sb-ext:run-program *wpctl-path* args :wait nil)))
-
-(defun volume-up (device-id step)
-  (run (list "set-volume" device-id (format nil "~D%+" step))))
-
-(defun volume-down (device-id step)
-  (run (list "set-volume" device-id (format nil "~D%-" step))))
-
-(defun toggle-mute (device-id)
-  (run (list "set-mute" device-id "toggle")))
-
-(defcommand wpctl-volume-up () ()
-  "Increase the volume by N points"
-  (volume-up *default-sink-id* *step*))
-
-(defcommand wpctl-volume-down () ()
-  "Decrease the volume by N points"
-  (volume-down *default-sink-id* *step*))
-
-(defcommand wpctl-toggle-mute () ()
-  "Toggle Mute"
-  (toggle-mute *default-sink-id*))
-
 (define-key *top-map* (kbd "XF86AudioRaiseVolume") "wpctl-volume-up")
 (define-key *top-map* (kbd "XF86AudioLowerVolume") "wpctl-volume-down")
 (define-key *top-map* (kbd "XF86AudioMute") "wpctl-toggle-mute")
@@ -154,3 +143,4 @@
 ;; Applications
 
 (define-key *top-map* (kbd "s-n") "exec nyxt")
+(define-key *top-map* (kbd "s-x") "exec xterm")

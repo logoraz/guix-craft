@@ -4,10 +4,11 @@
 #       ~/.config/stumpwm/start-stumpwm.sh
 
 # exec xmodmap ~/.xmodmap
-xrdb -load ~/.Xresources
+# currently handled in stumpwm config via run-command...
+#xrdb -load ~/.Xresources
 
 # Set fallback pointer
-xsetroot -cursor_name left_ptr
+xsetroot -xcf /run/current-system/profile/share/icons/Adwaita/cursors/left_ptr 24
 
 # Turn off system bell & screen-saver control
 xset b off
@@ -23,7 +24,7 @@ export GDK_CORE_DEVICE_EVENTS=1
 # exec xinput --set-prop 14 "Device Enabled" 1
 
 # Enable screen locking on suspend
-xss-lock -- slock &
+# xss-lock -- slock &
 
 # xrandr settings here...
 
