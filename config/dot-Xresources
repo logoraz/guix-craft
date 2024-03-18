@@ -1,5 +1,12 @@
-! XTerm resources
+! Xresources
 ! ln -f ~/repos/guix-craft/config/dot-Xresources ~/.Xresources
+
+! Xcursor resources
+Xcursor*theme: handheld
+Xcursor*size: 24
+
+
+! XTerm resources
 !
 ! Remember to run `xrdb < .Xresources` after changing anything.
 !
