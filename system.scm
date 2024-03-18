@@ -4,13 +4,31 @@
 
 (use-modules (gnu)
 	     (gnu packages)
-             (gnu packages cups)
+             (gnu packages cups) ;;needed for cups service
+             (gnu packages suckless) ;;need for lock service
              (gnu services)
              (gnu services cups)
-             (gnu services desktop)
              (gnu services ssh)
              (gnu services xorg)
+             (gnu services desktop)
 	     (nongnu packages linux))
+
+(define %xorg-packages
+  (list
+   "xhost"
+   "xset"
+   "xsetroot"
+   "xinput"
+   "xrdb"
+   "xrandr"
+   "xterm"
+   "xclip"
+   "xsel"
+   "slock"))
+
+(define %sys-packages
+  (list
+   "nss-certs"))
 
 (operating-system
  (kernel linux)
@@ -36,14 +54,16 @@
               (keyboard-layout keyboard-layout)))
 
  (swap-devices (list (swap-space
-                      (target (uuid
-                               "1d78e3c5-3776-4774-bfad-dc0850a21f1c")))))
+                      (target
+                       (uuid
+                        "1d78e3c5-3776-4774-bfad-dc0850a21f1c")))))
 
-  ;; Use 'blkid' to find unique file system identifiers ("UUIDs").
+ ;; Use 'blkid' to find unique file system identifiers ("UUIDs").
  (file-systems (append
                 (list (file-system
                        (mount-point "/boot/efi")
-                       (device (uuid "0E5C-C5DD"
+                       (device (uuid
+                                "0E5C-C5DD"
                                 'fat32))
                        (type "vfat"))
                       (file-system
@@ -63,9 +83,9 @@
  ;; Use 'guix search KEYWORD' to search for packages.
  (packages (append
             (map specification->package
-                 (list
-                  ;; Add other system-wide packages here...
-                  "nss-certs"))
+                 (append
+                  %xorg-packages
+                  %sys-packages))
             %base-packages))
 
  ;; Use 'guix system search KEYWORD' to search for system services.
@@ -75,9 +95,15 @@
                             (web-interface? #t)
                             (default-paper-size "Letter")
                             (extensions (list cups-filters hplip-minimal))))
-                  ;; TODO configure OpenSSH - `openssh-configuration'
+                  ;;TODO configure OpenSSH - `openssh-configuration'
                   (service openssh-service-type)
                   ;; See: https://guix.gnu.org/manual/en/html_node/X-Window.html
+                  (service screen-locker-service-type
+                           (screen-locker-configuration
+                            (name "slock")
+                            (program (file-append slock "/bin/slock"))))
+                  ;;TODO: Is there a way to add a nice font to the default
+                  ;;      X fonts?
                   (set-xorg-configuration
                    (xorg-configuration (keyboard-layout keyboard-layout))))
             %desktop-services)))

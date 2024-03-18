@@ -9,61 +9,107 @@
              (gnu home services sound)
              (gnu home services shells))
 
-(define %packages
+(define %raiz-packages
   (list
    ;; Dev Tools / IDE
-   "ccl"  "guile"  "gdb"  "make"  "binutils"
-   "git"  "curl"   "git:send-email"
-   "guile-ares-rs" "guile-hoot" "xterm"
+   "ccl"
+   "guile"
+   "gdb"
+   "make"
+   "binutils"
+   "git"
+   "git:send-email"
+   "curl"
+   "guile-ares-rs"
+   "guile-hoot"
    ;; Fonts
-   "font-fira-code"  "font-iosevka-aile"
-   "font-dejavu"     "font-google-material-design-icons"
-   ;; www/mail
-   "nyxt"       "icecat"
-   "gnupg"      "pinentry"         "keepassxc"
-   "gstreamer"  "gst-plugins-good" "gst-plugins-bad" "gst-libav"
-   ;; Mail
-   "isync"  "msmtp"  "mu"
+   "font-fira-code"
+   "font-iosevka-aile"
+   "font-dejavu"
+   "font-google-material-design-icons"
+   ;; WWW/Mail
+   "nyxt"
+   "icecat"
+   "gnupg"
+   "pinentry"
+   "keepassxc"
+   "isync"
+   "msmtp"
+   "mu"
+   "gstreamer"
+   "gst-plugins-good"
+   "gst-plugins-bad"
+   "gst-libav"
    ;; Apps
-   "vlc"  "gnucash"  "gimp"  "inkscape"
+   "vlc"
+   "gnucash"
+   "gimp"
+   "inkscape"
    ;; Documents
    "texlive-scheme-basic"
    "texlive-collection-latexrecommended"
    "texlive-collection-fontsrecommended"
    ;; Windows System Utils
-   "xset"           "xhost"        "xinput"     "xss-lock"
-   "xsetroot"       "xrandr"       "xrdb"
-   "picom"          "feh"          "slock"
-   "pipewire"       "wireplumber"  "playerctl"
-   "scrot"          "lm-sensors"   "libnotify"
-   "brightnessctl"  "blueman"
-   "xcursor-themes"))
+   "picom"
+   "feh"
+   "scrot"
+   "pipewire"
+   "wireplumber"
+   "playerctl"
+   "lm-sensors"
+   "libnotify"
+   "brightnessctl"
+   "blueman"))
 
 (define %stumpwm-packages
   (list
    ;; Window Manager
-   "sbcl"  "stumpwm"  "stumpwm:lib"
+   "sbcl"
+   "stumpwm"
+   "stumpwm:lib"
    ;; WM Support Modules
-   "sbcl-stumpwm-ttf-fonts"   "sbcl-stumpwm-kbd-layouts"
-   "sbcl-stumpwm-swm-gaps"    "sbcl-stumpwm-globalwindows"
-   "sbcl-stumpwm-notify"      "sbcl-stumpwm-winner-mode"
-   "sbcl-stumpwm-screenshot"  "sbcl-parse-float"
+   "sbcl-stumpwm-ttf-fonts"
+   "sbcl-stumpwm-kbd-layouts"
+   "sbcl-stumpwm-swm-gaps"
+   "sbcl-stumpwm-globalwindows"
+   "sbcl-stumpwm-notify"
+   "sbcl-stumpwm-winner-mode"
+   "sbcl-stumpwm-screenshot"
+   "sbcl-parse-float"
    ;; mode-line support
-   "sbcl-stumpwm-cpu"  "sbcl-stumpwm-mem"   "sbcl-stumpwm-disk"
-   "sbcl-stumpwm-net"  "sbcl-stumpwm-wifi"  "sbcl-stumpwm-hostname"
+   "sbcl-stumpwm-cpu"
+   "sbcl-stumpwm-mem"
+   "sbcl-stumpwm-disk"
+   "sbcl-stumpwm-net"
+   "sbcl-stumpwm-wifi"
+   "sbcl-stumpwm-hostname"
    "sbcl-stumpwm-battery-portable"))
 
   (define %emacs-packages
     (list
      "emacs"
-     "emacs-no-littering"  "emacs-ws-butler"
-     "emacs-undo-tree"     "emacs-paredit"   "emacs-denote"
-     "emacs-nord-theme"    "emacs-ligature"  "emacs-marginalia"
-     "emacs-magit"  "emacs-vterm"      "emacs-mbsync"
-     "emacs-mct"    "emacs-orderless"  "emacs-corfu"
-     "emacs-sly"    "emacs-guix"       "emacs-arei"
-     "emacs-org-superstar"  "emacs-org-appear"
-     "emacs-beframe"  "emacs-nyxt"  "emacs-stumpwm-mode"
+     "emacs-no-littering"
+     "emacs-ws-butler"
+     "emacs-undo-tree"
+     "emacs-paredit"
+     "emacs-denote"
+     "emacs-nord-theme"
+     "emacs-ligature"
+     "emacs-marginalia"
+     "emacs-magit"
+     "emacs-vterm"
+     "emacs-mbsync"
+     "emacs-mct"
+     "emacs-orderless"
+     "emacs-corfu"
+     "emacs-sly"
+     "emacs-guix"
+     "emacs-arei"
+     "emacs-org-superstar"
+     "emacs-org-appear"
+     "emacs-beframe"
+     "emacs-nyxt"
+     "emacs-stumpwm-mode"
      "emacs-bongo"))
 
 (home-environment
@@ -71,7 +117,7 @@
  ;; Home profile, under ~/.guix-home/profile.
  (packages (append (map specification->package+output
                         (append
-                         %packages
+                         %raiz-packages
 			 %stumpwm-packages
                          %emacs-packages))))
  
