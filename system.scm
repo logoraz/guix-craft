@@ -24,6 +24,7 @@
    "xterm"
    "xclip"
    "xsel"
+   "xss-lock" ;; new 230318 - need to do a system reconfigure
    "slock"))
 
 (define %sys-packages
@@ -97,13 +98,17 @@
                             (extensions (list cups-filters hplip-minimal))))
                   ;;TODO configure OpenSSH - `openssh-configuration'
                   (service openssh-service-type)
-                  ;; See: https://guix.gnu.org/manual/en/html_node/X-Window.html
+                  ;; See: guix-cookbook 3.7.2.1 Xorg
+                  ;; FIXME: Trial adding xss-lock to system-wide packags, not
+                  ;;        currently working as prescribed by Guix cookbook..
+                  ;; Remove after system configure. 230318 - see package agove.
                   (service screen-locker-service-type
                            (screen-locker-configuration
                             (name "slock")
                             (program (file-append slock "/bin/slock"))))
                   ;;TODO: Is there a way to add a nice font to the default
                   ;;      X fonts?
+                  ;; See: https://guix.gnu.org/manual/en/html_node/X-Window.html
                   (set-xorg-configuration
                    (xorg-configuration (keyboard-layout keyboard-layout))))
             %desktop-services)))
