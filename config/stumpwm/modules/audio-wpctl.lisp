@@ -1,8 +1,12 @@
 ;;;; -*- mode: stumpwm-mode -*-
 ;;;; Stump WM Audio (wpctl) Module
+;;;
 ;;; Setup:
 ;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/audio-wpctl.lisp \
-;;;       ~/.config/stumpwm/config
+;;;       ~/.config/stumpwm/audio-wpctl.lisp
+;;;
+;;; Ref: https://github.com/Junker/stumpwm-wpctl
+
 
 (defparameter *step* 5)
 (defparameter *wpctl-path* "/home/raiz/.guix-home/profile/bin/wpctl")

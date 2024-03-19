@@ -2,7 +2,8 @@
 ;;;; Stump WM Modeline Module
 ;;; Setup:
 ;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/modeline.lisp \
-;;;       ~/.config/stumpwm/config
+;;;       ~/.config/stumpwm/theme.lisp
+
 
 ;; Set mode line colors
 (setf *mode-line-background-color* "#272C37"
