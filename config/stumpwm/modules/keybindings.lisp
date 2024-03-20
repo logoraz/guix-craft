@@ -1,7 +1,7 @@
 ;;;; -*- mode: stumpwm-mode -*-
-;;;; Stump WM Utilities Module
+;;;; Stump WM Keybindings Module
 ;;; Setup:
-;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/theme.lisp \
+;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/keybindings.lisp \
 ;;;       ~/.config/stumpwm/keybindings.lisp
 
 

@@ -1,7 +1,7 @@
 ;;;; -*- mode: stumpwm-mode -*-
 ;;;; Stump WM Frames Module
 ;;; Setup:
-;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/theme.lisp \
+;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/frames.lisp \
 ;;;       ~/.config/stumpwm/frames.lisp
 
 
