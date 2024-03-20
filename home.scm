@@ -9,7 +9,7 @@
              (gnu home services sound)
              (gnu home services shells))
 
-(define %raiz-packages
+(define %logoraz-packages
   (list
    ;; Dev Tools / IDE
    "ccl"
@@ -75,7 +75,7 @@
    "sbcl-stumpwm-notify"
    "sbcl-stumpwm-winner-mode"
    "sbcl-stumpwm-screenshot"
-   "sbcl-parse-float"
+   "sbcl-parse-float" ;; needed for stumpwm-wpctl -> now audio-wpctl
    ;; mode-line support
    "sbcl-stumpwm-cpu"
    "sbcl-stumpwm-mem"
@@ -117,7 +117,7 @@
  ;; Home profile, under ~/.guix-home/profile.
  (packages (append (map specification->package+output
                         (append
-                         %raiz-packages
+                         %logoraz-packages
 			 %stumpwm-packages
                          %emacs-packages))))
  

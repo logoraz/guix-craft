@@ -37,15 +37,18 @@
  (locale "en_US.utf8")
  (timezone "America/Los_Angeles")
  (keyboard-layout (keyboard-layout "us"))
- (host-name "logos")
+ ;; Trial chaning hostname as well, previous was logos
+ (host-name "locutus")
  
  ;; List of user accounts ('root' is implicit).
+ ;; trial chaing home-directory on next system reconfigure to see what it does...
+ ;; previous username was raiz, /home/raiz
  (users (append
          (list (user-account
-                (name "raiz")
+                (name "logoraz")
                 (comment "Erik P. Almaraz")
                 (group "users")
-                (home-directory "/home/raiz")
+                (home-directory "/home/logoraz")
                 (supplementary-groups '("wheel" "netdev" "audio" "video"))))
          %base-user-accounts))
 
