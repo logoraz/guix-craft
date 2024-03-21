@@ -9,7 +9,7 @@
 
 
 (defparameter *step* 5)
-(defparameter *wpctl-path* "/home/raiz/.guix-home/profile/bin/wpctl")
+(defparameter *wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
 (defparameter *default-sink-id* "@DEFAULT_AUDIO_SINK@")
 (defparameter *default-source-id* "@DEFAULT_AUDIO_SOURCE@")
 
