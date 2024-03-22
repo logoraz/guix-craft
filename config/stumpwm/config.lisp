@@ -23,19 +23,12 @@
 ;; (register-altgr-as-modifier)
 
 ;; --- Initialize Xorg resources ---
+;; Needed for StumpWM config
 ;; (run-shell-command "autostart")
 ;;TODO: Put in autostart script?
-(run-shell-command "feh --bg-scale ~/desktop/wallpapers/sunset-mountain.jpg ")
 ;; Run xmodmap to remap keys
 ;; (run-shell-command "xmodmap ~/.xmodmap")
-(run-shell-command "xrdb -load ~/.Xresources")
-;; (run-shell-command "xsetroot -cursor_name left_ptr")
-;; (run-shell-command "xset b off")
-;; (run-shell-command "xset s off")
-;; (run-shell-command "export GDK_CORE_DEVICE_EVENTS=1")
-;; (run-shell-command "xss-lock -- slock &")
-;; (run-shell-command "picom &")
-
+;; xrandr stuff would go here too?
 
 ;; --- Load in custom file modules ---
 
@@ -61,3 +54,8 @@
 
 ;; Notify that everything is ready!
 ;; (setf *startup-message* "StumpWM is ready!")
+
+;; --- Additional Xorg resources ---
+;; XTerm configuration settings
+;;TODO - rename and keep location in local stumpwm dir
+(run-shell-command "xrdb -load ~/.Xresources")

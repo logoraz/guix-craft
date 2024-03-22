@@ -3,9 +3,11 @@
 # ln -f ~/repos/guix-craft/config/stumpwm/start-stumpwm.sh \
 #       ~/.config/stumpwm/start-stumpwm.sh
 
-# exec xmodmap ~/.xmodmap
-# currently handled in stumpwm config via run-command...
-#xrdb -load ~/.Xresources
+# Set Wallpaper
+feh --bg-scale  ~/desktop/wallpapers/sunset-mountain.jpg
+
+# Enable screen compositing
+picom &
 
 # Set fallback pointer
 xsetroot -xcf /run/current-system/profile/share/icons/Adwaita/cursors/left_ptr 24
@@ -13,9 +15,6 @@ xsetroot -xcf /run/current-system/profile/share/icons/Adwaita/cursors/left_ptr 2
 # Turn off system bell & screen-saver control
 xset b off
 xset s off
-
-# Fix scrolling on some GTK3 applications
-# export GDK_CORE_DEVICE_EVENTS=1
 
 # Disable touchpad/trackpad
 # https://packages.guix.gnu.org/packages/xinput/1.6.3/
@@ -26,11 +25,7 @@ xset s off
 # Enable screen locking on suspend
 xss-lock -- slock &
 
-# xrandr settings here...
-
-# Enable screen compositing
-picom &
-
 # See: https://mail.gnu.org/archive/html/bug-guix/2023-04/msg00227.html
 exec sbcl --no-userinit --non-interactive --eval '(require :asdf)' \
      --eval '(asdf:load-system "stumpwm")' --eval '(stumpwm:stumpwm)'
+
