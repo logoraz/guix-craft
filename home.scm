@@ -79,10 +79,10 @@
    ;; mode-line support
    "sbcl-stumpwm-cpu"
    "sbcl-stumpwm-mem"
-   "sbcl-stumpwm-disk"
-   "sbcl-stumpwm-net"
-   "sbcl-stumpwm-wifi"
-   "sbcl-stumpwm-hostname"
+   "sbcl-stumpwm-disk" ;; Not currently using
+   "sbcl-stumpwm-net"  ;; Not currently using
+   "sbcl-stumpwm-wifi" ;; Does not work as intended
+   "sbcl-stumpwm-hostname" ;; Not currently using
    "sbcl-stumpwm-battery-portable"))
 
   (define %emacs-packages

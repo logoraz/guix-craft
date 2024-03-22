@@ -4,7 +4,7 @@
 
 (use-modules (gnu)
 	     (gnu packages)
-             (gnu packages cups) ;;needed for cups service
+             (gnu packages cups)     ;;needed for cups service
              (gnu packages suckless) ;;need for lock service
              (gnu services)
              (gnu services cups)
@@ -24,7 +24,7 @@
    "xterm"
    "xclip"
    "xsel"
-   "xss-lock" ;; new 230318 - need to do a system reconfigure
+   "xss-lock"
    "slock"))
 
 (define %sys-packages
@@ -37,7 +37,6 @@
  (locale "en_US.utf8")
  (timezone "America/Los_Angeles")
  (keyboard-layout (keyboard-layout "us"))
- ;; Trial chaning hostname as well, previous was logos
  (host-name "locutus")
  
  ;; List of user accounts ('root' is implicit).
@@ -102,9 +101,7 @@
                   ;;TODO configure OpenSSH - `openssh-configuration'
                   (service openssh-service-type)
                   ;; See: guix-cookbook 3.7.2.1 Xorg
-                  ;; FIXME: Trial adding xss-lock to system-wide packags, not
-                  ;;        currently working as prescribed by Guix cookbook..
-                  ;; Remove after system configure. 230318 - see package agove.
+                  ;; FIXME: Screen locking not working as prescribed by the manual.
                   (service screen-locker-service-type
                            (screen-locker-configuration
                             (name "slock")
