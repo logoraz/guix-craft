@@ -34,6 +34,7 @@
 ;; (run-shell-command "xset s off")
 ;; (run-shell-command "export GDK_CORE_DEVICE_EVENTS=1")
 ;; Screenlocking suposed to now be handled by system -> system.scm
+;; FIXME - implementation at sys level not workin...
 ;; (run-shell-command "xss-lock -- slock &")
 ;; (run-shell-command "picom &")
 
