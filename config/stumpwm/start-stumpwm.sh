@@ -15,7 +15,7 @@ xset b off
 xset s off
 
 # Fix scrolling on some GTK3 applications
-export GDK_CORE_DEVICE_EVENTS=1
+# export GDK_CORE_DEVICE_EVENTS=1
 
 # Disable touchpad/trackpad
 # https://packages.guix.gnu.org/packages/xinput/1.6.3/
@@ -24,7 +24,7 @@ export GDK_CORE_DEVICE_EVENTS=1
 # exec xinput --set-prop 14 "Device Enabled" 1
 
 # Enable screen locking on suspend
-# xss-lock -- slock &
+xss-lock -- slock &
 
 # xrandr settings here...
 
