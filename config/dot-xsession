@@ -1,4 +1,0 @@
-# Setup:
-# ln -f ~/repos/guix-craft/config/dot-xsession ~/.xsession
-
-exec /home/logoraz/.config/stumpwm/start-stumpwm.sh

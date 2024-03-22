@@ -1,5 +1,5 @@
 ! Xresources
-! ln -f ~/repos/guix-craft/config/dot-Xresources ~/.Xresources
+! ln -f ~/repos/guix-craft/config/xorg/xtermrc ~/.config/xorg/xtermrc
 
 ! Xcursor resources
 Xcursor*theme: handheld
