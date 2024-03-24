@@ -33,6 +33,8 @@
 
 (operating-system
  (kernel linux)
+ ;; (kernel-arguments (cons "i915.enable_psr=0" %default-kernel-arguments))
+ (initrd-modules (cons "i915" %base-initrd-modules))
  (firmware (list linux-firmware))
  (locale "en_US.utf8")
  (timezone "America/Los_Angeles")

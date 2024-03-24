@@ -50,6 +50,9 @@
    "texlive-collection-latexrecommended"
    "texlive-collection-fontsrecommended"
    ;; Windows System Utils
+   ;; see https://gitlab.freedesktop.org/xorg/app/transset
+   ;; https://unix.stackexchange.com/questions/127624/make-xterm-transparent
+   "transset"
    "picom"
    "feh"
    "scrot"
