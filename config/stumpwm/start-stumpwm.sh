@@ -9,21 +9,14 @@ feh --bg-scale  ~/desktop/wallpapers/sunset-mountain.jpg
 # Enable screen compositing
 picom &
 
-# Set fallback pointer
-# Consider setting XCURSOR_PATH
+# Set fallback mouse pointer
+#
 export XCURSOR_PATH=~/.icons/:/run/current-system/profile/share/icons/
 xsetroot -xcf ~/.icons/XCursor-Pro-Dark/cursors/left_ptr 22
-# xsetroot -xcf /run/current-system/profile/share/icons/Adwaita/cursors/left_ptr 22
 
 # Turn off system bell & screen-saver control
 xset b off
 xset s off
-
-# Disable touchpad/trackpad
-# https://packages.guix.gnu.org/packages/xinput/1.6.3/
-# https://askubuntu.com/questions/919495/how-to-disable-touchpad-completely-on-boot#answer-919496
-# exec xinput --set-prop 14 "Device Enabled" 0
-# exec xinput --set-prop 14 "Device Enabled" 1
 
 # Enable screen locking on suspend
 xss-lock -- slock &

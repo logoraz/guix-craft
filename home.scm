@@ -12,8 +12,8 @@
 (define %logoraz-packages
   (list
    ;; Dev Tools / IDE
-   "ccl"
    "guile"
+   "ccl"
    "gdb"
    "make"
    "binutils"
