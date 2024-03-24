@@ -30,6 +30,7 @@
 (load-module "cpu")
 (load-module "mem")
 (load-module "battery-portable")
+(load-module "wifi")
 
 ;; https://github.com/stumpwm/stumpwm-contrib/tree/master/modeline/battery-portable
 ;; in your .stumpwmrc. Battery information is then available via %B in your
@@ -47,8 +48,11 @@
             " | %C"                     ; CPU module
             " | %M"                     ; Mem module
             " | %B"                     ; Battery module
+            " | %I"                     ; Wifi
+;;            " | %P"                     ; wpctl volume
             " | %d"))                   ; Clock
 
 ;; You can customize what’s displayed in CPU module by changing the
 ;; cpu::*cpu-modeline-fmt* internal variable in your init.lisp:
 (setf cpu::*cpu-modeline-fmt* "%c %t") ; default is "%c (%f) %t"
+(setf wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig")

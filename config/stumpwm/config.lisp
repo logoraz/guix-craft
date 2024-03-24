@@ -58,4 +58,3 @@
 ;; --- Additional Xorg resources ---
 ;; XTerm configuration settings
 (run-shell-command "xrdb -load ~/.Xresources")
-(run-shell-command "xrdb -load ~/.config/xorg/xtermrc")
