@@ -36,6 +36,6 @@
 ;; Applications
 
 (define-key *top-map* (kbd "s-n") "exec nyxt")
-(define-key *top-map* (kbd "s-x") "exec xterm")
+(define-key *top-map* (kbd "s-x") "exec ~/.config/xorg/start-xterm.sh")
 ;;TODO - remove as I get nyxt configuration fully functional..
 (define-key *top-map* (kbd "s-i") "exec icecat")

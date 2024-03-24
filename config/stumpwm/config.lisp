@@ -57,5 +57,5 @@
 
 ;; --- Additional Xorg resources ---
 ;; XTerm configuration settings
-;;TODO - rename and keep location in local stumpwm dir
+(run-shell-command "xrdb -load ~/.Xresources")
 (run-shell-command "xrdb -load ~/.config/xorg/xtermrc")

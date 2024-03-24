@@ -10,7 +10,10 @@ feh --bg-scale  ~/desktop/wallpapers/sunset-mountain.jpg
 picom &
 
 # Set fallback pointer
-xsetroot -xcf /run/current-system/profile/share/icons/Adwaita/cursors/left_ptr 24
+# Consider setting XCURSOR_PATH
+export XCURSOR_PATH=~/.icons/:/run/current-system/profile/share/icons/
+xsetroot -xcf ~/.icons/XCursor-Pro-Dark/cursors/left_ptr 22
+# xsetroot -xcf /run/current-system/profile/share/icons/Adwaita/cursors/left_ptr 22
 
 # Turn off system bell & screen-saver control
 xset b off
