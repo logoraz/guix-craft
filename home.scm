@@ -41,6 +41,7 @@
    "gst-plugins-bad"
    "gst-libav"
    ;; Apps
+   "mpv"
    "vlc"
    "gnucash"
    "gimp"
