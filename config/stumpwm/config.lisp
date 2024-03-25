@@ -1,10 +1,10 @@
-;;;; -*- mode: stumpwm-mode -*-
-;;;; Stump WM Initialization File
-;;; Setup:
-;;; ln -f ~/repos/guix-craft/config/stumpwm/config.lisp ~/.config/stumpwm/config
+;; Stump WM Initialization File
+;; Setup:
+;; ln -f ~/repos/guix-craft/config/stumpwm/config.lisp ~/.config/stumpwm/config
 
+;; TODO: set StumpWM to save logs to ~/.config/stumpwm insead of ~/.stumpwm.d/
 
-;;;  --- Initialization ---
+;;  --- Initialization ---
 
 (in-package :stumpwm)
 (setf *default-package* :stumpwm)

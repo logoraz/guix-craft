@@ -1,8 +1,7 @@
-;;;; -*- mode: stumpwm-mode -*-
-;;;; Stump WM Nord Colors Module
-;;; Setup:
-;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/colors.lisp \
-;;;       ~/.config/stumpwm/colors.lisp
+;; Stump WM Nord Colors Module
+;; Setup:
+;; ln -f ~/repos/guix-craft/config/stumpwm/modules/colors.lisp \
+;;       ~/.config/stumpwm/colors.lisp
 
 
 ;; Nord Color Palette

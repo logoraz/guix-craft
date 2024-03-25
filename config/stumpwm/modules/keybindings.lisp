@@ -1,8 +1,7 @@
-;;;; -*- mode: stumpwm-mode -*-
-;;;; Stump WM Keybindings Module
-;;; Setup:
-;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/keybindings.lisp \
-;;;       ~/.config/stumpwm/keybindings.lisp
+;; Stump WM Keybindings Module
+;; Setup:
+;; ln -f ~/repos/guix-craft/config/stumpwm/modules/keybindings.lisp \
+;;       ~/.config/stumpwm/keybindings.lisp
 
 
 ;; Change the prefix key to Super-d

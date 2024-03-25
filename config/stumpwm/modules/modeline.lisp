@@ -1,8 +1,7 @@
-;;;; -*- mode: stumpwm-mode -*-
-;;;; Stump WM Modeline Module
-;;; Setup:
-;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/modeline.lisp \
-;;;       ~/.config/stumpwm/theme.lisp
+;; Stump WM Modeline Module
+;; Setup:
+;; ln -f ~/repos/guix-craft/config/stumpwm/modules/modeline.lisp \
+;;       ~/.config/stumpwm/theme.lisp
 
 
 ;; The timeout of the modeline indicates how often it refreshes in seconds.

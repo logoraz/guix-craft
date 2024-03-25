@@ -1,8 +1,7 @@
-;;;; -*- mode: stumpwm-mode -*-
-;;;; Stump WM Theme Module
-;;; Setup:
-;;; ln -f ~/repos/guix-craft/config/stumpwm/modules/theme.lisp \
-;;;       ~/.config/stumpwm/theme.lisp
+;; Stump WM Theme Module
+;; Setup:
+;; ln -f ~/repos/guix-craft/config/stumpwm/modules/theme.lisp \
+;;       ~/.config/stumpwm/theme.lisp
 
 
 ;; Fonts
