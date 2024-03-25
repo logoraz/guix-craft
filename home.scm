@@ -108,7 +108,7 @@
      "emacs-corfu"
      "emacs-sly"
      "emacs-guix"
-     "emacs-arei"
+     ;; "emacs-arei" ;; This is no longer working...
      "emacs-org-superstar"
      "emacs-org-appear"
      "emacs-beframe"
