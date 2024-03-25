@@ -2,14 +2,13 @@
 ! ln -f ~/repos/guix-craft/config/xorg/xtermrc ~/.config/xorg/xtermrc
 
 ! Xcursor
+! See: https://github.com/ful1e5/XCursor-pro
 Xcursor.theme: XCursor-Pro-Dark
 Xcursor.size: 22
 
 ! XTerm
 !
 ! Remember to run `xrdb < .Xresources` after changing anything.
-!
-! Tavis Ormandy <taviso@gmail.com>
 ! Set the default UI font (menus, toolbar, etc)
 XTerm*XftFont:                  Segoe UI:size=10:antialias=true:style=Regular
 ! Color of UI Components

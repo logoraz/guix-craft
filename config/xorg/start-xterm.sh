@@ -8,4 +8,4 @@
 
 # Sleep long enough to get the window open, and set transparency
 sleep .4s
-transset -a
+transset -a 0.80
