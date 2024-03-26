@@ -7,5 +7,5 @@
 /run/current-system/profile/bin/xterm &
 
 # Sleep long enough to get the window open, and set transparency
-sleep .1s
+sleep .15s
 transset -a 0.80

@@ -83,53 +83,50 @@
    ;; mode-line support
    "sbcl-stumpwm-cpu"
    "sbcl-stumpwm-mem"
-   "sbcl-stumpwm-disk" ;; Not currently using
-   "sbcl-stumpwm-net"  ;; Not currently using
-   "sbcl-stumpwm-wifi" ;; Does not work as intended
-   "sbcl-stumpwm-hostname" ;; Not currently using
+   "sbcl-stumpwm-wifi"
    "sbcl-stumpwm-battery-portable"))
 
   (define %emacs-packages
     (list
      "emacs"
+     "emacs-nord-theme"
+     "emacs-ligature"
      "emacs-no-littering"
      "emacs-ws-butler"
      "emacs-undo-tree"
      "emacs-paredit"
-     "emacs-denote"
-     "emacs-nord-theme"
-     "emacs-ligature"
-     "emacs-marginalia"
-     "emacs-magit"
-     "emacs-vterm"
-     "emacs-mbsync"
      "emacs-mct"
      "emacs-orderless"
      "emacs-corfu"
-     "emacs-sly"
+     "emacs-marginalia"
+     "emacs-beframe"
+     "emacs-denote"
+     "emacs-magit"
      "emacs-guix"
-     ;; "emacs-arei" ;; This is no longer working...
+     "emacs-arei" ;; This is no longer working...
+     "emacs-vterm"
+     "emacs-mbsync"
      "emacs-org-superstar"
      "emacs-org-appear"
-     "emacs-beframe"
      "emacs-nyxt"
+     "emacs-sly"
      "emacs-stumpwm-mode"
      "emacs-bongo"))
 
 (home-environment
  ;; Below is the list of packages that will show up in your
  ;; Home profile, under ~/.guix-home/profile.
- (packages (append (map specification->package+output
-                        (append
-                         %logoraz-packages
-			 %stumpwm-packages
-                         %emacs-packages))))
+ (packages (specifications->packages
+            (append
+                %logoraz-packages
+		%stumpwm-packages
+                %emacs-packages)))
  
  ;; Below is the list of Home services.  To search for available
  ;; services, run 'guix home search KEYWORD' in a terminal.
  (services
   (list
-   (service home-x11-service-type)
+   ;; (service home-x11-service-type)
    (service home-dbus-service-type)
    (service home-pipewire-service-type)
    (service home-bash-service-type
