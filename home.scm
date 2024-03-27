@@ -12,7 +12,9 @@
 (define %logoraz-packages
   (list
    ;; Dev Tools / IDE
-   "guile"
+   "guile-next"
+   "guile-ares-rs"
+   "guile-hoot"
    "ccl"
    "gdb"
    "make"
@@ -20,8 +22,6 @@
    "git"
    "git:send-email"
    "curl"
-   "guile-ares-rs"
-   "guile-hoot"
    ;; Fonts
    "font-fira-code"
    "font-iosevka-aile"
@@ -102,15 +102,15 @@
      "emacs-beframe"
      "emacs-denote"
      "emacs-magit"
+     "emacs-vterm"
      "emacs-guix"
      "emacs-arei" ;; This is no longer working...
-     "emacs-vterm"
+     "emacs-sly"
+     "emacs-nyxt"
+     "emacs-stumpwm-mode"
      "emacs-mbsync"
      "emacs-org-superstar"
      "emacs-org-appear"
-     "emacs-nyxt"
-     "emacs-sly"
-     "emacs-stumpwm-mode"
      "emacs-bongo"))
 
 (home-environment

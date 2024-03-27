@@ -6,11 +6,10 @@
 
 ;; Set up Groups
 (when *initializing*
-  (grename "[EMACS]")
-  (gnewbg  "[TERM]")
-  (gnewbg  "[WWW]")
-  (gnewbg  "[FILES]")
-  (gnewbg  "[PRIV]"))
+  (grename "EMACS")
+  (gnewbg  "XTERM")
+  (gnewbg  "WWW")
+  (gnewbg  "PRIV"))
 
 (clear-window-placement-rules)
 
