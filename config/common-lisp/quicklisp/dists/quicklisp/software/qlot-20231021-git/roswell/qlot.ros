@@ -1,0 +1,19 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -L sbcl-bin -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  (let ((*standard-output* (make-broadcast-stream))
+        (*trace-output* (make-broadcast-stream)))
+    (funcall (intern (string '#:load-system) '#:asdf) '#:qlot/cli)))
+
+(defpackage #:ros/script/qlot
+  (:use #:cl)
+  (:import-from #:qlot/cli
+                #:qlot-command))
+(in-package #:ros/script/qlot)
+
+(defun main (&optional $1 &rest argv)
+  (apply #'qlot-command $1 argv))

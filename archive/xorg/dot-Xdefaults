@@ -1,0 +1,5 @@
+! -*- conf-xdefaults -*-
+! TODO
+
+XTerm*utf8: always
+XTerm*metaSendsEscape: true

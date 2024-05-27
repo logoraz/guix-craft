@@ -1,0 +1,217 @@
+#+TITLE: =(define (guix-craft system . home) ...)=
+#+subtitle: ... a work in progress
+#+author: Erik Pablo Almaraz (logoraz)
+#+email: erikalmaraz@fastmail.com
+:args:
+#+language: en
+#+options: ':t toc:nil author:t email:t num:t
+#+startup: content indent
+#+macro: latest-export-date '(eval (format-time-string "%F %T %z"))'
+:end:
+
+* Introduction
+
+  My personal Guix System & Home Configuration with Gnome.
+
+  I am currently configuring Guix SD for Common Lisp development, as a result I am
+  currently working on integrating quicklisp. As you will see, my config is mostly
+  founded on Lisp-based applications, i.e. Lem, Nyxt and Emacs.
+
+  The config directory comprises of those applications/frameworks which I have
+  personaly setup (and not all my 'dot files' therein) - a work in progress.
+  Currently using a shell script to deploy, but am working on using Guix/Guile
+  scheme in handling this task in a more robust manner (reproducible).
+
+  This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th Gen
+  (Type 20FB) Laptop.
+
+** System Configuration Outline (=system.scm=)
+
+ Define system-level services & packages:
+
+ - 1. =%system-services=
+   - Set Gnome Desktop Environment (Wayland at least)
+   - Set OpenSSH service
+   - =guix-home-service-type= -> (TODO would like to handle both concurrently)
+   - Modify =%desktop-services= to utilize substitutes where possible
+     as opposed to compiling everything...
+     See: https://git.savannah.gnu.org/cgit/guix.git/tree/gnu?h=v1.4.0
+
+- 2. =%system-packages= -> wip
+   This is Guix's default packages needed at the system level.
+
+** Home Configuration Outline (=home.scm=)
+
+ Define user-level services & packages:
+
+ - 1. =%logoraz-packages= -> My everyday packages (i.e. fonts, web, apps, tools)
+ - 2. =%dev-packages= -> Guile/Common Lisp packages I use consistently
+ - 3. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
+ - 4. =services= -> wip (need to modularize to separate variable definitions)
+   - =home-environment-variables-service-type=
+   - =home-bash-service-type=
+   - TBD (more to do here)
+
+** Installation
+
+*** Live Image/ISO
+
+ I specifically used the guix-installer, but next time my give the =guix-live-image=
+ a try... best to have both present for reference:
+
+ 1. https://github.com/SystemCrafters/guix-installer/releases/tag/v202308290335
+
+ 2. https://github.com/SystemCrafters/guix-live-image
+
+*** Create usb installation media
+
+For a quick reference on how to create usb installation media:
+
+- List information about block devices (i.e. see what disks you have and find
+  your usb)
+
+#+begin_src sh
+
+  $ lsblk
+
+#+end_src
+
+- Create your usb installation media (note: =sdX -> sdb= for me)
+
+#+begin_src sh
+
+  $ sudo dd if=guix-installer-<date number>.iso of=/dev/sdX status=progress=
+
+#+end_src
+
+*** Graphical Installer Procedure
+
+Followed =SystemCrafters= prescription for installation:
+
+- https://systemcrafters.net/craft-your-system-with-guix/full-system-install/
+
+** Deploy
+
+*** Initial setup/deployment (WIP)
+
+Plan is to configure Home services to deloy, i.e create all necessary locations
+and copy configs to their proper locations -> still working on refining this to
+follow the =Guix Way=.
+
+#+begin_src sh
+
+  # Get guix home setup
+  mkdir ~/repos/
+  cd ~/repos
+  git clone https://github.com/del-raiz/guix-craft.git
+  cd guix-craft/
+  # Copy channels.scm to ~/.config/guix
+  cp ./channels.scm ~/.config/guix/
+  # You can delete you channels.scm and system.scm in /etc/ if still there...
+  # that is the default location where they are stored, note that Guix checks
+  # ~/.config/guix for channels.scm and if it doesn't exits, it defaults to
+  # /etc/channels.scm.
+
+  guix pull
+  guix pull --delete-generations
+  sudo -E guix system reconfigure system.scm
+  sudo guix system delete-generations
+  guix home reconfigure home.scm
+  guix home delete-generations
+  guix upgrade
+  guix package --delete-generations
+  guix gc
+  # guix gc -d1w # delete generations older than 1 week
+  df -h
+
+  # Deploy the configuration to ~/.config/
+  # Use the deployment scripts in each config module:
+
+  # Setup Emacs
+  ./config/emacs/deploy-emacs.sh
+
+  # Setup Lem
+  ./config/lem/deploy-lem.sh
+
+  # Setup Nyxt
+  ./config/nyxt/deploy-nyxt.sh
+
+  # Setup Common Lisp Environment (quicklisp, FFI (WIP), etc.)
+  ./config/common-lisp/deploy-cl.sh
+
+#+end_src
+
+*** Connecting to Wifi via CLI
+
+Don't have yet a GUI for managing wifi connections in my StumpWM setup, so
+typically connect via command line, and so putting here as a reminder to myself:
+
+#+begin_src sh
+
+  # List Wifi networks available
+  $ sudo nmcli device wifi list
+
+  # Connect to ESSID
+  $ sudo nmcli device wifi connect <ESSID> password <network-password>
+
+#+end_src
+
+List known connections and delete them from list in Network Manager.
+
+#+begin_src sh
+
+  # Get ESSID (name) or UUID of connection to delete
+  $ sudo nmcli connection show
+
+  # Delete connection via ID (aka name or ESSID)
+  $ sudo nmcli connection delete <ESSID>
+
+#+end_src
+
+
+** Common Lisp Stuff
+
+*** Installing Lem (to trial in leu of Emacs)
+
+Lem has unoficial packaing for Guis at [[https://github.com/arthur-dog/lem-guix-packaging][lem-guix-packaging]], clone and install with Guix via:
+
+#+begin_src sh
+
+  $ guix package -f path/to/lem-guix-packaging/package.scm
+
+#+end_src
+
+This currently installs the package outside of Guix Home, will need to figure out if
+there is a way to install with home... This is a work in progress, going to try and
+write a Guix package recipe for latest Lem and push upstream.
+
+
+* References
+
+
+1. Guix System Installation & Home Configurations:
+
+   - https://systemcrafters.net/craft-your-system-with-guix/full-system-install/
+
+   - https://github.com/iambumblehead/guix-home
+
+2. StumpWM Configurations & Hacks:
+
+    - https://config.phundrak.com/stumpwm
+
+    - https://mail.gnu.org/archive/html/bug-guix/2023-04/msg00227.html
+
+3. Nyxt Configuration
+
+   - https://nyxt.atlas.engineer/documentation
+
+   - https://www.youtube.com/@nyxt-browser
+
+4. Emacs & Guix
+
+    - https://www.youtube.com/@systemcrafters
+
+5. Xorg Response Lag solution
+
+    - https://gitlab.com/nonguix/nonguix/-/issues/212
+
