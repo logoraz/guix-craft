@@ -2,6 +2,7 @@
 
 (use-modules (gnu)
 	     (gnu packages)
+             (gnu packages cups)
 	     (gnu services)
              (gnu services xorg)
              (gnu services ssh)
@@ -55,7 +56,14 @@
 (define %system-services
   (cons*
    (service gnome-desktop-service-type)
+   (set-xorg-configuration
+    (xorg-configuration (keyboard-layout %keyboard-layout)))
    (service openssh-service-type)
+   (service cups-service-type
+            (cups-configuration
+             (web-interface? #t)
+             (default-paper-size "Letter")
+             (extensions (list cups-filters hplip-minimal))))
    ;; Set up my home configuration
    ;; (guix-home-service-type
    ;;  `(("logoraz" ,home)))
