@@ -4,6 +4,6 @@ Encoding=UTF-8
 Name=Lem
 Comment="Editor/IDE well-tuned for Common Lisp"
 Exec=/home/logoraz/.guix-profile/bin/lem
-Icon=/home/logoraz/repos/lem-project/lem/frontends/sdl2/resources/icon.png
+Icon=/home/logoraz/repos/forks/lem-project/lem/frontends/sdl2/resources/icon.png
 Categories=Development
 Terminal=false;
