@@ -15,6 +15,13 @@ ln -s ~/repos/guix-craft/config/common-lisp/dot-sbclrc.lisp \
    ~/.sbclrc
 
 # Quicklisp
+# See Advanced Dependencies Management
+# |-> ;; https://lispcookbook.github.io/cl-cookbook/getting-started.html
+# You can drop Common Lisp projects into any of these folders:
+#  ~/quicklisp/local-projects
+#  ~/common-lisp,
+#  ~/.local/share/common-lisp/source,
+
 quicklisp=/home/logoraz/.config/quicklisp
 if [ ! -d $quicklisp ] && [ ! -L $quicklisp ]; then
     echo "/home/logoraz/.config/quicklisp/ does not exist - creating..."

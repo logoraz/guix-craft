@@ -19,6 +19,7 @@ desktop=~/.local/share/applications/
 if [ ! -d $desktop ]; then
     echo "~/.local/share/applications/ does not exist - creating..."
     mkdir ~/.local/share/applications/
-    ln -s ~/repos/guix-craft/config/lem/lem.desktop \
-       ~/.local/share/applications/lem.desktop
 fi
+
+ln -s ~/repos/guix-craft/config/lem/lem.desktop \
+   ~/.local/share/applications/lem.desktop

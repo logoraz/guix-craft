@@ -73,7 +73,7 @@
 ;;       "sbcl --eval \"(asdf:load-system :micros)\"")
 
 ;; Load quicklisp - not sure why it isn't being loaded in ~/.sbclrc file...
-(let ((quicklisp-init (merge-pathnames ".config/quicklisp/setup.lisp"
+(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
                                        (user-homedir-pathname))))
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))

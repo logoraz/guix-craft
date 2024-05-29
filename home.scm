@@ -54,8 +54,7 @@
    "sbcl"                      ; Steel Bank Common Lisp (Primary)
    "ccl"                       ; Clozure Common Lisp (Secondary)
    ;; Common Lisp Tools
-   "sbcl-slynk"
-   "sbcl-slime-swank"
+   ;;
    ;; Base Dev Tools
    "make"
    "binutils"

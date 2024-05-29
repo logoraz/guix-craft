@@ -1,1 +1,0 @@
-dists/quicklisp/software/qlot-20231021-git/
