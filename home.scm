@@ -21,6 +21,7 @@
    "font-google-material-design-icons"
    ;; WWW/Mail
    ;; "nyxt" ;-> Disable for now, will install for development purposes!
+   ;; "wl-clipboard"
    "icecat"
    "keepassxc"
    "gstreamer"
