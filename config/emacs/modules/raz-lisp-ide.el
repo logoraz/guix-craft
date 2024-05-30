@@ -19,6 +19,16 @@
 ;; Code:
 
 
+(setq sly-lisp-implementations
+        '((nyxt-sbcl
+           (lambda () (nyxt-make-guix-cl-for-nyxt
+                  "~/common-lisp/nyxt"
+                  :force t
+                  :cl-implementation "sbcl"
+                  :cl-system "nyxt/gi-gtk"
+                  :no-grafts t
+                  :ad-hoc '("emacs" "xdg-utils" "git"))))))
+
 ;; Enable sly IDE for common lisp
 (use-package sly
   :hook (;; (sly-mode . raz/sly-auto-connect)
@@ -28,19 +38,38 @@
                          "Set default lisp to Steel Bank Common Lisp.")
   (sly-lisp-implementations
    '((ccl ((executable-find "ccl")))
-     (sbcl ((executable-find "sbcl")) :coding-system utf-8-unix))
-   "Set main Lisps: Invoke sly with a prefix, i.e. C-u M-x to choose one from this list.")
+     (sbcl ((executable-find "sbcl")) :coding-system utf-8-unix)
+     ;; Enable development of sly
+     (nyxt-sbcl
+           (lambda () (nyxt-make-guix-cl-for-nyxt
+                  "~/common-lisp/nyxt"
+                  :force t
+                  :cl-implementation "sbcl"
+                  :cl-system "nyxt/gi-gtk"
+                  :no-grafts t
+                  :ad-hoc '("emacs" "xdg-utils" "git")))))
+   "Set Lisp Compilers: Invoke sly with a prefix, M-- M-x sly RET nyxt-sbcl RET")
   :config
-  ;; See: https://joaotavora.github.io/sly/#Loading-Slynk-faster
-  (defun raz/sly-auto-connect ()
-    (unless (sly-connected-p)
-      (save-excursion (sly))))
+  (load "~/common-lisp/nyxt/build-scripts/nyxt-guix.el" :noerror)
+
+  (defun raz/sly-nyxt-dev-connect ()
+    "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
+    (interactive)
+    ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
+    ;; (save-excursion (sly-connect "localhost" 4006))
+    (asdf:load-system :nyxt/gi-gtk)
+    (nyxt:start))
 
   (defun raz/sly-nyxt-auto-connect ()
     "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
     (interactive)
     ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
-    (save-excursion (sly-connect "localhost" 4006))))
+    (save-excursion (sly-connect "localhost" 4006)))
+
+  ;; See: https://joaotavora.github.io/sly/#Loading-Slynk-faster
+  (defun raz/sly-auto-connect ()
+    (unless (sly-connected-p)
+      (save-excursion (sly)))))
 
 ;; Have these packages here as place-holders -> still not sure if I want to use them
 ;; yet...
