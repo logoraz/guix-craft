@@ -19,16 +19,6 @@
 ;; Code:
 
 
-(setq sly-lisp-implementations
-        '((nyxt-sbcl
-           (lambda () (nyxt-make-guix-cl-for-nyxt
-                  "~/common-lisp/nyxt"
-                  :force t
-                  :cl-implementation "sbcl"
-                  :cl-system "nyxt/gi-gtk"
-                  :no-grafts t
-                  :ad-hoc '("emacs" "xdg-utils" "git"))))))
-
 ;; Enable sly IDE for common lisp
 (use-package sly
   :hook (;; (sly-mode . raz/sly-auto-connect)
@@ -37,8 +27,8 @@
   (inferior-lisp-program (executable-find "sbcl")
                          "Set default lisp to Steel Bank Common Lisp.")
   (sly-lisp-implementations
-   '((ccl ((executable-find "ccl")))
-     (sbcl ((executable-find "sbcl")) :coding-system utf-8-unix)
+   '((ccl (executable-find "ccl"))
+     (sbcl (executable-find "sbcl") :coding-system utf-8-unix)
      ;; Enable development of sly
      (nyxt-sbcl
            (lambda () (nyxt-make-guix-cl-for-nyxt
