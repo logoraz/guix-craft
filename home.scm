@@ -20,7 +20,7 @@
    "font-google-noto"
    "font-google-material-design-icons"
    ;; WWW/Mail
-   "nyxt"
+   ;; "nyxt" ;-> Disable for now, will install for development purposes!
    "icecat"
    "keepassxc"
    "gstreamer"
