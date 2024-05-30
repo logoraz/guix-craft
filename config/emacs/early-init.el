@@ -117,13 +117,12 @@
 
 (setq frame-resize-pixelwise t)
 
+;; (set-frame-parameter nil 'alpha-background 85)
+
 (setq raz/custom-frame-alist
-      '((fullscreen . maximized)
-        (background-mode . 'dark)
-        ;; (alpha-background) ;not working as it should in v29...
+      '((alpha-background . 85)
         (alpha . (85 . 85))
-        (use-frame-synchronization . t)
-        (undecorated . t)))
+        (use-frame-synchronization . t)))
 
 (setq initial-frame-alist
       (append
