@@ -27,8 +27,7 @@
 
   Git Repositories:
 
-  - GitLab: https://gitlab.com/logoraz/guix-craft.git
-  - GitHub (Mirror): https://github.com/logoraz/guix-craft.git
+  - GitHub: https://github.com/logoraz/guix-craft.git
 
 ** System Configuration Outline (=system.scm=)
 
