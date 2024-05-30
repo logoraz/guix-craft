@@ -11,9 +11,11 @@
 ;; Ref https://lists.gnu.org/archive/html/bug-guix/2020-01/msg00133.html
 ;; cffi doesn't care about LIBRARY_PATH, but this is where Guix adds
 ;; all libraries. We forward these directories to cffi.
-(ql:quickload :cffi)
-(dolist (dir (uiop:getenv-pathnames "LIBRARY_PATH"))
-  ;; The path need / at the end, so ensure this
-  (pushnew (uiop:ensure-directory-pathname dir)
-           cffi:*foreign-library-directories*
-           :test #'equal))
+;; Comment out for now -> not helping with qlot issue...
+;; (ql:quickload :cffi)
+;; (dolist (dir (uiop:getenv-pathnames "LIBRARY_PATH"))
+;;   ;; The path need / at the end, so ensure this
+;;   (pushnew (uiop:ensure-directory-pathname dir)
+;;            cffi:*foreign-library-directories*
+;;            :test #'equal))
+
