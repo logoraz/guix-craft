@@ -67,6 +67,7 @@
    ;; Set up my home configuration
    ;; (guix-home-service-type
    ;;  `(("logoraz" ,home)))
+   ;; Supposed to make package installation faster, but has EXTREMELY slow downloads
    (modify-services %desktop-services
                     (guix-service-type
                      config =>
