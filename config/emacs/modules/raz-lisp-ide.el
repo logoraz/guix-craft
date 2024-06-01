@@ -19,8 +19,8 @@
 ;; Code:
 
 
-;; Enable sly IDE for common lisp
 (use-package sly
+  ;; Enable sly IDE for Common Lisp
   :hook (;; (sly-mode . raz/sly-auto-connect)
          (lisp . sly-editing-mode))
   :custom
@@ -35,7 +35,7 @@
                   "~/common-lisp/nyxt"
                   :force t
                   :cl-implementation "sbcl"
-                  :cl-system "nyxt/gi-gtk"
+                  :cl-system "nyxt/electron"
                   :no-grafts t
                   :ad-hoc '("emacs" "xdg-utils" "git")))))
    "Set Lisp Compilers: Invoke sly with a prefix, M-- M-x sly RET nyxt-sbcl RET")
@@ -43,12 +43,17 @@
   (load "~/common-lisp/nyxt/build-scripts/nyxt-guix.el" :noerror)
 
   (defun raz/sly-nyxt-dev-connect ()
-    "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
+    "Initiate Nyxt developtment environement for electron renderer."
     (interactive)
     ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
     ;; (save-excursion (sly-connect "localhost" 4006))
-    (asdf:load-system :nyxt/gi-gtk)
+    (asdf:load-system :nyxt/electron)
     (nyxt:start))
+
+  (defun raz/nyxt-run-test-suit ()
+    "Run Nyxt test suit for electron renderer."
+    (interactive)
+    (asdf:test-system :nyxt/electron))
 
   (defun raz/sly-nyxt-auto-connect ()
     "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
