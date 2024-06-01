@@ -14,6 +14,9 @@ fi
 ln -s ~/repos/guix-craft/config/lem/init.lisp \
    ~/.config/lem/init.lisp
 
+ln -s ~/repos/guix-craft/config/lem/lem-icon.png \
+   ~/.config/lem/lem-icon.png
+
 # Set Gnome Application Luancher
 desktop=~/.local/share/applications/
 if [ ! -d $desktop ]; then
