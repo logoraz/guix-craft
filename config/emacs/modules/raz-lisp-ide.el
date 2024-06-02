@@ -23,24 +23,27 @@
   ;; Enable sly IDE for Common Lisp
   :hook (;; (sly-mode . raz/sly-auto-connect)
          (lisp . sly-editing-mode))
-  :custom
-  (inferior-lisp-program (executable-find "sbcl")
-                         "Set default lisp to Steel Bank Common Lisp.")
-  (sly-lisp-implementations
-   '((ccl (executable-find "ccl"))
-     (sbcl (executable-find "sbcl") :coding-system utf-8-unix)
-     ;; Enable development of sly
-     (nyxt-sbcl
-           (lambda () (nyxt-make-guix-cl-for-nyxt
-                  "~/common-lisp/nyxt"
-                  :force t
-                  :cl-implementation "sbcl"
-                  :cl-system "nyxt/electron"
-                  :no-grafts t
-                  :ad-hoc '("emacs" "xdg-utils" "git")))))
-   "Set Lisp Compilers: Invoke sly with a prefix, M-- M-x sly RET nyxt-sbcl RET")
+  ;; :custom
+  ;; (inferior-lisp-program (executable-find "sbcl")
+  ;;                        "Set default lisp to Steel Bank Common Lisp.")
   :config
   (load "~/common-lisp/nyxt/build-scripts/nyxt-guix.el" :noerror)
+  ;; Invoke SLY with a negative prefix argument, M-- M-x sly,
+  ;; and you can select a program from that list.
+  (setq sly-lisp-implementations
+        `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
+          (ccl (,(executable-find "ccl")))
+          (clasp (,(executable-find "clasp")))
+          ;; Enable development of sly
+          ;; FIXME - process errors out about broken pipe...
+          (nyxt-sbcl (lambda ()
+                       (nyxt-make-guix-cl-for-nyxt
+                        "~/common-lisp/nyxt"
+                        :force t
+                        :cl-implementation "sbcl"
+                        :cl-system "nyxt/electron"
+                        :no-grafts t
+                        :ad-hoc '("emacs" "xdg-utils" "git"))))))
 
   (defun raz/sly-nyxt-dev-connect ()
     "Initiate Nyxt developtment environement for electron renderer."
@@ -65,37 +68,6 @@
   (defun raz/sly-auto-connect ()
     (unless (sly-connected-p)
       (save-excursion (sly)))))
-
-;; Have these packages here as place-holders -> still not sure if I want to use them
-;; yet...
-(use-package nyxt
-  :disabled
-  :bind-keymap ("C-c y" . nyxt-map)
-  :after sly                            ;?
-  :config
-  (setq nyxt-path (executable-find "nyxt"))
-
-  (setq nyxt-startup-flags
-        '("shell" "-D" "-f"
-          "path/to/nyxt/build-scripts/nyxt.scm"
-          "--"
-          "path/to/nyxt/nyxt"
-          "-e"
-          "(start-slynk)")))
-
-(use-package stumpwm-mode
-  :disabled
-  :after sly ;?
-  :config
-  (defun raz/stumpwm--send-command (command)
-    (start-process-shell-command "stumpish" nil (concat  "stumpish " command)))
-
-  (set-frame-parameter (selected-frame) 'name "Emacs")
-  (select-frame (make-frame '((name . "Chat"))))
-  (persp-switch "Chat")
-  (persp-kill "Main")
-  (select-frame-by-name "Emacs"))
-
 
 
 
