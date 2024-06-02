@@ -21,7 +21,7 @@
    "font-google-material-design-icons"
    ;; WWW/Mail
    ;; "nyxt" ;-> Disable for now, will install for development purposes!
-   ;; "wl-clipboard"
+   "wl-clipboard"
    "icecat"
    "keepassxc"
    "gstreamer"
@@ -31,20 +31,18 @@
    "isync"
    "msmtp"
    "mu"
-   ;; Apps
-   "foot"
-   "mpv"
-   "vlc"
-   "gnucash"
-   "gimp"
-   "inkscape"
-   "blender"
    ;; Documents/Files
    ;; "texlive-scheme-basic"
    ;; "texlive-collection-latexrecommended"
    ;; "texlive-collection-fontsrecommended"
-   "zip"
-   "unzip"))
+   ;; Apps
+   "gnucash"
+   "gimp"
+   "inkscape"
+   "blender"
+   "mpv"
+   "vlc"
+   "foot"))
 
 (define %dev-packages  ;-> perhpas move to a manifest
   (list
@@ -59,6 +57,10 @@
    ;; Base Dev Tools
    "make"
    "binutils"
+   "tar"
+   "gzip"
+   "zip"
+   "unzip"
    "openssl"
    "curl"
    "gnupg"
@@ -67,10 +69,12 @@
 
 (define %emacs-packages ;-> perhaps move to a manifest
   (list
-   "emacs"
+   "emacs-next-pgtk"
    "emacs-diminish"
    "emacs-delight"
-   "emacs-nord-theme"
+   "emacs-nerd-icons"
+   "emacs-doom-themes"
+   "emacs-doom-modeline"
    "emacs-ligature"
    "emacs-no-littering"
    "emacs-ws-butler"
