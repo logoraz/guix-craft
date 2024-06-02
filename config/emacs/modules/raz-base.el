@@ -153,8 +153,7 @@
 ;;
 
 ;; Configure package PATH's
-(use-package no-littering
-  :demand t)
+(use-package no-littering)
 
 (use-package ligature
   ;; Fonts & Theme Configuration
@@ -162,7 +161,6 @@
   ;; See: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions#using-ligature
   ;; See: https://github.com/mickeynp/ligature.el
   :diminish ligature-mode
-  :demand t
   :config
   (dolist
       (face
@@ -197,22 +195,36 @@
 
 ;;; Theme Configuration
 ;; Load in local copy of nord theme - to develop and customize...
-(add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
-(load-theme 'nord t)
+;; (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
+;; (load-theme 'kanagawa t)
 
-(with-eval-after-load 'nord-theme
-  ;; Set Custom defined "Nord" faces for modeline
-  ;; See: list-faces-display for a list of defined faces.
-  (dolist
-      (face
-       '((mode-line :box (:line-width 1 :color "#7b88a1" :style none))
-         (mode-line :foreground "#D8DEE9")
-         (mode-line-inactive :box (:line-width 1 :color "#616e88" :style none))
-         (mode-line-inactive :foreground "#7b88a1")
-         (fill-column-indicator :foreground "#3B4252")))
-    (raz/set-face-attribute (car face) (cdr face))))
+(use-package nerd-icons)
+
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 28))
+
+(use-package doom-themes
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
 
 (use-package tab-bar
+  :disabled
   :after nord-theme
   :config
     ;; Set custome definte "Nord" faces for tab-bar
@@ -236,7 +248,6 @@
 ;; Editing/IDE Package configurations
 (use-package undo-tree
   :diminish undo-tree-mode
-  :demand t
   :custom
   (undo-tree-history-directory-alist
    `(("." . ,(expand-file-name "undo-tree-hist/"

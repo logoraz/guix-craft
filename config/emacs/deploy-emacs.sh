@@ -37,6 +37,9 @@ fi
 ln -s ~/repos/guix-craft/config/emacs/themes/nord-theme.el \
    ~/.config/emacs/themes/nord-theme.el
 
+ln -s ~/repos/guix-craft/config/emacs/themes/kanagawa-theme.el \
+   ~/.config/emacs/themes/kanagawa-theme.el
+
 # Modules
 modules=~/.config/emacs/modules/
 if [ ! -d $modules ]; then

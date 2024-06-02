@@ -73,6 +73,6 @@
 (require 'raz-media)
 (require 'raz-org)
 (require 'raz-erc)
-(require 'raz-nyxt) ; WIP
+;; (require 'raz-nyxt) ; WIP
 ;;TODO - need to configure on new GUIX Home scaffold
 ;; (require 'raz-mu4e)

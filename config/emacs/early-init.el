@@ -121,8 +121,11 @@
 
 (setq raz/custom-frame-alist
       '((alpha-background . 85)
-        (alpha . (85 . 85))
-        (use-frame-synchronization . t)))
+        ;; (alpha . (85 . 85))
+        (use-frame-synchronization . t)
+        ;; (undecorated . t)
+        ;; (maximized . t)
+        ))
 
 (setq initial-frame-alist
       (append
