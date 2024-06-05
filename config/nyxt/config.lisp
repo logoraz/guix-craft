@@ -43,3 +43,18 @@
 (defmethod files:resolve ((profile nyxt:nyxt-profile) (file nyxt/mode/bookmark:bookmarks-file))
   "Reroute bookmarks to the `.config/nyxt/' directory."
   #p"~/.config/nyxt/bookmarks.lisp")
+
+
+;; ;; Start Micros server so that Lem can connect to Nyxt...
+;; (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+;;                                        (user-homedir-pathname))))
+;;   (when (probe-file quicklisp-init)
+;;     (load quicklisp-init)))
+
+;; (bt:make-thread
+;;  (lambda ()
+;;    (ql:quickload :micros)
+;;    (micros:create-server :port 5000 :dont-close t)))
+
+;; (ql:quickload :micros)
+;; (micros:create-server :port 50000 :dont-close t)
