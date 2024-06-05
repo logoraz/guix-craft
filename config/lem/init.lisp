@@ -7,7 +7,7 @@
 
 (in-package :lem-user)
 
-(load-theme "decaf")
+;; (load-theme "decaf")
 
 
 
@@ -36,13 +36,14 @@
 (define-key lem-paredit-mode:*paredit-mode-keymap* "Shift-Right"
   'lem-paredit-mode:paredit-barf)
 
-(lem:define-command paredit-quote-wrap () ()
-  (progn
-    (lem-paredit-mode:paredit-insert-doublequote)
-    (lem-paredit-mode:paredit-slurp)
-    (lem:delete-next-char)))
+;; FIXME - Seems to be causing an error
+;; (lem:define-command paredit-quote-wrap () ()
+;;   (progn
+;;     (lem-paredit-mode:paredit-insert-doublequote)
+;;     (lem-paredit-mode:paredit-slurp)
+;;     (lem:delete-next-char)))
 
-(define-key lem-paredit-mode:*paredit-mode-keymap* "M-\"" 'paredit-quote-wrap)
+;; (define-key lem-paredit-mode:*paredit-mode-keymap* "M-\"" 'paredit-quote-wrap)
 
 
 
@@ -78,6 +79,7 @@
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))
 
+;; check open ports $ss -lntp
 (bt:make-thread
  (lambda ()
    (ql:quickload :micros)))
@@ -86,7 +88,7 @@
  (lambda () 
    (micros:create-server :port 50000 :dont-close t)))
 
-;; Version Control
+;; ;; Version Control
 (define-command start-legit () ()
   "Lem Command to start legit in thread."
   (bt:make-thread
