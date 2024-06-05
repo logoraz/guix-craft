@@ -18,7 +18,6 @@
 
 ;; Code:
 
-
 (use-package sly
   ;; Enable sly IDE for Common Lisp
   :hook (;; (sly-mode . raz/sly-auto-connect)
@@ -35,28 +34,19 @@
           (ccl (,(executable-find "ccl")))
           (clasp (,(executable-find "clasp")))
           ;; Enable development of sly
-          ;; FIXME - process errors out about broken pipe...
-          (nyxt-sbcl (lambda ()
-                       (nyxt-make-guix-cl-for-nyxt
-                        "~/common-lisp/nyxt"
-                        :force t
-                        :cl-implementation "sbcl"
-                        :cl-system "nyxt/electron"
-                        :no-grafts t
-                        :ad-hoc '("emacs" "xdg-utils" "git"))))))
-
-  (defun raz/sly-nyxt-dev-connect ()
-    "Initiate Nyxt developtment environement for electron renderer."
-    (interactive)
-    ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
-    ;; (save-excursion (sly-connect "localhost" 4006))
-    (asdf:load-system :nyxt/electron)
-    (nyxt:start))
-
-  (defun raz/nyxt-run-test-suit ()
-    "Run Nyxt test suit for electron renderer."
-    (interactive)
-    (asdf:test-system :nyxt/electron))
+          ;; FIXME - Failing: error output:
+          ;; Rebuilding environment "/home/logoraz/.guix-temp-profiles/nyxt/nyxt"
+          ;; and Lisp image "/home/logoraz/.cache/lisp-repl-core-directory/sbcl/nyxt-electron.image"...
+          ;; if: Nyxt Guix shell creation failed, see #<buffer *Nyxt Guix shell compilation*>.
+          ;; guix shell: error: writing to file: Broken pipe
+          (nyxt-sbcl ,(lambda ()
+                        (nyxt-make-guix-cl-for-nyxt
+                         "~/common-lisp/nyxt"
+                         :force t
+                         :cl-implementation "sbcl"
+                         :cl-system "nyxt/electron"
+                         :no-grafts t
+                         :ad-hoc '("emacs" "git"))))))
 
   (defun raz/sly-nyxt-auto-connect ()
     "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
@@ -68,6 +58,8 @@
   (defun raz/sly-auto-connect ()
     (unless (sly-connected-p)
       (save-excursion (sly)))))
+
+
 
 
 

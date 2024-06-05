@@ -9,6 +9,9 @@
 ;; 4. Corfu (COmpletions in Region FUnction) - https://github.com/minad/corfu
 ;; 5.
 
+;; TODO: Tell ares-rs where to search for Guix stuff
+;; it may work if you set `export
+;; GUILE_LOAD_PATH=$GUIX_ENVIRONMENT/share/guile/site/3.0`
 
 ;; Code:
 
