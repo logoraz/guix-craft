@@ -15,15 +15,20 @@
    ;; Fonts
    "font-fira-code"
    "font-fira-go"
-   "font-iosevka-aile"
    "font-dejavu"
+   "font-iosevka-aile"
+   "font-sarasa-gothic"
+   "font-apple-sf-pro"
+   "font-apple-sf-symbols"
+   "font-apple-sf-arabic"
    "font-google-noto"
+   "font-google-noto-sans-cjk"
    "font-google-material-design-icons"
    ;; WWW/Mail
    ;; "nyxt" ;-> Disable for now, will install for development purposes!
-   "wl-clipboard"
    "icecat"
    "keepassxc"
+   "wl-clipboard"
    "gstreamer"
    "gst-plugins-good"
    "gst-plugins-bad"
@@ -31,7 +36,7 @@
    "isync"
    "msmtp"
    "mu"
-   ;; Documents/Files
+   ;; Documents/Files -> disabled for now (these are huge)
    ;; "texlive-scheme-basic"
    ;; "texlive-collection-latexrecommended"
    ;; "texlive-collection-fontsrecommended"
@@ -51,7 +56,8 @@
    "guile-ares-rs"     ; for mREPL Guile Scheme Emacs IDE
    ;; Common Lisp GUI Dev
    "sbcl"                      ; Steel Bank Common Lisp (Primary)
-   "ccl"                       ; Clozure Common Lisp (Secondary)
+   ;; "clasp"                     ; CLASP Common Lisp (Secondary)
+   "ccl"                       ; Clozure Common Lisp (Tertiary)
    ;; Common Lisp Tools
    ;;
    ;; Base Dev Tools
