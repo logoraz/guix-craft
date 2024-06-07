@@ -7,19 +7,16 @@
 
 (in-package :lem-user)
 
-;; (load-theme "decaf")
-
 
 
 ;;; Basic Config
+
+;; Load Theme
+;; (load-theme "decaf") ; default
+
 ;; Set Transparency (using SDL2 Lem Backend)
 (sdl2-ffi.functions:sdl-set-window-opacity
  (lem-sdl2/display:display-window (lem-sdl2/display:current-display)) 0.84)
-
-(define-command open-init-file () ()
-  ;; @sasanidas
-  (lem:find-file
-   (merge-pathnames "init.lisp" (lem-home))))
 
 
 
@@ -37,13 +34,13 @@
   'lem-paredit-mode:paredit-barf)
 
 ;; FIXME - Seems to be causing an error
-;; (lem:define-command paredit-quote-wrap () ()
-;;   (progn
-;;     (lem-paredit-mode:paredit-insert-doublequote)
-;;     (lem-paredit-mode:paredit-slurp)
-;;     (lem:delete-next-char)))
+(lem:define-command paredit-quote-wrap () ()
+  (progn
+    (lem-paredit-mode:paredit-insert-doublequote)
+    (lem-paredit-mode:paredit-slurp)
+    (lem:delete-next-char)))
 
-;; (define-key lem-paredit-mode:*paredit-mode-keymap* "M-\"" 'paredit-quote-wrap)
+(define-key lem-paredit-mode:*paredit-mode-keymap* "M-\"" 'paredit-quote-wrap)
 
 
 
@@ -61,6 +58,16 @@
   (define-key *global-keymap* "C-h p" 'lem-lisp-mode:lisp-apropos-package))
 (custom-keybindings) ; Enable custom keybindings on initialization.
 
+
+;;; Commands
+
+(define-command open-init-file () ()
+  ;; @sasanidas
+  (lem:find-file
+   (merge-pathnames "init.lisp" (lem-home))))
+
+
+
 
 
 ;;; Experimental Packages
@@ -68,25 +75,12 @@
 ;; Slime/Swank REPL configuration
 ;; Using quicklisp -> issue with Guix finding micros...
 ;; See:  https://www.quicklisp.org/beta/
-;; modified 'quicklisp/setup.lisp' -> 'common-lisp/quicklisp/setup.lisp'
-;; Alternative solution
-;; (setf lem-lisp-mode/implementation::*default-command* 
-;;       "sbcl --eval \"(asdf:load-system :micros)\"")
 
 ;; Load quicklisp - not sure why it isn't being loaded in ~/.sbclrc file...
 (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
                                        (user-homedir-pathname))))
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))
-
-;; check open ports $ss -lntp
-(bt:make-thread
- (lambda ()
-   (ql:quickload :micros)))
-
-(bt:make-thread
- (lambda () 
-   (micros:create-server :port 50000 :dont-close t)))
 
 ;; ;; Version Control
 (define-command start-legit () ()
