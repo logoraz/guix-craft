@@ -26,3 +26,16 @@ fi
 
 ln -s ~/repos/guix-craft/config/lem/lem.desktop \
    ~/.local/share/applications/lem.desktop
+
+# Lem Utilities
+lisp=~/.config/lem/lisp/
+if [ ! -d $lisp ]; then
+    echo "~/.config/lem/lisp/ does not exist - creating..."
+    mkdir ~/.config/lem/lisp/
+fi
+
+ln -s ~/repos/guix-craft/config/lem/lisp/time-stamp.lisp \
+    ~/.config/lem/lisp/time-stamp.lisp
+
+ln -s ~/repos/guix-craft/config/lem/lisp/utilities.lisp \
+    ~/.config/lem/lisp/utilities.lisp

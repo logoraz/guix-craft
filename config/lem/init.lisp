@@ -2,26 +2,32 @@
 
 ;;; Erik P. Almaraz (logoraz)
 
-;;; Notes:
-
-
-(in-package :lem-user)
+
+;;; Load Additional CL Libraries
+;; (pushnew "/path/to/lisp/project/" asdf:*central-registry* :test #'equal)
 
 
 
-;;; Basic Config
+;;; Start Up & Basic Config
+
+(in-package :lem-user)
+
+;; Evaluating Lisp in M-: we want to be in Lem' package.
+(lem-lisp-mode/internal::lisp-set-package "LEM")
 
 ;; Load Theme
 ;; (load-theme "decaf") ; default
 
-;; Set Transparency (using SDL2 Lem Backend)
-(sdl2-ffi.functions:sdl-set-window-opacity
- (lem-sdl2/display:display-window (lem-sdl2/display:current-display)) 0.84)
+;; Set Transparency
+#+lem-sdl2
+(sdl2-ffi.functions:sdl-set-window-opacity (lem-sdl2/display::display-window lem-sdl2/display::*display*) 0.84)
 
+;; Logs on the terminal output:
+;; (log:config :info)
 
 
-;;; Borrowed from Gavinok
 ;;; Setup Paredit
+;; Borrowed from @gavinok (https://github.com/Gavinok/.lem)
 (lem:add-hook lem:*find-file-hook*
               (lambda (buffer)
                 (when (eq (buffer-major-mode buffer) 'lem-lisp-mode:lisp-mode)
@@ -67,15 +73,39 @@
    (merge-pathnames "init.lisp" (lem-home))))
 
 
+
+;;; Completions
+;; ref - @vindarel (https://github.com/vindarel/lem-init)
+
+;; Choose the position of the completion prompt (new in May, 2024)
+(setf lem-core::*default-prompt-gravity* :bottom-display)
+(setf lem/prompt-window::*prompt-completion-window-gravity* :horizontally-above-window)
+(setf lem/prompt-window::*fill-width* t)
+
+;; and show the completion list directly, without a first press on TAB:
+(add-hook *prompt-after-activate-hook*
+          (lambda ()
+            (call-command 'lem/prompt-window::prompt-completion nil)))
+
+(add-hook *prompt-deactivate-hook*
+          (lambda ()
+            (lem/completion-mode:completion-end)))
 
 
 
 ;;; Experimental Packages
 
-;; Slime/Swank REPL configuration
 ;; Using quicklisp -> issue with Guix finding micros...
 ;; See:  https://www.quicklisp.org/beta/
 
+;; See Advanced Dependencies Management
+;; -> https://lispcookbook.github.io/cl-cookbook/getting-started.html
+;;    ASDF and Quicklisp loadable directories:
+;;   |--> ~/common-lisp/
+;;   |--> ~/quicklisp/local-projects/
+;;   |--> ~/.local/share/common-lisp/source/
+
+;; Quicklisp Initialization
 ;; Load quicklisp - not sure why it isn't being loaded in ~/.sbclrc file...
 (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
                                        (user-homedir-pathname))))
@@ -88,6 +118,19 @@
   (bt:make-thread
    (lambda ()
      (ql:quickload :lem/legit)
+     ;; for some reason loading legit unsets keybindings and theme...
      (load-theme "decaf")
      (custom-keybindings))))
+
+
+
+
+;;; Utilities
+(load "~/.config/lem/lisp/utilities.lisp")
+(load "~/.config/lem/lisp/time-stamp.lisp")
+
+;; Now you can do `M-x time-stamp` to print the timestamp of the day, in the org-mode format:
+;; "<2023-07-05 Wed>"
+
+
 
