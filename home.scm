@@ -63,6 +63,7 @@
    ;; Base Dev Tools
    "make"
    "binutils"
+   "xdg-utils"
    "tar"
    "gzip"
    "zip"
