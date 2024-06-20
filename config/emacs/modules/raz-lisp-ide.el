@@ -33,20 +33,23 @@
         `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
           (ccl (,(executable-find "ccl")))
           (clasp (,(executable-find "clasp")))
-          ;; Enable development of sly
-          ;; FIXME - Failing: error output:
-          ;; Rebuilding environment "/home/logoraz/.guix-temp-profiles/nyxt/nyxt"
-          ;; and Lisp image "/home/logoraz/.cache/lisp-repl-core-directory/sbcl/nyxt-electron.image"...
-          ;; if: Nyxt Guix shell creation failed, see #<buffer *Nyxt Guix shell compilation*>.
-          ;; guix shell: error: writing to file: Broken pipe
+          ;; Enable development of Nyxt
+          ;; Enable with M-- M-x sly RET nyxt-sbcl RET to start the SLY REPL.
+          ;; Wait for it to finish and the REPL will open. At this point you are
+          ;; almost ready to start hacking. In the SLY REPL, write the following:
+          ;; (asdf:load-system :nyxt/gi-gtk)
+          ;; (nyxt:start)
+          ;; Test with:
+          ;; (asdf:test-system :nyxt/gi-gtk)
+          ;; Recommended to restart sly session before/after running tests
           (nyxt-sbcl ,(lambda ()
                         (nyxt-make-guix-cl-for-nyxt
                          "~/common-lisp/nyxt"
                          :force t
                          :cl-implementation "sbcl"
-                         :cl-system "nyxt/electron"
+                         :cl-system "nyxt/gi-gtk"
                          :no-grafts t
-                         :ad-hoc '("emacs" "git"))))))
+                         :ad-hoc '("emacs" "xdg-utils" "git"))))))
 
   (defun raz/sly-nyxt-auto-connect ()
     "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
