@@ -122,7 +122,9 @@
   (list
    (simple-service 'env-vars home-environment-variables-service-type
                    '(("EDITOR" . "emacs")
-                     ("BROWSER" . "nyxt")))
+                     ("BROWSER" . "nyxt")
+                     ;; Add flatpak pakcages to env variables
+                     ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:/home/logoraz/.local/share/flatpak/exports/share:$XDG_DATA_DIRS")))
    (service home-bash-service-type
             (home-bash-configuration
 	     (guix-defaults? #f)
