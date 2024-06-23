@@ -126,11 +126,17 @@
 
 
 ;;; Utilities
-(load "~/.config/lem/lisp/utilities.lisp")
-(load "~/.config/lem/lisp/time-stamp.lisp")
 
 ;; Now you can do `M-x time-stamp` to print the timestamp of the day, in the org-mode format:
 ;; "<2023-07-05 Wed>"
+(load "~/.config/lem/lisp/time-stamp.lisp")
+
+;; Errors - cannot find "PROMPT" package...
+;; (load "~/.config/lem/lisp/file-prompt.lisp")
+
+(load "~/.config/lem/lisp/utilities.lisp")
+
+
 
 
 

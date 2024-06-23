@@ -39,3 +39,6 @@ ln -s ~/repos/guix-craft/config/lem/lisp/time-stamp.lisp \
 
 ln -s ~/repos/guix-craft/config/lem/lisp/utilities.lisp \
     ~/.config/lem/lisp/utilities.lisp
+
+ln -s ~/repos/guix-craft/config/lem/lisp/file-prompt.lisp \
+    ~/.config/lem/lisp/file-prompt.lisp
