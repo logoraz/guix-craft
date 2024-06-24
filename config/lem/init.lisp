@@ -131,8 +131,7 @@
 ;; "<2023-07-05 Wed>"
 (load "~/.config/lem/lisp/time-stamp.lisp")
 
-;; Errors - cannot find "PROMPT" package...
-;; (load "~/.config/lem/lisp/file-prompt.lisp")
+(load "~/.config/lem/lisp/file-prompt.lisp")
 
 (load "~/.config/lem/lisp/utilities.lisp")
 
