@@ -112,6 +112,16 @@
   (when (probe-file quicklisp-init)
     (load quicklisp-init)))
 
+;; (bt:make-thread
+;;  (lambda ()
+;;    (ql:quickload :micros)))
+
+;; According to garlic we don't need this...
+;; (bt:make-thread
+;;  (lambda ()
+;;    (ql:quickload :micros)
+;;    (micros:create-server :port 50000 :dont-close t)))
+
 ;; ;; Version Control
 (define-command start-legit () ()
   "Lem Command to start legit in thread."
@@ -131,6 +141,7 @@
 ;; "<2023-07-05 Wed>"
 (load "~/.config/lem/lisp/time-stamp.lisp")
 
+;; not currently working as I thought it was intended - deletes up to project directory
 (load "~/.config/lem/lisp/file-prompt.lisp")
 
 (load "~/.config/lem/lisp/utilities.lisp")
