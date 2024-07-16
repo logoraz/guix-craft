@@ -1,0 +1,7 @@
+(undo-tree-save-format-version . 1)
+"95735d96ff7f0bd52746a0ac7ff11631aae086b4"
+[nil nil nil nil (26261 40955 68265 805000) 0 nil]
+([nil nil ((3980 . 3981) (t 26260 14471 706603 676000)) nil (26261 40955 68264 756000) 0 nil])
+([nil nil ((3981 . 3982)) nil (26261 40955 68263 632000) 0 nil])
+([nil current ((apply 3 4006 4034 undo--wrap-and-run-primitive-undo 4006 4034 ((#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -4014) 4037))) nil (26261 40955 68259 438000) 0 nil])
+nil

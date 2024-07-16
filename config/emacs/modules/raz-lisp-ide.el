@@ -31,31 +31,22 @@
   ;; and you can select a program from that list.
   (setq sly-lisp-implementations
         `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
+          ;(clasp (,(executable-find "clasp")))
           (ccl (,(executable-find "ccl")))
-          (clasp (,(executable-find "clasp")))
-          ;; Enable development of Nyxt
-          ;; Enable with M-- M-x sly RET nyxt-sbcl RET to start the SLY REPL.
-          ;; Wait for it to finish and the REPL will open. At this point you are
-          ;; almost ready to start hacking. In the SLY REPL, write the following:
-          ;; (asdf:load-system :nyxt/gi-gtk)
-          ;; (nyxt:start)
-          ;; Test with:
-          ;; (asdf:test-system :nyxt/gi-gtk)
-          ;; Recommended to restart sly session before/after running tests
-          (nyxt-sbcl ,(lambda ()
-                        (nyxt-make-guix-cl-for-nyxt
-                         "~/common-lisp/nyxt"
-                         :force t
-                         :cl-implementation "sbcl"
-                         :cl-system "nyxt/gi-gtk"
-                         :no-grafts t
-                         :ad-hoc '("emacs" "xdg-utils" "git"))))))
+          (ecl (,(executable-find "ecl")))))
+
+  (defun raz/sly-stumpwm-auto-connect ()
+    "Auto connect to StumpWM slynk session -> port 4005."
+    (interactive)
+    ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
+    (save-excursion (sly-connect "localhost" 4005)))
 
   (defun raz/sly-nyxt-auto-connect ()
     "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
     (interactive)
     ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
     (save-excursion (sly-connect "localhost" 4006)))
+
 
   ;; See: https://joaotavora.github.io/sly/#Loading-Slynk-faster
   (defun raz/sly-auto-connect ()

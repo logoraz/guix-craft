@@ -2,16 +2,17 @@
 
 (use-modules (gnu)
 	     (gnu packages)
-             (gnu packages cups)
-	     (gnu services)
-             (gnu services xorg)
-             (gnu services ssh)
+             (gnu packages cups)       ; -> needed for cups service
+             (gnu packages suckless)   ; -> need for lock service
+             (gnu services)
              (gnu services cups)
+             (gnu services ssh)
+             (gnu services xorg)
              (gnu services desktop)
-             (gnu services networking)	     
 	     (guix packages)
 	     (guix download)
 	     (nongnu packages linux))
+
 
 (define %keyboard-layout
   (keyboard-layout "us"))
@@ -26,13 +27,19 @@
 
 (define %locutus-file-system
   (list (file-system
-         (mount-point "/boot/efi")
-         (device (uuid "81F3-AB0A" 'fat32))
+         (mount-point  "/boot/efi")
+         (device (uuid "F8E9-9C22" 'fat32))
          (type "vfat"))
         (file-system
          (mount-point "/")
-         (device (uuid "c9a9da72-8f59-4230-b57d-2b4aec4093d5" 'ext4))
+         (device (uuid "c0ffc6f4-dab7-4efc-8cdd-3e9d727b91ab" 'ext4))
          (type "ext4"))))
+
+;; Define Core System Wide Packages & Services
+(define %stumpwm-packages
+  (list
+   "sbcl"
+   "stumpwm-with-slynk"))
 
 ;; Use Package substitutes instead of compiling everything
 ;; Borrowed from iambumblehead
@@ -52,18 +59,22 @@
               "0j66nq1bxvbxf5n8q2py14sjbkn57my0mjwq7k1qm9ddghca7177")))
            %default-authorized-guix-keys))))
 
-;; Define Core System Wide Packages & Services
 (define %system-services
   (cons*
-   (service gnome-desktop-service-type)
+   ;; Not really sure if `xorg-configruation' is truly needed.
    (set-xorg-configuration
-    (xorg-configuration (keyboard-layout %keyboard-layout)))
-   (service openssh-service-type)
+    (xorg-configuration
+     (keyboard-layout %keyboard-layout)))
+   (service screen-locker-service-type
+            (screen-locker-configuration
+             (name "slock")
+             (program (file-append slock "/bin/slock"))))
    (service cups-service-type
             (cups-configuration
              (web-interface? #t)
              (default-paper-size "Letter")
              (extensions (list cups-filters hplip-minimal))))
+   (service openssh-service-type)
    ;; Set up my home configuration
    ;; (guix-home-service-type
    ;;  `(("logoraz" ,home)))
@@ -72,9 +83,6 @@
                     (guix-service-type
                      config =>
                      (substitutes->services config)))))
-
-(define %system-packages
-  (list "tbd"))
 
 ;; Define Operating system
 (operating-system
@@ -97,23 +105,20 @@
               (targets (list "/boot/efi"))
               (keyboard-layout keyboard-layout)))
 
- (swap-devices (list
-                (swap-space
-                 (target
-		  (uuid
-                   "641df639-73e4-4c83-8620-c49fba958e87")))))
- 
+ (swap-devices (list (swap-space
+                      (target
+                       (uuid
+			"b547f9c1-9a69-4c63-9c55-edc2736bf504")))))
+
  ;; Use 'blkid' to find unique file system identifiers ("UUIDs").
  (file-systems (append
                 %locutus-file-system
 		%base-file-systems))
 
  ;; Use 'guix search KEYWORD' to search for packages.
- (packages %base-packages)
- ;; WIP
- ;; (packages (append
- ;;            (specifications->packages
- ;;             %system-packages)
- ;;            %base-packages))
+ (packages (append
+            (specifications->packages
+             %stumpwm-packages)
+            %base-packages))
 
  (services %system-services))

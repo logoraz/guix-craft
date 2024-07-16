@@ -5,5 +5,5 @@ if [ -L ~/.guix-profile ]; then
     . "$GUIX_PROFILE/etc/profile"
 fi
 
-# Set title bar of GTK applications
-# export GTK_THEME=Adwaita:dark
+# StumpWM - Set title bar of GTK applications
+export GTK_THEME=Adwaita:dark

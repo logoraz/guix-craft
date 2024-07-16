@@ -15,7 +15,7 @@
 
 
 (use-package denote
-  :hook ((find-file . denote-link-buttonize-buffer)
+  :hook (;;(find-file . denote-link-buttonize-buffer)
          (dired-mode . denote-dired-mode-in-directories)
          (denote-dired-mode . dired-hide-details-mode)
          (org-capture-mode . raz/denote-org-capture))

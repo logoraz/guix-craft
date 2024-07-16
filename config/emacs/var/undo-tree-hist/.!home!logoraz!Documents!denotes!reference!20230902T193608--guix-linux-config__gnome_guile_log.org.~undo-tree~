@@ -1,0 +1,5 @@
+(undo-tree-save-format-version . 1)
+"28a97972c4d0af153a17f58907b71cf0c6d3b5df"
+[nil current nil nil (26261 54320 505043 528000) 0 nil]
+([nil nil ((1033 . 1034) (t 26261 41764 685953 72000)) ((#("n" 0 1 (ws-butler-chg chg fontified t)) . 1033) (undo-tree-id0 . -1)) (26261 54320 504454 626000) 0 nil])
+nil

@@ -9,78 +9,108 @@
              (gnu services)
              (guix gexp))
 
-
 (define %logoraz-packages
   (list
    ;; Fonts
    "font-fira-code"
-   "font-fira-go"
-   "font-dejavu"
    "font-iosevka-aile"
-   "font-sarasa-gothic"
-   "font-apple-sf-pro"
-   "font-apple-sf-symbols"
-   "font-apple-sf-arabic"
+   "font-dejavu"
    "font-google-noto"
-   "font-google-noto-sans-cjk"
+   "font-google-noto-emoji"
    "font-google-material-design-icons"
+   "font-google-noto-sans-cjk"
    ;; WWW/Mail
-   ;; "nyxt" ;-> Disable for now, will install for development purposes!
+   "nyxt"
    "icecat"
+   "gnupg"
    "keepassxc"
-   "wl-clipboard"
+   "isync"
+   "msmtp"
+   "mu"
    "gstreamer"
    "gst-plugins-good"
    "gst-plugins-bad"
    "gst-libav"
-   "isync"
-   "msmtp"
-   "mu"
-   ;; Documents/Files -> disabled for now (these are huge)
-   ;; "texlive-scheme-basic"
-   ;; "texlive-collection-latexrecommended"
-   ;; "texlive-collection-fontsrecommended"
    ;; Apps
+   "mpv"
+   "vlc"
    "gnucash"
    "gimp"
    "inkscape"
    "blender"
-   "mpv"
-   "vlc"
-   "foot"))
+   ;; Documents/Files
+   ;; "texlive-scheme-basic"
+   ;; "texlive-collection-latexrecommended"
+   ;; "texlive-collection-fontsrecommended"
+   "zip"
+   "unzip"))
 
 (define %dev-packages  ;-> perhpas move to a manifest
   (list
    ;; Guile Dev Tools
    "guile-next"        ; needed for ares/arei
    "guile-ares-rs"     ; for mREPL Guile Scheme Emacs IDE
-   ;; Common Lisp GUI Dev
-   "sbcl"                      ; Steel Bank Common Lisp (Primary)
-   ;; "clasp"                     ; CLASP Common Lisp (Secondary)
-   "ccl"                       ; Clozure Common Lisp (Tertiary)
-   ;; Common Lisp Tools
-   ;;
+   "guile-hoot"        ; explore Web/WASM
+   ;; Common Lisp Dev Tools
+   "ccl"                       ;-> Alternate ANSI Common Lisp compiler
+   "ecl"
    ;; Base Dev Tools
    "make"
    "binutils"
-   "xdg-utils"
-   "tar"
-   "gzip"
-   "zip"
-   "unzip"
-   "openssl"
    "curl"
-   "gnupg"
    "git"
    "git:send-email"))
 
+(define %xorg-util-packages
+  (list
+   ;; Xorg Window System Utils
+   ;; see -> https://gitlab.freedesktop.org/xorg/app/transset
+   ;; see -> https://unix.stackexchange.com/questions/127624/make-xterm-transparent
+   "xhost"                   ;
+   "xset"                    ;
+   "xsetroot"                ;
+   "xinput"                  ;
+   "xrdb"                    ; Set Xresource files
+   "xrandr"                  ; Screen rendering
+   "xclip"                   ; Clipboard
+   "xsel"                    ;
+   "xss-lock"                ; Screen locking
+   "xterm"                   ; XORG Terminal
+   "transset"                ; XORG window transparency
+   "picom"                   ; Compositor
+   "feh"                     ; Desktop background
+   "pipewire"                ; Audio System
+   "wireplumber"             ; Audio System router/controls
+   "playerctl"               ; Audio Player
+   "lm-sensors"              ; CLI system monitor
+   "libnotify"               ; Notifications
+   "brightnessctl"           ; Brightness Controls
+   "blueman"))               ; Bluetooh (-> need to configure)
+
+(define %stumpwm-packages
+  (list
+   ;; StumpWM Support Modules
+   "sbcl-slynk"                  ;
+   "sbcl-parse-float"            ;-> audio-wpctl
+   "sbcl-stumpwm-ttf-fonts"
+   "sbcl-stumpwm-kbd-layouts"
+   "sbcl-stumpwm-swm-gaps"
+   "sbcl-stumpwm-globalwindows"  ;-> need to properly configure
+   "sbcl-stumpwm-screenshot"     ;-> preliminarily working
+   ;; mode-line support
+   "sbcl-stumpwm-cpu"
+   "sbcl-stumpwm-mem"
+   "sbcl-stumpwm-wifi"
+   "sbcl-stumpwm-battery-portable"))
+
 (define %emacs-packages ;-> perhaps move to a manifest
   (list
-   "emacs-next-pgtk"
+   "emacs"
    "emacs-diminish"
    "emacs-delight"
-   "emacs-nerd-icons"
+   "emacs-nord-theme"
    "emacs-doom-themes"
+   "emacs-nerd-icons"
    "emacs-doom-modeline"
    "emacs-ligature"
    "emacs-no-littering"
@@ -99,6 +129,8 @@
    "emacs-guix"
    "emacs-arei"
    "emacs-sly"
+   "emacs-nyxt"
+   "emacs-stumpwm-mode"
    "emacs-mbsync"
    "emacs-org-superstar"
    "emacs-org-appear"
@@ -114,6 +146,8 @@
             (append
              %logoraz-packages
              %dev-packages
+             %xorg-util-packages
+             %stumpwm-packages
              %emacs-packages)))
  
  ;; Below is the list of Home services.  To search for available
@@ -123,8 +157,12 @@
    (simple-service 'env-vars home-environment-variables-service-type
                    '(("EDITOR" . "emacs")
                      ("BROWSER" . "nyxt")
-                     ;; Add flatpak pakcages to env variables
-                     ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:/home/logoraz/.local/share/flatpak/exports/share:$XDG_DATA_DIRS")))
+                     ("XDG_SESSION_TYPE" . "x11")
+                     ("XDG_SESSION_DESKOP" . "stumpwm")
+                     ("XDG_CURRENT_DESKTOP" . "stumpwm")
+                     ("XDG_DOWNLOAD_DIR" . "/home/logoraz/Downloads/")))
+   (service home-dbus-service-type)
+   (service home-pipewire-service-type)
    (service home-bash-service-type
             (home-bash-configuration
 	     (guix-defaults? #f)
@@ -135,11 +173,11 @@
                         ("ghr"  . "guix home reconfigure")
                         ("gsr"  . "sudo guix system reconfigure")
                         ("gup"  . "guix pull && guix upgrade")
-                        ("gud"  . "sudo guix system delete-generations")
+                        ("gud"  . "guix system delete-generations")
                         ("ghd"  . "guix home delete-generations")))
              (bashrc
-              (list (local-file "./config/dot-bashrc.sh"
+              (list (local-file "./dot-bashrc.sh"
                                 #:recursive? #t)))
              (bash-profile
-              (list (local-file "./config/dot-bash_profile.sh"
+              (list (local-file "./dot-bash_profile.sh"
                                 #:recursive? #t))))))))

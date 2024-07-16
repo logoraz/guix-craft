@@ -120,8 +120,8 @@
 ;; (set-frame-parameter nil 'alpha-background 85)
 
 (setq raz/custom-frame-alist
-      '((alpha-background . 85)
-        ;; (alpha . (85 . 85))
+      '(;;(alpha-background . 85)
+        (alpha . (85 . 85))
         (use-frame-synchronization . t)
         ;; (undecorated . t)
         ;; (maximized . t)

@@ -1,0 +1,38 @@
+(undo-tree-save-format-version . 1)
+"de2d90e2cd002eaf6f0d06355b0f58c418ffa3ad"
+[nil nil nil nil (26261 40005 543172 27000) 0 nil]
+([nil nil ((3021 . 3022) (t 26260 17609 279058 322000)) nil (26261 40005 543171 222000) 0 nil])
+([nil nil ((3021 . 3024)) nil (26261 40005 543170 321000) 0 nil])
+([nil nil ((3024 . 3026)) nil (26261 40005 543169 532000) 0 nil])
+([nil nil ((#("   \"\"" 0 3 (ws-butler-chg chg fontified t) 3 4 (face font-lock-string-face ws-butler-chg chg fontified t) 4 5 (face font-lock-string-face ws-butler-chg chg fontified t)) . 3021) (undo-tree-id2 . -3) (undo-tree-id3 . -4) (undo-tree-id4 . -5)) nil (26261 40005 543168 579000) 0 nil])
+([nil nil ((#("
+" 0 1 (ws-butler-chg delete fontified t)) . 3021) (undo-tree-id1 . -1)) nil (26261 40005 543166 98000) 0 nil])
+([nil nil ((3043 . 3044)) nil (26261 40005 543164 502000) 0 nil])
+([nil nil ((#("
+" 0 1 (ws-butler-chg chg fontified t)) . 3043) (undo-tree-id0 . -1)) nil (26261 40005 543163 541000) 0 nil])
+([nil nil ((3043 . 3044)) nil (26261 40005 543150 742000) 0 nil])
+([nil nil ((3043 . 3046)) nil (26261 40005 543149 947000) 0 nil])
+([nil nil ((3046 . 3048)) nil (26261 40005 543149 319000) 0 nil])
+([nil nil ((3047 . 3051)) nil (26261 40005 543148 959000) 0 nil])
+([nil nil ((3051 . 3057)) nil (26261 40005 543148 476000) 0 nil])
+([nil nil ((3058 . 3062)) nil (26261 40005 543148 116000) 0 nil])
+([nil nil ((3062 . 3064)) nil (26261 40005 543147 722000) 0 nil])
+([nil nil ((3063 . 3076)) nil (26261 40005 543147 361000) 0 nil])
+([nil nil ((3042 . 3046)) nil (26261 40005 543146 819000) 0 nil])
+([nil nil ((3046 . 3048)) nil (26261 40005 543146 48000) 0 nil])
+([nil nil ((3047 . 3058)) nil (26261 40005 543141 799000) 0 nil])
+([nil nil ((3047 . 3053) (t 26261 40005 552156 492000)) nil (26261 41182 203857 990000) 0 nil])
+([nil nil ((3070 . 3076)) nil (26261 41182 203856 889000) 0 nil])
+([nil nil ((3092 . 3098)) nil (26261 41182 203852 855000) 0 nil])
+([nil nil ((486 . 487) (t 26261 41182 211819 651000)) nil (26261 44658 482842 965000) 0 nil])
+([nil nil ((486 . 489)) nil (26261 44658 482842 168000) 0 nil])
+([nil nil ((489 . 491)) nil (26261 44658 482841 388000) 0 nil])
+([nil nil ((490 . 511)) nil (26261 44658 482840 790000) 0 nil])
+([nil nil ((511 . 512)) nil (26261 44658 482839 868000) 0 nil])
+([nil nil ((512 . 515)) nil (26261 44658 482835 867000) 0 nil])
+([nil nil ((#("   \"font-google-noto-sans-cjk\"" 0 3 (fontified t) 3 29 (face font-lock-string-face fontified t) 29 30 (face font-lock-string-face fontified t)) . 486) (t 26261 44658 491766 200000)) nil (26261 44704 825901 754000) 0 nil])
+([nil nil ((419 . 420)) nil (26261 44704 825900 563000) 0 nil])
+([nil nil ((nil rear-nonsticky nil 516 . 517) (nil fontified nil 516 . 517) (nil fontified nil 490 . 516) (nil fontified nil 487 . 490) (487 . 517)) nil (26261 44704 825899 642000) 0 nil])
+([nil current ((#("
+" 0 1 (ws-butler-chg chg fontified t)) . 419) (undo-tree-id0 . -1)) nil (26261 44704 825895 843000) 0 nil])
+nil

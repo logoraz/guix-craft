@@ -19,7 +19,7 @@
 (use-package org
   :diminish org-mode
   :hook ((org-mode . raz/org-fonts-hkf)
-         (org-mode . raz/nord-theme-org-mods-hkf)
+         ;;(org-mode . raz/nord-theme-org-mods-hkf)
          (org-mode . raz/org-latex-hkf))
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture))

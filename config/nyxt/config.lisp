@@ -14,11 +14,20 @@
 
 ;;; Start-Up & Configuration
 
+#+quicklisp
+(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+
 (in-package #:nyxt-user)
 
 ;; Loading files from the same directory (~/.config/nyxt/).
 (define-nyxt-user-system-and-load nyxt-user/basic-config
-  :components ("theme" "passwords" "utilities"))
+  :components ("theme"
+               "passwords"
+               "passwords-dev"
+               "utilities"))
 
 ;; Base broswer/buffer configurations
 (define-configuration browser
@@ -46,18 +55,4 @@
 (defmethod files:resolve ((profile nyxt:nyxt-profile) (file nyxt/mode/bookmark:bookmarks-file))
   "Reroute bookmarks to the `.config/nyxt/' directory."
   #p"~/.config/nyxt/bookmarks.lisp")
-
-
-;;; Load External Packages/Libraries
-;; Start Micros server so that Lem can connect to Nyxt...
-(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
-                                       (user-homedir-pathname))))
-  (when (probe-file quicklisp-init)
-    (load quicklisp-init)))
-
-;; FIXME - Nyxt sbcl process can't find micros even with quicklisp...
-;; (ql:quickload "micros")
-;; (bt:make-thread
-;;  (lambda ()
-;;    (micros:create-server :port 5000 :dont-close t)))
 

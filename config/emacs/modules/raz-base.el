@@ -11,22 +11,18 @@
 ;;  ‘forward-page’ (`C-x ]’ or `C-]’),
 ;;  ‘backward-page’ (`C-x [’ or `C-[’), and `narrow-to-page' (‘C-x n p’).
 
-
+
 ;; Code:
-;; TODO: Revmove dependencies on del-emacs-defhook macro...
-;;       not a very efficient implementation, need to fix before it can be deployed...
-;;TODO - define variables using `use-package' `:custom' keyword where possible.
 
-;;
-;; File Settings: Auto Save, Backups, History, Bookmark, and Recent Files.
+;;; File Settings: Auto Save, Backups, History, Bookmark, and Recent Files.
 ;;
 
-;; Auto Mode Alist
+;;; Auto Mode Alist
 ;; create `custom' file extension for Xdefaults/Xresources file types...
 ;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Associating-modes-with-files.html
 ;; (add-to-list 'auto-mode-alist '("\\.xconf\\'" . conf-xdefaults-mode))
 
-;; Auto Save: Prefix for generating auto-save-list-file-name
+;;; Auto Save: Prefix for generating auto-save-list-file-name
 ;; see - `auto-save-list-file-name'
 (setq auto-save-list-file-prefix (expand-file-name "auto-save/.saves-"
                                                    *raz-var-directory*))
@@ -42,7 +38,7 @@
        kept-new-versions 9
        delete-by-moving-to-trash t)
 
-;; History
+;;; History
 (use-package savehist
   :diminish savehist-mode
   :custom
@@ -53,12 +49,12 @@
         history-delete-duplicates t)
   (savehist-mode 1))
 
-;; Bookmarks
+;;; Bookmarks
 (use-package bookmark
   :custom
   (bookmark-default-file (expand-file-name "bookmarks" *raz-var-directory*)))
 
-;; Recent Files
+;;; Recent Files
 (use-package recentf
   ;; recentf settings/hack
   ;; TODO: Optimize use-package configuration for this!
@@ -80,9 +76,9 @@
   :config
   (recentf-mode))
 
-
-;; Coding/Editing Defaults
-;;
+
+;;; Coding/Editing Defaults
+
 ;; .dir-local variables for development projects
 (setq enable-local-eval nil)
 (setq enable-local-variables nil)
@@ -91,7 +87,7 @@
 (setq-default global-auto-revert-non-file-buffers t)
 (setq-default indent-tabs-mode nil) ; use spaces instead of tabs
 (setq-default ;cursor-type 'bar
-              fill-column 90
+              fill-column 95
               large-file-warning-threshold 100000000
               find-file-visit-truename t)
 (global-auto-revert-mode 1)
@@ -99,6 +95,7 @@
 (column-number-mode 1)
 
 (use-package display-fill-column-indicator
+  :disabled
   :diminish
   :hook ((prog-mode . display-fill-column-indicator-mode)
          (lisp-interaction-mode . (lambda () (display-fill-column-indicator-mode -1))))
@@ -151,9 +148,8 @@
                  'append)))))
 
 
-;;
-;; External Package Path's Configuration
-;;
+;;; External Package Path's Configuration
+
 
 ;; Configure package PATH's
 (use-package no-littering)
@@ -249,8 +245,8 @@
          (tab-bar-tab-ungrouped :inherit tab-bar-tab-inactive)))
     (raz/set-face-attribute (car face) (cdr face))))
 
-
-;; Editing/IDE Package configurations
+
+;;; Editing/IDE Package configurations
 (use-package undo-tree
   :diminish undo-tree-mode
   :custom
@@ -281,7 +277,7 @@
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (vc-follow-symlinks t))
 
-;; Workflow frame/tab workspaces
+;;; Workflow frame/tab workspaces
 (use-package beframe
   :diminish beframe-mode
   :bind-keymap ("C-c b" . beframe-prefix-map)
