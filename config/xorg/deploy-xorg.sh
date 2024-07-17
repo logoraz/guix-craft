@@ -5,7 +5,7 @@
 
 # .icons directory -> custom cursor
 icons=~/.icons
-if [ ! -d $icons ] && [ ! -L $icons]; then
+if [ ! -d $icons ] && [ ! -L $icons ]; then
     echo "~/.icons/ does not exist - creating..."
     ln -s ~/repos/guix-craft/config/xorg/dot-icons \
     ~/.icons

@@ -1,8 +1,0 @@
-(undo-tree-save-format-version . 1)
-"b6c2bb303ab1ab083e8f1b1f463d983645cc492b"
-[nil nil nil nil (26261 42644 925997 956000) 0 nil]
-([nil nil ((#("~" 0 1 (fontified t)) . -45) (undo-tree-id39 . -1) 46 (t 26261 38680 872710 200000)) nil (26261 42644 925996 718000) 0 nil])
-([nil nil ((50 . 53) (45 . 45) (45 . 50)) nil (26261 42644 925995 12000) 0 nil])
-([nil nil ((53 . 59)) nil (26261 42644 925993 993000) 0 nil])
-([nil current ((#("/" 0 1 (ws-butler-chg chg fontified t)) . -58) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (undo-tree-id2 . -1) (undo-tree-id3 . -1) (undo-tree-id4 . -1) (undo-tree-id5 . -1) (undo-tree-id6 . -1) (undo-tree-id7 . -1) (undo-tree-id8 . -1) (undo-tree-id9 . -1) (undo-tree-id10 . -1) (undo-tree-id11 . -1) (undo-tree-id12 . -1) (undo-tree-id13 . -1) (undo-tree-id14 . -1) (undo-tree-id15 . -1) (undo-tree-id16 . -1) (undo-tree-id17 . -1) (undo-tree-id18 . -1) (undo-tree-id19 . -1) (undo-tree-id20 . -1) (undo-tree-id21 . -1) (undo-tree-id22 . -1) (undo-tree-id23 . -1) (undo-tree-id24 . -1) (undo-tree-id25 . -1) (undo-tree-id26 . -1) (undo-tree-id27 . -1) (undo-tree-id28 . -1) (undo-tree-id29 . -1) (undo-tree-id30 . -1) (undo-tree-id31 . -1) (undo-tree-id32 . -1) (undo-tree-id33 . -1) (undo-tree-id34 . -1) (undo-tree-id35 . -1) (undo-tree-id36 . -1) (undo-tree-id37 . -1) (undo-tree-id38 . -1) 59) nil (26261 42644 925990 675000) 0 nil])
-nil

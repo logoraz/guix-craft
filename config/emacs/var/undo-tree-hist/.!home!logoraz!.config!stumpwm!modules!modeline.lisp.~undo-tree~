@@ -1,5 +1,0 @@
-(undo-tree-save-format-version . 1)
-"aed90316bed20af6a8a0fdfd7854892c71190f94"
-[nil nil nil nil (26261 42543 524528 36000) 0 nil]
-([nil current ((apply 30 1532 1966 undo--wrap-and-run-primitive-undo 1532 1966 ((#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1927) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1881) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1843) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1795) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1751) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1707) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1663) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1622) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1564) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -1532) 1996))) nil (26261 42543 524523 733000) 0 nil])
-nil

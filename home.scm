@@ -52,7 +52,7 @@
    "guile-ares-rs"     ; for mREPL Guile Scheme Emacs IDE
    "guile-hoot"        ; explore Web/WASM
    ;; Common Lisp Dev Tools
-   "ccl"                       ;-> Alternate ANSI Common Lisp compiler
+   "ccl"
    "ecl"
    ;; Base Dev Tools
    "make"
@@ -85,7 +85,8 @@
    "lm-sensors"              ; CLI system monitor
    "libnotify"               ; Notifications
    "brightnessctl"           ; Brightness Controls
-   "blueman"))               ; Bluetooh (-> need to configure)
+   "bluez"                   ; Bluetooh API
+   "blueman"))               ; Bluetooh System/Controls (-> need to configure)
 
 (define %stumpwm-packages
   (list

@@ -10,9 +10,17 @@ if [ ! -d $nyxt ]; then
     mkdir ~/.config/nyxt/
 fi
 
+# StumpWM Start Script
+ln -s ~/repos/guix-craft/config/nyxt/start-nyxt.sh \
+   ~/.config/nyxt/start-nyxt.sh
+
 # Initialization File
 ln -s ~/repos/guix-craft/config/nyxt/config.lisp \
    ~/.config/nyxt/config.lisp
+
+# Themes
+ln -s ~/repos/guix-craft/config/nyxt/theme.lisp \
+   ~/.config/nyxt/theme.lisp
 
 # Utilities
 ln -s ~/repos/guix-craft/config/nyxt/utilities.lisp \
@@ -22,6 +30,5 @@ ln -s ~/repos/guix-craft/config/nyxt/utilities.lisp \
 ln -s ~/repos/guix-craft/config/nyxt/passwords.lisp \
    ~/.config/nyxt/passwords.lisp
 
-# Themes
-ln -s ~/repos/guix-craft/config/nyxt/theme.lisp \
-   ~/.config/nyxt/theme.lisp
+ln -s ~/repos/guix-craft/config/nyxt/passwords-dev.lisp \
+   ~/.config/nyxt/passwords-dev.lisp
