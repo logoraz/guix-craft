@@ -204,9 +204,11 @@ Common Lisp newcomers and Guix users. A few rude, pompous contributors to the
 project and their interactions with me on DM's is what lead to this... Not sure if I will update this package recipe any longer knowing it will contribute to that negative
 social environment.
 
-** StumpWM Configuration
+
+* StumpWM Configuration
 
 *** WIP
+
 
 * References
 
