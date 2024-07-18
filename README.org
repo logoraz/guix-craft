@@ -13,7 +13,7 @@
 
   [[file:./assets/home-desktop.png]]
 
-  [[file:./assets/nyxt-desktop.png]]
+  [[file:./assets/nyxt-desktop-2.png]]
 
 
   My personal Guix System & Home StumpWM Configuration!
