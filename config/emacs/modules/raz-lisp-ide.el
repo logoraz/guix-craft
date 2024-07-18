@@ -31,7 +31,7 @@
   ;; and you can select a program from that list.
   (setq sly-lisp-implementations
         `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
-          ;(clasp (,(executable-find "clasp")))
+          (clasp (,(executable-find "clasp")))
           (ccl (,(executable-find "ccl")))
           (ecl (,(executable-find "ecl")))))
 
