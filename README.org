@@ -11,9 +11,9 @@
 
 * Introduction
 
-  [[file:~/repos/guix-craft/assets/home-desktop.png]]
+  [[file:./assets/home-desktop.png]]
 
-  [[file:~/repos/guix-craft/assets/nyxt-desktop.png]]
+  [[file:./assets/nyxt-desktop.png]]
 
 
   My personal Guix System & Home StumpWM Configuration!
