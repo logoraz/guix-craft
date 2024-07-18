@@ -9,7 +9,7 @@
 #+macro: latest-export-date '(eval (format-time-string "%F %T %z"))'
 :end:
 
-* Introduction
+* Guix+StumpWM Configuration
 
   [[file:./assets/home-desktop.png]]
 
@@ -188,9 +188,10 @@ List known connections and delete them from list in Network Manager.
 
 ** Common Lisp Stuff
 
-*** Installing Lem (to trial in leu of Emacs)
+*** Installing Lem
 
-I created a Guix package recipe for Lem, which can be found  [[https://github.com/logoraz/lem-guix-package-recipe][here]], clone and install with Guix via:
+I created a Guix package recipe for Lem, which can be found [[https://github.com/logoraz/lem-guix-package-recipe][here]], clone and install with
+Guix via:
 
 #+begin_src sh
 
@@ -198,6 +199,14 @@ I created a Guix package recipe for Lem, which can be found  [[https://github.co
 
 #+end_src
 
+*Note:* I no longer plan to contribute to Lem due to their distasteful ethics towards
+Common Lisp newcomers and Guix users. A few rude, pompous contributors to the
+project and their interactions with me on DM's is what lead to this... Not sure if I will update this package recipe any longer knowing it will contribute to that negative
+social environment.
+
+** StumpWM Configuration
+
+*** WIP
 
 * References
 
