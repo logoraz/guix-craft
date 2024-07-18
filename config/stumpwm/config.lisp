@@ -32,10 +32,10 @@
 ;;; Initialize Desktop Environment & Xorg Resources.
 (load "~/.config/stumpwm/modules/auto-start.lisp")
 
-
 ;;; Modified StumpWM contrib module
 ;;; TODO - Determine general fix -> send PR & possibly package for Guix!
 (load "~/.config/stumpwm/modules/audio-wpctl.lisp")
+
 ;;; Load in custom file modules
 (load "~/.config/stumpwm/modules/commands.lisp")
 (load "~/.config/stumpwm/modules/utilities.lisp")

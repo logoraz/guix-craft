@@ -1,5 +1,5 @@
-#+TITLE: =(define (guix-craft system . home) ...)=
-#+subtitle: ... a work in progress
+#+TITLE: GNU Guix - System & Home StumpWM Configuration
+#+subtitle: =(defmacro guix-craft (system home &rest body) ...)
 #+author: Erik Pablo Almaraz (logoraz)
 #+email: erikalmaraz@fastmail.com
 :args:
@@ -11,16 +11,21 @@
 
 * Introduction
 
-  My personal Guix System & Home Configuration with Gnome.
+  [[file:~/repos/guix-craft/assets/home-desktop.png]]
 
-  I am currently configuring Guix SD for Common Lisp development, as a result I am
-  currently working on integrating quicklisp. As you will see, my config is mostly
-  founded on Lisp-based applications, i.e. Lem, Nyxt and Emacs.
+  [[file:~/repos/guix-craft/assets/nyxt-desktop.png]]
+
+
+  My personal Guix System & Home StumpWM Configuration!
+
+  I am currently configuring Guix SD for Clasp Common Lisp and Guile Scheme
+  development.
 
   The config directory comprises of those applications/frameworks which I have
-  personaly setup (and not all my 'dot files' therein) - a work in progress.
-  Currently using a shell script to deploy, but am working on using Guix/Guile
-  scheme in handling this task in a more robust manner (reproducible).
+  personaly setup (and not all my 'dot files' are therein).
+  Currently using a shell script to deploy, but am working on setting up a
+  full Guix deployment, however, maintaining original source code rather
+  than writting it in Guile as some do.
 
   This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th Gen
   (Type 20FB) Laptop.
@@ -29,20 +34,23 @@
 
   - GitHub: https://github.com/logoraz/guix-craft.git
 
+
 ** System Configuration Outline (=system.scm=)
 
  Define system-level services & packages:
 
  - 1. =%system-services=
-   - Set Gnome Desktop Environment (Wayland at least)
    - Set OpenSSH service
    - =guix-home-service-type= -> (TODO would like to handle both concurrently)
    - Modify =%desktop-services= to utilize substitutes where possible
      as opposed to compiling everything...
      See: https://git.savannah.gnu.org/cgit/guix.git/tree/gnu?h=v1.4.0
 
-- 2. =%system-packages= -> wip
-   This is Guix's default packages needed at the system level.
+- 2. =%stumpwm-packages=
+  Prefer to keep the WM at the system level to configure basic services and to have
+  them available system wide, home can configure StumpWM however you like.
+  - =sbcl=
+  - =stumpwm-with-slynk=
 
 ** Home Configuration Outline (=home.scm=)
 
@@ -50,11 +58,17 @@
 
  - 1. =%logoraz-packages= -> My everyday packages (i.e. fonts, web, apps, tools)
  - 2. =%dev-packages= -> Guile/Common Lisp packages I use consistently
- - 3. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
- - 4. =services= -> wip (need to modularize to separate variable definitions)
+ - 3. =%xorg-util-packages= -> X11 packages needed for StumpWM
+ - 4. =%stumpwm-packages= -> For StumpWM configuration/customization
+ - 4. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
+ - 5. =services= -> wip (need to modularize to separate variable definitions)
    - =home-environment-variables-service-type=
+   - =home-dbus-service-type=
+   - =home-pipewire-service-type=
    - =home-bash-service-type=
-   - TBD (more to do here)
+   - TODO: Implement =home-xdg-configuration-files-service-type=
+   - TODO: Implment =home-files-service-type=
+   - TODO: Modularize services, i.e. define list outside =home-environment= in variable.
 
 ** Installation
 
@@ -172,22 +186,17 @@ List known connections and delete them from list in Network Manager.
 
 #+end_src
 
-
 ** Common Lisp Stuff
 
 *** Installing Lem (to trial in leu of Emacs)
 
-Lem has unoficial packaing for Guis at [[https://github.com/arthur-dog/lem-guix-packaging][lem-guix-packaging]], clone and install with Guix via:
+I created a Guix package recipe for Lem, which can be found  [[https://github.com/logoraz/lem-guix-package-recipe][here]], clone and install with Guix via:
 
 #+begin_src sh
 
   $ guix package -f path/to/lem-guix-packaging/package.scm
 
 #+end_src
-
-This currently installs the package outside of Guix Home, will need to figure out if
-there is a way to install with home... This is a work in progress, going to try and
-write a Guix package recipe for latest Lem and push upstream.
 
 
 * References
