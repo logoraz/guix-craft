@@ -1,4 +1,3 @@
-;; -*- mode: Lisp; -*-
 ;;;; StumpWM Initialization File (config)
 ;;; Commentary:
 ;;; TODO: 1. Research into the differences between `require' & `use-module'
@@ -13,6 +12,7 @@
 
 ;;; Set PATHs: data directory, etc.
 ;; https://stumpwm.github.io/git/stumpwm-git_67.html
+;; stumpwm still saves stuff to ~/.stumpwm.d, want it to go to ~/.config/stumpwm/data/ instead.
 (setf *data-dir* (concat (getenv "HOME")
                          "/.config/stumpwm/data/"))
 
@@ -39,6 +39,15 @@
 ;;    - https://github.com/Junker/stumpwm-wpctl
 ;; 2. Then setup as stand-alone package & trial out
 (load "~/.config/stumpwm/modules/audio-wpctl.lisp")
+
+;;; StumpWM contrib not available in Guix
+;;; end-session
+;; Need to add to load-path as it is not part of Guix available packages
+(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/util/end-session/")
+;; actually load the module
+(load-module "end-session")
+;; Use loginctl instead of the default systemctl
+;; (setf end-session:*end-session-command* "loginctl")
 
 ;;; Load in custom file modules
 (load "~/.config/stumpwm/modules/commands.lisp")

@@ -71,3 +71,17 @@
     key-map))
 
 (define-key *top-map* (kbd "Print") '*my-screenshot-keymap*)
+
+;;; end-session
+(defvar *end-session-keymap*
+  (let ((key-map (make-sparse-keymap)))
+    (define-key key-map (kbd "q") "end-session")
+    (define-key key-map (kbd "l") "logout")
+    (define-key key-map (kbd "s") "suspend-computer")
+    (define-key key-map (kbd "S") "shutdown-computer")
+    (define-key key-map (kbd "r") "loadrc")
+    (define-key key-map (kbd "R") "restart-hard")
+    (define-key key-map (kbd "C-r") "restart-computer")
+    key-map))
+
+(define-key *root-map* (kbd "q") '*end-session-keymap*)

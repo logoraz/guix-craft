@@ -65,3 +65,8 @@ ln -f ~/repos/guix-craft/config/stumpwm/modules/commands.lisp \
 ## utilities
 ln -f ~/repos/guix-craft/config/stumpwm/modules/utilities.lisp \
    ~/.config/stumpwm/modules/utilities.lisp
+
+# StumpWM Contrib not available in Guix
+
+ln -f ~/repos/guix-craft/config/stumpwm/modules/end-session.lisp \
+   ~/.config/stumpwm/modules/end-session.lisp
