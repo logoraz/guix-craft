@@ -1,4 +1,4 @@
-;;;; StumpWM Commands & Macro's Module
+;;;; StumpWM Commands
 
 ;;; Commentary:
 

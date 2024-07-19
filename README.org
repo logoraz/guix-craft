@@ -1,4 +1,4 @@
-#+TITLE: GNU Guix - System & Home StumpWM Configuration
+#+TITLE: GNU Guix System & Home + StumpWM Configuration
 #+subtitle: =(defmacro guix-craft (system home &rest body) ...)
 #+author: Erik Pablo Almaraz (logoraz)
 #+email: erikalmaraz@fastmail.com
@@ -9,7 +9,7 @@
 #+macro: latest-export-date '(eval (format-time-string "%F %T %z"))'
 :end:
 
-* Guix+StumpWM Configuration
+* Guix Configuration
 
   [[file:./assets/home-desktop.png]]
 
@@ -209,11 +209,34 @@ Guix via:
 Common Lisp newcomers and Guix users. A few rude, pompous contributors to the
 project and their interactions with me on DM's is what lead to this... Not sure if I will update this package recipe any longer knowing it will contribute to that negative
 social environment.
+My Lem config is kept in the archive directory of this repo.
 
 
 * StumpWM Configuration
 
-*** WIP
+My personal StumpWM configuration - I prefer to follow the XDG-style configuration, as
+prescribed on https://github.com/stumpwm/stumpwm/wiki/Customize. I like things modular,
+so it is set up as such.
+
+** Initialization File:  =~/.config/stumpwm/config= -> Loads in modules and set's up core
+features, such amy X11 environment.
+
+** Modules:
+- =audio-wpctl= - Wireplumber audio controls for StumpWM
+- =auto-start= - Setup X11 environment & controls
+- =colors= - Define color pallet for StumpWM
+- =commands= - Commands, Helper Functions, and Macros for StumpWM (wip)
+- =frames= - Frame/Window configurations
+- =keybindings= - The heart and sole of the StumpWM configuration
+- =modeline= - Setup & customize StumpWM modeline
+- =theme= - Set appearance/style of StumpWM
+- =utilities= - Utility packages/libraries and their customization.
+
+** Libraries:
+- =audio-wpctl= - converting to package/library to push upstream
+  - A fork of https://github.com/Junker/stumpwm-wpctl
+- tbd
+
 
 
 * References
@@ -229,7 +252,11 @@ social environment.
 
     - https://config.phundrak.com/stumpwm
 
+    - https://github.com/herbertjones/my-stumpwm-config
+
+
     - https://mail.gnu.org/archive/html/bug-guix/2023-04/msg00227.html
+      - Believe this has since been corrected in Guix upstream.
 
 3. Nyxt Configuration
 
