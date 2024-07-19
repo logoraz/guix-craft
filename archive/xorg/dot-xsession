@@ -1,4 +1,0 @@
-# -*- conf-unix -*-
-# Setup:
-
-exec ~/.config/stumpwm/start-stumpwm.sh
