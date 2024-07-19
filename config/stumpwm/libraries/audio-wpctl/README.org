@@ -1,0 +1,8 @@
+#+TITLE: audio-wpctl - Wireplumber audio controls for StumpWM
+#+author: Erik Pablo Almaraz (logoraz)
+
+* Usage
+
+* TBD
+
+* References
