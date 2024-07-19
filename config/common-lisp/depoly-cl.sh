@@ -1,5 +1,5 @@
 #!/bin/sh
-# Deploy Lem Config
+# Deploy Common Lisp Environment
 
 # TODO - Once I learn guile well enough, will use Guix as a deploy agent for this...
 
@@ -10,21 +10,46 @@
 #  ~/common-lisp,
 #  ~/.local/share/common-lisp/source,
 
-# Check if directory exists else create.
+# Save development common-lisp libraries/packages here
 common_lisp=/home/logoraz/common-lisp/
 if [ ! -d $common_lisp ]; then
     echo "~/common-lisp/ does not exist - creating..."
     mkdir ~/common-lisp/
 fi
 
+# Save persistent common-lisp libraries/packages here
+common_lisp_local=/home/logoraz/.local/share/common-lisp/
+if [ ! -d $common_lisp_local ]; then
+    echo "~/.local/share/common-lisp/ does not exist - creating..."
+    mkdir ~/.local/share/common-lisp/
+    common_lisp_source=/home/logoraz/.local/share/common-lisp/source/
+    if [ ! -d $common_lisp_source ]; then
+    echo "~/.local/share/common-lisp/source/ does not exist - creating..."
+    mkdir ~/.local/share/common-lisp/source/
+    fi
+fi
+
+
 # SBCL Init file
 ln -s ~/repos/guix-craft/config/common-lisp/dot-sbclrc.lisp \
    ~/.sbclrc
 
+# CLASP-CL Init file?
+
+
 # Quicklisp
-quicklisp=/home/logoraz/.config/quicklisp
-if [ ! -d $quicklisp ] && [ ! -L $quicklisp ]; then
-    echo "/home/logoraz/.config/quicklisp/ does not exist - creating..."
-    ln -s ~/repos/guix-craft/config/common-lisp/quicklisp \
-       /home/logoraz/.config/quicklisp
+# setting up so you don't have to re-download everytime
+quicklisp=/home/logoraz/quicklisp/
+if [ ! -d $quicklisp ]; then
+    echo "/home/logoraz/quicklisp/ does not exist - creating..."
+    mkdir ~/quicklisp/
+fi
+
+if [ ! -d $quicklisp/install ]; then
+    echo "/home/logoraz/quicklisp/install/ does not exist - creating.."
+    mkdir $quicklisp/install/
+    cp ~/repos/guix-craft/config/common-lisp/quicklisp/quicklisp.lisp \
+       ~/quicklisp/install/quicklisp.lisp
+    cp ~/repos/guix-craft/config/common-lisp/quicklisp/quicklisp.asc \
+       ~/quicklisp/install/quicklisp.asc
 fi
