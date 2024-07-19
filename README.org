@@ -145,13 +145,19 @@ follow the =Guix Way=.
   # Deploy the configuration to ~/.config/
   # Use the deployment scripts in each config module:
 
-  # Setup Emacs
+  # Setup Guix files
+  ./config/guix/deploy-guix.sh
+
+  # Setup StumpWM config files
+  ./config/stumpwm/deploy-stumpwm.sh
+
+  # Setup X11 (Xorg) environment files for StumpWM
+  ./config/xorg/deploy-xorg.sh
+
+  # Setup Emacs config files
   ./config/emacs/deploy-emacs.sh
 
-  # Setup Lem
-  ./config/lem/deploy-lem.sh
-
-  # Setup Nyxt
+  # Setup Nyxt config files
   ./config/nyxt/deploy-nyxt.sh
 
   # Setup Common Lisp Environment (quicklisp, FFI (WIP), etc.)
