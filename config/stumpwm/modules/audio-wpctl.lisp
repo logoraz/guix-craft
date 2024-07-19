@@ -3,9 +3,8 @@
 ;;; Commentary:
 
 ;;; References:
-;;  Not in StumpWM-contrib
-;;  1. https://github.com/Junker/stumpwm-wpctl
-;;  2. https://github.com/stumpwm/stumpwm-contrib/tree/master
+;;;  1. https://github.com/Junker/stumpwm-wpctl
+;;;  2. https://github.com/stumpwm/stumpwm-contrib/tree/master
 
 (load-module "parse-float")
 

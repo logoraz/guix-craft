@@ -1,13 +1,15 @@
 ;;;; StumpWM Keybindings Module
 
 ;;; Commentary:
+;; TODO - Skinny down StumpWM's original Top Level keymap, don't need every option
+;;        that is present, also - it takes a while to load...
 
 ;;; References:
 
 (in-package :stumpwm)
 
 ;;; Enable multiple keyboard layouts (English and TBD)
-
+;; TODO - disable message for this, I don't want to see it at start up.
 (load-module "kbd-layouts")
  (kbd-layouts:keyboard-layout-list "us")
 
@@ -56,6 +58,8 @@
 (define-key *root-map* (kbd "a") '*my-applications-keymap*)
 
 ;;; Screenshots
+;; TODO - determine how to preset location for screenshots so I don't have to
+;; type it in every time. Also, screenshot captures the stumpwm prompt as well...
 (defvar *my-screenshot-dir* "~/desktop/screenshots/"
   "Path to custom screenshots directory.")
 

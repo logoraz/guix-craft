@@ -33,7 +33,10 @@
 (load "~/.config/stumpwm/modules/auto-start.lisp")
 
 ;;; Modified StumpWM contrib module
-;;; TODO - Determine general fix -> send PR & possibly package for Guix!
+;; TODO - Determine general fix -> send PR & possibly package for Guix!
+;; 1. Fork repo this was borrowed from and apply changes
+;;    - https://github.com/Junker/stumpwm-wpctl
+;; 2. Then setup as stand-alone package & trial out
 (load "~/.config/stumpwm/modules/audio-wpctl.lisp")
 
 ;;; Load in custom file modules
