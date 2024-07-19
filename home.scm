@@ -93,11 +93,12 @@
    ;; StumpWM Support Modules
    "sbcl-slynk"                  ;
    "sbcl-parse-float"            ;-> audio-wpctl
-   "sbcl-stumpwm-ttf-fonts"
-   "sbcl-stumpwm-kbd-layouts"
-   "sbcl-stumpwm-swm-gaps"
+   "sbcl-stumpwm-ttf-fonts"      ;->
+   "sbcl-stumpwm-kbd-layouts"    ;->
+   "sbcl-stumpwm-swm-gaps"       ;->
    "sbcl-stumpwm-globalwindows"  ;-> need to properly configure
    "sbcl-stumpwm-screenshot"     ;-> preliminarily working
+   ;"sbcl-stumpwm-end-session"   ;-> Not available in guix...
    ;; mode-line support
    "sbcl-stumpwm-cpu"
    "sbcl-stumpwm-mem"
