@@ -30,6 +30,7 @@
 ;; (register-altgr-as-modifier)
 
 ;;; Initialize Desktop Environment & Xorg Resources.
+;; TODO: Create Package/Librarie to submit to StumpWM/contrib
 (load "~/.config/stumpwm/modules/auto-start.lisp")
 
 ;;; Modified StumpWM contrib module
