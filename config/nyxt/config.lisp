@@ -29,6 +29,7 @@
                "passwords-dev"
                "utilities"))
 
+
 ;; Base broswer/buffer configurations
 (define-configuration browser
     ((restore-session-on-startup-p nil)))
@@ -56,3 +57,6 @@
   "Reroute bookmarks to the `.config/nyxt/' directory."
   #p"~/.config/nyxt/bookmarks.lisp")
 
+;; Prescription to use invader theme does not work.
+;; (define-nyxt-user-system-and-load nyxt-user/invader-proxy
+;;   :depends-on ("invader"))
