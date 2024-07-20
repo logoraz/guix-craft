@@ -47,7 +47,7 @@
 ;; actually load the module
 (load-module "end-session")
 ;; Use loginctl instead of the default systemctl
-;; (setf end-session:*end-session-command* "loginctl")
+(setf end-session:*end-session-command* "loginctl")
 
 ;;; Load in custom file modules
 (load "~/.config/stumpwm/modules/commands.lisp")
