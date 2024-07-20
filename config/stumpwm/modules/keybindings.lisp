@@ -50,6 +50,7 @@
   (let ((key-map (make-sparse-keymap)))
     (define-key key-map (kbd "x") "exec ~/.config/xorg/start-xterm.sh")
     (define-key key-map (kbd "n") "exec ~/.config/nyxt/start-nyxt.sh")
+    (define-key key-map (kbd "e") "exec emacs")
     (define-key key-map (kbd "i") "exec icecat")
     (define-key key-map (kbd "k") "exec keepassxc")
     (define-key key-map (kbd "c") "exec gnucash")
@@ -75,15 +76,15 @@
 
 (define-key *top-map* (kbd "Print") '*my-screenshot-keymap*)
 
-;;; end-session
+;;; Session Controls (end-session)
 (defvar *end-session-keymap*
   (let ((key-map (make-sparse-keymap)))
-    (define-key key-map (kbd "q") "end-session")
-    (define-key key-map (kbd "l") "logout")
-    (define-key key-map (kbd "s") "suspend-computer")
-    (define-key key-map (kbd "S") "shutdown-computer")
-    (define-key key-map (kbd "r") "loadrc")
-    (define-key key-map (kbd "R") "restart-hard")
+    (define-key key-map (kbd "q")   "end-session")
+    (define-key key-map (kbd "l")   "logout")
+    (define-key key-map (kbd "s")   "suspend-computer")
+    (define-key key-map (kbd "S")   "shutdown-computer")
+    (define-key key-map (kbd "r")   "loadrc")
+    (define-key key-map (kbd "R")   "restart-hard")
     (define-key key-map (kbd "C-r") "restart-computer")
     key-map))
 
