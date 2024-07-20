@@ -8,11 +8,11 @@
 
 ;;; Set up Groups & Placement
 (when *initializing*
-  (grename "HOME")
-  (gnewbg  "DEV")
-  (gnewbg  "WWW")
-  (gnewbg  "SYS")
-  (gnewbg  "PRIV"))
+  (grename "[HOME]")
+  (gnewbg  "[TERM]")
+  (gnewbg  "[WWW]")
+  (gnewbg  "[PRIV]")
+  (gnewbg  "[ETC]"))
 
 (clear-window-placement-rules)
 
