@@ -59,14 +59,8 @@
             " | %d"))          ; Clock
 
 
-;; You can customize what’s displayed in CPU module by changing the
-;; cpu::*cpu-modeline-fmt* internal variable in your init.lisp:
+;; Customize what’s displayed in CPU module
 (setf cpu::*cpu-modeline-fmt* "%c %t") ; default is "%c (%f) %t"
 
 ;; Set executable source for wifi module:
 (setf wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig")
-
-;; Customize format of wpclt module
-;; (setf wpctl::*wpctl-modeline-fmt* "AUD: %v")
-;; For some reason this is not properly being set here -> set in audio-wpctl
-;; (setf *wpctl-modeline-fmt* "AUD: %v")
