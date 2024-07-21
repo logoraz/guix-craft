@@ -6,6 +6,8 @@
 ;;;  1. https://github.com/Junker/stumpwm-wpctl
 ;;;  2. https://github.com/stumpwm/stumpwm-contrib/tree/master
 
+(in-package :stumpwm)
+
 (load-module "parse-float")
 
 (defvar *wpctl-modeline-fmt* "AUD: %v" ;"%b (%v)"
@@ -145,7 +147,7 @@
   (register-ml-on-click-id :ml-wpctl-source-on-click #'source-ml-on-click))
 
 ;;; StumpWM Interface Definitions
-(defcommand wpctl-volume-up () ()
+(stumpwm:defcommand wpctl-volume-up () ()
   "Increase the volume by N points"
   (volume-up *default-sink-id* *step*))
 
