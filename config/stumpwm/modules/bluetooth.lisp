@@ -13,6 +13,7 @@
 (defvar *bluetooth-command* "bluetoothctl"
   "Base command for interacting with bluetooth.")
 
+;;; Utilities
 (defun bluetooth-message (&rest message)
   (message (format nil
                    "^2Bluetooth:^7 ~{~A~^ ~}"
@@ -24,12 +25,14 @@
           *bluetooth-command*
           args))
 
+
 (defmacro bluetooth-command (&rest args)
   `(run-shell-command (bluetooth-make-command ,@args) t))
 
 (defmacro bluetooth-message-command (&rest args)
   `(bluetooth-message (bluetooth-command ,@args)))
 
+;;; Toggle Bluetooth on/off
 (defcommand bluetooth-turn-on () ()
   "Turn on bluetooth."
   (bluetooth-message-command "power" "on"))
@@ -38,18 +41,19 @@
   "Turn off bluetooth."
   (bluetooth-message-command "power" "off"))
 
+;;; Bluetooth Devices
 (defstruct (bluetooth-device
-             (:constructor
-              make-bluetooth-device (&key (address "")
-                                          (name nil)))
-             (:constructor
-              make-bluetooth-device-from-command
-              (&key (raw-name "")
-               &aux (address (cadr (cl-ppcre:split " " raw-name)))
-                    (full-name (format nil "~{~A~^ ~}" (cddr (cl-ppcre:split " " raw-name)))))))
+            (:constructor
+                make-bluetooth-device (&key (address "")
+                                         (name nil)))
+            (:constructor
+                make-bluetooth-device-from-command
+                (&key (raw-name "")
+                 &aux (address (cadr (cl-ppcre:split " " raw-name)))
+                   (full-name (format nil "~{~A~^ ~}" (cddr (cl-ppcre:split " " raw-name)))))))
   address
   (full-name (progn
-                 (format nil "~{~A~^ ~}" name))))
+               (format nil "~{~A~^ ~}" name))))
 
 (defun bluetooth-get-devices ()
   (let ((literal-devices (bluetooth-command "devices")))
@@ -57,13 +61,14 @@
               (make-bluetooth-device-from-command :raw-name device))
      (cl-ppcre:split "\\n" literal-devices))))
 
+;;; Connect to a device
 (defun bluetooth-connect-device (device)
   (progn
     (bluetooth-turn-on)
     (cond ((bluetooth-device-p device) ;; it is a bluetooth-device structure
            (bluetooth-message-command "connect"
                                       (bluetooth-device-address device)))
-          ((stringp device)            ;; assume it is a MAC address
+          ((stringp device) ;; assume it is a MAC address
            (bluetooth-message-command "connect" device))
           (t (message (format nil "Cannot work with device ~a" device))))))
 
@@ -78,11 +83,12 @@
                                    devices)))))
       (bluetooth-connect-device choice)))))
 
+;;; Keybindings -> move to keybindings.lisp
 (defvar *bluetooth-keymap*
   (let ((key-map (make-sparse-keymap)))
     (define-key key-map (kbd "c") "bluetooth-connect")
     (define-key key-map (kbd "o") "bluetooth-turn-on")
     (define-key key-map (kbd "O") "bluetooth-turn-off")
-    m))
+    key-map))
 
 (define-key *root-map* (kbd "B") '*bluetooth-keymap*)
