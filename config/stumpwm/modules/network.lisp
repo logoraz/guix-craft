@@ -1,4 +1,4 @@
-;;;; StumpWM Network Manager Module
+;;;; network.lisp --> Network Nanagement for StumpWM
 
 ;;; Commentary:
 

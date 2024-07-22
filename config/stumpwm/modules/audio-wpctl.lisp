@@ -1,4 +1,4 @@
-;;;; StumpWM Audio (wpctl) Module
+;;;; audio-wpctl --> Wireplumber Audio Controls for StumpWM
 
 ;;; Commentary:
 

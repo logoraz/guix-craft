@@ -1,4 +1,4 @@
-;;;; StumpWM Initialization File (config)
+;;;; StumpWM Initialization File (config.lisp --> config)
 ;;; Commentary:
 ;;; TODO: 1. Research into the differences between `require' & `use-module'
 ;;;       2. Implment in StumpWM config & modules the more performant method.

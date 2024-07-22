@@ -1,4 +1,4 @@
-;;;; StumpWM Commands
+;;;; commands.lisp --> StumpWM Macro's & Commands
 
 ;;; Commentary:
 

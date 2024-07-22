@@ -1,4 +1,4 @@
-;;;; StumpWM Keybindings Module
+;;;; keybindings --> Keybindings for StumpWM
 
 ;;; Commentary:
 ;; TODO - Skinny down StumpWM's original Top Level keymap, don't need every option

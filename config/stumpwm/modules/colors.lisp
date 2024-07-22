@@ -1,4 +1,4 @@
-;;;; StumpWM Nord Colors Module
+;;;; colors.lisp --> StumpWM Nord Colors Module
 
 ;;; Commentary:
 

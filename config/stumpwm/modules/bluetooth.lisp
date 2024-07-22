@@ -1,4 +1,4 @@
-;;;; StumpWM Bluetooth Module
+;;;; bluetooth.lisp --> StumpWM Bluetooth Module
 
 ;;; Commentary:
 
@@ -87,8 +87,8 @@
 (defvar *bluetooth-keymap*
   (let ((key-map (make-sparse-keymap)))
     (define-key key-map (kbd "c") "bluetooth-connect")
-    (define-key key-map (kbd "o") "bluetooth-turn-on")
-    (define-key key-map (kbd "O") "bluetooth-turn-off")
+    (define-key key-map (kbd "i") "bluetooth-turn-on")
+    (define-key key-map (kbd "o") "bluetooth-turn-off")
     key-map))
 
 (define-key *root-map* (kbd "B") '*bluetooth-keymap*)

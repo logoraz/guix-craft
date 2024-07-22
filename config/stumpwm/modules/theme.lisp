@@ -1,4 +1,4 @@
-;;;; StumpWM Theme Module
+;;;; theme.lisp --> Theme settings for StumpWM
 
 ;;; Commentary:
 

@@ -1,4 +1,4 @@
-;;;; StumpWM Frames Module
+;;;; frames.lisp --> Frames & Windows Configuration for StumpWM
 
 ;;; Commentary:
 

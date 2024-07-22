@@ -1,4 +1,4 @@
-;;;; StumpWM Modeline Module
+;;;; modeline.lisp --> Modeline Configuration for StumpWM
 
 ;;; Commentary:
 

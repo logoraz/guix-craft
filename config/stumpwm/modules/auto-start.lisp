@@ -1,4 +1,4 @@
-;;;; auto-start.lisp
+;;;; auto-start.lisp --> Start X11 environment for StumpWM
 
 
 (in-package :stumpwm)
@@ -10,6 +10,7 @@
 ;; xrandr stuff would go here too?
 
 ;; Set pointer/cursor paths & defaults -> theme set in .Xresources
+;; Ref |--> https://github.com/ful1e5/XCursor-pro
 (run-shell-command "xsetroot -xcf ~/.icons/XCursor-Pro-Dark/cursors/left_ptr 22")
 
 ;; Turn off system bell & screen-saver control

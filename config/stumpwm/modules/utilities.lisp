@@ -1,4 +1,4 @@
-;;;; StumpWM Utilities Module
+;;;; utilities.lisp --> Utilities for StumpWM
 
 ;;; Commentary:
 
