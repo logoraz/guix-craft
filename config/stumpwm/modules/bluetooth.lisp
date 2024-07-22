@@ -4,6 +4,7 @@
 
 ;;; References:
 ;;; 1. https://config.phundrak.com/stumpwm#bluetooth
+;;; 2. how to start bluez deamon?
 
 (in-package :stumpwm)
 

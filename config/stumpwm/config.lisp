@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; TODO: 1. Research into the differences between `require' & `use-module'
 ;;;       2. Implment in StumpWM config & modules the more performant method.
+;;;       3. Create StumpWM `packages' in lieu of current `modules/scripts'
 
 ;;; References:
 
@@ -40,8 +41,8 @@
 ;; 2. Then setup as stand-alone package & trial out
 (load "~/.config/stumpwm/modules/audio-wpctl.lisp")
 
-;;; StumpWM contrib not available in Guix
-;;; end-session
+;;; StumpWM contrib packages not available in Guix
+;;; `end-session'
 ;; Need to add to load-path as it is not part of Guix available packages
 (add-to-load-path #p"~/.local/share/stumpwm/contrib/end-session/")
 ;; actually load the module
