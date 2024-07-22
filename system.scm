@@ -68,6 +68,10 @@
             (screen-locker-configuration
              (name "slock")
              (program (file-append slock "/bin/slock"))))
+   ;; Don't believe there exists a home service type for bluetooth
+   (service bluetooth-service-type
+            (bluetooth-configuration
+             (auto-enable? #t)))
    (service cups-service-type
             (cups-configuration
              (web-interface? #t)
