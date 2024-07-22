@@ -6,27 +6,27 @@
 # See Advanced Dependencies Management
 # |-> ;; https://lispcookbook.github.io/cl-cookbook/getting-started.html
 # You can drop Common Lisp projects into any of these folders:
-#  ~/quicklisp/local-projects
-#  ~/common-lisp,
-#  ~/.local/share/common-lisp/source,
+#  1. |--> ~/quicklisp/local-projects/
+#  2. |--> ~/common-lisp/
+#  3. |--> ~/.local/share/common-lisp/source/
 
 # Save development common-lisp libraries/packages here
 common_lisp=/home/logoraz/common-lisp/
 if [ ! -d $common_lisp ]; then
     echo "~/common-lisp/ does not exist - creating..."
-    mkdir ~/common-lisp/
+    mkdir $common_lisp
 fi
 
 # Save persistent common-lisp libraries/packages here
 common_lisp_local=/home/logoraz/.local/share/common-lisp/
 if [ ! -d $common_lisp_local ]; then
     echo "~/.local/share/common-lisp/ does not exist - creating..."
-    mkdir ~/.local/share/common-lisp/
-    common_lisp_source=/home/logoraz/.local/share/common-lisp/source/
-    if [ ! -d $common_lisp_source ]; then
+    mkdir $common_lisp_local
+fi
+common_lisp_source=/home/logoraz/.local/share/common-lisp/source/
+if [ ! -d $common_lisp_source ]; then
     echo "~/.local/share/common-lisp/source/ does not exist - creating..."
-    mkdir ~/.local/share/common-lisp/source/
-    fi
+    mkdir $common_lisp_source
 fi
 
 
