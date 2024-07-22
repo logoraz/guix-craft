@@ -11,30 +11,32 @@
 ;;;    - wget nyxt-browser.com/static/release/invader.tar.gz
 ;;; 2. Sourced Saved in ~/.local/share/nyxt/extensions/invader
 
-(in-package #:nyxt-user)
+#+(or nyxt-3 nyxt-4)
+(nyxt:define-package :nx-invader-2)
 
+(in-package :nx-invader-2)
 
 ;;; Nord Color Palette
-(defvar logoraz-nord0 "#2e3440")   ; 'Black'
-(defvar logoraz-nord1 "#3b4252")   ; "Dark Gray'
-(defvar logoraz-nord2 "#434c5e")   ; 'Medium Gray'
-(defvar logoraz-nord3 "#4c566a")   ; 'Gray'
-(defvar logoraz-nord4 "#d8dee9")   ; 'Light grey'
-(defvar logoraz-nord5 "#e5e9f0")   ; 'Off-white'
-(defvar logoraz-nord6 "#eceff4")   ; 'White'
-(defvar logoraz-nord7 "#8fbcbb")   ; 'Blue/Green'
-(defvar logoraz-nord8 "#88c0d0")   ; 'Teal'
-(defvar logoraz-nord9 "#81a1c1")   ; 'Blue/Gray'
-(defvar logoraz-nord10 "#5e81ac")  ; 'Blue'
-(defvar logoraz-nord11 "#bf616a")  ; 'Red'
-(defvar logoraz-nord12 "#d08770")  ; 'Orange'
-(defvar logoraz-nord13 "#ebcb8b")  ; 'Yellow'
-(defvar logoraz-nord14 "#a3be8c")  ; 'Green'
-(defvar logoraz-nord15 "#b48ead")  ; 'Purple'
+(defvar raz-nord0 "#2e3440")   ; 'Black'
+(defvar raz-nord1 "#3b4252")   ; "Dark Gray'
+(defvar raz-nord2 "#434c5e")   ; 'Medium Gray'
+(defvar raz-nord3 "#4c566a")   ; 'Gray'
+(defvar raz-nord4 "#d8dee9")   ; 'Light grey'
+(defvar raz-nord5 "#e5e9f0")   ; 'Off-white'
+(defvar raz-nord6 "#eceff4")   ; 'White'
+(defvar raz-nord7 "#8fbcbb")   ; 'Blue/Green'
+(defvar raz-nord8 "#88c0d0")   ; 'Teal'
+(defvar raz-nord9 "#81a1c1")   ; 'Blue/Gray'
+(defvar raz-nord10 "#5e81ac")  ; 'Blue'
+(defvar raz-nord11 "#bf616a")  ; 'Red'
+(defvar raz-nord12 "#d08770")  ; 'Orange'
+(defvar raz-nord13 "#ebcb8b")  ; 'Yellow'
+(defvar raz-nord14 "#a3be8c")  ; 'Green'
+(defvar raz-nord15 "#b48ead")  ; 'Purple'
 
 
 ;;; Invader Theme
-(defvar invader-theme
+(defvar invader-theme-2
   (make-instance 'theme:theme
                  :dark-p t
                  :background-color- "#303240"
@@ -77,9 +79,9 @@
                  :codeblock-color+ "#2D4880"
                  :on-codeblock-color "#F7FBFC"))
 
-(define-configuration browser
-    ((theme invader-theme)))
+(define-configuration :browser
+    ((theme invader-theme-2)))
 
-(define-configuration status-buffer
+(define-configuration :status-buffer
     ((style (str:concat %slot-value%
                         (theme:themed-css (theme *browser*))))))

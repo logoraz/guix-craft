@@ -18,17 +18,27 @@ ln -f ~/repos/guix-craft/config/nyxt/start-nyxt.sh \
 ln -f ~/repos/guix-craft/config/nyxt/config.lisp \
    ~/.config/nyxt/config.lisp
 
-# Themes
-ln -f ~/repos/guix-craft/config/nyxt/theme.lisp \
-   ~/.config/nyxt/theme.lisp
+# Modules
 
-# Utilities
+## Utilities
 ln -f ~/repos/guix-craft/config/nyxt/utilities.lisp \
    ~/.config/nyxt/utilities.lisp
 
-# Password Management
+## Password Management
 ln -f ~/repos/guix-craft/config/nyxt/passwords.lisp \
    ~/.config/nyxt/passwords.lisp
 
 ln -f ~/repos/guix-craft/config/nyxt/passwords-dev.lisp \
    ~/.config/nyxt/passwords-dev.lisp
+
+# Extensions
+
+## Theme
+nyxt_extensions=~/.local/share/nyxt/extensions/
+if [ ! -d $nyxt ]; then
+    echo "~/.local/share/nyxt/extensions/ does not exist - creating..."
+    mkdir ~/.local/share/nyxt/extensions/
+fi
+
+ln -s ~/repos/guix-craft/config/nyxt/extensions/nx-invader-2 \
+   ~/.local/share/nyxt/extensions/nx-invader-2
