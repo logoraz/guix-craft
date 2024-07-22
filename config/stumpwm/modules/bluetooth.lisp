@@ -25,7 +25,6 @@
           *bluetooth-command*
           args))
 
-
 (defmacro bluetooth-command (&rest args)
   `(run-shell-command (bluetooth-make-command ,@args) t))
 
@@ -40,6 +39,7 @@
 (defcommand bluetooth-turn-off () ()
   "Turn off bluetooth."
   (bluetooth-message-command "power" "off"))
+
 
 ;;; Bluetooth Devices
 (defstruct (bluetooth-device
@@ -60,6 +60,7 @@
     (mapcar (lambda (device)
               (make-bluetooth-device-from-command :raw-name device))
      (cl-ppcre:split "\\n" literal-devices))))
+
 
 ;;; Connect to a device
 (defun bluetooth-connect-device (device)
@@ -82,6 +83,7 @@
                                      `(,(bluetooth-device-full-name device) ,device))
                                    devices)))))
       (bluetooth-connect-device choice)))))
+
 
 ;;; Keybindings -> move to keybindings.lisp
 (defvar *bluetooth-keymap*
