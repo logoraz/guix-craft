@@ -66,7 +66,14 @@ ln -f ~/repos/guix-craft/config/stumpwm/modules/commands.lisp \
 ln -f ~/repos/guix-craft/config/stumpwm/modules/utilities.lisp \
    ~/.config/stumpwm/modules/utilities.lisp
 
-# StumpWM Contrib not available in Guix
 
-ln -f ~/repos/guix-craft/config/stumpwm/modules/end-session.lisp \
-   ~/.config/stumpwm/modules/end-session.lisp
+# StumpWM Contrib
+stumpwm_contrib=~/.local/share/stumpwm/contrib/
+if [ ! -d $stumpwm_contrib ]; then
+    echo "~/.local/share/stumpwm/contrib/ does not exist - creating..."
+    mkdir ~/.local/share/stumpwm/contrib/
+fi
+
+## util: end-session
+ln -s ~/repos/guix-craft/config/stumpwm/contrib/end-session \
+   ~/.local/share/stumpwm/contrib/end-session

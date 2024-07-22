@@ -43,7 +43,7 @@
 ;;; StumpWM contrib not available in Guix
 ;;; end-session
 ;; Need to add to load-path as it is not part of Guix available packages
-(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/util/end-session/")
+(add-to-load-path #p"~/.local/share/stumpwm/contrib/end-session/")
 ;; actually load the module
 (load-module "end-session")
 ;; Use loginctl instead of the default systemctl
@@ -57,6 +57,7 @@
 (load "~/.config/stumpwm/modules/theme.lisp")
 (load "~/.config/stumpwm/modules/modeline.lisp")
 
+(load "~/.config/stumpwm/modules/bluetooth.lisp")
 
 ;; Start the mode line
 ;; TODO: Put in modeline module?
