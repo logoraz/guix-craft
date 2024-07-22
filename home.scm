@@ -93,6 +93,7 @@
    ;; StumpWM Support Modules
    "sbcl-slynk"                  ;
    "sbcl-parse-float"            ;-> audio-wpctl
+   "sbcl-cl-ppcre"               ;->
    "sbcl-stumpwm-ttf-fonts"      ;->
    "sbcl-stumpwm-kbd-layouts"    ;->
    "sbcl-stumpwm-swm-gaps"       ;->

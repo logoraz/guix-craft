@@ -61,7 +61,6 @@
 
 (define %system-services
   (cons*
-   ;; Not really sure if `xorg-configruation' is truly needed.
    (set-xorg-configuration
     (xorg-configuration
      (keyboard-layout %keyboard-layout)))
