@@ -23,7 +23,7 @@
          (comment "Erik P. Almaraz")
          (group "users")
          (home-directory "/home/logoraz")
-         (supplementary-groups '("wheel" "netdev" "audio" "video")))))
+         (supplementary-groups '("wheel" "netdev" "audio" "video" "lp")))))
 
 (define %locutus-file-system
   (list (file-system

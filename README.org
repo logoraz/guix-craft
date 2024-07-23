@@ -218,10 +218,12 @@ My personal StumpWM configuration - I prefer to follow the XDG-style configurati
 prescribed on https://github.com/stumpwm/stumpwm/wiki/Customize. I like things modular,
 so it is set up as such.
 
-** Initialization File:  =~/.config/stumpwm/config= -> Loads in modules and set's up core
-features, such amy X11 environment.
-
+** Initialization File:  =~/.config/stumpwm/config=
+Loads in modules and set's up core features, such as my X11 environment.
 ** Modules:
+These probably aren't qualified to be called modules, but they are akin to stand-alone
+common-lisp scripts, they currently have a predefined order to be called in StumpWM
+config.lisp -> config.
 - =audio-wpctl= - Wireplumber audio controls for StumpWM
 - =auto-start= - Setup X11 environment & controls
 - =colors= - Define color pallet for StumpWM
@@ -233,9 +235,11 @@ features, such amy X11 environment.
 - =utilities= - Utility packages/libraries and their customization.
 
 ** Libraries:
+These are personally developed StumpWM CL packages, to be loaded similarily to
+StumpWM-Contrib packages:
 - =audio-wpctl= - converting to package/library to push upstream
   - A fork of https://github.com/Junker/stumpwm-wpctl
-- tbd
+- =bluetooth= -
 
 
 

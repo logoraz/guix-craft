@@ -85,8 +85,8 @@
    "lm-sensors"              ; CLI system monitor
    "libnotify"               ; Notifications
    "brightnessctl"           ; Brightness Controls
-   "bluez"                   ; Bluetooh API
-   "blueman"))               ; Bluetooh System/Controls (-> need to configure)
+   "blueman"                 ; Bluetooh System/Controls (-> need to configure)
+   "bluez"))                 ; Bluetooh API
 
 (define %stumpwm-packages
   (list
