@@ -41,6 +41,9 @@
 ;; 2. Then setup as stand-alone package & trial out
 (load "~/.config/stumpwm/modules/audio-wpctl.lisp")
 
+;; TODO - convert to StumpWM contrib package, put keybindings below...
+(load "~/.config/stumpwm/modules/bluetooth.lisp")
+
 ;;; StumpWM contrib packages not available in Guix
 ;;; `end-session'
 ;; Need to add to load-path as it is not part of Guix available packages
@@ -57,8 +60,6 @@
 (load "~/.config/stumpwm/modules/keybindings.lisp")
 (load "~/.config/stumpwm/modules/theme.lisp")
 (load "~/.config/stumpwm/modules/modeline.lisp")
-
-(load "~/.config/stumpwm/modules/bluetooth.lisp")
 
 ;; Start the mode line
 ;; TODO: Put in modeline module?
