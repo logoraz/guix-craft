@@ -1,7 +1,6 @@
-;;;; package.lisp
-
-(defpackage #:bluetooth
-  (:use #:cl :stumpwm)
-  (:export #:bluetooth-turn-on
-           #:bluetooth-turn-off
-           #:bluetooth-connect))
+(defpackage :bluetooth
+  (:use #:cl :stumpwm #:cl-ppcre)
+  (:export #:bluetooth-message-command
+           #:bluetooth-turn-off-command
+           #:bluetooth-connect-device
+           #:*bluetooth-command*))

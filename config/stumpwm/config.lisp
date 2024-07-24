@@ -30,36 +30,30 @@
 ;; (setf *altgr-offset* 4)
 ;; (register-altgr-as-modifier)
 
-;;; Initialize Desktop Environment & Xorg Resources.
-;; TODO: Create Package/Librarie to submit to StumpWM/contrib
+;;; Initialize Desktop Environment & X11 Resources.
 (load "~/.config/stumpwm/modules/auto-start.lisp")
 
-;;; StumpWM Packages/Libraries -> StumpWM-contrib candidates
-;; TODO - Determine general fix -> send PR & possibly package for Guix!
-;; 1. Fork repo this was borrowed from and apply changes
-;;    - https://github.com/Junker/stumpwm-wpctl
-;; 2. Then setup as stand-alone package & trial out
-;; (load "~/.config/stumpwm/modules/audio-wpctl.lisp")
-
+;;; Stumpwm-contrib Packages/Libraries
+;; Pipewire/Wirepluber Audio Controls for StumpWM
 (add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/wpctl/")
 (load-module "wpctl")
 (setf wpctl:*modeline-fmt* "AUD: %v") ;default "%b (%v)"
 (setf wpctl:*wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
 (setf wpctl:*mixer-command* "playerctl")
 
-;; TODO - convert to StumpWM contrib package, put keybindings below...
-(load "~/.config/stumpwm/modules/bluetooth.lisp")
+;; Simple Bluetooth Controls for StumpWM
+;; TODO: Add modeline display
+(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/bluetooth/")
+(load-module "bluetooth")
 
 ;;; Stumpwm-contrib packages not available in Guix
-;;; `end-session'
-;; Need to add to load-path as it is not part of Guix available packages
+;; `end-session' - Provides session control commands, i.e. shutdown, restart, and logoff for StumpWM.
 (add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/end-session/")
-;; actually load the module
 (load-module "end-session")
 ;; Use loginctl instead of the default systemctl
 (setf end-session:*end-session-command* "loginctl")
 
-;;; Load in custom file modules
+;;; Load in custom files
 (load "~/.config/stumpwm/modules/commands.lisp")
 (load "~/.config/stumpwm/modules/utilities.lisp")
 (load "~/.config/stumpwm/modules/frames.lisp")

@@ -1,4 +1,4 @@
-;;;; bluetooth.lisp --> StumpWM Bluetooth Module
+;;;; bluetooth.lisp
 
 ;;; Commentary:
 
@@ -6,10 +6,7 @@
 ;;; 1. https://config.phundrak.com/stumpwm#bluetooth
 ;;; 2. how to start bluez deamon?
 
-(in-package :stumpwm)
-
-;;(require cl-pprce)
-(load-module "cl-ppcre")
+(in-package :bluetooth)
 
 (defvar *bluetooth-command* "bluetoothctl"
   "Base command for interacting with bluetooth.")
@@ -85,13 +82,3 @@
                                    devices)))))
       (bluetooth-connect-device choice)))))
 
-
-;;; Keybindings -> move to keybindings.lisp
-(defvar *bluetooth-keymap*
-  (let ((key-map (make-sparse-keymap)))
-    (define-key key-map (kbd "c") "bluetooth-connect")
-    (define-key key-map (kbd "i") "bluetooth-turn-on")
-    (define-key key-map (kbd "o") "bluetooth-turn-off")
-    key-map))
-
-(define-key *root-map* (kbd "B") '*bluetooth-keymap*)
