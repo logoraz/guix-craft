@@ -30,13 +30,14 @@
 ;; (setf *altgr-offset* 4)
 ;; (register-altgr-as-modifier)
 
-;;; Initialize Desktop Environment & X11 Resources.
+;;; Initialize X11 Desktop Environment & Resources.
 (load "~/.config/stumpwm/modules/auto-start.lisp")
 
 ;;; Stumpwm-contrib Packages/Libraries
 ;; Pipewire/Wirepluber Audio Controls for StumpWM
 (add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/wpctl/")
 (load-module "wpctl")
+;;TODO: test chaning one back to defparameter to see if still setf-able...
 (setf wpctl:*modeline-fmt* "AUD: %v") ;default "%b (%v)"
 (setf wpctl:*wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
 (setf wpctl:*mixer-command* "playerctl")
