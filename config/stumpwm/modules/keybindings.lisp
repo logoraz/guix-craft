@@ -89,3 +89,13 @@
     key-map))
 
 (define-key *root-map* (kbd "q") '*end-session-keymap*)
+
+;;; Bluetooth Controls (bluetooth)
+(defvar *bluetooth-keymap*
+  (let ((key-map (make-sparse-keymap)))
+    (define-key key-map (kbd "c") "bluetooth-connect")
+    (define-key key-map (kbd "i") "bluetooth-turn-on")
+    (define-key key-map (kbd "o") "bluetooth-turn-off")
+    key-map))
+
+(define-key *root-map* (kbd "B") '*bluetooth-keymap*)
