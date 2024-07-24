@@ -34,20 +34,26 @@
 ;; TODO: Create Package/Librarie to submit to StumpWM/contrib
 (load "~/.config/stumpwm/modules/auto-start.lisp")
 
-;;; Modified StumpWM contrib module
+;;; StumpWM Packages/Libraries -> StumpWM-contrib candidates
 ;; TODO - Determine general fix -> send PR & possibly package for Guix!
 ;; 1. Fork repo this was borrowed from and apply changes
 ;;    - https://github.com/Junker/stumpwm-wpctl
 ;; 2. Then setup as stand-alone package & trial out
-(load "~/.config/stumpwm/modules/audio-wpctl.lisp")
+;; (load "~/.config/stumpwm/modules/audio-wpctl.lisp")
+
+(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/wpctl/")
+(load-module "wpctl")
+(setf wpctl:*modeline-fmt* "AUD: %v") ;default "%b (%v)"
+(setf wpctl:*wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
+(setf wpctl:*mixer-command* "playerctl")
 
 ;; TODO - convert to StumpWM contrib package, put keybindings below...
 (load "~/.config/stumpwm/modules/bluetooth.lisp")
 
-;;; StumpWM contrib packages not available in Guix
+;;; Stumpwm-contrib packages not available in Guix
 ;;; `end-session'
 ;; Need to add to load-path as it is not part of Guix available packages
-(add-to-load-path #p"~/.local/share/stumpwm/contrib/end-session/")
+(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/end-session/")
 ;; actually load the module
 (load-module "end-session")
 ;; Use loginctl instead of the default systemctl
