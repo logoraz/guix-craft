@@ -1,38 +1,26 @@
-;;;; audio-wpctl.lisp --> Wireplumber Audio Controls for StumpWM
+(in-package :wpctl)
 
-;;; Commentary:
-
-;;; References:
-;;;  1. https://github.com/Junker/stumpwm-wpctl
-;;;  2. https://github.com/stumpwm/stumpwm-contrib/tree/master
-
-(load-module "parse-float")
-
-(defvar *wpctl-modeline-fmt* "AUD: %v" ;"%b (%v)"
-  "Default value for displaying wpctl information on the modeline.")
-
+;; formatters.
 (add-screen-mode-line-formatter #\P 'modeline)
 ;; (add-screen-mode-line-formatter #\M 'source-modeline)
 
-(defparameter *step* 5)
+(defvar *step* 5)
 
-(defparameter *modeline-fmt* *wpctl-modeline-fmt*
+(defvar *modeline-fmt* "%b(%v)"
   "The default value for displaying wpctl information on the modeline")
 
-(defparameter *source-modeline-fmt* *wpctl-modeline-fmt*
+(defvar *source-modeline-fmt* "%b(%v)"
   "The default value for displaying wpctl source information on the modeline")
 
-(defparameter *formatters-alist*
+(defvar *formatters-alist*
   '((#\b  ml-bar)
     (#\v  ml-volume)))
 
-(defparameter *wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
-;; FIXME - this should be something customizable by the user
-;; change pavucontrol -> playerctl
-(defparameter *mixer-command* "playerctl")
+(defvar *wpctl-path* "/usr/bin/wpctl")
+(defvar *mixer-command* "pavucontrol")
 
-(defparameter *default-sink-id* "@DEFAULT_AUDIO_SINK@")
-(defparameter *default-source-id* "@DEFAULT_AUDIO_SOURCE@")
+(defvar *default-sink-id* "@DEFAULT_AUDIO_SINK@")
+(defvar *default-source-id* "@DEFAULT_AUDIO_SOURCE@")
 
 (defvar *volume-regex* (ppcre:create-scanner "Volume: (\\d+\\.\\d+)"))
 (defvar *mute-regex* (ppcre:create-scanner "Volume: \\d+\\.\\d+ \\[MUTED\\]"))
@@ -53,19 +41,17 @@
   (run (list "set-volume" device-id (format nil "~D%" value))))
 
 (defun get-volume (device-id)
-  (truncate (* 100 (parse-float:parse-float
-                    (aref
-                     (nth-value
-                      1
-                      (ppcre:scan-to-strings
-                       *volume-regex*
-                       (run (list "get-volume" device-id) t)))
-                     0)))))
+  (truncate (* 100 (parse-float (aref
+                                 (nth-value
+                                  1
+                                  (ppcre:scan-to-strings
+                                   *volume-regex*
+                                   (run (list "get-volume" device-id) t)))
+                                 0)))))
 
 (defun get-mute (device-id)
-  (and (ppcre:scan
-        *mute-regex*
-        (run (list "get-volume" device-id) t))
+  (and (ppcre:scan *mute-regex*
+                   (run (list "get-volume" device-id) t))
        t))
 
 (defun unmute (device-id)
@@ -80,7 +66,6 @@
 (defun open-mixer ()
   (run-shell-command *mixer-command*))
 
-;;; Modeline Logic
 (defun ml-bar (volume muted)
   (concat "\["
           (stumpwm:bar (if muted 0 (min 100 volume)) 5 #\X #\=)
@@ -92,20 +77,18 @@
 
 (defun modeline (ml)
   (declare (ignore ml))
-  (let ((ml-str (format-expand
-                 *formatters-alist*
-                 *modeline-fmt*
-                 (get-volume *default-sink-id*) (get-mute *default-sink-id*))))
-    (if (fboundp 'stumpwm::format-with-on-click-id) ; check in case of old stumpwm version
+  (let ((ml-str (format-expand *formatters-alist*
+                               *modeline-fmt*
+                               (get-volume *default-sink-id*) (get-mute *default-sink-id*))))
+    (if (fboundp 'stumpwm::format-with-on-click-id) ;check in case of old stumpwm version
         (format-with-on-click-id ml-str :ml-wpctl-on-click nil)
         ml-str)))
 
 (defun source-modeline (ml)
   (declare (ignore ml))
-  (let ((ml-str (format-expand
-                 *formatters-alist*
-                 *source-modeline-fmt*
-                 (get-volume *default-source-id*) (get-mute *default-source-id*))))
+  (let ((ml-str (format-expand *formatters-alist*
+                               *source-modeline-fmt*
+                               (get-volume *default-source-id*) (get-mute *default-source-id*))))
     (if (fboundp 'stumpwm::format-with-on-click-id) ;check in case of old stumpwm version
         (format-with-on-click-id ml-str :ml-wpctl-source-on-click nil)
         ml-str)))
@@ -140,11 +123,10 @@
        (volume-down *default-source-id* *step*))))
   (stumpwm::update-all-mode-lines))
 
-(when (fboundp 'stumpwm::register-ml-on-click-id) ; check in case of old stumpwm version
+(when (fboundp 'stumpwm::register-ml-on-click-id) ;check in case of old stumpwm version
   (register-ml-on-click-id :ml-wpctl-on-click #'ml-on-click)
   (register-ml-on-click-id :ml-wpctl-source-on-click #'source-ml-on-click))
 
-;;; StumpWM Interface Definitions
 (defcommand wpctl-volume-up () ()
   "Increase the volume by N points"
   (volume-up *default-sink-id* *step*))
