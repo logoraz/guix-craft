@@ -13,6 +13,7 @@
   (list
    ;; Fonts
    "font-fira-code"
+   "font-nerd-fonts-fira-code"
    "font-iosevka-aile"
    "font-dejavu"
    "font-google-noto"
@@ -55,6 +56,9 @@
    "ccl"
    "ecl"
    ;; Base Dev Tools
+   ;; "elfutils"      ; need to determine what this does...
+   ;; "libtree"       ; not sure if I need
+   "gcc-toolchain"
    "make"
    "binutils"
    "curl"
@@ -155,6 +159,9 @@
  
  ;; Below is the list of Home services.  To search for available
  ;; services, run 'guix home search KEYWORD' in a terminal.
+ ;; TODO: Implement the following
+ ;; 1. (service home-xdg-configuration-files-service-type ...)
+ ;; 2. (service home-files-service-type ...)
  (services
   (list
    (simple-service 'env-vars home-environment-variables-service-type
