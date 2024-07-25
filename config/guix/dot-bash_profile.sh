@@ -7,3 +7,6 @@ fi
 
 # StumpWM - Set title bar of GTK applications
 export GTK_THEME=Adwaita:dark
+
+# Add Common Lisp Project Manager (CLPM) to path
+export PATH=/usr/local/bin:$PATH
