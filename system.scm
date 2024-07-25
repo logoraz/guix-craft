@@ -9,8 +9,8 @@
              (gnu services ssh)
              (gnu services xorg)
              (gnu services desktop)
-	     (guix packages)
-	     (guix download)
+	     (guix packages)           ; -> needed by ?
+	     (guix download)           ; -> needed by ?
 	     (nongnu packages linux))
 
 
