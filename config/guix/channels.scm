@@ -23,6 +23,27 @@
      (openpgp-fingerprint
       "CD2D 5EAA A98C CB37 DA91  D6B0 5F58 1664 7F8B E551")))))
 
+(define rde
+  (channel
+  (name 'rde)
+  (url "https://git.sr.ht/~abcdw/rde")
+  (branch "master")
+  (introduction
+    (make-channel-introduction
+      "257cebd587b66e4d865b3537a9a88cccd7107c95"
+      (openpgp-fingerprint
+        "2841 9AC6 5038 7440 C7E9  2FFA 2208 D209 58C1 DEB0")))))
+
+(define benoitj
+  (channel
+   (name 'benoitj)
+   (url "https://git.sr.ht/~benoit/my-guix-channel")
+   (branch "main")
+   (introduction
+    (make-channel-introduction
+     "37444eebf69f83f4accaa2c69562209d94f4e57a"
+     (openpgp-fingerprint
+      "C3B6 ED99 DF87 B208 0C79  C8AC F86B 0628 26D4 C20A")))))
 
 (append (list (channel
                (name 'guix)
@@ -39,5 +60,7 @@
                 (make-channel-introduction
                  "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
                  (openpgp-fingerprint
-                  "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5")))))
+                  "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))
+              ;; For font-nerd-fonts-fira-code
+              benoitj)
         %default-channels)
