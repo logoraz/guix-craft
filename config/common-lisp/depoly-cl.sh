@@ -6,11 +6,11 @@
 # See Advanced Dependencies Management
 # |-> ;; https://lispcookbook.github.io/cl-cookbook/getting-started.html
 # You can drop Common Lisp projects into any of these folders:
-#  1. |--> ~/quicklisp/local-projects/
-#  2. |--> ~/common-lisp/
-#  3. |--> ~/.local/share/common-lisp/source/
-
+#  1. |--> ~/common-lisp/
+#  2. |--> ~/.local/share/common-lisp/source/
+#  3. |--> ~/quicklisp/local-projects/
 # Save development common-lisp libraries/packages here
+
 common_lisp=/home/logoraz/common-lisp/
 if [ ! -d $common_lisp ]; then
     echo "~/common-lisp/ does not exist - creating..."
@@ -37,19 +37,23 @@ ln -s ~/repos/guix-craft/config/common-lisp/dot-sbclrc.lisp \
 # CLASP-CL Init file?
 
 
-# Quicklisp
-# setting up so you don't have to re-download everytime
-quicklisp=/home/logoraz/quicklisp/
-if [ ! -d $quicklisp ]; then
-    echo "/home/logoraz/quicklisp/ does not exist - creating..."
-    mkdir ~/quicklisp/
+# CLPM & ASDF Registry Setup
+common_lisp_config=/home/logoraz/.config/common-lisp/
+if [ ! -d $common_lisp_config ]; then
+    echo "~/.config/common-lisp/ does not exist - creating directory"
+    mkdir $common_lisp_config
 fi
 
-if [ ! -d $quicklisp/install ]; then
-    echo "/home/logoraz/quicklisp/install/ does not exist - creating.."
-    mkdir $quicklisp/install/
-    cp ~/repos/guix-craft/config/common-lisp/quicklisp/quicklisp.lisp \
-       ~/quicklisp/install/quicklisp.lisp
-    cp ~/repos/guix-craft/config/common-lisp/quicklisp/quicklisp.asc \
-       ~/quicklisp/install/quicklisp.asc
+asdf_reg=/home/logoraz/.config/common-lisp/source-registry.conf.d
+if [ ! -d $asdf_reg ] && [ ! -L $asdf_reg ]; then
+    echo "~/.config/common-lisp/source-registry.conf.d/ does not exist - creating link"
+    ln -s ~/repos/guix-craft/config/common-lisp/source-registry.conf.d \
+       $asdf_reg
+fi
+
+clpm=/home/logoraz/.config/clpm
+if [ ! -d $clpm ] && [ ! -L $clpm ]; then
+    echo "~/.config/clpm/ does not exist - creating link"
+    ln -s ~/repos/guix-craft/config/common-lisp/clpm \
+       $clpm
 fi
