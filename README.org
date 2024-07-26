@@ -38,14 +38,12 @@
 ** System Configuration Outline (=system.scm=)
 
  Define system-level services & packages:
-
  - 1. =%system-services=
-   - Set OpenSSH service
+   - Set OpenSSH, CUPs, Screenlocker, and Bluetooth services
    - =guix-home-service-type= -> (TODO would like to handle both concurrently)
    - Modify =%desktop-services= to utilize substitutes where possible
      as opposed to compiling everything...
      See: https://git.savannah.gnu.org/cgit/guix.git/tree/gnu?h=v1.4.0
-
 - 2. =%stumpwm-packages=
   Prefer to keep the WM at the system level to configure basic services and to have
   them available system wide, home can configure StumpWM however you like.
@@ -55,7 +53,6 @@
 ** Home Configuration Outline (=home.scm=)
 
  Define user-level services & packages:
-
  - 1. =%logoraz-packages= -> My everyday packages (i.e. fonts, web, apps, tools)
  - 2. =%dev-packages= -> Guile/Common Lisp packages I use consistently
  - 3. =%xorg-util-packages= -> X11 packages needed for StumpWM
@@ -69,6 +66,17 @@
    - TODO: Implement =home-xdg-configuration-files-service-type=
    - TODO: Implment =home-files-service-type=
    - TODO: Modularize services, i.e. define list outside =home-environment= in variable.
+
+** Channels (=channels.scm=)
+
+Current list of defined channels and whether they are active and/or pinned at a specific
+commit:
+- Guix
+- Nonguix
+- benoitj
+- guixrus
+- flatwhatson
+- rde
 
 ** Installation
 
@@ -219,28 +227,49 @@ prescribed on https://github.com/stumpwm/stumpwm/wiki/Customize. I like things m
 so it is set up as such.
 
 ** Initialization File:  =~/.config/stumpwm/config=
+
 Loads in modules and set's up core features, such as my X11 environment.
-** Modules:
+
+** Modules: =~/.config/stumpwm/modules/*=
+
 These probably aren't qualified to be called modules, but they are akin to stand-alone
 common-lisp scripts, they currently have a predefined order to be called in StumpWM
 config.lisp -> config.
-- =audio-wpctl= - Wireplumber audio controls for StumpWM
 - =auto-start= - Setup X11 environment & controls
 - =colors= - Define color pallet for StumpWM
-- =commands= - Commands, Helper Functions, and Macros for StumpWM (wip)
+- =syntax= - Helper Functions, and Macros for StumpWM (wip)
 - =frames= - Frame/Window configurations
 - =keybindings= - The heart and sole of the StumpWM configuration
 - =modeline= - Setup & customize StumpWM modeline
 - =theme= - Set appearance/style of StumpWM
-- =utilities= - Utility packages/libraries and their customization.
+- =utilities= - Utility packages/libraries, ad-hoc customizations & commands.
 
-** Libraries:
+** Libraries: =~/.config/stumpwm/libraries/*=
+
 These are personally developed StumpWM CL packages, to be loaded similarily to
 StumpWM-Contrib packages:
-- =audio-wpctl= - converting to package/library to push upstream
+- =stumpwm-wpctl= - converted to package/library
   - A fork of https://github.com/Junker/stumpwm-wpctl
-- =bluetooth= -
+- =bluetooth= - converted to a package/library
+  - Borrowed from https://config.phundrak.com/stumpwm#bluetooth
+- =stump-nmctl= - TODO: make a CL interface to nmcli for StumpWM
 
+** Contrib: =~/.config/stumpwm/contrib/*= or guix-location
+
+These are the =stumpwm-contrib= packages that I am currently using, most through Guix,
+but a few I needed to git clone and add to load path:
+- stumpwm-contrib/util:
+  - =end-session=: configured/loaded in "config.lisp"
+  - =swm-gaps=: configured/loaded in "frames.lisp"
+  - =kbd-layouts=: configured/loaded in "keybindings.lisp"
+  - =ttf-fonts=: configured/loaded in "theme.lisp"
+  - =global-windows= - configured/loaded in "config.lisp"
+  - =screenshoot=: configured/loaded in "utilities.lisp"
+- stumpwm-contrib/modeline:
+  - =cpu=: configured/loaded in "modeline.lisp"
+  - =mem=: configured/loaded in "modeline.lisp"
+  - =wifi=: configured/loaded in "modeline.lisp"
+  - =battery-portable=: configured/loaded in "modeline.lisp"
 
 
 * References
