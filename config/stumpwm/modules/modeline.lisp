@@ -44,7 +44,6 @@
 (load-module "mem")
 (load-module "battery-portable")
 (load-module "wifi")
-;; (load-module "audio-wpclt")
 
 
 (setf *screen-mode-line-format*

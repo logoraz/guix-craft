@@ -78,5 +78,10 @@
 ;;; Additional Xorg resources
 (run-shell-command "xrdb -merge ~/.Xresources")
 
+;;; Start StumpWM slynk server - persistent for session
+;; Always hacking StumpWM
+(require :slynk)
+(sb-thread:make-thread (lambda () (slynk:create-server :dont-close t)))
+
 ;; Notify that everything is ready!
 (setf *startup-message* "^2*Welcome ^Blogoraz^b! Your ^BStumpWM^b session is ready.")
