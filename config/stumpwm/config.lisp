@@ -56,7 +56,7 @@
 (setf end-session:*end-session-command* "loginctl")
 
 ;;; Load in custom files
-(load "~/.config/stumpwm/modules/commands.lisp")
+(load "~/.config/stumpwm/modules/syntax.lisp")
 (load "~/.config/stumpwm/modules/utilities.lisp")
 (load "~/.config/stumpwm/modules/frames.lisp")
 (load "~/.config/stumpwm/modules/keybindings.lisp")
@@ -76,13 +76,7 @@
 (load-module "globalwindows")
 
 ;;; Additional Xorg resources
-;; XTerm configuration settings
-;; (run-shell-command "xrdb -load ~/.Xresources")
 (run-shell-command "xrdb -merge ~/.Xresources")
-
-;; Start Slynk/Sly server to connect Emacs to StumpWM -> port 4005
-(require :slynk)
-(slynk:create-server :dont-close t)
 
 ;; Notify that everything is ready!
 (setf *startup-message* "^2*Welcome ^Blogoraz^b! Your ^BStumpWM^b session is ready.")

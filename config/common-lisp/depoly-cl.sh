@@ -3,19 +3,10 @@
 
 # TODO - Once I learn guile well enough, will use Guix as a deploy agent for this...
 
-# See Advanced Dependencies Management
-# |-> ;; https://lispcookbook.github.io/cl-cookbook/getting-started.html
-# You can drop Common Lisp projects into any of these folders:
+# ASDF search locations for CL packages.
 #  1. |--> ~/common-lisp/
 #  2. |--> ~/.local/share/common-lisp/source/
-#  3. |--> ~/quicklisp/local-projects/
 # Save development common-lisp libraries/packages here
-
-common_lisp=/home/logoraz/common-lisp/
-if [ ! -d $common_lisp ]; then
-    echo "~/common-lisp/ does not exist - creating..."
-    mkdir $common_lisp
-fi
 
 # Save persistent common-lisp libraries/packages here
 common_lisp_local=/home/logoraz/.local/share/common-lisp/
@@ -37,7 +28,8 @@ ln -s ~/repos/guix-craft/config/common-lisp/dot-sbclrc.lisp \
 # CLASP-CL Init file?
 
 
-# CLPM & ASDF Registry Setup
+# ASDF Registry Setup
+# Ref: https://www.sbcl.org/manual/asdf.html#Configuring-ASDF
 common_lisp_config=/home/logoraz/.config/common-lisp/
 if [ ! -d $common_lisp_config ]; then
     echo "~/.config/common-lisp/ does not exist - creating directory"
@@ -49,11 +41,4 @@ if [ ! -d $asdf_reg ] && [ ! -L $asdf_reg ]; then
     echo "~/.config/common-lisp/source-registry.conf.d/ does not exist - creating link"
     ln -s ~/repos/guix-craft/config/common-lisp/source-registry.conf.d \
        $asdf_reg
-fi
-
-clpm=/home/logoraz/.config/clpm
-if [ ! -d $clpm ] && [ ! -L $clpm ]; then
-    echo "~/.config/clpm/ does not exist - creating link"
-    ln -s ~/repos/guix-craft/config/common-lisp/clpm \
-       $clpm
 fi
