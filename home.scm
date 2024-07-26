@@ -13,7 +13,7 @@
   (list
    ;; Fonts
    "font-fira-code"
-   "font-nerd-fonts-fira-code"
+   "font-nerd-fonts-fira-code"    ; --> benoitj channel
    "font-iosevka-aile"
    "font-dejavu"
    "font-google-noto"
