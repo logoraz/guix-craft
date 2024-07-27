@@ -69,11 +69,9 @@
 (require 'raz-completions-mct)
 (require 'raz-lisp-ide)
 (require 'raz-guile-ide)
-;; Notes/Office/Mail + Multimedia
+;; Notes/Office/Mail/Chat
 (require 'raz-denote)
-(require 'raz-media)
 (require 'raz-org)
 (require 'raz-erc)
-;; (require 'raz-nyxt) ; WIP
 ;;TODO - need to configure on new GUIX Home scaffold
 ;; (require 'raz-mu4e)
