@@ -4,26 +4,29 @@
 (add-screen-mode-line-formatter #\P 'modeline)
 ;; (add-screen-mode-line-formatter #\M 'source-modeline)
 
-(defvar *step* 5)
+(defparameter *step* 5)
 
-(defvar *modeline-fmt* "%b(%v)"
+(defparameter *modeline-fmt* "%b(%v)"
   "The default value for displaying wpctl information on the modeline")
 
-(defvar *source-modeline-fmt* "%b(%v)"
+(defparameter *source-modeline-fmt* "%b(%v)"
   "The default value for displaying wpctl source information on the modeline")
 
-(defvar *formatters-alist*
+(defparameter *formatters-alist*
   '((#\b  ml-bar)
     (#\v  ml-volume)))
 
-(defvar *wpctl-path* "/usr/bin/wpctl")
-(defvar *mixer-command* "pavucontrol")
+(defparameter *wpctl-path* "/usr/bin/wpctl")
+(defparameter *mixer-command* "pavucontrol")
 
-(defvar *default-sink-id* "@DEFAULT_AUDIO_SINK@")
-(defvar *default-source-id* "@DEFAULT_AUDIO_SOURCE@")
+(defparameter *default-sink-id* "@DEFAULT_AUDIO_SINK@")
+(defparameter *default-source-id* "@DEFAULT_AUDIO_SOURCE@")
 
-(defvar *volume-regex* (ppcre:create-scanner "Volume: (\\d+\\.\\d+)"))
-(defvar *mute-regex* (ppcre:create-scanner "Volume: \\d+\\.\\d+ \\[MUTED\\]"))
+;; Changed to defparamter as these dynamic variables effects behavior of display state
+;; of volume controls. defvar is for holding of persistent data (best practice).
+;; Change indentation formating -> 80 character width preference?
+(defparameter *volume-regex* (ppcre:create-scanner "Volume: (\\d+\\.\\d+)"))
+(defparameter *mute-regex* (ppcre:create-scanner "Volume: \\d+\\.\\d+ \\[MUTED\\]"))
 
 (defun run (args &optional (wait-output nil))
   (if wait-output
@@ -40,14 +43,15 @@
 (defun set-volume (device-id value)
   (run (list "set-volume" device-id (format nil "~D%" value))))
 
+;; Changed indentation to fit ~80 character width for `stumpwm-contrib'
+;; submission
 (defun get-volume (device-id)
-  (truncate (* 100 (parse-float (aref
-                                 (nth-value
-                                  1
-                                  (ppcre:scan-to-strings
-                                   *volume-regex*
-                                   (run (list "get-volume" device-id) t)))
-                                 0)))))
+  (truncate (* 100 (parse-float
+                    (aref (nth-value 1
+                                     (ppcre:scan-to-strings
+                                      *volume-regex*
+                                      (run (list "get-volume" device-id) t)))
+                          0)))))
 
 (defun get-mute (device-id)
   (and (ppcre:scan *mute-regex*
@@ -66,6 +70,7 @@
 (defun open-mixer ()
   (run-shell-command *mixer-command*))
 
+;; May consider changing `full' parameter 5 -> 6 or to a dynamical user set variable
 (defun ml-bar (volume muted)
   (concat "\["
           (stumpwm:bar (if muted 0 (min 100 volume)) 5 #\X #\=)
@@ -74,21 +79,24 @@
 (defun ml-volume (volume muted)
   (if muted "MUT" (format nil "~a\%" volume)))
 
-
+;; Changed indent formatting -> 80 character width preference
 (defun modeline (ml)
   (declare (ignore ml))
   (let ((ml-str (format-expand *formatters-alist*
                                *modeline-fmt*
-                               (get-volume *default-sink-id*) (get-mute *default-sink-id*))))
+                               (get-volume *default-sink-id*)
+                               (get-mute *default-sink-id*))))
     (if (fboundp 'stumpwm::format-with-on-click-id) ;check in case of old stumpwm version
         (format-with-on-click-id ml-str :ml-wpctl-on-click nil)
         ml-str)))
 
+;; Changed indent formatting -> 80 character width preference
 (defun source-modeline (ml)
   (declare (ignore ml))
   (let ((ml-str (format-expand *formatters-alist*
                                *source-modeline-fmt*
-                               (get-volume *default-source-id*) (get-mute *default-source-id*))))
+                               (get-volume *default-source-id*)
+                               (get-mute *default-source-id*))))
     (if (fboundp 'stumpwm::format-with-on-click-id) ;check in case of old stumpwm version
         (format-with-on-click-id ml-str :ml-wpctl-source-on-click nil)
         ml-str)))
