@@ -1,16 +1,17 @@
 ;;;; Guix SYSTEM Configuration
-
+;; TODO: use package symbols instead of package strings & specifications->packages
+;; specify gnu packages & gnu services -> use-package-modules & use-service-modules
 (use-modules (gnu)
 	     (gnu packages)
-             (gnu packages cups)       ; -> needed for cups service
-             (gnu packages suckless)   ; -> need for lock service
+             (gnu packages cups)        ; -> needed for cups service
+             (gnu packages suckless)    ; -> need for lock service
              (gnu services)
              (gnu services cups)
              (gnu services ssh)
              (gnu services xorg)
              (gnu services desktop)
-	     (guix packages)           ; -> needed by ?
-	     (guix download)           ; -> needed by ?
+	     (guix packages)            ; -> needed by ?
+	     (guix download)            ; -> needed by ?
 	     (nongnu packages linux))
 
 

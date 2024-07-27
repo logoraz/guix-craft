@@ -1,5 +1,6 @@
 ;;;; Guix HOME Configuration
-
+;; TODO: use package symbols instead of package strings & specifications->packages
+;; specify gnu packages & gnu services -> use-package-modules & use-service-modules
 (use-modules (gnu home)
              (gnu home services)
              (gnu home services desktop)
@@ -162,6 +163,7 @@
  ;; TODO: Implement the following
  ;; 1. (service home-xdg-configuration-files-service-type ...)
  ;; 2. (service home-files-service-type ...)
+ ;; 3. (service home-dotfiles-service-type ..)
  (services
   (list
    (simple-service 'env-vars home-environment-variables-service-type
