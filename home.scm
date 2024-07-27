@@ -1,162 +1,150 @@
 ;;;; Guix HOME Configuration
 ;; TODO: use package symbols instead of package strings & specifications->packages
 ;; specify gnu packages & gnu services -> use-package-modules & use-service-modules
-(use-modules (gnu home)
+(use-modules (gnu)
+             (benoitj packages fonts)
+             (gnu home)
              (gnu home services)
              (gnu home services desktop)
              (gnu home services sound)
              (gnu home services shells)
-             (gnu packages)
-             (gnu services)
              (guix gexp))
+
+(use-package-modules fonts web-browsers gnuzilla password-utils gnupg mail
+                     gstreamer video gnucash gimp inkscape graphics compression
+                     version-control xorg xdisorg compton image-viewers linux
+                     music networking lisp lisp-xyz wm guile guile-xyz
+                     emacs emacs-xyz)
+
 
 (define %logoraz-packages
   (list
-   ;; Fonts
-   "font-fira-code"
-   "font-nerd-fonts-fira-code"    ; --> benoitj channel
-   "font-iosevka-aile"
-   "font-dejavu"
-   "font-google-noto"
-   "font-google-noto-emoji"
-   "font-google-material-design-icons"
-   "font-google-noto-sans-cjk"
+   ;; Fonts -> gnu packages fonts
+   font-fira-code
+   font-iosevka-aile
+   font-dejavu
+   font-google-noto
+   font-google-noto-emoji
+   font-google-material-design-icons
+   font-google-noto-sans-cjk
+   font-nerd-fonts-fira-code ; benoitj packages fonts
    ;; WWW/Mail
-   "nyxt"
-   "icecat"
-   "gnupg"
-   "keepassxc"
-   "isync"
-   "msmtp"
-   "mu"
-   "gstreamer"
-   "gst-plugins-good"
-   "gst-plugins-bad"
-   "gst-libav"
+   nyxt
+   icecat
+   keepassxc
+   gnupg
+   isync
+   msmtp
+   mu
+   gstreamer
+   gst-plugins-good
+   gst-plugins-bad
+   gst-libav
    ;; Apps
-   "mpv"
-   "vlc"
-   "gnucash"
-   "gimp"
-   "inkscape"
-   "blender"
-   ;; Documents/Files
-   ;; "texlive-scheme-basic"
-   ;; "texlive-collection-latexrecommended"
-   ;; "texlive-collection-fontsrecommended"
-   "zip"
-   "unzip"))
+   mpv
+   vlc
+   gnucash
+   gimp
+   inkscape
+   blender
+   ;; Utilities
+   zip
+   unzip
+   git)) ;-> how to enact git:send-email with packages->specifications
 
-(define %dev-packages  ;-> perhpas move to a manifest
+(define %x11-util-packages
   (list
-   ;; Guile Dev Tools
-   "guile-next"        ; needed for ares/arei
-   "guile-ares-rs"     ; for mREPL Guile Scheme Emacs IDE
-   "guile-hoot"        ; explore Web/WASM
-   ;; Common Lisp Dev Tools
-   "ccl"
-   "ecl"
-   ;; Base Dev Tools
-   ;; "elfutils"      ; need to determine what this does...
-   ;; "libtree"       ; not sure if I need
-   "gcc-toolchain"
-   "make"
-   "binutils"
-   "curl"
-   "git"
-   "git:send-email"))
+   ;; gnu packages xorg
+   xterm
+   transset
+   xhost
+   xset
+   xsetroot
+   xinput
+   xrdb
+   xrandr
+   ;; gnu packages xdisorg
+   xclip
+   xsel
+   xss-lock
+   picom      ;; gnu packages compton
+   feh        ;; gnu packages image-viewers
+   ;; gnu packages linux
+   pipewire
+   wireplumber
+   lm-sensors
+   brightnessctl
+   playerctl  ;; gnu packages music
+   blueman))  ;; gnu package networking
 
-(define %xorg-util-packages
+(define %cl-stumpwm-packages
   (list
-   ;; Xorg Window System Utils
-   ;; see -> https://gitlab.freedesktop.org/xorg/app/transset
-   ;; see -> https://unix.stackexchange.com/questions/127624/make-xterm-transparent
-   "xhost"                   ;
-   "xset"                    ;
-   "xsetroot"                ;
-   "xinput"                  ;
-   "xrdb"                    ; Set Xresource files
-   "xrandr"                  ; Screen rendering
-   "xclip"                   ; Clipboard
-   "xsel"                    ;
-   "xss-lock"                ; Screen locking
-   "xterm"                   ; XORG Terminal
-   "transset"                ; XORG window transparency
-   "picom"                   ; Compositor
-   "feh"                     ; Desktop background
-   "pipewire"                ; Audio System
-   "wireplumber"             ; Audio System router/controls
-   "playerctl"               ; Audio Player
-   "lm-sensors"              ; CLI system monitor
-   "libnotify"               ; Notifications
-   "brightnessctl"           ; Brightness Controls
-   "blueman"                 ; Bluetooh System/Controls (-> need to configure)
-   "bluez"))                 ; Bluetooh API
+   ;; gnu packages lisp
+   ecl
+   ;; gnu packages lisp-xyz
+   sbcl-slynk
+   sbcl-parse-float
+   sbcl-cl-ppcre
+   ;; gnu packages wm
+   ;; --> stumpwm-contrib/util
+   sbcl-stumpwm-ttf-fonts
+   sbcl-stumpwm-kbd-layouts
+   sbcl-stumpwm-swm-gaps
+   sbcl-stumpwm-globalwindows
+   sbcl-stumpwm-screenshot
+   ;; --> stumpwm-contrib/modeline
+   sbcl-stumpwm-cpu
+   sbcl-stumpwm-mem
+   sbcl-stumpwm-wifi
+   sbcl-stumpwm-battery-portable))
 
-(define %stumpwm-packages
+(define %emacs-packages
   (list
-   ;; StumpWM Support Modules
-   "sbcl-slynk"                  ;
-   "sbcl-parse-float"            ;-> audio-wpctl
-   "sbcl-cl-ppcre"               ;->
-   "sbcl-stumpwm-ttf-fonts"      ;->
-   "sbcl-stumpwm-kbd-layouts"    ;->
-   "sbcl-stumpwm-swm-gaps"       ;->
-   "sbcl-stumpwm-globalwindows"  ;-> need to properly configure
-   "sbcl-stumpwm-screenshot"     ;-> preliminarily working
-   ;"sbcl-stumpwm-end-session"   ;-> Not available in guix...
-   ;; mode-line support
-   "sbcl-stumpwm-cpu"
-   "sbcl-stumpwm-mem"
-   "sbcl-stumpwm-wifi"
-   "sbcl-stumpwm-battery-portable"))
-
-(define %emacs-packages ;-> perhaps move to a manifest
-  (list
-   "emacs"
-   "emacs-diminish"
-   "emacs-delight"
-   "emacs-nord-theme"
-   "emacs-doom-themes"
-   "emacs-nerd-icons"
-   "emacs-doom-modeline"
-   "emacs-ligature"
-   "emacs-no-littering"
-   "emacs-ws-butler"
-   "emacs-undo-tree"
-   "emacs-paredit"
-   "emacs-visual-fill-column"
-   "emacs-mct"
-   "emacs-orderless"
-   "emacs-corfu"
-   "emacs-marginalia"
-   "emacs-beframe"
-   "emacs-denote"
-   "emacs-magit"
-   "emacs-vterm"
-   "emacs-guix"
-   "emacs-arei"
-   "emacs-sly"
-   "emacs-nyxt"
-   "emacs-stumpwm-mode"
-   "emacs-mbsync"
-   "emacs-org-superstar"
-   "emacs-org-appear"
-   "emacs-erc-hl-nicks"
-   "emacs-erc-image"
-   "emacs-emojify"
-   "emacs-bongo"))
+   ;; gnu packages guile
+   guile-next
+   ;; gnu packages guile-xyz
+   guile-ares-rs
+   ;; gnu packages emacs
+   emacs
+   ;; gnu packages emacs-xyz
+   emacs-diminish
+   emacs-delight
+   emacs-nord-theme
+   emacs-doom-themes
+   emacs-nerd-icons
+   emacs-doom-modeline
+   emacs-ligature
+   emacs-no-littering
+   emacs-ws-butler
+   emacs-undo-tree
+   emacs-paredit
+   emacs-visual-fill-column
+   emacs-mct
+   emacs-orderless
+   emacs-corfu
+   emacs-marginalia
+   emacs-beframe
+   emacs-denote
+   emacs-magit
+   emacs-vterm
+   emacs-guix
+   emacs-arei
+   emacs-sly
+   emacs-mbsync
+   emacs-org-superstar
+   emacs-org-appear
+   emacs-erc-hl-nicks
+   emacs-erc-image
+   emacs-emojify))
 
 (home-environment
  ;; Below is the list of packages that will show up in your
  ;; Home profile, under ~/.guix-home/profile.
- (packages (specifications->packages
-            (append
-             %logoraz-packages
-             %dev-packages
-             %xorg-util-packages
-             %stumpwm-packages
-             %emacs-packages)))
+ (packages (append
+            %logoraz-packages
+            %x11-util-packages
+            %cl-stumpwm-packages
+            %emacs-packages))
  
  ;; Below is the list of Home services.  To search for available
  ;; services, run 'guix home search KEYWORD' in a terminal.

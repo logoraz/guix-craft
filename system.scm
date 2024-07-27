@@ -3,17 +3,13 @@
 ;; specify gnu packages & gnu services -> use-package-modules & use-service-modules
 (use-modules (gnu)
 	     (gnu packages)
-             (gnu packages cups)        ; -> needed for cups service
-             (gnu packages suckless)    ; -> need for lock service
              (gnu services)
-             (gnu services cups)
-             (gnu services ssh)
-             (gnu services xorg)
-             (gnu services desktop)
-	     (guix packages)            ; -> needed by ?
-	     (guix download)            ; -> needed by ?
+	     (guix packages)
+	     (guix download)
 	     (nongnu packages linux))
 
+(use-package-modules cups suckless lisp wm linux)
+(use-service-modules cups ssh desktop xorg)
 
 (define %keyboard-layout
   (keyboard-layout "us"))
@@ -37,10 +33,11 @@
          (type "ext4"))))
 
 ;; Define Core System Wide Packages & Services
+;; Updated to use package symbols instead of strings for specifications->packages lookup.
 (define %stumpwm-packages
-  (list
-   "sbcl"
-   "stumpwm-with-slynk"))
+  (list bluez
+        sbcl
+        stumpwm+slynk))
 
 ;; Use Package substitutes instead of compiling everything
 ;; Borrowed from iambumblehead
@@ -121,8 +118,7 @@
 
  ;; Use 'guix search KEYWORD' to search for packages.
  (packages (append
-            (specifications->packages
-             %stumpwm-packages)
+            %stumpwm-packages
             %base-packages))
 
  (services %system-services))
