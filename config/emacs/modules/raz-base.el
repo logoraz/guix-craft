@@ -87,7 +87,7 @@
 (setq-default global-auto-revert-non-file-buffers t)
 (setq-default indent-tabs-mode nil) ; use spaces instead of tabs
 (setq-default ;cursor-type 'bar
-              fill-column 95
+              fill-column 81
               large-file-warning-threshold 100000000
               find-file-visit-truename t)
 (global-auto-revert-mode 1)
@@ -95,10 +95,10 @@
 (column-number-mode 1)
 
 (use-package display-fill-column-indicator
-  :disabled
+  ;; TODO: Customize theme color for this element -> via ':config' keyword
   :diminish
-  :hook ((prog-mode . display-fill-column-indicator-mode)
-         (lisp-interaction-mode . (lambda () (display-fill-column-indicator-mode -1))))
+  ;; Only activate for lisp-mode -> stumpwm-contrib preference
+  :hook ((lisp-mode . display-fill-column-indicator-mode))
   :custom
   (display-fill-column-indicator-column fill-column))
 
