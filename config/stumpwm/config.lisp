@@ -14,7 +14,8 @@
 
 ;;; Set PATHs: data directory, etc.
 ;; https://stumpwm.github.io/git/stumpwm-git_67.html
-;; stumpwm still saves stuff to ~/.stumpwm.d, want it to go to ~/.config/stumpwm/data/ instead.
+;; stumpwm still saves stuff to ~/.stumpwm.d, want it to go to
+;; ~/.config/stumpwm/data/ instead.
 (setf *data-dir* (concat (getenv "HOME")
                          "/.config/stumpwm/data/"))
 
@@ -49,7 +50,8 @@
 (load-module "bluetooth")
 
 ;;; Stumpwm-contrib packages not available in Guix
-;; `end-session' - Provides session control commands, i.e. shutdown, restart, and logoff for StumpWM.
+;; `end-session' - Provides session control commands, i.e. shutdown, restart,
+;; and logoff for StumpWM.
 (add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/end-session/")
 (load-module "end-session")
 ;; Use loginctl instead of the default systemctl
@@ -84,4 +86,6 @@
 (sb-thread:make-thread (lambda () (slynk:create-server :dont-close t)))
 
 ;; Notify that everything is ready!
-(setf *startup-message* "^2*Welcome ^Blogoraz^b! Your ^BStumpWM^b session is ready.")
+(setf *startup-message*
+      (concatenate 'string "^2*Welcome ^Blogoraz^b! "
+                  "Your ^BStumpWM^b session is ready."))
