@@ -64,7 +64,8 @@
 ;; Macros/Helper functions
 (require 'raz-subrx)
 ;; Base + IDE
-(require 'raz-base)
+(require 'raz-base-core)
+(require 'raz-base-ext)
 (require 'raz-completions-mct)
 (require 'raz-lisp-ide)
 (require 'raz-guile-ide)

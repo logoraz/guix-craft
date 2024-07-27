@@ -48,8 +48,11 @@ if [ ! -d $modules ]; then
 fi
 
 # Emacs Base Configuration
-ln -f ~/repos/guix-craft/config/emacs/modules/raz-base.el \
-   ~/.config/emacs/modules/raz-base.el
+ln -f ~/repos/guix-craft/config/emacs/modules/raz-base-core.el \
+   ~/.config/emacs/modules/raz-base-core.el
+
+ln -f ~/repos/guix-craft/config/emacs/modules/raz-base-ext.el \
+   ~/.config/emacs/modules/raz-base-ext.el
 
 # Completions System
 ln -f ~/repos/guix-craft/config/emacs/modules/raz-completions-mct.el \
