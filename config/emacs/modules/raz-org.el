@@ -170,11 +170,13 @@
 ;; External Packages
 (use-package org-appear
   :diminish org-appear-mode
-  :hook (org-mode . org-appear-mode))
+  :hook ((org-mode . org-appear-mode))
+  :custom
+  (org-appear-autoemphasis t))
 
 (use-package org-superstar
   :diminish org-superstar-mode
-  :hook (org-mode . org-superstar-mode)
+  :hook ((org-mode . org-superstar-mode))
   :custom
   (org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
   (org-auto-align-tags nil)
@@ -185,12 +187,11 @@
   (org-return-follows-link t)
   (org-mouse-1-follows-link t)
   (org-descriptive-links t)
-  (org-pretty-entities t)
-  (org-hide-emphasis-markers t))
+  (org-pretty-entities t))
 
 (use-package visual-fill-column
   :diminish visual-line-mode
-  :hook (g(org-mode . visual-line-fill-column-mode)))
+  :hook ((org-mode . visual-line-fill-column-mode)))
 
 
 

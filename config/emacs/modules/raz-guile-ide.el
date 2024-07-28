@@ -12,12 +12,12 @@
 ;; TODO: Tell ares-rs where to search for Guix stuff
 ;; it may work if you set `export
 ;; GUILE_LOAD_PATH=$GUIX_ENVIRONMENT/share/guile/site/3.0`
-
+
 ;; Code:
 
 (use-package arei
   :if (eq system-type 'gnu/linux)
-  ;; :hook ((scheme-mode . raz/start-guile-ares))
+  :hook ((scheme-mode . raz/start-guile-ares))
   :config
   (setq geiser-mode-auto-p nil)
 
@@ -52,10 +52,7 @@
       (save-excursion (sesman-start)))))
 
 (use-package sesman
-  :disabled
-  :if (eq system-type 'gnu/linux)
-  :config
-  )
+  :if (eq system-type 'gnu/linux))
 
 
 ;; Guix install of `emacs-guix' comes with:
@@ -66,6 +63,7 @@
   :if (eq system-type 'gnu/linux)
   :config
   (setq geiser-mode-auto-p nil))
+
 
 
 

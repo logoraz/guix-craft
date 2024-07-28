@@ -20,19 +20,19 @@
 
 (use-package sly
   ;; Enable sly IDE for Common Lisp
-  :hook (;; (sly-mode . raz/sly-auto-connect)
-         (lisp . sly-editing-mode))
+  :hook (;;(sly-mode . raz/sly-auto-connect)
+         (lisp-mode . sly-editing-mode))
   ;; :custom
   ;; (inferior-lisp-program (executable-find "sbcl")
   ;;                        "Set default lisp to Steel Bank Common Lisp.")
   :config
-  (load "~/common-lisp/nyxt/build-scripts/nyxt-guix.el" :noerror)
   ;; Invoke SLY with a negative prefix argument, M-- M-x sly,
   ;; and you can select a program from that list.
   (setq sly-lisp-implementations
         `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
+          (clasp (,(executable-find "clasp")))
           (ecl (,(executable-find "ecl")))
-          (clasp (,(executable-find "clasp")))))
+          (ccl (,(executable-find "ccl")))))
 
   (defun raz/sly-stumpwm-auto-connect ()
     "Auto connect to StumpWM slynk session -> port 4005."
@@ -52,7 +52,7 @@
       (save-excursion (sly)))))
 
 
-
 
+
 
 (provide 'raz-lisp-ide)

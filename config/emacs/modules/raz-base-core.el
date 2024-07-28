@@ -97,7 +97,8 @@
   ;; TODO: Customize theme color for this element -> via ':config' keyword
   :diminish
   ;; Only activate for lisp-mode -> stumpwm-contrib preference
-  :hook ((lisp-mode . display-fill-column-indicator-mode))
+  :hook ((lisp-mode . display-fill-column-indicator-mode)
+         (scheme-mode . display-fill-column-indicator-mode))
   :custom
   (display-fill-column-indicator-column fill-column))
 
