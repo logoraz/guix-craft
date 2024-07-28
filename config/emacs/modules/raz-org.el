@@ -19,7 +19,8 @@
 (use-package org
   ;; :diminish org-mode
   :hook ((org-mode . raz/org-fonts-hkf)
-         (org-mode . raz/org-latex-hkf))
+         ;(org-mode . raz/org-latex-hkf)
+         )
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture))
   :custom
@@ -152,11 +153,13 @@
           ("bib" . "src bibtex")
           ("cm"  . "comment"))))
 
-;; External Packages
+;;; External Packages
+;; TODO: org-appear does not seem to be working... FIX!!
 (use-package org-appear
   ;; :diminish org-appear-mode
   :hook (org-mode . org-appear-mode)
   :custom
+  (org-appear-trigger 'always)
   (org-appear-delay 0.2)
   (org-appear-autoemphasis t)
   (org-appear-autolinks t)
