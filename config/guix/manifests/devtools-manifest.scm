@@ -1,4 +1,4 @@
-;;;; dev-tools-manifest.scm
+;;;; devtools-manifest.scm
 ;;; To be used with guix shell command as follows
 ;;;
 ;;; guix shell -m devtools-manifest.scm
@@ -9,10 +9,10 @@
 ;;;
 
 (specifications->manifest
- '( ;; "libtree"
-   "gcc-toolchain"
+ '("gcc-toolchain"
    "binutils"
    "make"
    "curl"
+   "ecl"
    "ccl"
    "git:send-email"))
