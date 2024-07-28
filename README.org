@@ -42,7 +42,7 @@
    - Modify =%desktop-services= to utilize substitutes where possible
      as opposed to compiling everything...
      See: https://git.savannah.gnu.org/cgit/guix.git/tree/gnu?h=v1.4.0
-- 2. =%stumpwm-packages=
+- 2. =%stumpwm-packages= - Window Manager
   Note that packages are specified only as symbols and not using
   =specifications->packages=.
   SBCL, SBCL-*, StumpWM+Slynk and stumpwm-contrib installed at the system
@@ -51,18 +51,21 @@
   - =sbcl-*=
   - =stumpwm+slynk=
   - =sbcl-stumpwm-*=
+- 3. =%x11-util-packages= - Window System, X11 util packages
   - =font-fira-code=
   - =bluez=
+  - =blueman=
+  - =x*=
 
 ** Home Configuration Outline (=home.scm=)
 
  Define user-level services & packages - note packages are specified as
  symbols, not using =specifications->packages=:
- - 1. =%logoraz-packages= -> My everyday packages
-      (i.e. fonts, web, apps, tools)
- - 2. =%x11-util-packages= -> X11 packages needed for StumpWM
- - 3. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
- - 4. =services= -> wip (todo: modularize to separate variable definitions)
+ - 1. =%logoraz-packages= -> My everyday packages (fonts, apps, utils/tools)
+      Note: I also call for home to install =font-fira-code= as emacs &
+      X11 are  not able to resolve that it is installed at the system level.
+ - 2. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
+ - 3. =services= -> wip (todo: modularize to separate variable definitions)
    - =home-environment-variables-service-type=
    - =home-dbus-service-type=
    - =home-pipewire-service-type=
