@@ -1,6 +1,5 @@
 ;;;; Guix HOME Configuration
-;; TODO: use package symbols instead of package strings & specifications->packages
-;; specify gnu packages & gnu services -> use-package-modules & use-service-modules
+
 (use-modules (gnu)
              (gnu home)
              (gnu home services)
@@ -12,8 +11,7 @@
 (use-package-modules fonts web-browsers gnuzilla password-utils gnupg mail
                      gstreamer video gnucash gimp inkscape graphics compression
                      version-control xorg xdisorg compton image-viewers linux
-                     music networking lisp lisp-xyz wm guile guile-xyz
-                     emacs emacs-xyz)
+                     music networking guile guile-xyz emacs emacs-xyz)
 
 (define %logoraz-packages
   (list font-fira-code  ;;|--> gnu packages fonts
@@ -66,33 +64,6 @@
         playerctl  ;;|--> gnu packages music
         blueman))  ;;|--> gnu package networking
 
-(define %cl-stumpwm-packages
-  ;;clasp?? |--> gnux packages lisp
-  (list sbcl-slynk ;;|--> gnu packages lisp-xyz
-        sbcl-parse-float
-        sbcl-cl-ppcre
-        sbcl-zpng
-        sbcl-salza2
-        sbcl-clx
-        sbcl-zpb-ttf
-        sbcl-cl-vectors
-        sbcl-cl-store
-        sbcl-trivial-features
-        sbcl-global-vars
-        sbcl-trivial-garbage
-        sbcl-bordeaux-threads
-        sbcl-cl-fad
-        sbcl-clx-truetype
-        sbcl-stumpwm-ttf-fonts ;;|--> gnu packages wm :stumpwm-contrib/util
-        sbcl-stumpwm-kbd-layouts
-        sbcl-stumpwm-swm-gaps
-        sbcl-stumpwm-globalwindows
-        sbcl-stumpwm-screenshot
-        sbcl-stumpwm-cpu ;;:stumpwm-contrib/modeline
-        sbcl-stumpwm-mem
-        sbcl-stumpwm-wifi
-        sbcl-stumpwm-battery-portable))
-
 (define %emacs-packages
   (list  guile-next      ;;|--> gnu packages guile
          guile-ares-rs   ;;|--> gnu packages guile-xyz
@@ -133,7 +104,6 @@
  (packages (append
             %logoraz-packages
             %x11-util-packages
-            %cl-stumpwm-packages
             %emacs-packages))
  
  ;; Below is the list of Home services.  To search for available

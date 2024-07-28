@@ -20,8 +20,7 @@
                          "/.config/stumpwm/data/"))
 
 ;; Add StumpWM module paths (for GUIX)
-(defconstant +guix-share-path+ (concat (getenv "HOME")
-                                       "/.guix-home/profile/share/"))
+(defconstant +guix-share-path+ "/var/guix/profiles/system/profile/share/")
 (set-module-dir (concat +guix-share-path+
                         "common-lisp/sbcl/"))
 

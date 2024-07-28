@@ -1,6 +1,5 @@
 ;;;; Guix SYSTEM Configuration
-;; TODO: use package symbols instead of package strings & specifications->packages
-;; specify gnu packages & gnu services -> use-package-modules & use-service-modules
+
 (use-modules (gnu)
 	     (gnu packages)
              (gnu services)
@@ -8,7 +7,7 @@
 	     (guix download)
 	     (nongnu packages linux))
 
-(use-package-modules cups suckless lisp wm linux)
+(use-package-modules cups suckless fonts lisp lisp-xyz wm linux networking)
 (use-service-modules cups ssh desktop xorg)
 
 (define %keyboard-layout
@@ -33,12 +32,35 @@
          (type "ext4"))))
 
 ;; Define Core System Wide Packages & Services
-;; Updated to use package symbols instead of strings for specifications->packages
-;; lookup.
 (define %stumpwm-packages
-  (list sbcl
-        stumpwm+slynk
-        bluez))
+  (list sbcl       ;;|--> gnu packages lisp
+        sbcl-slynk ;;|--> gnu packages lisp-xyz
+        sbcl-parse-float
+        sbcl-cl-ppcre
+        sbcl-zpng
+        sbcl-salza2
+        sbcl-clx
+        sbcl-zpb-ttf
+        sbcl-cl-vectors
+        sbcl-cl-store
+        sbcl-trivial-features
+        sbcl-global-vars
+        sbcl-trivial-garbage
+        sbcl-bordeaux-threads
+        sbcl-cl-fad
+        sbcl-clx-truetype
+        stumpwm+slynk ;;|--> gnu packages wm
+        sbcl-stumpwm-ttf-fonts ;;:stumpwm-contrib/util
+        sbcl-stumpwm-kbd-layouts
+        sbcl-stumpwm-swm-gaps
+        sbcl-stumpwm-globalwindows
+        sbcl-stumpwm-screenshot
+        sbcl-stumpwm-cpu ;;:stumpwm-contrib/modeline
+        sbcl-stumpwm-mem
+        sbcl-stumpwm-wifi
+        sbcl-stumpwm-battery-portable
+        font-fira-code ;;|--> gnu packages fonts
+        bluez)) ;;|--> gnu packages networking
 
 ;; Use Package substitutes instead of compiling everything
 ;; Borrowed from iambumblehead
