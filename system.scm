@@ -7,7 +7,9 @@
 	     (guix download)
 	     (nongnu packages linux))
 
-(use-package-modules cups suckless fonts lisp lisp-xyz wm linux networking)
+(use-package-modules lisp lisp-xyz wm xorg xdisorg linux fonts
+                     cups suckless networking)
+
 (use-service-modules cups ssh desktop xorg)
 
 (define %keyboard-layout
@@ -33,8 +35,8 @@
 
 ;; Define Core System Wide Packages & Services
 (define %stumpwm-packages
-  (list sbcl       ;;|--> gnu packages lisp
-        sbcl-slynk ;;|--> gnu packages lisp-xyz
+  (list sbcl           ;;|--> gnu packages lisp
+        sbcl-slynk     ;;|--> gnu packages lisp-xyz
         sbcl-parse-float
         sbcl-cl-ppcre
         sbcl-zpng
@@ -49,7 +51,7 @@
         sbcl-bordeaux-threads
         sbcl-cl-fad
         sbcl-clx-truetype
-        stumpwm+slynk ;;|--> gnu packages wm
+        stumpwm+slynk  ;;|--> gnu packages wm
         sbcl-stumpwm-ttf-fonts ;;:stumpwm-contrib/util
         sbcl-stumpwm-kbd-layouts
         sbcl-stumpwm-swm-gaps
@@ -58,9 +60,23 @@
         sbcl-stumpwm-cpu ;;:stumpwm-contrib/modeline
         sbcl-stumpwm-mem
         sbcl-stumpwm-wifi
-        sbcl-stumpwm-battery-portable
-        font-fira-code ;;|--> gnu packages fonts
-        bluez)) ;;|--> gnu packages networking
+        sbcl-stumpwm-battery-portable))
+
+(define %x11-util-packages
+  (list font-fira-code  ;;|--> gnu packages fonts
+        xterm      ;;|--> gnu packages xorg
+        transset
+        xhost
+        xset
+        xsetroot
+        xinput
+        xrdb
+        xrandr
+        xclip      ;;|--> gnu packages xdisorg
+        xsel
+        xss-lock
+        blueman    ;;|--> gnu package networking
+        bluez))
 
 ;; Use Package substitutes instead of compiling everything
 ;; Borrowed from iambumblehead
@@ -102,7 +118,6 @@
    ;; Set up my home configuration
    ;; (guix-home-service-type
    ;;  `(("logoraz" ,home)))
-   ;; Supposed to make package installation faster, but has EXTREMELY slow downloads
    (modify-services %desktop-services
                     (guix-service-type
                      config =>
@@ -142,6 +157,7 @@
  ;; Use 'guix search KEYWORD' to search for packages.
  (packages (append
             %stumpwm-packages
+            %x11-util-packages
             %base-packages))
 
  (services %system-services))
