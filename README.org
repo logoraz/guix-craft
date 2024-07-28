@@ -1,5 +1,5 @@
 #+TITLE: GNU Guix System & Home + StumpWM Configuration
-#+subtitle: =(defmacro guix-craft (system home &rest body) ...)
+#+subtitle: (defmacro guix-craft (system home &rest body) ...)
 #+author: Erik Pablo Almaraz (logoraz)
 #+email: erikalmaraz@fastmail.com
 :args:
@@ -14,7 +14,6 @@
   [[file:./assets/home-desktop.png]]
 
   [[file:./assets/nyxt-desktop-2.png]]
-
 
   My personal Guix System & Home StumpWM Configuration!
 
@@ -34,7 +33,6 @@
 
   - GitHub: https://github.com/logoraz/guix-craft.git
 
-
 ** System Configuration Outline (=system.scm=)
 
  Define system-level services & packages:
@@ -45,14 +43,20 @@
      as opposed to compiling everything...
      See: https://git.savannah.gnu.org/cgit/guix.git/tree/gnu?h=v1.4.0
 - 2. =%stumpwm-packages=
-  Prefer to keep the WM at the system level to configure basic services and to have
-  them available system wide, home can configure StumpWM however you like.
+  Prefer to keep the WM at the system level to configure basic services
+  and to have them available system wide, home can configure StumpWM
+  however you like. Also add bluetooth package bluez as its service is
+  only available currently at the system level.
+  Note that packages are specified only as symbols and not using
+  =specifications->packages=.
+  - =bluez=
   - =sbcl=
-  - =stumpwm-with-slynk=
+  - =stumpwm+slynk=
 
 ** Home Configuration Outline (=home.scm=)
 
- Define user-level services & packages:
+ Define user-level services & packages - note packages are specified as
+ symbols, not using =specifications->packages=:
  - 1. =%logoraz-packages= -> My everyday packages (i.e. fonts, web, apps, tools)
  - 2. =%dev-packages= -> Guile/Common Lisp packages I use consistently
  - 3. =%xorg-util-packages= -> X11 packages needed for StumpWM
@@ -73,21 +77,42 @@ Current list of defined channels and whether they are active and/or pinned at a 
 commit:
 - Guix
 - Nonguix
-- benoitj
 - guixrus
 - flatwhatson
 - rde
+- benoitj
+- TBD
+
+** Manifests (=./config/guix/manifests/=)
+- =devtools-manifest.scm=  - Dev Packages in general and for Common Lisp
+- =org-docs-manifest.scm=  - Latex packages for Org document generation
+
+I use these manifests as follows for consistent environments with packages I
+need without bloating my home configuration:
+
+#+begin_src sh
+
+  $ guix shell -m devtools-manifest.scm -- emacs
+  # or
+  $ guix shell -m org-docs-manifest.scm -- emacs
+
+#+end_src
 
 ** Installation
 
+Basic Instructions on how to install Guix System
 *** Live Image/ISO
 
- I specifically used the guix-installer, but next time my give the =guix-live-image=
- a try... best to have both present for reference:
+ I specifically used the guix-installer, but next time my give the
+ =guix-live-image= a try... best to have both present for reference.
+ Also note that one can use the nonguix images provided on item 3.
 
  1. https://github.com/SystemCrafters/guix-installer/releases/tag/v202308290335
 
  2. https://github.com/SystemCrafters/guix-live-image
+
+ 3. https://gitlab.com/nonguix/nonguix/-/releases
+    - https://gitlab.com/nonguix/nonguix
 
 *** Create usb installation media
 
@@ -114,7 +139,7 @@ For a quick reference on how to create usb installation media:
 
 Followed =SystemCrafters= prescription for installation:
 
-- https://systemcrafters.net/craft-your-system-with-guix/full-system-install/
+- [[https://systemcrafters.net/craft-your-system-with-guix/full-system-install/][systemcrafters:craft-your-own-system-with-guix]]
 
 ** Deploy
 
@@ -201,6 +226,58 @@ List known connections and delete them from list in Network Manager.
 #+end_src
 
 ** Common Lisp Stuff
+
+Some Common Lisp stuff I've trialed out in Guix System:
+*** Clasp
+
+The Clasp Common Lisp compiler is a project of extreme high interest to
+me - Clasp is a new Common Lisp implementation that seamlessly
+interoperates with C++ libraries and programs using LLVM for compilation
+to native code. See: https://github.com/clasp-developers/clasp
+
+They currently have a guix package recipe that hasn't yet made its way
+upstream, as it has a bit complex build model due to git submodules:
+
+I have it currently installed to my .guix-profle, but may resort to
+installing it via guix shell only, so as to follow the "Guix way..."
+
+Installation Instructions:
+
+#+begin_src sh
+
+  # Clone to a directory of your choice
+  $ git clone https://github.com/clasp-developers/clasp.git \
+    ~/repos/builds/clasp/
+
+  $ cd ~/repos/builds/clasp/
+  $ guix shell --pure git nss-certs sbcl -- ./koga
+  # Note: Koga will error out after downloading the dependencies,
+  # when trying to configure clasp.
+  $ guix build -f guix/clasp.scm
+
+
+  # Perhaps install via guix shell for the future
+  # one caveat is that it will be removed once you perform guix gc
+  # I have not yet trialed the below code:
+  $ guix shell -D -f guix/clasp.scm
+  # then you can invoke it with whatever program you'd like, say emacs:
+  $ guix shell -D -f guix/clasp.scm -- emacs
+
+#+end_src
+
+;;
+;;   guix shell -D -f guix/clasp.scm -- COMMAND # Clasp-suitable environment
+;;   guix build -f guix/clasp.scm               # Build the package
+;;   guix package -f guix/clasp.scm             # Install the package
+;;
+;; Unfortunately, for now the package and the above commands require the
+;; cloned dependencies to be already present, which can be accomplished
+;; as follows:
+;;
+;;   guix shell --pure git nss-certs sbcl -- ./koga
+;;
+;; though Koga will error out after downloading the dependencies, when
+;; trying to configure Clasp.
 
 *** Installing Lem
 
