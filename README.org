@@ -131,7 +131,7 @@ For a quick reference on how to create usb installation media:
 
 #+begin_src sh
 
-  $ sudo dd if=guix-installer-<date number>.iso of=/dev/sdX status=progress=
+  $ sudo dd if=guix-installer-<date number>.iso of=/dev/sdX status=progress
 
 #+end_src
 

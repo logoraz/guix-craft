@@ -17,9 +17,8 @@
 ;; Code:
 
 (use-package org
-  :diminish org-mode
+  ;; :diminish org-mode
   :hook ((org-mode . raz/org-fonts-hkf)
-         ;;(org-mode . raz/nord-theme-org-mods-hkf)
          (org-mode . raz/org-latex-hkf))
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture))
@@ -31,7 +30,7 @@
   (org-insert-heading-respect-content t)
   (org-return-follows-link t)
   (org-mouse-1-follows-link t)
-  (org-descriptive-links t)
+  (org-link-descriptive t)
   (org-hide-emphasis-markers t)
   (org-pretty-entities t)
   (org-agenda-window-setup 'current-window)
@@ -101,21 +100,6 @@
       (set-face-attribute (car face) nil
                           :inherit (cadr face))))
 
-  (defun raz/nord-theme-org-mods-hkf ()
-    "Modify some of Nord theme faces for Org elements."
-    (dolist
-        (face
-         '((org-block :background "#272C37" :inherit fixed-pitch)
-           (org-block-begin-line ;; nord15 - purpleish
-            :foreground "#b48ead" :background "#272C37" :inherit fixed-pitch)
-           (org-block-end-line
-            :foreground "#b48ead" :background "#272C37" :inherit fixed-pitch)
-           (org-inline-src-block :background "#272C37" :inherit fixed-pitch)
-           (org-document-info :inherit fixed-pitch)
-           (org-document-info-keyword :inherit fixed-pitch)
-           (org-property-value :inherit fixed-pitch)))
-      (raz/set-face-attribute (car face) (cdr face))))
-
   (defun raz/org-latex-hkf ()
     "Hook function setting up configuration for Org using Latex."
 
@@ -151,48 +135,46 @@
 
 ;; Org Accessories
 (use-package org-indent
-  :diminish org-indent-mode
+  ;; :diminish org-indent-mode
   :after org)
 
 (use-package org-tempo
-  :diminish org-tempo-mode
+  ;; :diminish org-tempo-mode
   :after org
   :config
-  (setq org-structure-template-alist '(("el"  . "src emacs-lisp")
-                                       ("li"  . "src lisp")
-                                       ("sc"  . "src scheme")
-                                       ("sh"  . "src sh")
-                                       ("co"  . "src conf")
-                                       ("C"   . "src C")
-                                       ("bib" . "src bibtex")
-                                       ("cm"  . "comment"))))
+  (setq org-structure-template-alist
+        '(("el"  . "src emacs-lisp")
+          ("li"  . "src lisp")
+          ("sc"  . "src scheme")
+          ("sh"  . "src sh")
+          ("co"  . "src conf")
+          ("C"   . "src C")
+          ("bib" . "src bibtex")
+          ("cm"  . "comment"))))
 
 ;; External Packages
 (use-package org-appear
-  :diminish org-appear-mode
-  :hook ((org-mode . org-appear-mode))
+  ;; :diminish org-appear-mode
+  :hook (org-mode . org-appear-mode)
   :custom
-  (org-appear-autoemphasis t))
+  (org-appear-delay 0.2)
+  (org-appear-autoemphasis t)
+  (org-appear-autolinks t)
+  (org-appear-autosubmarkers t)
+  (org-appear-autoentities t))
 
 (use-package org-superstar
-  :diminish org-superstar-mode
-  :hook ((org-mode . org-superstar-mode))
+  ;; :diminish org-superstar-mode
+  :hook (org-mode . org-superstar-mode)
   :custom
-  (org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
-  (org-auto-align-tags nil)
-  (org-tags-column 0)
-  (org-catch-invisible-edits 'show-and-error)
-  (org-special-ctrl-a/e t)
-  (org-insert-heading-respect-content t)
-  (org-return-follows-link t)
-  (org-mouse-1-follows-link t)
-  (org-descriptive-links t)
-  (org-pretty-entities t))
+  (org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (use-package visual-fill-column
-  :diminish visual-line-mode
-  :hook ((org-mode . visual-line-fill-column-mode)))
+  ;; :diminish visual-line-mode
+  :hook (org-mode . visual-line-fill-column-mode))
+
 
 
+
 
 (provide 'raz-org)
