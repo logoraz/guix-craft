@@ -54,19 +54,7 @@
       (openpgp-fingerprint
         "2841 9AC6 5038 7440 C7E9  2FFA 2208 D209 58C1 DEB0")))))
 
-(define benoitj
-  (channel
-   (name 'benoitj)
-   (url "https://git.sr.ht/~benoit/my-guix-channel")
-   (branch "main")
-   (introduction
-    (make-channel-introduction
-     "37444eebf69f83f4accaa2c69562209d94f4e57a"
-     (openpgp-fingerprint
-      "C3B6 ED99 DF87 B208 0C79  C8AC F86B 0628 26D4 C20A")))))
 
 (append (list guix
-              nonguix
-              ;; For font-nerd-fonts-fira-code
-              benoitj)
+              nonguix)
         %default-channels)

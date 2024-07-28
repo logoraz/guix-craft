@@ -33,11 +33,12 @@
          (type "ext4"))))
 
 ;; Define Core System Wide Packages & Services
-;; Updated to use package symbols instead of strings for specifications->packages lookup.
+;; Updated to use package symbols instead of strings for specifications->packages
+;; lookup.
 (define %stumpwm-packages
-  (list bluez
-        sbcl
-        stumpwm+slynk))
+  (list sbcl
+        stumpwm+slynk
+        bluez))
 
 ;; Use Package substitutes instead of compiling everything
 ;; Borrowed from iambumblehead
