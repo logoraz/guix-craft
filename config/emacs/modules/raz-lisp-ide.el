@@ -31,8 +31,8 @@
   ;; and you can select a program from that list.
   (setq sly-lisp-implementations
         `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
-          (clasp (,(executable-find "clasp")))
-          (ecl (,(executable-find "ecl")))))
+          (ecl (,(executable-find "ecl")))
+          (clasp (,(executable-find "clasp")))))
 
   (defun raz/sly-stumpwm-auto-connect ()
     "Auto connect to StumpWM slynk session -> port 4005."
@@ -45,7 +45,6 @@
     (interactive)
     ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
     (save-excursion (sly-connect "localhost" 4006)))
-
 
   ;; See: https://joaotavora.github.io/sly/#Loading-Slynk-faster
   (defun raz/sly-auto-connect ()
