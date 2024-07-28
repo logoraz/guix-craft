@@ -26,8 +26,8 @@
   full Guix deployment, however, maintaining original source code rather
   than writting it in Guile as some do.
 
-  This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th Gen
-  (Type 20FB) Laptop.
+  This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
+  Gen (Type 20FB) Laptop.
 
   Git Repositories:
 
@@ -43,26 +43,26 @@
      as opposed to compiling everything...
      See: https://git.savannah.gnu.org/cgit/guix.git/tree/gnu?h=v1.4.0
 - 2. =%stumpwm-packages=
-  Prefer to keep the WM at the system level to configure basic services
-  and to have them available system wide, home can configure StumpWM
-  however you like. Also add bluetooth package bluez as its service is
-  only available currently at the system level.
   Note that packages are specified only as symbols and not using
   =specifications->packages=.
-  - =bluez=
+  SBCL, SBCL-*, StumpWM+Slynk and stumpwm-contrib installed at the system
+  level. Also install font-fira-code as base system font.
   - =sbcl=
+  - =sbcl-*=
   - =stumpwm+slynk=
+  - =sbcl-stumpwm-*=
+  - =font-fira-code=
+  - =bluez=
 
 ** Home Configuration Outline (=home.scm=)
 
  Define user-level services & packages - note packages are specified as
  symbols, not using =specifications->packages=:
- - 1. =%logoraz-packages= -> My everyday packages (i.e. fonts, web, apps, tools)
- - 2. =%dev-packages= -> Guile/Common Lisp packages I use consistently
- - 3. =%xorg-util-packages= -> X11 packages needed for StumpWM
- - 4. =%stumpwm-packages= -> For StumpWM configuration/customization
- - 4. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
- - 5. =services= -> wip (need to modularize to separate variable definitions)
+ - 1. =%logoraz-packages= -> My everyday packages
+      (i.e. fonts, web, apps, tools)
+ - 2. =%x11-util-packages= -> X11 packages needed for StumpWM
+ - 3. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
+ - 4. =services= -> wip (todo: modularize to separate variable definitions)
    - =home-environment-variables-service-type=
    - =home-dbus-service-type=
    - =home-pipewire-service-type=
@@ -107,7 +107,7 @@ Basic Instructions on how to install Guix System
  =guix-live-image= a try... best to have both present for reference.
  Also note that one can use the nonguix images provided on item 3.
 
- 1. https://github.com/SystemCrafters/guix-installer/releases/tag/v202308290335
+ 1. [[https://github.com/SystemCrafters/guix-installer/releases/tag/v202308290335][GitHub:SystemCrafters/guix-installer/releases/tag/v202308290335]]
 
  2. https://github.com/SystemCrafters/guix-live-image
 
