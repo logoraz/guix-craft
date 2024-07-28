@@ -32,7 +32,6 @@
   (setq sly-lisp-implementations
         `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
           (clasp (,(executable-find "clasp")))
-          (ccl (,(executable-find "ccl")))
           (ecl (,(executable-find "ecl")))))
 
   (defun raz/sly-stumpwm-auto-connect ()
