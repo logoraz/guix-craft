@@ -9,9 +9,9 @@
              (guix gexp))
 
 (use-package-modules fonts web-browsers gnuzilla password-utils gnupg mail
-                     gstreamer video gnucash gimp inkscape graphics compression
-                     version-control xorg xdisorg compton image-viewers linux
-                     music networking guile guile-xyz emacs emacs-xyz)
+                     gstreamer video compton image-viewers linux music
+                     gnucash gimp inkscape graphics compression version-control
+                     guile guile-xyz emacs emacs-xyz)
 
 (define %logoraz-packages
   (list font-fira-code  ;;|--> gnu packages fonts
@@ -34,27 +34,6 @@
         gst-libav
         mpv        ;;|--> gnu packages video :apps
         vlc
-        gnucash    ;;|--> gnu packages gnucash
-        gimp       ;;|--> gnu packages gimp
-        inkscape   ;;|--> gnu packages inkscape
-        blender    ;;|--> gnu packages graphics
-        zip        ;;|--> gnu packages compression :utilities
-        unzip
-        git))      ;;|--> gnu packages version-control
-
-(define %x11-util-packages
-  (list xterm      ;;|--> gnu packages xorg
-        xterm
-        transset
-        xhost
-        xset
-        xsetroot
-        xinput
-        xrdb
-        xrandr
-        xclip      ;;|--> gnu packages xdisorg
-        xsel
-        xss-lock
         picom      ;;|--> gnu packages compton
         feh        ;;|--> gnu packages image-viewers
         pipewire   ;;|--> gnu packages linux
@@ -62,7 +41,13 @@
         lm-sensors
         brightnessctl
         playerctl  ;;|--> gnu packages music
-        blueman))  ;;|--> gnu package networking
+        gnucash    ;;|--> gnu packages gnucash
+        gimp       ;;|--> gnu packages gimp
+        inkscape   ;;|--> gnu packages inkscape
+        blender    ;;|--> gnu packages graphics
+        zip        ;;|--> gnu packages compression :utilities
+        unzip
+        git))      ;;|--> gnu packages version-control
 
 (define %emacs-packages
   (list  guile-next      ;;|--> gnu packages guile
@@ -103,7 +88,6 @@
  ;; Home profile, under ~/.guix-home/profile.
  (packages (append
             %logoraz-packages
-            %x11-util-packages
             %emacs-packages))
  
  ;; Below is the list of Home services.  To search for available
@@ -114,6 +98,8 @@
  ;; 3. (service home-dotfiles-service-type ..)
  (services
   (list
+   (service home-pipewire-service-type)
+   (service home-dbus-service-type) ;; for bluetooth --> system
    (simple-service 'env-vars home-environment-variables-service-type
                    '(("EDITOR" . "emacs")
                      ("BROWSER" . "nyxt")
@@ -121,8 +107,6 @@
                      ("XDG_SESSION_DESKOP" . "stumpwm")
                      ("XDG_CURRENT_DESKTOP" . "stumpwm")
                      ("XDG_DOWNLOAD_DIR" . "/home/logoraz/Downloads/")))
-   (service home-dbus-service-type)
-   (service home-pipewire-service-type)
    (service home-bash-service-type
             (home-bash-configuration
 	     (guix-defaults? #f)
