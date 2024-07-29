@@ -19,7 +19,7 @@
 (setf *data-dir* (concat (getenv "HOME")
                          "/.config/stumpwm/data/"))
 
-;; Add StumpWM module paths (for GUIX)
+;; Add StumpWM module paths (for GUIX system)
 (defconstant +guix-share-path+ "/run/current-system/profile/share/")
 (set-module-dir (concat +guix-share-path+
                         "common-lisp/sbcl/"))
