@@ -1,6 +1,6 @@
 #+TITLE: GNU Guix System & Home + StumpWM Configuration
 #+subtitle: (defmacro guix-craft (system home &rest body) ...)
-#+author: Erik Pablo Almaraz (logoraz)
+#+author: Erik P. Almaraz (logoraz)
 #+email: erikalmaraz@fastmail.com
 :args:
 #+language: en
