@@ -36,12 +36,16 @@ ln -f ~/repos/guix-craft/config/nyxt/bookmarks.lisp \
    ~/.config/nyxt/bookmarks.lisp
 # Extensions
 
-## Theme
+# Extensions
 nyxt_extensions=~/.local/share/nyxt/extensions/
 if [ ! -d $nyxt ]; then
     echo "~/.local/share/nyxt/extensions/ does not exist - creating..."
     mkdir $nyxt_extensions
 fi
 
-ln -s ~/repos/guix-craft/config/nyxt/extensions/nx-invader-2 \
-   ~/.local/share/nyxt/extensions/nx-invader-2
+## Theme
+if [ ! -L ~/.local/share/nyxt/extensions/nx-invader-2 ]; then
+    echo "creating link ~/.local/share/nyxt/extensions/nx-invader-2..."
+    ln -s ~/repos/guix-craft/config/nyxt/extensions/nx-invader-2 \
+       ~/.local/share/nyxt/extensions/nx-invader-2
+fi
