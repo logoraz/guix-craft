@@ -8,6 +8,12 @@
 #  2. |--> ~/.local/share/common-lisp/source/
 # Save development common-lisp libraries/packages here
 
+common_lisp_dev=/home/logoraz/common-lisp/
+if [ ! -d $common_lisp_dev ]; then
+    echo "~/common-lisp/ does not exist - creating..."
+    mkdir $common_lisp_dev
+fi
+
 # Save persistent common-lisp libraries/packages here
 common_lisp_local=/home/logoraz/.local/share/common-lisp/
 if [ ! -d $common_lisp_local ]; then
