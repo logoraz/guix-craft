@@ -82,7 +82,9 @@
 ;;; Start StumpWM slynk server - persistent for session
 ;; Always hacking StumpWM
 (require :slynk)
-(sb-thread:make-thread (lambda () (slynk:create-server :dont-close t)))
+(sb-thread:make-thread (lambda () (slynk:create-server
+                                   :port 4005
+                                   :dont-close t)))
 
 ;; Notify that everything is ready!
 (setf *startup-message*
