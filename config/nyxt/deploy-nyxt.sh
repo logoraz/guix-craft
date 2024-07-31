@@ -31,13 +31,16 @@ ln -f ~/repos/guix-craft/config/nyxt/passwords.lisp \
 ln -f ~/repos/guix-craft/config/nyxt/passwords-dev.lisp \
    ~/.config/nyxt/passwords-dev.lisp
 
+## Bookmarks
+ln -f ~/repos/guix-craft/config/nyxt/bookmarks.lisp \
+   ~/.config/nyxt/bookmarks.lisp
 # Extensions
 
 ## Theme
 nyxt_extensions=~/.local/share/nyxt/extensions/
 if [ ! -d $nyxt ]; then
     echo "~/.local/share/nyxt/extensions/ does not exist - creating..."
-    mkdir ~/.local/share/nyxt/extensions/
+    mkdir $nyxt_extensions
 fi
 
 ln -s ~/repos/guix-craft/config/nyxt/extensions/nx-invader-2 \
