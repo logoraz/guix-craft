@@ -3,13 +3,14 @@
 
 ! TODO: Refactor/Cleanup Code from example not currently being used
 
+
 ! Xcursor
 ! See: https://github.com/ful1e5/XCursor-pro
 Xcursor.theme: XCursor-Pro-Dark
 Xcursor.size: 22
 
-! XTerm
 
+! XTerm
 
 ! Fonts
 ! Set the default UI font (menus, toolbar, etc) - Not needed for StumpWM
@@ -18,10 +19,8 @@ XTerm*XftFont: Fira Code:size=11:antialias=true:style=Regular
 XTerm*vt100.faceName: Fira Code:size=11:antialias=true:style=Regular
 XTerm*vt100.boldFont: Fira Code:size=11:antialias=true:style=Bold
 
-
-! Color Theme:
+! Color Theme: Molokai
 ! Ref: https://www.futurile.net/2016/06/15/xterm-256color-themes-molokai-terminal-theme/
-
 ! Colours are in groups as the second one should be a brighter version.
 
 ! Background: black, dark grey
