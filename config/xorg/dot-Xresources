@@ -1,7 +1,7 @@
 ! -*- conf-xdefaults -*-
-! Xresources
+! Xresources - X11 Environment Configuration
 
-! X environment variables -> TBD/WIP
+! TODO: Refactor/Cleanup Code from example not currently being used
 
 ! Xcursor
 ! See: https://github.com/ful1e5/XCursor-pro
@@ -9,112 +9,89 @@ Xcursor.theme: XCursor-Pro-Dark
 Xcursor.size: 22
 
 ! XTerm
-!
-! Remember to run `xrdb < .Xresources` after changing anything.
-! Set the default UI font (menus, toolbar, etc)
-XTerm*XftFont:                  Fira Code:size=11:antialias=true:style=Regular
-! Color of UI Components
-XTerm*.SimpleMenu.background:   #ffffff
-XTerm*.SimpleMenu.foreground:   #000000
-! Tone down the Xaw3D effect.
-XTerm*shapeStyle:               Rectangle
-XTerm*beNiceToColormap:         false
-XTerm*relief:                   None
-XTerm*highlightThickness:       0
-! Dont automatically jump to the bottom on output, but do on keypress.
-XTerm*scrollTtyOutput:          false
-XTerm*scrollKey:                true
-XTerm*scrollBar:                false
-XTerm*eightBitInput:            false
-XTerm*cursorBlink:              true
-! Dont allow mouse ops - it can be enabled in the view Menu at runtime.
-! The reason is it breaks copy/paste if an application requests mouse events,
-! because the application gets the event instead of XTerm.
-XTerm*allowMouseOps:            false
-! Dont change my title by default, this can be re-enabled from the menu.
-XTerm*allowTitleOps:            false
-XTerm*allowFontOps:             false
-! Mouse cursor configuration, I prefer to keep it simple.
-XTerm*pointerColor:             white
-XTerm*pointerColorBackground:   black
-XTerm*pointerShape:             left_ptr
-! Only select text, not empty space around it.
-XTerm*highlightSelection:       true
-! The distance between the edge of the screen and the characters.
-XTerm*vt100.internalBorder:     6
-! The border around elements.
-XTerm*.BorderColor:             #ffffff
-XTerm*vt100.BorderColor:        #d0d0d0
-XTerm*BorderWidth:              3
-! Menu Names, I dont like the default verbose names.
-XTerm*.mainMenu.label:          File
-XTerm*.vtMenu.label:            Options
-XTerm*.fontMenu.label:          View
-! You can rename menu entries, like this, I dont know why the menubar
-! is called a "toolbar", probably historical reasons.
-XTerm*.mainMenu.toolbar.label:  Menubar
-! Adjust how the active menu item looks
-XTerm*.SimpleMenu.*.shadowWidth: 3
-XTerm*.SimpleMenu.*.topShadowPixel: SkyBlue
-XTerm*.SimpleMenu.*.bottomShadowPixel: LightSkyBlue
-! Try to hide the useless title displayed at the top of menus, I know what
-! menu it is because I just clicked it.
-XTerm*.*.menuLabel.vertSpace:   0
-XTerm*.*.menuLabel.foreground:  #ffffff
-XTerm*.*.menuLabel.XftFont:     Fira Code:size=0
-! Space around menu entries.
-XTerm*.SimpleMenu.*.topMargin:  0
-XTerm*.SimpleMenu.*.bottomMargin: 0
-XTerm*.SimpleMenu.*.leftMargin: 32
-XTerm*.SimpleMenu.*.rightMargin: 64
-! The height of each menu entry, the default calculates it from font size.
-! XTerm*.SimpleMenu.*.rowHeight: 16
-! Space around the checkmark in the menus.
-XTerm*.SimpleMenu.*.leftWhitespace: 16
-!XTerm*.SimpleMenu.*.rightWhitespace: 8
-! Trim vertical padding around the toolbar, all elements have a form.
-XTerm*Form.menubar.vSpace:      0
-XTerm*Form.menubar.vertDistance: 0
-!XTerm*Form.menubar.foreground: #000000
-!XTerm*Form.menubar.background: #ffffff
-!XTerm*Form.menubar.Thickness:  0
+
+
 ! Fonts
-XTerm*vt100.faceName:           Fira Code:size=11:antialias=true:style=Regular
-XTerm*vt100.boldFont:           Fira Code:size=11:antialias=true:style=Bold
-! Size and Title
-XTerm*vt100.geometry:           100x30
-XTerm*title:                    Terminal
-XTerm*iconHint:                 /home/logoraz/.icons/computer_x11.xpm
-! Terminal Colors
-XTerm*vt100.background:     #212121
-XTerm*vt100.foreground:     #80FF80
-XTerm*cursorColor:          #ffffff
-! I like bold items to be in bright white.
-XTerm*veryBoldColors:       4
-XTerm*colorBDMode:          true
-XTerm*colorBD:              #ffffff
-XTerm*colorRV:              #ffffff
-! I can see a small line between box characters, this fixes it.
-XTerm*forceBoxChars:        true
-XTerm*vt100.scaleHeight:    1.04
-! This (or similar id) is required for Sixel support.
-XTerm*decTerminalID:        vt382
-! Color Scheme
-! 0-7:  Black, Red, Green, Yellow, Blue, Purple, Cyan, White
-! 8-15: Bright Black, Bright Red, ...
-XTerm*color0:               #212121
-XTerm*color8:               #7f7f7f
-XTerm*color1:               #A00000
-XTerm*color9:               #FF0000
-XTerm*color2:               #00A000
-XTerm*color10:              #00FF00
-XTerm*color3:               #A0A000
-XTerm*color11:              #FFFF00
-XTerm*color4:               #0000A0
-XTerm*color12:              #5C5CFF
-XTerm*color5:               #A000A0
-XTerm*color13:              #FF00FF
-XTerm*color6:               #00A0A0
-XTerm*color14:              #00FFFF
-XTerm*color7:               #C0C0C0
-XTerm*color15:              #ffffff
+! Set the default UI font (menus, toolbar, etc) - Not needed for StumpWM
+XTerm*XftFont: Fira Code:size=11:antialias=true:style=Regular
+! Set the terminal fonts
+XTerm*vt100.faceName: Fira Code:size=11:antialias=true:style=Regular
+XTerm*vt100.boldFont: Fira Code:size=11:antialias=true:style=Bold
+
+
+! Color Theme:
+! Ref: https://www.futurile.net/2016/06/15/xterm-256color-themes-molokai-terminal-theme/
+
+! Colours are in groups as the second one should be a brighter version.
+
+! Background: black, dark grey
+#define _background #272822
+#define _color8 #303030
+
+! Color1/foreground: light grey: standard files, cursor
+! Color9: bright pink: soft link e.g. ln -s test1 imaginarytest
+#define _foreground #d0d0d0
+#define _color9 #ff0090
+
+! Color2: dark green: world read/write dir e.g. /tmp
+! Color10: bright green: binaries user can execute /bin
+#define _color2 #66AA11
+#define _color10 #80FF00
+
+! Color3: medium brown: fifo e.g mkfifo fifotest
+! Color11: light brown/sand: block special files e.g ls -l /dev/loop0
+#define _color3 #c47f2c
+#define _color11 #ffba68
+
+! Color4: medium blue: FIXME: unused?
+! Color12: light blue: directory
+#define _color4 #30309b
+#define _color12 #5f5fee
+
+! Color5: dark purple: Not used in ls, in ranger (not sure where it gets it colors from though)
+! Color13: light purple: socket file /var/run/dbus_system_bus_socket
+#define _color5 #7e40a5
+#define _color13 #bb88dd
+
+! Color6: medium magenta: FIXME: unused?
+! Color14: light magenta: symbolic links e.g. ~/Examples /bin/lsmod
+#define _color6 #3579A8
+#define _color14 #4eb4fa
+
+! Color7: medium grey: setuid file e.g. /usr/bin/sudo
+! Color15: light grey: background color for setuid files e.g /usr/bin/sudo
+#define _color7 #9999AA
+! Trying white in case it helps
+#define _color15 #ffffff
+!#define _color15 #d0d0d0
+
+! General - covering all X clients
+!*background: _background
+!*foreground: _foreground
+! Not sure what this one does - Solarise had it at base3
+!*fadeColor: XXX ! Not sure what this does
+
+! XTerm specific
+xterm*background: _background
+xterm*foreground: _foreground
+
+! Not really required - XTerm defaults to using the foreground colour
+xterm*cursorColor: _foreground
+
+xterm*color0: _background
+xterm*color1: _foreground
+xterm*color2: _color2
+xterm*color3: _color3
+xterm*color4: _color4
+xterm*color5: _color5
+xterm*color6: _color6
+xterm*color7: _color7
+! 8-15 are considered brighter colours of 1-7
+xterm*color8: _color8
+xterm*color9: _color9
+xterm*color10: _color10
+xterm*color11: _color11
+xterm*color12: _color12
+xterm*color13: _color13
+xterm*color14: _color14
+xterm*color15: _color15
