@@ -30,9 +30,7 @@
   ;; and you can select a program from that list.
   (setq sly-lisp-implementations
         `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
-          (clasp (,(executable-find "clasp")))
-          (ecl (,(executable-find "ecl")))
-          (ccl (,(executable-find "ccl")))))
+          (clasp (,(executable-find "clasp")))))
 
   (defun raz/sly-stumpwm-auto-connect ()
     "Auto connect to StumpWM slynk session -> port 4005."
