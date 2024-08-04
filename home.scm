@@ -6,46 +6,53 @@
              (gnu home services desktop)
              (gnu home services sound)
              (gnu home services shells)
-             (guix gexp))
+             (guix gexp)
+             (guix transformations))
 
 (use-package-modules fonts web-browsers gnuzilla password-utils gnupg mail
                      gstreamer video compton image-viewers linux music
                      gnucash gimp inkscape graphics compression version-control
                      guile guile-xyz emacs emacs-xyz)
 
+;; Trialing out package transformations to fetch 3.11.8 version of Nyxt
+;; (define latest-nyxt
+;;   (options->transformation
+;;    '((with-latest . "nyxt"))))
+;; Add to %lograz-packages
+;; nyxt --> (latest-nyxt nyxt)
 (define %logoraz-packages
-  (list font-fira-code  ;;|--> gnu packages fonts
+  (list font-fira-code ;;|--> gnu packages fonts
         font-iosevka-aile
         font-dejavu
         font-google-noto
         font-google-noto-emoji
         font-google-material-design-icons
         font-google-noto-sans-cjk
-        nyxt       ;;|--> gnu packages web-browsers :www-mail
-        icecat     ;;|--> gnu packages gnuzilla
-        keepassxc  ;;|--> gnu packages password-utils
-        gnupg      ;;|--> gnu packages gnupg
-        isync      ;;|--> gnu packages mail
+        nyxt ;;|--> gnu packages web-browsers :www-mail
+        icecat    ;;|--> gnu packages gnuzilla
+        keepassxc ;;|--> gnu packages password-utils
+        gnupg     ;;|--> gnu packages gnupg
+        isync     ;;|--> gnu packages mail
         msmtp
         mu
-        gstreamer  ;;|--> gnu packages gstreamer
+        gstreamer ;;|--> gnu packages gstreamer
         gst-plugins-good
         gst-plugins-bad
         gst-libav
-        mpv        ;;|--> gnu packages video :apps
+        mpv ;;|--> gnu packages video :apps
         vlc
-        picom      ;;|--> gnu packages compton
-        feh        ;;|--> gnu packages image-viewers
-        pipewire   ;;|--> gnu packages linux
+        picom    ;;|--> gnu packages compton
+        feh      ;;|--> gnu packages image-viewers
+        pipewire ;;|--> gnu packages linux
         wireplumber
         lm-sensors
         brightnessctl
-        playerctl  ;;|--> gnu packages music
-        gnucash    ;;|--> gnu packages gnucash
-        gimp       ;;|--> gnu packages gimp
-        inkscape   ;;|--> gnu packages inkscape
-        blender    ;;|--> gnu packages graphics
-        zip        ;;|--> gnu packages compression :utilities
+        playerctl ;;|--> gnu packages music
+        gnucash   ;;|--> gnu packages gnucash
+        gimp      ;;|--> gnu packages gimp
+        inkscape  ;;|--> gnu packages inkscape
+        blender   ;;|--> gnu packages graphics
+        zip       ;;|--> gnu packages compression :utilities
         unzip
         git))      ;;|--> gnu packages version-control
 
