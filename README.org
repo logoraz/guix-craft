@@ -11,9 +11,7 @@
 
 * Guix Configuration
 
-  [[file:./assets/home-desktop.png]]
-
-  [[file:./assets/nyxt-desktop-2.png]]
+  [[file:./assets/Guix+StumpWM-trio.png]]
 
   My personal Guix System & Home StumpWM Configuration!
 
