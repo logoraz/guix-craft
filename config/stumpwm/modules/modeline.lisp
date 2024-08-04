@@ -20,7 +20,7 @@
 ;; The timeout of the modeline indicates how often it refreshes in seconds.
 (setf *mode-line-timeout* 2)
 
-;;; Formatting options
+;; Formatting options
 (setf *time-modeline-string* "%F %H:%M")
 
 ;; Let’s also indicate how the groupname is displayed.
@@ -30,7 +30,7 @@
 ;; limited to 30 characters.
 (setf *window-format* " %n: %30t ")
 
-;;; Load in colors module & Set Modeline Colors
+;; Load in colors module & Set Modeline Colors
 (load "~/.config/stumpwm/modules/colors.lisp")
 
 (setf *mode-line-background-color* logoraz-nord0
@@ -39,27 +39,34 @@
 (setf *mode-line-border-color* logoraz-nord3
       *mode-line-border-width* 1)
 
-;;; Modeline Modules & Formatting
+;;; Modeline Packages (stumpwm-contrib)
+
 (load-module "cpu")
-(load-module "mem")
-(load-module "battery-portable")
-(load-module "wifi")
-
-
-(setf *screen-mode-line-format*
-      (list "[%n]"             ; The current group's name
-            "%v"               ; Windows
-            "^>"               ; Push right
-            " | %C"            ; CPU module
-            " | %M"            ; Mem module
-            " | %B"            ; Battery module
-            " | %I"            ; Wifi
-            " | %P"            ; wpctl volume
-            " | %d"))          ; Clock
-
-
 ;; Customize what’s displayed in CPU module
 (setf cpu::*cpu-modeline-fmt* "%c %t") ; default is "%c (%f) %t"
 
+(load-module "mem")
+
+(load-module "battery-portable")
+
+(load-module "wifi")
 ;; Set executable source for wifi module:
 (setf wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig")
+
+
+;;; Modeline Formatter
+
+;; TODO: Establish a "formatter
+(setf *screen-mode-line-format*
+      (list "[%n]"               ; The current group's name
+            "%v"                 ; Windows
+            "^>"                 ; Push right
+            " | %C"              ; CPU module
+            " | %M"              ; Mem module
+            " | %I"              ; Wifi
+            " | %P"              ; wpctl volume
+            " | %B"              ; Battery module
+            " | %d"))            ; clock
+
+
+;; end
