@@ -15,8 +15,8 @@
                 (format-timestring
                  nil
                  (now)
-                 :format '(:year "-" :month "-" :day "T"
-                           :hour ":" :min ":" :sec)))
+                 :format '(:year "-" :month "-" :day "-T"
+                           :hour "-" :min   "-" :sec)))
                ".png"))
 
 (defun colorname-to-color (colorname)
