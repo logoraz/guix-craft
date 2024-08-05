@@ -1,5 +1,5 @@
-#+TITLE: GNU Guix System & Home + StumpWM Configuration
-#+subtitle: (defmacro guix-craft (system home &rest body) ...)
+#+TITLE: GNU Guix System/Home + StumpWM Configuration
+#+subtitle: (defmacro guix-craft (system home &key (stumpwm 'x11)) ...)
 #+author: Erik P. Almaraz (logoraz)
 #+email: erikalmaraz@fastmail.com
 :args:
@@ -9,11 +9,11 @@
 #+macro: latest-export-date '(eval (format-time-string "%F %T %z"))'
 :end:
 
-* Guix Configuration
+  My personal GNU Guix System/Home + StumpWM Configuration!
 
   [[file:./assets/screenshot__2024-8-4-T20-46-9.png]]
 
-  My personal Guix System & Home StumpWM Configuration!
+* Guix Configuration
 
   I am currently configuring Guix SD for Clasp Common Lisp and Guile Scheme
   development.
