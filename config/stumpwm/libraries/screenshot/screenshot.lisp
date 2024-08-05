@@ -2,7 +2,9 @@
 
 (in-package :screenshot)
 
-(defparameter *screenshot-directory* "/home/logoraz/Pictures/Screenshots/"
+(defparameter *screenshot-directory* (concatenate 'string
+                                                  (getenv "HOME")
+                                                  "/Pictures/Screenshots/")
   "Set default directory to save screenshots.")
 
 (defun filename ()
@@ -155,7 +157,7 @@
                     (%screenshot-window
                      (xlib:screen-root (stumpwm:screen-number
                                         (stumpwm:current-screen)))
-                     *filename*
+                     (filename)
                      :x (- x1 1)
                      :y (- y1 1)
                      :width (- (- root-x x1) 1)
