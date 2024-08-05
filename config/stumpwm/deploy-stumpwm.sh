@@ -79,5 +79,9 @@ ln -s ~/repos/guix-craft/config/stumpwm/libraries/bluetooth/ \
    ~/.local/share/common-lisp/stumpwm-contrib/bluetooth
 
 ## util: end-session
-ln -s ~/repos/guix-craft/config/stumpwm/contrib/end-session \
+ln -s ~/repos/guix-craft/config/stumpwm/libraries/end-session \
    ~/.local/share/common-lisp/stumpwm-contrib/end-session
+
+## util: screenshot
+ln -s ~/repos/guix-craft/config/stumpwm/libraries/screenshot \
+   ~/.local/share/common-lisp/stumpwm-contrib/screenshot
