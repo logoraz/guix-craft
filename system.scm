@@ -38,6 +38,7 @@
   (list sbcl           ;;|--> gnu packages lisp
         sbcl-slynk     ;;|--> gnu packages lisp-xyz
         sbcl-parse-float
+        sbcl-local-time
         sbcl-cl-ppcre
         sbcl-zpng
         sbcl-salza2
@@ -56,7 +57,6 @@
         sbcl-stumpwm-kbd-layouts
         sbcl-stumpwm-swm-gaps
         sbcl-stumpwm-globalwindows
-        sbcl-stumpwm-screenshot
         sbcl-stumpwm-cpu ;;:stumpwm-contrib/modeline
         sbcl-stumpwm-mem
         sbcl-stumpwm-wifi
