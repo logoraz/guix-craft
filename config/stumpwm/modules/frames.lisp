@@ -11,15 +11,15 @@
   (grename "[HOME]")
   (gnewbg  "[TERM]")
   (gnewbg  "[WWW]")
-  (gnewbg  "[PRIV]")
-  (gnewbg  "[ETC]"))
+  (gnewbg  "[ETC]")
+  (gnewbg  "[PRIV]"))
 
 (clear-window-placement-rules)
 
-(define-frame-preference "EMACS" (nil t t :class "Tiling"))
-(define-frame-preference "DEV" (nil t t :class "Tiling"))
+(define-frame-preference "HOME" (nil t t :class "Tiling"))
+(define-frame-preference "TERM" (nil t t :class "Tiling"))
 (define-frame-preference "WWW" (nil t t :class "Tiling"))
-(define-frame-preference "FILES" (nil t t :class "Tiling"))
+(define-frame-preference "ETC" (nil t t :class "Tiling"))
 (define-frame-preference "PRIV" (nil t t :class "Tiling"))
 
 (setf *dynamic-group-master-split-ratio* 1/2)
