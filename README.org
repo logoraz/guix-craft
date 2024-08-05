@@ -360,7 +360,7 @@ These are the =stumpwm-contrib= modules available in Guix that I am using.
 
 1. Guix System Installation & Home Configurations:
 
-   - https://systemcrafters.net/craft-your-system-with-guix/full-system-install/
+   - [[https://systemcrafters.net/craft-your-system-with-guix/full-system-install/][Craft Your System with Guix - Full System Install]]
 
    - https://github.com/iambumblehead/guix-home
 
@@ -369,7 +369,6 @@ These are the =stumpwm-contrib= modules available in Guix that I am using.
     - https://config.phundrak.com/stumpwm
 
     - https://github.com/herbertjones/my-stumpwm-config
-
 
     - https://mail.gnu.org/archive/html/bug-guix/2023-04/msg00227.html
       - Believe this has since been corrected in Guix upstream.
