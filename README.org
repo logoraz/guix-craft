@@ -13,6 +13,14 @@
 
   [[file:./assets/screenshot__2024-8-4-T20-46-9.png]]
 
+    This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
+  Gen (Type 20FB) Laptop.
+
+  Git Repositories:
+
+  - GitHub: https://github.com/logoraz/guix-craft.git
+
+
 * Guix Configuration
 
   I am currently configuring Guix SD for Clasp Common Lisp and Guile Scheme
@@ -23,13 +31,6 @@
   Currently using a shell script to deploy, but am working on setting up a
   full Guix deployment, however, maintaining original source code rather
   than writting it in Guile as some do.
-
-  This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
-  Gen (Type 20FB) Laptop.
-
-  Git Repositories:
-
-  - GitHub: https://github.com/logoraz/guix-craft.git
 
 ** System Configuration Outline (=system.scm=)
 
@@ -328,21 +329,25 @@ These are personally developed StumpWM CL packages, to be loaded similarily to
 StumpWM-Contrib packages:
 - =stumpwm-wpctl= - converted to package/library
   - A fork of https://github.com/Junker/stumpwm-wpctl
+  - configured/loaded in "config.lisp --> config"
 - =bluetooth= - converted to a package/library
   - Borrowed from https://config.phundrak.com/stumpwm#bluetooth
+  - configured/loaded in "config.lisp --> config"
+- =screenshot= - Improved from stumpwm-contrib/util/screenshot
+  - Enhanced functionality - no longer need to write path & filename
+    into a prompt.
+  - configured/loaded in "utilities.lisp"
+- =end-session= - A la carte from stumpwm-contrib/util, staged for improvements
+  - configured/loaded in "config.lisp --> config"
 - =stump-nmctl= - TODO: make a CL interface to nmcli for StumpWM
 
-** Contrib: =~/.config/stumpwm/contrib/*= or guix-location
-
-These are the =stumpwm-contrib= packages that I am currently using, most through Guix,
-but a few I needed to git clone and add to load path:
+** Guix [[https://github.com/stumpwm/stumpwm-contrib][stumpwm-contrib]] modules:
+These are the =stumpwm-contrib= modules available in Guix that I am using.
 - stumpwm-contrib/util:
-  - =end-session=: configured/loaded in "config.lisp"
-  - =swm-gaps=: configured/loaded in "frames.lisp"
   - =kbd-layouts=: configured/loaded in "keybindings.lisp"
   - =ttf-fonts=: configured/loaded in "theme.lisp"
+  - =swm-gaps=: configured/loaded in "frames.lisp"
   - =global-windows= - configured/loaded in "config.lisp"
-  - =screenshoot=: configured/loaded in "utilities.lisp"
 - stumpwm-contrib/modeline:
   - =cpu=: configured/loaded in "modeline.lisp"
   - =mem=: configured/loaded in "modeline.lisp"
