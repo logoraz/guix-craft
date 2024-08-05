@@ -28,17 +28,11 @@ ln -f ~/repos/guix-craft/config/emacs/elisp/raz-subrx.el \
    ~/.config/emacs/elisp/raz-subrx.el
 
 # Custom Themes
-themes=~/.config/emacs/themes/
-if [ ! -d $themes ]; then
-    echo "~/.config/emacs/themes/ does not exist - creating..."
-    mkdir ~/.config/emacs/themes/
-fi
-
-ln -f ~/repos/guix-craft/config/emacs/themes/nord-theme.el \
-   ~/.config/emacs/themes/nord-theme.el
-
-ln -f ~/repos/guix-craft/config/emacs/themes/kanagawa-theme.el \
-   ~/.config/emacs/themes/kanagawa-theme.el
+# themes=~/.config/emacs/themes/
+# if [ ! -d $themes ]; then
+#     echo "~/.config/emacs/themes/ does not exist - creating..."
+#     mkdir ~/.config/emacs/themes/
+# fi
 
 # Modules
 modules=~/.config/emacs/modules/
