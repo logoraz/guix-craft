@@ -1,6 +1,7 @@
 ;;;; package.lisp --> bluetooth
 
 (defpackage #:bluetooth
+  (:use #:cl)
   (:import-from :cl-ppcre
                 #:split)
   (:import-from :stumpwm
@@ -9,7 +10,6 @@
                 #:select-from-menu
                 #:current-screen
                 #:run-shell-command)
-  (:use #:cl)
   (:export #:bluetooth-message-command
            #:bluetooth-turn-off-command
            #:bluetooth-connect-device

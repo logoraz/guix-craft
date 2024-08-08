@@ -1,6 +1,7 @@
 ;;;; package.lisp --> screenshot
 
 (defpackage #:screenshot
+  (:use #:cl)
   (:import-from :local-time
                 #:now
                 #:format-timestring)
@@ -40,7 +41,6 @@
                 #:echo
                 #:window-xwin
                 #:*display*)
-  (:use #:cl)
   (:export #:screenshot
            #:screenshot-window
            #:screenshot-area))
