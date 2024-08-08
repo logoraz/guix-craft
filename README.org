@@ -145,35 +145,17 @@ Followed =SystemCrafters= prescription for installation:
 
 *** Initial setup/deployment (WIP)
 
-Plan is to configure Home services to deloy, i.e create all necessary locations
-and copy configs to their proper locations -> still working on refining this to
-follow the =Guix Way=.
+Plan is to configure system/home services to deloy, i.e create all
+necessary locations and copy configs to their proper locations -> still working on refining this to follow the =Guix Way=. Currently using shell scripts to either establish hard and/or soft links to the desired
+locations, i.e. `~/.config/`, `~/.`, etc.
 
 #+begin_src sh
 
   # Get guix home setup
   mkdir ~/repos/
   cd ~/repos
-  git clone https://github.com/del-raiz/guix-craft.git
+  git clone https://github.com/logoraz/guix-craft.git
   cd guix-craft/
-  # Copy channels.scm to ~/.config/guix
-  cp ./channels.scm ~/.config/guix/
-  # You can delete you channels.scm and system.scm in /etc/ if still there...
-  # that is the default location where they are stored, note that Guix checks
-  # ~/.config/guix for channels.scm and if it doesn't exits, it defaults to
-  # /etc/channels.scm.
-
-  guix pull
-  guix pull --delete-generations
-  sudo -E guix system reconfigure system.scm
-  sudo guix system delete-generations
-  guix home reconfigure home.scm
-  guix home delete-generations
-  guix upgrade
-  guix package --delete-generations
-  guix gc
-  # guix gc -d1w # delete generations older than 1 week
-  df -h
 
   # Deploy the configuration to ~/.config/
   # Use the deployment scripts in each config module:
@@ -195,6 +177,18 @@ follow the =Guix Way=.
 
   # Setup Common Lisp Environment (quicklisp, FFI (WIP), etc.)
   ./config/common-lisp/deploy-cl.sh
+
+  guix pull
+  sudo guix system reconfigure system.scm
+  guix home reconfigure home.scm
+
+  # Optional Clean-up afterwards when everything is working
+  guix pull --delete-generations
+  guix package --delete-generations
+  guix home delete-generations
+  sudo guix system delete-generations
+  guix gc
+  # guix gc -d1w # delete generations older than 1 week
 
 #+end_src
 
@@ -265,20 +259,6 @@ Installation Instructions:
 
 #+end_src
 
-;;
-;;   guix shell -D -f guix/clasp.scm -- COMMAND # Clasp-suitable environment
-;;   guix build -f guix/clasp.scm               # Build the package
-;;   guix package -f guix/clasp.scm             # Install the package
-;;
-;; Unfortunately, for now the package and the above commands require the
-;; cloned dependencies to be already present, which can be accomplished
-;; as follows:
-;;
-;;   guix shell --pure git nss-certs sbcl -- ./koga
-;;
-;; though Koga will error out after downloading the dependencies, when
-;; trying to configure Clasp.
-
 *** Installing Lem
 
 I created a Guix package recipe for Lem, which can be found [[https://github.com/logoraz/lem-guix-package-recipe][here]], clone and install with
@@ -323,8 +303,11 @@ config.lisp -> config.
 
 ** Libraries: =~/.config/stumpwm/libraries/*=
 
-These are personally developed StumpWM CL packages, to be loaded similarily to
-StumpWM-Contrib packages:
+These are personally developed StumpWM CL packages, to be loaded similarily
+to StumpWM-Contrib packages. Note I've modiefied most of these contrib
+packages slighly to suit my use needs and updated their package definitions
+minimizing `:use` in place of `:import-from` as suggested by the
+Common Lisp Cookbook best practices:
 - =stumpwm-wpctl= - converted to package/library
   - A fork of https://github.com/Junker/stumpwm-wpctl
   - configured/loaded in "config.lisp --> config"
