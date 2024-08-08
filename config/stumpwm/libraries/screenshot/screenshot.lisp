@@ -11,34 +11,35 @@
   "Generate formated filename using PATH."
   (concatenate 'string
                *screenshot-directory*
-               (format
-                nil
-                "screenshot__~a"
-                (format-timestring
-                 nil
-                 (now)
-                 :format '(:year "-" :month "-" :day "-T"
-                           :hour "-" :min   "-" :sec)))
+               (format nil "screenshot__~a"
+                       (format-timestring
+                        nil
+                        (now)
+                        :format '(:year "-" :month "-" :day "-T"
+                                  :hour "-" :min   "-" :sec)))
                ".png"))
 
+;;TODO - Refactor the below code...
 (defun colorname-to-color (colorname)
-  (let* ((screen (stumpwm:current-screen))
-         (colormap (xlib:screen-default-colormap (stumpwm:screen-number screen)))
-         (color (xlib:lookup-color colormap colorname)))
-    (xlib:alloc-color colormap color)))
+  (let* ((screen (current-screen))
+         (colormap (screen-default-colormap (screen-number screen)))
+         (color (lookup-color colormap colorname)))
+    (alloc-color colormap color)))
 
-(defun %screenshot-window (drawable file
-                           &key
-                             (x 0)
-                             (y 0)
-                             (height (xlib:drawable-height drawable))
-                             (width (xlib:drawable-width drawable)))
+;;FIXME - need to implement (sleep n) before is captures drawable so that it
+;;        doesn't capture any of stumpwm's prompts
+;;        May need to write a function that wraps drawable...
+(defun capture (drawable file &key (x 0)
+                                   (y 0)
+                                   (height (drawable-height drawable))
+                                   (width (drawable-width drawable)))
+  "Captures the provided drawable area to file."
   (let* ((png (make-instance 'pixel-streamed-png
                              :color-type :truecolor-alpha
                              :width width
                              :height height)))
     (multiple-value-bind (pixarray depth visual)
-        (xlib:get-raw-image drawable :x x :y y :width width :height height
+        (get-raw-image drawable :x x :y y :width width :height height
                                      :format :Z-PIXMAP)
       (declare (ignore depth visual))
       (with-open-file (stream file
@@ -47,7 +48,7 @@
                               :if-does-not-exist :create
                               :element-type '(unsigned-byte 8))
         (start-png png stream)
-        (case (xlib:display-byte-order (xlib:drawable-display drawable))
+        (case (display-byte-order (drawable-display drawable))
           (:lsbfirst
            (do ((i 0 (+ 4 i)))
                ((>= i (length pixarray)))
@@ -73,9 +74,8 @@
           (max (+ 2 y1) y2)))
 
 (defcommand screenshot-area () ()
-    ;; (filename) ((:rest "Filename: "))
   "Make screenshot of selected area of display."
-  (let ((display stumpwm:*display*)
+  (let ((display *display*)
         (x1 0)
         (y1 0)
         (x2 0)
@@ -83,17 +83,17 @@
     ;; The secret to drawing the selection rectangle comes from the xor function
     ;; in the graphics context and the subwindow-mode :include-inferiors.
     ;; https://askubuntu.com/questions/487725/ \
-    ;;         how-can-i-draw-selection-rectangle-on-screen-for-my-script
+    ;; how-can-i-draw-selection-rectangle-on-screen-for-my-script
     (let* ((window
-             (xlib:create-window
-              :parent (xlib:screen-root (xlib:display-default-screen display))
+             (create-window
+              :parent (screen-root (display-default-screen display))
               :x 0
               :y 0
-              :width (stumpwm:screen-width (stumpwm:current-screen))
-              :height (stumpwm:screen-height (stumpwm:current-screen))
+              :width (screen-width (current-screen))
+              :height (screen-height (current-screen))
               :background :none
               :event-mask '(:exposure :button-press :button-release)))
-           (gc (xlib:create-gcontext
+           (gc (create-gcontext
                 :drawable window
                 :line-width 1
                 :foreground (colorname-to-color "green")
@@ -101,12 +101,12 @@
                 :subwindow-mode :include-inferiors)))
       (unwind-protect
            (progn
-             (xlib:map-window window)
-             (xlib:grab-pointer
+             (map-window window)
+             (grab-pointer
               window
               '(:button-press :button-release :button-motion) :owner-p t)
-             (stumpwm:echo "Click and drag the area to screenshot.")
-             (xlib:event-case (display :discard-p t)
+             (echo "Click and drag the area to screenshot.")
+             (event-case (display :discard-p t)
                (exposure
                 ()
                 nil #| continue receiving events |#)
@@ -118,66 +118,61 @@
                   ;; context, drawing over the old rectangle reverts the pixels
                   ;; back to their original values.
                   (when x2
-                    (xlib:draw-rectangle
+                    (draw-rectangle
                      window gc x1 y1 (- x2 x1) (- y2 y1)))
                   (setf x2 root-x)
                   (setf y2 root-y)
                   ;; Now draw the new rectangle.
-                  (xlib:draw-rectangle
+                  (draw-rectangle
                    window gc x1 y1 (- root-x x1) (- root-y y1)))
                 nil)
                (button-press
                 ()
                 (multiple-value-bind
-                      (root-x root-y) (xlib:global-pointer-position display)
-                  (stumpwm:echo (format nil "Screenshotting from ~A, ~A to ..."
-                                        root-x root-y))
+                      (root-x root-y) (global-pointer-position display)
+                  (echo (format nil
+                                "Screenshotting from ~A, ~A to ..."
+                                root-x root-y))
                   (setf x1 root-x)
                   (setf y1 root-y)
                   (setf x2 (+ 1 x1))
                   (setf y2 (+ 1 y1))
-                  (xlib:draw-rectangle window gc x1 y1 (- x2 x1) (- y2 y1))
+                  (draw-rectangle window gc x1 y1 (- x2 x1) (- y2 y1))
                   nil))
                (button-release
                 ()
                 (multiple-value-bind
-                      (root-x root-y) (xlib:global-pointer-position display)
+                      (root-x root-y) (global-pointer-position display)
                   (multiple-value-bind
                         (x1 y1 root-x root-y) (clamp-xy x1 y1 root-x root-y)
                     ;; Since we're using that boole-xor function in the graphics
                     ;; context, drawing over the old rectangle reverts the pixels
                     ;; back to their original values.
                     (when x2
-                      (xlib:draw-rectangle
+                      (draw-rectangle
                        window gc x1 y1 (- x2 x1) (- y2 y1)))
-                    (stumpwm:echo (format
-                                   nil
-                                   "Screenshotted from ~A, ~A to ~A, ~A to ~A"
-                                   x1 y1 root-x root-y (filename)))
-                    (%screenshot-window
-                     (xlib:screen-root (stumpwm:screen-number
-                                        (stumpwm:current-screen)))
-                     (filename)
-                     :x (- x1 1)
-                     :y (- y1 1)
-                     :width (- (- root-x x1) 1)
-                     :height (- (- root-y y1) 1))
-                    (xlib:ungrab-pointer display)
-                    (xlib:destroy-window window))
+                    (echo (format nil
+                                  "Screenshotted from ~A, ~A to ~A, ~A to ~A"
+                                  x1 y1 root-x root-y (filename)))
+                    (capture (screen-root (screen-number (current-screen)))
+                             (filename)
+                             :x (- x1 1)
+                             :y (- y1 1)
+                             :width (- (- root-x x1) 1)
+                             :height (- (- root-y y1) 1))
+                    (ungrab-pointer display)
+                    (destroy-window window))
                   t))))
-        (xlib:destroy-window window)))))
+        (destroy-window window)))))
 
 (defcommand screenshot () ()
-    ;; (filename) ((:rest "Filename: "))
   "Make screenshot of root window"
-  (%screenshot-window
-   (xlib:screen-root (stumpwm:screen-number
-                      (stumpwm:current-screen)))
-   (filename)))
+  (capture (screen-root (screen-number (current-screen)))
+           (filename))
+    (echo "Captured current screen"))
 
 (defcommand screenshot-window () ()
-    ;; (filename) ((:rest "Filename: "))
   "Make screenshot of focus window"
-  (%screenshot-window
-   (stumpwm:window-xwin (stumpwm:current-window))
-   (filename)))
+  (capture (window-xwin (current-window))
+           (filename))
+  (echo "Captured current window."))
