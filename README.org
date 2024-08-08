@@ -37,15 +37,13 @@
  Define system-level services & packages:
  - 1. =%system-services=
    - Set OpenSSH, CUPs, Screenlocker, and Bluetooth services
+   - =%desktop-services= utilizes package substitutes now.
    - =guix-home-service-type= -> (TODO would like to handle both concurrently)
-   - Modify =%desktop-services= to utilize substitutes where possible
-     as opposed to compiling everything...
-     See: https://git.savannah.gnu.org/cgit/guix.git/tree/gnu?h=v1.4.0
 - 2. =%stumpwm-packages= - Window Manager
   Note that packages are specified only as symbols and not using
   =specifications->packages=.
   SBCL, SBCL-*, StumpWM+Slynk and stumpwm-contrib installed at the system
-  level. Also install font-fira-code as base system font.
+  level. Also install font-fira-code at the system level font.
   - =sbcl=
   - =sbcl-*=
   - =stumpwm+slynk=
