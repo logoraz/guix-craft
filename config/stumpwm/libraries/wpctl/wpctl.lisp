@@ -25,8 +25,8 @@
 ;; Changed to defparamter as these dynamic variables effects behavior of display state
 ;; of volume controls. defvar is for holding of persistent data (best practice).
 ;; Change indentation formating -> 80 character width preference?
-(defparameter *volume-regex* (ppcre:create-scanner "Volume: (\\d+\\.\\d+)"))
-(defparameter *mute-regex* (ppcre:create-scanner "Volume: \\d+\\.\\d+ \\[MUTED\\]"))
+(defparameter *volume-regex* (create-scanner "Volume: (\\d+\\.\\d+)"))
+(defparameter *mute-regex* (create-scanner "Volume: \\d+\\.\\d+ \\[MUTED\\]"))
 
 (defun run (args &optional (wait-output nil))
   (if wait-output
@@ -48,13 +48,13 @@
 (defun get-volume (device-id)
   (truncate (* 100 (parse-float
                     (aref (nth-value 1
-                                     (ppcre:scan-to-strings
+                                     (scan-to-strings
                                       *volume-regex*
                                       (run (list "get-volume" device-id) t)))
                           0)))))
 
 (defun get-mute (device-id)
-  (and (ppcre:scan *mute-regex*
+  (and (scan *mute-regex*
                    (run (list "get-volume" device-id) t))
        t))
 
@@ -73,7 +73,7 @@
 ;; May consider changing `full' parameter 5 -> 6 or to a dynamical user set variable
 (defun ml-bar (volume muted)
   (concat "\["
-          (stumpwm:bar (if muted 0 (min 100 volume)) 5 #\X #\=)
+          (bar (if muted 0 (min 100 volume)) 5 #\X #\=)
           "\]"))
 
 (defun ml-volume (volume muted)
@@ -86,7 +86,7 @@
                                *modeline-fmt*
                                (get-volume *default-sink-id*)
                                (get-mute *default-sink-id*))))
-    (if (fboundp 'stumpwm::format-with-on-click-id) ;check in case of old stumpwm version
+    (if (fboundp 'format-with-on-click-id) ;check in case of old stumpwm version
         (format-with-on-click-id ml-str :ml-wpctl-on-click nil)
         ml-str)))
 
@@ -97,14 +97,14 @@
                                *source-modeline-fmt*
                                (get-volume *default-source-id*)
                                (get-mute *default-source-id*))))
-    (if (fboundp 'stumpwm::format-with-on-click-id) ;check in case of old stumpwm version
+    (if (fboundp 'format-with-on-click-id) ;check in case of old stumpwm version
         (format-with-on-click-id ml-str :ml-wpctl-source-on-click nil)
         ml-str)))
 
 (defun ml-on-click (code id &rest rest)
   (declare (ignore rest))
   (declare (ignore id))
-  (let ((button (stumpwm::decode-button-code code)))
+  (let ((button (decode-button-code code)))
     (case button
       ((:left-button)
        (toggle-mute *default-sink-id*))
@@ -114,12 +114,12 @@
        (volume-up *default-sink-id* *step*))
       ((:wheel-down)
        (volume-down *default-sink-id* *step*))))
-  (stumpwm::update-all-mode-lines))
+  (update-all-mode-lines))
 
 (defun source-ml-on-click (code id &rest rest)
   (declare (ignore rest))
   (declare (ignore id))
-  (let ((button (stumpwm::decode-button-code code)))
+  (let ((button (decode-button-code code)))
     (case button
       ((:left-button)
        (toggle-mute *default-source-id*))
@@ -129,9 +129,9 @@
        (volume-up *default-source-id* *step*))
       ((:wheel-down)
        (volume-down *default-source-id* *step*))))
-  (stumpwm::update-all-mode-lines))
+  (update-all-mode-lines))
 
-(when (fboundp 'stumpwm::register-ml-on-click-id) ;check in case of old stumpwm version
+(when (fboundp 'register-ml-on-click-id) ;check in case of old stumpwm version
   (register-ml-on-click-id :ml-wpctl-on-click #'ml-on-click)
   (register-ml-on-click-id :ml-wpctl-source-on-click #'source-ml-on-click))
 
