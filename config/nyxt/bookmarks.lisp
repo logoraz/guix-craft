@@ -13,6 +13,7 @@
 (:url "https://renter.turbotenant.com/auth/login" :title "TurboTenant" :date "2024-07-24T13:25:01.796231Z" :tags ("Home"))
 (:url "https://simondobson.org/2024/07/27/my-mental-model-of-setf-was-wrong/" :title "Mental Model of setf" :date "2024-07-31T01:52:42.926308Z" :tags ("CommonLisp"))
 (:url "https://sr.ht/~abcdw/rde/" :title "RDE with Guix" :date "2024-07-25T02:25:21.070179Z" :tags ("Guix"))
+(:url "https://stumpwm.github.io/git/stumpwm-git.html#Top" :title "StumpWM Manual: Top" :date "2024-08-09T04:33:56.989531Z" :tags ("CommonLisp"))
 (:url "https://systemcrafters.net/live-streams/january-13-2023/" :title "Building a Custom Guix Distribution - System Crafters" :date "2024-07-25T02:24:01.746998Z" :tags ("Guix"))
 (:url "https://toys.whereis.みんな/" :title "Toys/Webring for GNU Guix channels" :date "2024-07-25T02:28:02.443124Z" :tags ("Guix"))
 (:url "http://web.archive.org/web/20080616093233/http://www.lisp.org/table/objects.htm" :title "ALU: Object Orientation" :date "2024-07-29T03:20:37.703646Z" :tags ("CommonLisp"))

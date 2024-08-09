@@ -31,8 +31,8 @@ ln -f ~/repos/guix-craft/config/nyxt/passwords.lisp \
 ln -f ~/repos/guix-craft/config/nyxt/passwords-dev.lisp \
    ~/.config/nyxt/passwords-dev.lisp
 
-## Bookmarks
-ln -f ~/repos/guix-craft/config/nyxt/bookmarks.lisp \
+## Bookmarks - needs to be softlink so nyst updates file in our repo!
+ln -s ~/repos/guix-craft/config/nyxt/bookmarks.lisp \
    ~/.config/nyxt/bookmarks.lisp
 # Extensions
 
