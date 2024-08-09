@@ -32,17 +32,23 @@
         `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
           (clasp (,(executable-find "clasp")))))
 
-  (defun raz/sly-stumpwm-auto-connect ()
+  (defun raz/stumpwm-sly-connect ()
     "Auto connect to StumpWM slynk session -> port 4005."
     (interactive)
     ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
     (save-excursion (sly-connect "localhost" 4005)))
 
-  (defun raz/sly-nyxt-auto-connect ()
+  (defun raz/nyxt-sly-connect ()
     "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
     (interactive)
     ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
     (save-excursion (sly-connect "localhost" 4006)))
+
+  (defun raz/chemscribe-sly-connect ()
+    "Auto connect to Nyxt slynk session, start via start-slynk Nyxt command -> port 4006."
+    (interactive)
+    ;;FIXME -> query if nyxt-slynk is running or has been started (unless ...)
+    (save-excursion (sly-connect "localhost" 4008)))
 
   ;; See: https://joaotavora.github.io/sly/#Loading-Slynk-faster
   (defun raz/sly-auto-connect ()
