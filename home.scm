@@ -20,15 +20,15 @@
 ;;    '((with-latest . "nyxt"))))
 ;; Add to %lograz-packages
 ;; nyxt --> (latest-nyxt nyxt)
+
 (define %logoraz-packages
   (list font-fira-code ;;|--> gnu packages fonts
         font-iosevka-aile
-        font-dejavu
         font-google-noto
         font-google-noto-emoji
         font-google-material-design-icons
         font-google-noto-sans-cjk
-        nyxt ;;|--> gnu packages web-browsers :www-mail
+        nyxt      ;;|--> gnu packages web-browsers :www-mail
         icecat    ;;|--> gnu packages gnuzilla
         keepassxc ;;|--> gnu packages password-utils
         gnupg     ;;|--> gnu packages gnupg

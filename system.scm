@@ -35,8 +35,8 @@
 
 ;; Define Core System Wide Packages & Services
 (define %stumpwm-packages
-  (list sbcl           ;;|--> gnu packages lisp
-        sbcl-slynk     ;;|--> gnu packages lisp-xyz
+  (list sbcl                       ;;|--> gnu packages lisp
+        sbcl-slynk                 ;;|--> gnu packages lisp-xyz
         sbcl-parse-float
         sbcl-local-time
         sbcl-cl-ppcre
@@ -52,19 +52,20 @@
         sbcl-bordeaux-threads
         sbcl-cl-fad
         sbcl-clx-truetype
-        stumpwm+slynk  ;;|--> gnu packages wm
-        sbcl-stumpwm-ttf-fonts ;;:stumpwm-contrib/util
+        stumpwm+slynk              ;;|--> gnu packages wm
+        sbcl-stumpwm-ttf-fonts     ;;:stumpwm-contrib/util
         sbcl-stumpwm-kbd-layouts
         sbcl-stumpwm-swm-gaps
         sbcl-stumpwm-globalwindows
-        sbcl-stumpwm-cpu ;;:stumpwm-contrib/modeline
+        sbcl-stumpwm-cpu           ;;:stumpwm-contrib/modeline
         sbcl-stumpwm-mem
         sbcl-stumpwm-wifi
         sbcl-stumpwm-battery-portable))
 
 (define %x11-util-packages
-  (list font-fira-code  ;;|--> gnu packages fonts
-        xterm      ;;|--> gnu packages xorg
+  (list font-hack    ;;|--> gnu packages fonts
+        font-dejavu
+        xterm        ;;|--> gnu packages xorg
         transset
         xhost
         xset
@@ -72,10 +73,10 @@
         xinput
         xrdb
         xrandr
-        xclip      ;;|--> gnu packages xdisorg
+        xclip        ;;|--> gnu packages xdisorg
         xsel
         xss-lock
-        blueman    ;;|--> gnu package networking
+        blueman      ;;|--> gnu package networking
         bluez))
 
 ;; Use Package substitutes instead of compiling everything
