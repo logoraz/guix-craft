@@ -18,5 +18,5 @@
               'xft:font :family "Hack"
                         :subfamily "Regular" :size 11 :antialias t)
             ,(make-instance
-              'xft:font :family "DejaVu Sans Mono"
-                        :subfamily "Book" :size 11 :antialias t)))
+              'xft:font :family "JetBrains Mono"
+                        :subfamily "Regular" :size 11 :antialias t)))

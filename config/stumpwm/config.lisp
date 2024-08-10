@@ -35,10 +35,10 @@
 
 ;;; Stumpwm-contrib Packages/Libraries
 ;; Pipewire/Wirepluber Audio Controls for StumpWM
+;; TODO: Refactor -> move to modeline file.
 (add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/wpctl/")
 (load-module "wpctl")
-;;TODO: test chaning one back to defparameter to see if still setf-able...
-(setf wpctl:*modeline-fmt* "AUD: %v") ;default "%b (%v)"
+(setf wpctl:*modeline-fmt* "α %v")
 (setf wpctl:*wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
 (setf wpctl:*mixer-command* "playerctl")
 

@@ -47,31 +47,26 @@
 (load-module "wifi")
 
 ;;; Custom Module Settings
-;; Customize what’s displayed in CPU module
-;; (setf cpu::*cpu-modeline-fmt* "%c %t")
-
-;; Set executable source for wifi module:
-;; (setf wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig")
-
+;; f0 = font-hack, f1 = font-jetbrains-mono
 (setf cpu::*cpu-modeline-fmt*        "%c %t"
-      ;; cpu::*cpu-usage-modeline-fmt*  "^f2^f0^[~A~2D%^]"
-      ;; mem::*mem-modeline-fmt*        "%a%p"
-      wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig"
+      cpu::*cpu-usage-modeline-fmt*  "^f1⊠^f0 ^[~A~2D%^]"
+      mem::*mem-modeline-fmt*        "≡ %a%p"
       *hidden-window-color*          "^**"
-      *mode-line-highlight-template* "«~A»")
+      *mode-line-highlight-template* "«~A»"
+      wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig")
 
 ;;; Modeline Formatter
 
 (defvar *mode-line-formatter-list*
-  '(("%g")
-    ("%W")
-    ("^>")
-    ("%C")
-    ("%M")
-    ("%I")
-    ("%P")
-    ("%B")
-    ("%d"))
+  '(("%g")  ;; Groupts
+    ("%W")  ;; Windows
+    ("^>")  ;; StumpWM modeline seperator
+    ("%P")  ;; Audio info
+    ("%C")  ;; CPU usage
+    ("%M")  ;; Memory usage
+    ("%I")  ;; Wifi status
+    ("%B")  ;; Battery info
+    ("%d")) ;; Date/Time
   "List of formatters for the modeline.")
 
 (defun generate-modeline (elements &optional not-invertedp rightp)
