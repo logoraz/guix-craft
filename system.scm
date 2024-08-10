@@ -64,7 +64,7 @@
 
 (define %x11-util-packages
   (list font-hack    ;;|--> gnu packages fonts
-        font-dejavu
+        font-jetbrains-mono
         xterm        ;;|--> gnu packages xorg
         transset
         xhost

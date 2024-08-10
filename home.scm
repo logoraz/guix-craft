@@ -26,7 +26,6 @@
         font-iosevka-aile
         font-google-noto
         font-google-noto-emoji
-        font-google-material-design-icons
         font-google-noto-sans-cjk
         nyxt      ;;|--> gnu packages web-browsers :www-mail
         icecat    ;;|--> gnu packages gnuzilla
