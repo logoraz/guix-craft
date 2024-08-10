@@ -80,9 +80,7 @@ ELEMENTS should be a list of `cons'es which `first' is the modeline
 formatter or the shell command to run, and their `rest' is either nil
 when the `first' is a formatter and t when it is a shell command."
   (when elements
-    (cons (format nil
-                  ;; This formatting style no longer works!
-                  " ^[~A^]^(:bg \"~A\") "
+    (cons (format nil " ^[~A^]^(:bg \"~A\") "
                   (format nil "^(:fg \"~A\")^(:bg \"~A\")~A"
                           (if (xor not-invertedp rightp) logoraz-nord0 logoraz-nord2)
                           (if (xor not-invertedp rightp) logoraz-nord2 logoraz-nord0)

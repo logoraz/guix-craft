@@ -14,7 +14,9 @@
                                                  "/.local/share/fonts/"
                                                  "font-cache.sexp"))
 (xft:cache-fonts)
-(set-font (make-instance
-           'xft:font
-           :family "Fira Code"
-           :subfamily "Regular" :size 11))
+(set-font `(,(make-instance
+              'xft:font :family "Hack"
+                        :subfamily "Regular" :size 11 :antialias t)
+            ,(make-instance
+              'xft:font :family "DejaVu Sans Mono"
+                        :subfamily "Book" :size 11 :antialias t)))
