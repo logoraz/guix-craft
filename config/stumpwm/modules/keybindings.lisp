@@ -14,7 +14,8 @@
 ;;; Enable multiple keyboard layouts (English and TBD)
 ;; TODO - disable message for this, I don't want to see it at start up.
 (load-module "kbd-layouts")
- (kbd-layouts:keyboard-layout-list "us")
+;; function immediately runs switch-keyboard-layout which provides message!
+;; (kbd-layouts:keyboard-layout-list "us")
 
 ;;;  Defaults s-SPC for this command, reset & set this to prefix-key below!
 (define-key *top-map* (kbd "s-k") "switch-keyboard-layout")
