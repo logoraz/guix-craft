@@ -42,31 +42,67 @@
 ;;; Modeline Packages (stumpwm-contrib)
 
 (load-module "cpu")
-;; Customize what’s displayed in CPU module
-(setf cpu::*cpu-modeline-fmt* "%c %t") ; default is "%c (%f) %t"
-
 (load-module "mem")
-
 (load-module "battery-portable")
-
 (load-module "wifi")
-;; Set executable source for wifi module:
-(setf wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig")
 
+;;; Custom Module Settings
+;; Customize what’s displayed in CPU module
+;; (setf cpu::*cpu-modeline-fmt* "%c %t")
+
+;; Set executable source for wifi module:
+;; (setf wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig")
+
+(setf cpu::*cpu-modeline-fmt*        "%c %t"
+      ;; cpu::*cpu-usage-modeline-fmt*  "^f2^f0^[~A~2D%^]"
+      ;; mem::*mem-modeline-fmt*        "%a%p"
+      wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig"
+      *hidden-window-color*          "^**"
+      *mode-line-highlight-template* "«~A»")
 
 ;;; Modeline Formatter
 
-;; TODO: Establish a "formatter
-(setf *screen-mode-line-format*
-      (list "[%n]"               ; The current group's name
-            "%v"                 ; Windows
-            "^>"                 ; Push right
-            " | %C"              ; CPU module
-            " | %M"              ; Mem module
-            " | %I"              ; Wifi
-            " | %P"              ; wpctl volume
-            " | %B"              ; Battery module
-            " | %d"))            ; clock
+(defvar *mode-line-formatter-list*
+  '(("%g")
+    ("%W")
+    ("^>")
+    ("%C")
+    ("%M")
+    ("%I")
+    ("%P")
+    ("%B")
+    ("%d"))
+  "List of formatters for the modeline.")
 
+(defun generate-modeline (elements &optional not-invertedp rightp)
+  "Generate a modeline for StumpWM.
+ELEMENTS should be a list of `cons'es which `first' is the modeline
+formatter or the shell command to run, and their `rest' is either nil
+when the `first' is a formatter and t when it is a shell command."
+  (when elements
+    (cons (format nil
+                  ;; This formatting style no longer works!
+                  " ^[~A^]^(:bg \"~A\") "
+                  (format nil "^(:fg \"~A\")^(:bg \"~A\")~A"
+                          (if (xor not-invertedp rightp) logoraz-nord0 logoraz-nord2)
+                          (if (xor not-invertedp rightp) logoraz-nord2 logoraz-nord0)
+                          (if rightp "" ""))
+                  (if not-invertedp logoraz-nord2 logoraz-nord0))
+          (let* ((current-element (first elements))
+                 (formatter       (first current-element))
+                 (commandp        (rest current-element)))
+            (cons (if commandp
+                      `(:eval (run-shell-command ,formatter t))
+                    (format nil "~A" formatter))
+                  (generate-modeline (rest elements)
+                                     (not not-invertedp)
+                                     (if (string= "^>" (caar elements)) t rightp)))))))
 
-;; end
+(defcommand reload-modeline () ()
+  "Reload modeline."
+  (sb-thread:make-thread
+   (lambda ()
+     (setf *screen-mode-line-format*
+           (rest (generate-modeline *mode-line-formatter-list*))))))
+
+(reload-modeline)

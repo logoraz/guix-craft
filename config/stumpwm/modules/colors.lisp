@@ -29,7 +29,7 @@
                 logoraz-nord11    ; 1 Red
                 logoraz-nord14    ; 2 Green
                 logoraz-nord13    ; 3 Yellow
-                logoraz-nord10    ; 4 Blue
+                logoraz-nord10    ; 4 Dark Blue
                 logoraz-nord14    ; 5 Magenta -> 'Green'
                 logoraz-nord8     ; 6 Cyan
                 logoraz-nord5     ; 7 White
