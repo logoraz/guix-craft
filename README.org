@@ -11,7 +11,7 @@
 
   My personal GNU Guix System/Home + StumpWM Configuration!
 
-  [[file:./assets/screenshot__2024-8-9-T22-18-42.png]]
+  [[file:./assets/guix+stumpwm_desktop.png]]
 
     This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
   Gen (Type 20FB) Laptop.
