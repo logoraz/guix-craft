@@ -16,11 +16,11 @@
 
 (clear-window-placement-rules)
 
-(define-frame-preference "HOME" (nil t t :class "Tiling"))
-(define-frame-preference "TERM" (nil t t :class "Tiling"))
-(define-frame-preference "WWW" (nil t t :class "Tiling"))
-(define-frame-preference "ETC" (nil t t :class "Tiling"))
-(define-frame-preference "PRIV" (nil t t :class "Tiling"))
+(define-frame-preference "[HOME]" (nil t t :class "Tiling"))
+(define-frame-preference "[TERM]" (nil t t :class "Tiling"))
+(define-frame-preference "[WWW]"  (nil t t :class "Tiling"))
+(define-frame-preference "[ETC]"  (nil t t :class "Tiling"))
+(define-frame-preference "[PRIV]" (nil t t :class "Tiling"))
 
 (setf *dynamic-group-master-split-ratio* 1/2)
 
