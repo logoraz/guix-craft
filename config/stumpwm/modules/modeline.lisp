@@ -77,8 +77,10 @@ when the `first' is a formatter and t when it is a shell command."
   (when elements
     (cons (format nil " ^[~A^]^(:bg \"~A\") "
                   (format nil "^(:fg \"~A\")^(:bg \"~A\")~A"
-                          (if (xor not-invertedp rightp) logoraz-nord0 logoraz-nord2)
-                          (if (xor not-invertedp rightp) logoraz-nord2 logoraz-nord0)
+                          (if (xor not-invertedp rightp)
+                              logoraz-nord0 logoraz-nord2)
+                          (if (xor not-invertedp rightp)
+                              logoraz-nord2 logoraz-nord0)
                           (if rightp "" ""))
                   (if not-invertedp logoraz-nord2 logoraz-nord0))
           (let* ((current-element (first elements))
@@ -89,7 +91,8 @@ when the `first' is a formatter and t when it is a shell command."
                     (format nil "~A" formatter))
                   (generate-modeline (rest elements)
                                      (not not-invertedp)
-                                     (if (string= "^>" (caar elements)) t rightp)))))))
+                                     (if (string= "^>" (first (first elements)))
+                                         t rightp)))))))
 
 (defcommand reload-modeline () ()
   "Reload modeline."
