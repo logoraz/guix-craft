@@ -12,9 +12,9 @@
   (concatenate 'string
                *screenshot-directory*
                (format nil "screenshot__~a"
-                       (format-timestring
+                       (lt:format-timestring
                         nil
-                        (now)
+                        (lt:now)
                         :format '(:year "-" :month "-" :day "-T"
                                   :hour "-" :min   "-" :sec)))
                ".png"))
@@ -22,50 +22,50 @@
 ;;TODO - Refactor the below code...
 (defun colorname-to-color (colorname)
   (let* ((screen (current-screen))
-         (colormap (screen-default-colormap (screen-number screen)))
-         (color (lookup-color colormap colorname)))
-    (alloc-color colormap color)))
+         (colormap (xl:screen-default-colormap (screen-number screen)))
+         (color (xl:lookup-color colormap colorname)))
+    (xl:alloc-color colormap color)))
 
 ;;FIXME - need to implement (sleep n) before is captures drawable so that it
 ;;        doesn't capture any of stumpwm's prompts
 ;;        May need to write a function that wraps drawable...
 (defun capture (drawable file &key (x 0)
                                    (y 0)
-                                   (height (drawable-height drawable))
-                                   (width (drawable-width drawable)))
+                                   (height (xl:drawable-height drawable))
+                                   (width (xl:drawable-width drawable)))
   "Captures the provided drawable area to file."
-  (let* ((png (make-instance 'pixel-streamed-png
+  (let* ((png (make-instance 'zpng:pixel-streamed-png
                              :color-type :truecolor-alpha
                              :width width
                              :height height)))
     (multiple-value-bind (pixarray depth visual)
-        (get-raw-image drawable :x x :y y :width width :height height
-                                     :format :Z-PIXMAP)
+        (xl:get-raw-image drawable :x x :y y :width width :height height
+                          :format :Z-PIXMAP)
       (declare (ignore depth visual))
       (with-open-file (stream file
                               :direction :output
                               :if-exists :supersede
                               :if-does-not-exist :create
                               :element-type '(unsigned-byte 8))
-        (start-png png stream)
-        (case (display-byte-order (drawable-display drawable))
+        (zpng:start-png png stream)
+        (case (xl:display-byte-order (xl:drawable-display drawable))
           (:lsbfirst
            (do ((i 0 (+ 4 i)))
                ((>= i (length pixarray)))
-             (write-pixel (list (aref pixarray (+ 2 i))
-                                (aref pixarray (+ 1 i))
-                                (aref pixarray i)
-                                #xFF)
-                          png)))
+             (zpng:write-pixel (list (aref pixarray (+ 2 i))
+                                     (aref pixarray (+ 1 i))
+                                     (aref pixarray i)
+                                     #xFF)
+                               png)))
           (:msbfirst
            (do ((i 0 (+ 4 i)))
                ((>= i (* height width 4)))
-             (write-pixel (list (aref pixarray (1+ i))
-                                (aref pixarray (+ 2 i))
-                                (aref pixarray (+ 3 i))
-                                #xFF)
-                          png))))
-        (finish-png png)))))
+             (zpng:write-pixel (list (aref pixarray (1+ i))
+                                     (aref pixarray (+ 2 i))
+                                     (aref pixarray (+ 3 i))
+                                     #xFF)
+                               png))))
+        (zpng:finish-png png)))))
 
 (defun clamp-xy (x1 y1 x2 y2)
   (values (max x1 0)
@@ -85,15 +85,15 @@
     ;; https://askubuntu.com/questions/487725/ \
     ;; how-can-i-draw-selection-rectangle-on-screen-for-my-script
     (let* ((window
-             (create-window
-              :parent (screen-root (display-default-screen display))
+             (xl:create-window
+              :parent (xl:screen-root (xl:display-default-screen display))
               :x 0
               :y 0
               :width (screen-width (current-screen))
               :height (screen-height (current-screen))
               :background :none
               :event-mask '(:exposure :button-press :button-release)))
-           (gc (create-gcontext
+           (gc (xl:create-gcontext
                 :drawable window
                 :line-width 1
                 :foreground (colorname-to-color "green")
@@ -101,12 +101,12 @@
                 :subwindow-mode :include-inferiors)))
       (unwind-protect
            (progn
-             (map-window window)
-             (grab-pointer
+             (xl:map-window window)
+             (xl:grab-pointer
               window
               '(:button-press :button-release :button-motion) :owner-p t)
              (echo "Click and drag the area to screenshot.")
-             (event-case (display :discard-p t)
+             (xl:event-case (display :discard-p t)
                (exposure
                 ()
                 nil #| continue receiving events |#)
@@ -118,18 +118,18 @@
                   ;; context, drawing over the old rectangle reverts the pixels
                   ;; back to their original values.
                   (when x2
-                    (draw-rectangle
+                    (xl:draw-rectangle
                      window gc x1 y1 (- x2 x1) (- y2 y1)))
                   (setf x2 root-x)
                   (setf y2 root-y)
                   ;; Now draw the new rectangle.
-                  (draw-rectangle
+                  (xl:draw-rectangle
                    window gc x1 y1 (- root-x x1) (- root-y y1)))
                 nil)
                (button-press
                 ()
                 (multiple-value-bind
-                      (root-x root-y) (global-pointer-position display)
+                      (root-x root-y) (xl:global-pointer-position display)
                   (echo (format nil
                                 "Screenshotting from ~A, ~A to ..."
                                 root-x root-y))
@@ -137,37 +137,37 @@
                   (setf y1 root-y)
                   (setf x2 (+ 1 x1))
                   (setf y2 (+ 1 y1))
-                  (draw-rectangle window gc x1 y1 (- x2 x1) (- y2 y1))
+                  (xl:draw-rectangle window gc x1 y1 (- x2 x1) (- y2 y1))
                   nil))
                (button-release
                 ()
                 (multiple-value-bind
-                      (root-x root-y) (global-pointer-position display)
+                      (root-x root-y) (xl:global-pointer-position display)
                   (multiple-value-bind
                         (x1 y1 root-x root-y) (clamp-xy x1 y1 root-x root-y)
                     ;; Since we're using that boole-xor function in the graphics
                     ;; context, drawing over the old rectangle reverts the pixels
                     ;; back to their original values.
                     (when x2
-                      (draw-rectangle
+                      (xl:draw-rectangle
                        window gc x1 y1 (- x2 x1) (- y2 y1)))
                     (echo (format nil
                                   "Screenshotted from ~A, ~A to ~A, ~A to ~A"
                                   x1 y1 root-x root-y (filename)))
-                    (capture (screen-root (screen-number (current-screen)))
+                    (capture (xl:screen-root (screen-number (current-screen)))
                              (filename)
                              :x (- x1 1)
                              :y (- y1 1)
                              :width (- (- root-x x1) 1)
                              :height (- (- root-y y1) 1))
-                    (ungrab-pointer display)
-                    (destroy-window window))
+                    (xl:ungrab-pointer display)
+                    (xl:destroy-window window))
                   t))))
-        (destroy-window window)))))
+        (xl:destroy-window window)))))
 
 (defcommand screenshot () ()
   "Make screenshot of root window"
-  (capture (screen-root (screen-number (current-screen)))
+  (capture (xl:screen-root (screen-number (current-screen)))
            (filename))
     (echo "Captured current screen"))
 
