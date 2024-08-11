@@ -5,7 +5,8 @@
              (gnu services)
 	     (guix packages)
 	     (guix download)
-	     (nongnu packages linux))
+	     (nongnu packages linux)
+             (nongnu system linux-initrd))
 
 (use-package-modules lisp lisp-xyz wm xorg xdisorg linux fonts
                      cups suckless networking)
@@ -127,6 +128,7 @@
 ;; Define Operating system
 (operating-system
  (kernel linux)
+ (initrd microcode-initrd)
  ;; Fixes Xorg Lag - https://gitlab.com/nonguix/nonguix/-/issues/212
  (kernel-arguments (cons "i915.enable_psr=0" %default-kernel-arguments))
  (firmware (list linux-firmware))
