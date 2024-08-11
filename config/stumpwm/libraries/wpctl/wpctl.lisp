@@ -25,8 +25,8 @@
 ;; Changed to defparamter as these dynamic variables effects behavior of display state
 ;; of volume controls. defvar is for holding of persistent data (best practice).
 ;; Change indentation formating -> 80 character width preference?
-(defparameter *volume-regex* (create-scanner "Volume: (\\d+\\.\\d+)"))
-(defparameter *mute-regex* (create-scanner "Volume: \\d+\\.\\d+ \\[MUTED\\]"))
+(defparameter *volume-regex* (re:create-scanner "Volume: (\\d+\\.\\d+)"))
+(defparameter *mute-regex* (re:create-scanner "Volume: \\d+\\.\\d+ \\[MUTED\\]"))
 
 (defun run (args &optional (wait-output nil))
   (if wait-output
@@ -46,15 +46,15 @@
 ;; Changed indentation to fit ~80 character width for `stumpwm-contrib'
 ;; submission
 (defun get-volume (device-id)
-  (truncate (* 100 (parse-float
+  (truncate (* 100 (pf:parse-float
                     (aref (nth-value 1
-                                     (scan-to-strings
+                                     (re:scan-to-strings
                                       *volume-regex*
                                       (run (list "get-volume" device-id) t)))
                           0)))))
 
 (defun get-mute (device-id)
-  (and (scan *mute-regex*
+  (and (re:scan *mute-regex*
                    (run (list "get-volume" device-id) t))
        t))
 

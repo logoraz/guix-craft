@@ -1,21 +1,7 @@
 (defpackage :wpctl
-  (:use #:cl)
-  (:import-from :parse-float
-                #:parse-float)
-  (:import-from :ppcre
-                #:create-scanner
-                #:scan
-                #:scan-to-strings)
-  (:import-from :stumpwm
-                #:defcommand
-                #:add-screen-mode-line-formatter
-                #:format-expand
-                #:bar
-                #:add-screen-mode-line-formatter
-                #:format-with-on-click-id
-                #:decode-button-code
-                #:update-all-mode-lines
-                #:register-ml-on-click-id)
+  (:use #:cl :stumpwm)
+  (:local-nicknames (:re :ppcre)
+                    (:pf :parse-float))
   (:export #:volume-up
            #:volume-down
            #:set-volume
