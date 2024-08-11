@@ -49,7 +49,7 @@
 ;;; Custom Module Settings
 ;; f0 = font-hack, f1 = font-jetbrains-mono
 (setf cpu::*cpu-modeline-fmt*        "%c %t"
-      cpu::*cpu-usage-modeline-fmt*  "^f1⊠^f0 ^[~A~2D%^]"
+      cpu::*cpu-usage-modeline-fmt*  "^f1⊠^f0 ^[~A~0D%^]"
       mem::*mem-modeline-fmt*        "≡ %a%p"
       *hidden-window-color*          "^**"
       *mode-line-highlight-template* "«~A»"
@@ -58,7 +58,7 @@
 ;;; Modeline Formatter
 
 (defvar *mode-line-formatter-list*
-  '(("%g")  ;; Groupts
+  '(("%g")  ;; Groups
     ("%W")  ;; Windows
     ("^>")  ;; StumpWM modeline seperator
     ("%P")  ;; Audio info
