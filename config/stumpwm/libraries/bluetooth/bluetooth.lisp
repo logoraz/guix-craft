@@ -13,15 +13,10 @@
 
 ;;; Utilities
 (defun bluetooth-message (&rest message)
-  (message (format nil
-                   "^2Bluetooth:^7 ~{~A~^ ~}"
-                   message)))
+  (message (format nil "^2Bluetooth:^7 ~{~A~^ ~}" message)))
 
 (defun bluetooth-make-command (&rest args)
-  (format nil
-          "~a ~{~A~^ ~}"
-          *bluetooth-command*
-          args))
+  (format nil "~a ~{~A~^ ~}" *bluetooth-command* args))
 
 (defmacro bluetooth-command (&rest args)
   `(run-shell-command (bluetooth-make-command ,@args) t))
@@ -31,25 +26,20 @@
 
 ;;; Bluetooth Devices
 (defstruct (bluetooth-device
-            (:constructor
-                make-bluetooth-device (&key (address "")
-                                            (name nil)))
-            (:constructor
-                make-bluetooth-device-from-command
+            (:constructor make-bluetooth-device (&key (address "") (name nil)))
+            (:constructor make-bluetooth-device-from-command
                 (&key (raw-name "")
-                 &aux (address (cadr (split " " raw-name)))
-                      (full-name (format nil
-                                         "~{~A~^ ~}"
-                                         (cddr (split " " raw-name)))))))
+                 &aux (address (second (re:split " " raw-name)))
+                      (full-name (format nil "~{~A~^ ~}"
+                                         (rest (rest (re:split " " raw-name))))))))
   address
-  (full-name (progn
-               (format nil "~{~A~^ ~}" name))))
+  (full-name (progn (format nil "~{~A~^ ~}" name))))
 
 (defun bluetooth-get-devices ()
   (let ((literal-devices (bluetooth-command "devices")))
     (mapcar (lambda (device)
               (make-bluetooth-device-from-command :raw-name device))
-     (split "\\n" literal-devices))))
+     (re:split "\\n" literal-devices))))
 
 
 ;;; Connect to a device
@@ -70,12 +60,12 @@
   (sb-thread:make-thread
    (lambda ()
      (let* ((devices (bluetooth-get-devices))
-            (choice  (cadr (select-from-menu
-                            (current-screen)
-                            (mapcar (lambda (device)
-                                      `(,(bluetooth-device-full-name device)
-                                        ,device))
-                                    devices)))))
+            (choice  (second (select-from-menu
+                              (current-screen)
+                              (mapcar (lambda (device)
+                                        `(,(bluetooth-device-full-name device)
+                                          ,device))
+                                      devices)))))
        (bluetooth-connect-device choice)))))
 
 ;;; Toggle Bluetooth on/off
