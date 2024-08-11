@@ -9,7 +9,7 @@
 ;;; Set up Groups & Placement
 (when *initializing*
   (grename "[HOME]")
-  (gnewbg  "[TERM]")
+  (gnewbg  "[DEV]")
   (gnewbg  "[WWW]")
   (gnewbg  "[ETC]")
   (gnewbg  "[PRIV]"))
@@ -17,7 +17,7 @@
 (clear-window-placement-rules)
 
 (define-frame-preference "[HOME]" (nil t t :class "Tiling"))
-(define-frame-preference "[TERM]" (nil t t :class "Tiling"))
+(define-frame-preference "[DEV]"  (nil t t :class "Tiling"))
 (define-frame-preference "[WWW]"  (nil t t :class "Tiling"))
 (define-frame-preference "[ETC]"  (nil t t :class "Tiling"))
 (define-frame-preference "[PRIV]" (nil t t :class "Tiling"))
