@@ -6,7 +6,7 @@
 
 (in-package :stumpwm)
 
-;;; Set up Groups & Placement
+;;; Window Groups & Placement
 (when *initializing*
   (grename "[HOME]")
   (gnewbg  "[DEV]")
@@ -29,13 +29,7 @@
 ;; This was the cause of swm-gaps crashing with Emacs!
 (setf *ignore-wm-inc-hints* t)
 
-;; Show messages in the center
-(setq *input-window-gravity*     :top
-      *message-window-padding*   10
-      *message-window-y-padding* 10
-      *message-window-gravity    :top)
-
-;;; Gaps
+;; Gaps
 (load-module "swm-gaps")
 
 (setf swm-gaps:*head-gaps-size*  0
@@ -45,3 +39,10 @@
 (when *initializing*
   (swm-gaps:toggle-gaps))
 
+
+;;; Messaging & Input Windows
+;; Show messages in the center
+(setq *input-window-gravity*     :top
+      *message-window-padding*   10
+      *message-window-y-padding* 10
+      *message-window-gravity    :top)

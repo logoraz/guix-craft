@@ -24,18 +24,3 @@
 (defvar logoraz-nord14 "#a3be8c") ; 'Green'
 (defvar logoraz-nord15 "#b48ead") ; 'Purple'
 
-(setq *colors* (list
-                logoraz-nord1     ; 0 Black
-                logoraz-nord11    ; 1 Red
-                logoraz-nord14    ; 2 Green
-                logoraz-nord13    ; 3 Yellow
-                logoraz-nord10    ; 4 Dark Blue
-                logoraz-nord14    ; 5 Magenta -> 'Green'
-                logoraz-nord8     ; 6 Cyan
-                logoraz-nord5     ; 7 White
-                ;; Extra Colors
-                logoraz-nord12    ; 8 optional-1 - 'Orange'
-                logoraz-nord15))  ; 9 optional-2 - 'Purple'
-
-(when *initializing*
-  (update-color-map (current-screen)))

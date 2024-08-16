@@ -9,6 +9,16 @@
 
 (in-package :stumpwm)
 
+;; Define Guix profiles
+(defconstant +guix-system-path+ "/run/current-system/profile/share/"
+  "Define Guix System profile PATH.")
+(defconstant +guix-home-path+ "/home/logoraz/.guix-home/profile/share/"
+  "Define Guix Home profile PATH.")
+
+;; Set StumpWM modules directory - at system level!
+(set-module-dir (concat +guix-system-path+
+                        "common-lisp/sbcl/"))
+
 (setf *default-package* :stumpwm)
 
 ;;; Set PATHs: data directory, etc.
@@ -17,11 +27,6 @@
 ;; ~/.config/stumpwm/data/ instead.
 (setf *data-dir* (concat (getenv "HOME")
                          "/.config/stumpwm/data/"))
-
-;; Add StumpWM module paths (for GUIX system)
-(defconstant +guix-share-path+ "/run/current-system/profile/share/")
-(set-module-dir (concat +guix-share-path+
-                        "common-lisp/sbcl/"))
 
 ;; A startup message can be used when initializing StumpWM, for now set to nil.
 (setf *startup-message* nil)
@@ -34,26 +39,6 @@
 (load "~/.config/stumpwm/modules/auto-start.lisp")
 
 ;;; Stumpwm-contrib Packages/Libraries
-;; Pipewire/Wirepluber Audio Controls for StumpWM
-;; TODO: Refactor -> move to modeline file.
-(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/wpctl/")
-(load-module "wpctl")
-(setf wpctl:*modeline-fmt* "α %v")
-(setf wpctl:*wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
-(setf wpctl:*mixer-command* "playerctl")
-
-;; Simple Bluetooth Controls for StumpWM
-;; TODO: Add modeline display
-(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/bluetooth/")
-(load-module "bluetooth")
-
-;;; Stumpwm-contrib packages not available in Guix
-;; `end-session' - Provides session control commands, i.e. shutdown, restart,
-;; and logoff for StumpWM.
-(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/end-session/")
-(load-module "end-session")
-;; Use loginctl instead of the default systemctl
-(setf end-session:*end-session-command* "loginctl")
 
 ;;; Load in custom files
 (load "~/.config/stumpwm/modules/syntax.lisp")

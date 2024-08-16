@@ -6,21 +6,26 @@
 
 (in-package :stumpwm)
 
-;;; Define commands to create slynk server -> no need to run all the time.
-;; (require :slynk)
-;; (defcommand sly-start-server () ()
-;;   "Start a slynk server for sly."
-;;   (sb-thread:make-thread
-;;    (lambda () (slynk:create-server :port 4005 :dont-close t))))
+;; Pipewire/Wirepluber Audio Controls for StumpWM
+;; TODO: Refactor -> move to modeline file.
+(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/wpctl/")
+(load-module "wpctl")
+(setf wpctl:*modeline-fmt* "α %v")
+(setf wpctl:*wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
+(setf wpctl:*mixer-command* "playerctl")
 
-;; (defcommand sly-stop-server () ()
-;;   "Stop current slynk server for sly."
-;;   (sb-thread:make-thread
-;;    (lambda () (slynk:stop-server 4005))))
+;; Simple Bluetooth Controls for StumpWM
+;; TODO: Add modeline display
+(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/bluetooth/")
+(load-module "bluetooth")
 
-;; Add to keybindings.lisp
-;; (define-key key-map (kbd "y") "sly-start-server")
-;; (define-key key-map (kbd "z") "sly-stop-server")
+;;; Stumpwm-contrib packages not available in Guix
+;; `end-session' - Provides session control commands, i.e. shutdown, restart,
+;; and logoff for StumpWM.
+(add-to-load-path #p"~/.local/share/common-lisp/stumpwm-contrib/end-session/")
+(load-module "end-session")
+;; Use loginctl instead of the default systemctl
+(setf end-session:*end-session-command* "loginctl")
 
 ;;; Screenshots via Common Lisp -> removed scrot!
 ;;; Modified stumpwwm-contrib package screenshot

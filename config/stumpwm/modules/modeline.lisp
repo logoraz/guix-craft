@@ -30,9 +30,7 @@
 ;; limited to 30 characters.
 (setf *window-format* " %n: %30t ")
 
-;; Load in colors module & Set Modeline Colors
-(load "~/.config/stumpwm/modules/colors.lisp")
-
+;; Set mode-line colors
 (setf *mode-line-background-color* logoraz-nord0
       *mode-line-foreground-color* logoraz-nord4)
 
