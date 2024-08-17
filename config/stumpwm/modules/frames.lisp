@@ -39,10 +39,27 @@
 (when *initializing*
   (swm-gaps:toggle-gaps))
 
-
 ;;; Messaging & Input Windows
 ;; Show messages in the center
-(setq *input-window-gravity*     :top
+(set-border-color        logoraz-nord3)
+(set-focus-color         logoraz-nord1)
+(set-unfocus-color       logoraz-nord3)
+(set-float-focus-color   logoraz-nord1)
+(set-float-unfocus-color logoraz-nord3)
+
+(set-fg-color logoraz-nord4)
+(set-bg-color logoraz-nord0)
+
+;; (setf *key-seq-color* "^2")
+;; (setf *which-key-format* (concat *key-seq-color* "*~5a^n ~a"))
+
+(setf *input-window-gravity*     :top-right
       *message-window-padding*   10
       *message-window-y-padding* 10
-      *message-window-gravity    :top)
+      *message-window-gravity    :top-right)
+
+(setf *normal-border-width*       1
+      *float-window-border*       1
+      *float-window-title-height* 15
+      *window-border-style*       :none
+      *window-format*             "%n:%t")

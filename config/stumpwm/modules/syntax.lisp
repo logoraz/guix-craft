@@ -36,7 +36,6 @@
 ;;                             (format nil "kitty ~A" program)
 ;;                             "kitty")))))
 
-
 ;;; Define commands to create slynk server -> no need to run all the time.
 ;; (require :slynk)
 ;; (defcommand sly-start-server () ()

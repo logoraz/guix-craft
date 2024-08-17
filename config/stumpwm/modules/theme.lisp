@@ -24,7 +24,7 @@
 
 ;;; Colors
 ;; Load in colors module to set theme.
-(load "~/.config/stumpwm/modules/colors.lisp")
+;; (load "~/.config/stumpwm/modules/colors.lisp")
 
 (setq *colors* (list
                 logoraz-nord1           ; 0 Black
