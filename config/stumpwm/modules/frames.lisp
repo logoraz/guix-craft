@@ -43,9 +43,9 @@
 ;; Show messages in the center
 (set-border-color        logoraz-nord3)
 (set-focus-color         logoraz-nord1)
-(set-unfocus-color       logoraz-nord3)
+(set-unfocus-color       logoraz-nord0)
 (set-float-focus-color   logoraz-nord1)
-(set-float-unfocus-color logoraz-nord3)
+(set-float-unfocus-color logoraz-nord0)
 
 (set-fg-color logoraz-nord4)
 (set-bg-color logoraz-nord0)
