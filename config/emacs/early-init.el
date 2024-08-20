@@ -106,7 +106,6 @@
 
 ;; See Window Frame parameters
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Window-Frame-Parameters.html
-
 (set-frame-name "Home")
 
 ;; Customize Frame Title Construct
@@ -117,15 +116,12 @@
 
 (setq frame-resize-pixelwise t)
 
-;; (set-frame-parameter nil 'alpha-background 85)
-
 (setq raz/custom-frame-alist
-      '(;;(alpha-background . 85)
+      '(;;(alpha-background . 85) ; doesn't work on X11
+        ;;(undecorated . t)
+        ;;(maximized . t)
         (alpha . (85 . 85))
-        (use-frame-synchronization . t)
-        ;; (undecorated . t)
-        ;; (maximized . t)
-        ))
+        (use-frame-synchronization . t)))
 
 (setq initial-frame-alist
       (append
@@ -146,16 +142,15 @@
 
 ;; Avoid the flash of light
 ;; https://github.com/protesilaos/dotfiles/blob/master/emacs/.emacs.d/early-init.el
-;; (add-hook 'after-make-frame-functions #'raz/re-enable-frame-theme)
 (defun raz/avoid-initial-flash-of-light ()
   "Avoid flash of light when starting Emacs, if needed - use Nord theme colors."
   (setq mode-line-format nil)
   (set-face-attribute 'default nil
-                      :background "#2E3440" :foreground "#D8DEE9")
+                      :background "#000000" :foreground "#d8dee9")
   (set-face-attribute 'mode-line nil
-                      :background "#4C566A" :foreground "#D8DEE9" :box 'unspecified)
+                      :background "#000000" :foreground "#d8dee9" :box 'unspecified)
   (set-face-attribute 'mode-line-inactive nil
-                      :background "#3B4252" :foreground "#7b88a1" :box 'unspecified))
+                      :background "#000000" :foreground "#d8dee9" :box 'unspecified))
 
 (raz/avoid-initial-flash-of-light)
 
@@ -166,7 +161,7 @@
 
 (setq package-enable-at-startup t)
 
-;; FIXME - Determine how to handle package loading between
+;; TODO - Determine how to handle package loading between
 ;;         `GUIX' and `package.el' and `use-package' abilities to leverage both
 ;;         systems.
 ;; https://www.reddit.com/r/emacs/comments/jhb2i6/
@@ -175,7 +170,7 @@
 ;; Guix Home PATH (for reference)
 ;; (load-file "~/.guix-home/profile/share/emacs/site-lisp/subdirs.el")
 ;; For Guix system (for reference) - `use-package' seems to handle this...
-;; (load-file "~/.guix-profile/share/emacs/site-lisp/subdirs.el")
+;; (load-file "/run/current-system/profile/share/emacs/site-lisp/subdirs.el")
 
 (require 'package)
 
