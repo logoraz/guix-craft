@@ -17,7 +17,7 @@
 
 (use-package arei
   :if (eq system-type 'gnu/linux)
-  :hook ((scheme-mode . raz/start-guile-ares))
+  ;; :hook ((scheme-mode . raz/start-guile-ares))
   :config
   (setq geiser-mode-auto-p nil)
 
