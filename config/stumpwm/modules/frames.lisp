@@ -50,8 +50,7 @@
 (set-fg-color logoraz-nord4)
 (set-bg-color logoraz-nord0)
 
-;;TODO: Lookup these variables & personalize
-(setf *key-seq-color* "^2")
+(setf *key-seq-color* "^6")
 (setf *which-key-format* (concat *key-seq-color* "*~5a^n ~a"))
 
 (setf *input-window-gravity*     :top-right
