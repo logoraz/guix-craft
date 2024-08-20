@@ -5,9 +5,8 @@
 ;;; References:
 ;;; 1. StumpWM Contrib: https://github.com/stumpwm/stumpwm-contrib
 ;;; 2. battery-portible contrib
-;;;    https://github.com/stumpwm/stumpwm-contrib/tree/master/modeline/battery-portable
-;;;    in your .stumpwmrc. Battery information is then available via %B in your
-;;;    mode-line config.
+;;;    https://github.com/stumpwm/stumpwm-contrib/tree/master/modeline/ \
+;;;    battery-portable
 ;;; 3. mem module contrib
 ;;;    https://github.com/stumpwm/stumpwm-contrib/tree/master/modeline/mem
 ;;;    Then you can use “%M” and/or “%N in your mode line format.
@@ -54,7 +53,7 @@
       wifi::*iwconfig-path* "/run/current-system/profile/sbin/iwconfig")
 
 ;;; Modeline Formatter
-
+;;TODO: change format so groups are blue...
 (defvar *mode-line-formatter-list*
   '(("%g")  ;; Groups
     ("%W")  ;; Windows
