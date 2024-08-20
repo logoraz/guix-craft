@@ -40,13 +40,13 @@
 
 ;;; Stumpwm-contrib Packages/Libraries
 
-;;; Load in custom files
+;;; Load in configuration/custom files
 (load "~/.config/stumpwm/modules/syntax.lisp")
 (load "~/.config/stumpwm/modules/utilities.lisp")
 (load "~/.config/stumpwm/modules/colors.lisp")
+(load "~/.config/stumpwm/modules/theme.lisp")
 (load "~/.config/stumpwm/modules/frames.lisp")
 (load "~/.config/stumpwm/modules/keybindings.lisp")
-(load "~/.config/stumpwm/modules/theme.lisp")
 (load "~/.config/stumpwm/modules/modeline.lisp")
 
 ;; Start the mode line
