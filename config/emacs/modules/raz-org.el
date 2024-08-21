@@ -55,16 +55,16 @@
   (org-todo-keywords
    '((sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)")
      (sequence "INACTIVE(i@/!)" "|" "CANCELLED(c@/!)")
-     (sequence "MEETING")))
+     (sequence "ACTIVE")))
   (org-todo-keyword-faces
    '(("TODO" . "#EBCB8B")          ; Yellow
      ("NEXT" . "#D08770")          ; Orange
      ("WAIT" . "#B48EAD")          ; Purple
      ("HOLD" . "#BF616A")          ; Red
      ("DONE" . "#A3BE8C")          ; Green
-     ("MEETING"   . "#88C0D0")     ; Teal
+     ("ACTIVE"    . "#88C0D0")     ; Teal
      ("INACTIVE"  . "#81A1C1")     ; Light Blue
-     ("CANCELLED" . "#5E81AC")))
+     ("CANCELLED" . "#5E81AC")))   ; ?
   (org-babel-lisp-eval-fn 'sly-eval "Configure Babel Programming Language Execution")
   :config
   ;; Org Helper Hook Functions
