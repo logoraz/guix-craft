@@ -1,6 +1,6 @@
 ;;;; package.lisp --> screenshot
 
-(defpackage #:screenshot
+(uiop:define-package #:screenshot
   (:use #:cl :stumpwm)
   (:local-nicknames (:xl :xlib)
                     (:lt :local-time))

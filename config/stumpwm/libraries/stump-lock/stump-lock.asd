@@ -1,3 +1,5 @@
+;;;; stump-lock.asd
+
 (defsystem "stump-lock"
   :serial t
   :description "Screen locker in StumpWM"

@@ -1,4 +1,6 @@
-(defpackage :wpctl
+;;;; package.lisp -> wpctl
+
+(uiop:define-package #:wpctl
   (:use #:cl :stumpwm)
   (:local-nicknames (:re :ppcre)
                     (:pf :parse-float))

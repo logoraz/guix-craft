@@ -1,6 +1,6 @@
 ;;;; package.lisp --> bluetooth
 
-(defpackage #:bluetooth
+(uiop:define-package #:bluetooth
   (:use #:cl :stumpwm)
   (:local-nicknames (:re :ppcre))
   (:export #:bluetooth-message-command

@@ -1,5 +1,5 @@
-;;;; package.lisp
+;;;; package.lisp -> end-session
 
-(defpackage #:end-session
+(uiop:define-package #:end-session
   (:use #:cl :stumpwm)
   (:export #:*end-session-command*))
