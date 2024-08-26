@@ -3,8 +3,9 @@
 (defsystem "stump-lock"
   :serial t
   :description "Screen locker in StumpWM"
-  :author "Florian Margaine <florian@margaine.com>"
+  :author "Florian Margaine, Erik Almaraz"
   :license "GPLv3"
+  :version "0.1.1"
   :depends-on ("stumpwm")
   :components ((:file "package")
                (:file "lock")))

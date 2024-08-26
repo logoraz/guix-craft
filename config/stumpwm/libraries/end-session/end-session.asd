@@ -1,9 +1,10 @@
 ;;;; end-session.asd
 
 (defsystem "end-session"
-  :description "Provides commands to stumpwm that allow the user to shutdown, restart, and logoff through the stumpwm UI"
-  :author "Stuart Dilts"
+  :description "StumpWM UI commands for shutdown, restart, and logoff."
+  :author "Stuart Dilts, Erik Almaraz"
   :license "GPLv3"
+  :version "0.1.1"
   :depends-on ("stumpwm")
   :serial t
   :components ((:file "package")
