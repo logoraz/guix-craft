@@ -2,7 +2,7 @@
 
 (defsystem "bluetooth"
   :description "Provides simple interface to connect to Bluetooth"
-  :author "Erik Almaraz"
+  :author "Erik P Almaraz"
   :license "GPLv3"
   :version "0.1.1"
   :serial t

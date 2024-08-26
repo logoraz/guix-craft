@@ -2,7 +2,7 @@
 
 (defsystem "wpctl"
   :description "PipeWire (WirePlumber) volume and microphone control module for StumpWM"
-  :author "Dmitrii Kosenkov, Erik Almaraz"
+  :author "Dmitrii Kosenkov, Erik P Almaraz"
   :license  "GPLv3"
   :version "0.1.1"
   :serial t
