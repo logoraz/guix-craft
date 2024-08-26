@@ -1,6 +1,6 @@
 #+TITLE: GNU Guix System/Home + StumpWM Configuration
 #+subtitle: (defmacro guix-craft (system home &key (stumpwm 'x11)) ...)
-#+author: Erik P. Almaraz (logoraz)
+#+author: Erik P Almaraz (logoraz)
 #+email: erikalmaraz@fastmail.com
 :args:
 #+language: en
@@ -37,19 +37,21 @@
  Define system-level services & packages:
  - 1. =%system-services=
    - Set OpenSSH, CUPs, Screenlocker, and Bluetooth services
-   - =%desktop-services= utilizes package substitutes now.
-   - =guix-home-service-type= -> (TODO would like to handle both concurrently)
+   - =%desktop-services= - modify-services to utilizes package substitutes now.
+   - =guix-home-service-type= -> TODO: would like to handle both concurrently
 - 2. =%stumpwm-packages= - Window Manager
   Note that packages are specified only as symbols and not using
   =specifications->packages=.
   SBCL, SBCL-*, StumpWM+Slynk and stumpwm-contrib installed at the system
-  level. Also install font-fira-code at the system level font.
+  level.
+  font.
   - =sbcl=
   - =sbcl-*=
   - =stumpwm+slynk=
   - =sbcl-stumpwm-*=
-- 3. =%x11-util-packages= - Window System, X11 util packages
-  - =font-fira-code=
+- 3. =%x11-util-packages= - Window System, X11 util packages and base fonts
+  - =font-hack=
+  - =font-jetbrains-mono=
   - =bluez=
   - =blueman=
   - =x*=
@@ -59,8 +61,6 @@
  Define user-level services & packages - note packages are specified as
  symbols, not using =specifications->packages=:
  - 1. =%logoraz-packages= -> My everyday packages (fonts, apps, utils/tools)
-      Note: I also call for home to install =font-fira-code= as emacs &
-      X11 are  not able to resolve that it is installed at the system level.
  - 2. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
  - 3. =services= -> wip (todo: modularize to separate variable definitions)
    - =home-environment-variables-service-type=
@@ -342,6 +342,8 @@ These are the =stumpwm-contrib= modules available in Guix that I am using.
 1. Guix System Installation & Home Configurations:
 
    - [[https://systemcrafters.net/craft-your-system-with-guix/full-system-install/][Craft Your System with Guix - Full System Install]]
+
+   - [[https://github.com/SystemCrafters/guix-installer][SystemCrafters: guix-installer]]
 
    - https://github.com/iambumblehead/guix-home
 
