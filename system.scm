@@ -118,7 +118,7 @@
              (extensions (list cups-filters hplip-minimal))))
    (service openssh-service-type)
    ;; Set up my home configuration
-   ;; (guix-home-service-type
+   ;; (service guix-home-service-type
    ;;  `(("logoraz" ,home)))
    (modify-services %desktop-services
                     (guix-service-type
