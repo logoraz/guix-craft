@@ -32,10 +32,14 @@
   full Guix deployment, however, maintaining original source code rather
   than writting it in Guile as some do.
 
-** System Configuration Outline (=system.scm=)
+** Guix OS (System + Home + Channels)
 
- Define system-level services & packages:
- - 1. =%system-services=
+Setup =guix-config.scm= which utilizes =guix-home-service-type= to combine system
+and home and specify package subsitutes & channels via
+=specifications->tranformations= function.
+
+Define system-level services & packages:
+- 1. =%system-services=
    - Set OpenSSH, CUPs, Screenlocker, and Bluetooth services
    - =%desktop-services= - modify-services to utilizes package substitutes now.
    - =guix-home-service-type= -> TODO: would like to handle both concurrently
@@ -56,25 +60,20 @@
   - =blueman=
   - =x*=
 
-** Home Configuration Outline (=home.scm=)
+Define user-level services & packages - note packages are specified as
+symbols, not using =specifications->packages=:
+- 1. =%logoraz-packages= -> My everyday packages (fonts, apps, utils/tools)
+- 2. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
+- 3. =services= -> wip (todo: modularize to separate variable definitions)
+  - =home-environment-variables-service-type=
+  - =home-dbus-service-type=
+  - =home-pipewire-service-type=
+  - =home-bash-service-type=
+  - TODO: Implement =home-xdg-configuration-files-service-type=
+  - TODO: Implment =home-files-service-type=
+  - TODO: Modularize services, i.e. define list outside =home-environment= in variable.
 
- Define user-level services & packages - note packages are specified as
- symbols, not using =specifications->packages=:
- - 1. =%logoraz-packages= -> My everyday packages (fonts, apps, utils/tools)
- - 2. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
- - 3. =services= -> wip (todo: modularize to separate variable definitions)
-   - =home-environment-variables-service-type=
-   - =home-dbus-service-type=
-   - =home-pipewire-service-type=
-   - =home-bash-service-type=
-   - TODO: Implement =home-xdg-configuration-files-service-type=
-   - TODO: Implment =home-files-service-type=
-   - TODO: Modularize services, i.e. define list outside =home-environment= in variable.
-
-** Channels (=channels.scm=)
-
-Current list of defined channels and whether they are active and/or pinned at a specific
-commit:
+Current list of defined channels and whether they are active and/or pinned at a specific commit:
 - Guix
 - Nonguix
 - guixrus
