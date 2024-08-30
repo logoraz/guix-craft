@@ -10,17 +10,9 @@ if [ ! -d $guix_config ]; then
     mkdir $guix_config
 fi
 
-# System
-ln -f ~/repos/guix-craft/system.scm \
-   ~/.config/guix/system.scm
-
-# Home
-ln -f ~/repos/guix-craft/home.scm \
-   ~/.config/guix/home.scm
-
-# Channels
-ln -f ~/repos/guix-craft/config/guix/channels.scm \
-   ~/.config/guix/channels.scm
+# Guix OS (System + Home + Channels)
+ln -f ~/repos/guix-craft/guix-config.scm \
+   ~/.config/guix/guix-config.scm
 
 # Bash Profiles
 ln -f ~/repos/guix-craft/config/guix/dot-bashrc.sh \
