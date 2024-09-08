@@ -165,9 +165,9 @@
    ;; Below is the list of Home services.  To search for available
    ;; services, run 'guix home search KEYWORD' in a terminal.
    ;; TODO: Implement the following
-   ;; 1. (service home-xdg-configuration-files-service-type ...)
+   ;; 1. (service home-dotfiles-service-type ..)
    ;; 2. (service home-files-service-type ...)
-   ;; 3. (service home-dotfiles-service-type ..)
+   ;; 3. (service home-xdg-configuration-files-service-type ...)
    (services
     (list
      (service home-pipewire-service-type)
