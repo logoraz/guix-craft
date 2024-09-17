@@ -20,8 +20,7 @@
 
 (use-package sly
   ;; Enable sly IDE for Common Lisp
-  :hook (;;(sly-mode . raz/sly-auto-connect)
-         (lisp-mode . sly-editing-mode))
+  :hook ((lisp-mode . sly-editing-mode))
   ;; :custom
   ;; (inferior-lisp-program (executable-find "sbcl")
   ;;                        "Set default lisp to Steel Bank Common Lisp.")
