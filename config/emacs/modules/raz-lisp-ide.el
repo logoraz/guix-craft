@@ -51,6 +51,7 @@
 
   ;; See: https://joaotavora.github.io/sly/#Loading-Slynk-faster
   (defun raz/sly-auto-connect ()
+    (interactive)
     (unless (sly-connected-p)
       (save-excursion (sly)))))
 
