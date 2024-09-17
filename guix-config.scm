@@ -85,6 +85,13 @@
                 nonguix-channel)
           %default-channels))
 
+;; Trialing out package transformations to fetch 3.11.8 version of Nyxt
+;; (define latest-nyxt
+;;   (options->transformation
+;;    '((with-latest . "nyxt"))))
+;; Add to %lograz-packages
+;; nyxt --> (latest-nyxt nyxt)
+
 ;;; Home User Configuration Definitions & Services
 (define logoraz-packages
   (list font-fira-code ;;|--> gnu packages fonts
