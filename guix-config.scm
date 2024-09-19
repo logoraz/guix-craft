@@ -14,6 +14,7 @@
 	     (guix download)
              (guix gexp)
              (guix transformations)
+             (guix ci)
 	     (nongnu packages linux)
              (nongnu system linux-initrd))
 
@@ -80,17 +81,22 @@
       (openpgp-fingerprint
         "2841 9AC6 5038 7440 C7E9  2FFA 2208 D209 58C1 DEB0")))))
 
+(define aadcg-channel
+  (channel
+   (name 'aadcg)
+   (url "https://github.com/aadcg/aadcg-guix-channel")))
+
 (define logoraz-channels
-  (append (list guix-channel
-                nonguix-channel)
+  (append (list nonguix-channel
+                guix-channel)
           %default-channels))
 
 ;; Trialing out package transformations to fetch 3.11.8 version of Nyxt
-;; (define latest-nyxt
-;;   (options->transformation
-;;    '((with-latest . "nyxt"))))
 ;; Add to %lograz-packages
 ;; nyxt --> (latest-nyxt nyxt)
+(define latest-nyxt
+  (options->transformation
+   '((with-latest . "nyxt"))))
 
 ;;; Home User Configuration Definitions & Services
 (define logoraz-packages
@@ -272,7 +278,7 @@
 
 ;; System Services
 ;; Use Package substitutes instead of compiling everything & specify channels
-;; Borrowed from iambumblehead
+;; Ref: Borrowed from iambumblehead
 (define (substitutes->services config channels)
   (guix-configuration
    (inherit config)
@@ -280,6 +286,7 @@
    (guix (guix-for-channels channels))
    (substitute-urls
     (cons* "https://substitutes.nonguix.org"
+           "https://ci.guix.gnu.org"
            %default-substitute-urls))
    (authorized-keys
     (cons* (origin
