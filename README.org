@@ -34,9 +34,9 @@
 
 ** Guix OS (System + Home + Channels)
 
-Setup =guix-config.scm= which utilizes =guix-home-service-type= to combine system
-and home and specify package subsitutes & channels via
-=specifications->tranformations= function.
+I've set up my entire config in =guix-config.scm=, which comprises of System, Home, and the channels for both. This is done using =guix-home-service-type=. With this, I only need to call =guix system reconfigure guix-confic.scm=, which replaces =guix pull=, =guix home reconfigure=, and =guix system reconfigure=.
+I am using channels subsitutes via =specifications->tranformations= function
+I defined based on the Guix manual's prescription.
 
 Define system-level services & packages:
 - 1. =%system-services=
