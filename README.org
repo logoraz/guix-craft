@@ -1,5 +1,5 @@
-#+TITLE: GNU Guix System/Home + StumpWM Configuration
-#+subtitle: (defmacro guix-craft (system home &key (stumpwm 'x11)) ...)
+#+TITLE: Guix OS (System & Home) + StumpWM Configuration
+#+subtitle: (defmacro guix-os (system home &key (stumpwm 'x11)) ...)
 #+author: Erik P Almaraz (logoraz)
 #+email: erikalmaraz@fastmail.com
 :args:
@@ -9,7 +9,7 @@
 #+macro: latest-export-date '(eval (format-time-string "%F %T %z"))'
 :end:
 
-  My personal GNU Guix System/Home + StumpWM Configuration!
+  My personal GNU Guix OS (System & Home) + StumpWM Configuration!
 
   [[file:./assets/guix+stumpwm_desktop.png]]
 
@@ -21,7 +21,7 @@
   - GitHub: https://github.com/logoraz/guix-craft.git
 
 
-* Guix Configuration
+* Guix OS Configuration
 
   I am currently configuring Guix SD for Clasp Common Lisp and Guile Scheme
   development.
@@ -221,6 +221,7 @@ List known connections and delete them from list in Network Manager.
 ** Common Lisp Stuff
 
 Some Common Lisp stuff I've trialed out in Guix System:
+
 *** Clasp
 
 The Clasp Common Lisp compiler is a project of extreme high interest to
@@ -274,6 +275,13 @@ Common Lisp newcomers and Guix users. A few rude, pompous contributors to the
 project and their interactions with me on DM's is what lead to this... Not sure if I will update this package recipe any longer knowing it will contribute to that negative
 social environment.
 My Lem config is kept in the archive directory of this repo.
+
+*** ChemScribe
+A work in progress of a Common Lisp (Clasp) application I am writing for
+my line of chemistry work. Right now it is a base scaffolding and scratch
+work as I learn more about Common Lisp...
+
+Reference my repo: https://github.com/logoraz/ChemScribe
 
 
 * StumpWM Configuration
