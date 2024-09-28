@@ -29,6 +29,8 @@
 
 (use-service-modules guix cups ssh desktop xorg)
 
+(primitive-load "home-impure-symlinks.scm")
+
 ;;; Define Channels
 (define guix-channel
   (channel
@@ -129,8 +131,8 @@
         gimp      ;;|--> gnu packages gimp
         inkscape  ;;|--> gnu packages inkscape
         blender   ;;|--> gnu packages graphics
-        zip       ;;|--> gnu packages compression :utilities
-        unzip
+        ;; zip       ;;|--> gnu packages compression :utilities
+        ;; unzip
         git))           ;;|--> gnu packages version-control
 
 (define emacs-packages
@@ -167,6 +169,8 @@
          emacs-erc-image
          emacs-emojify))
 
+(define *home-path* "/home/logoraz/repos/guix-craft/")
+
 (define logoraz-home
   (home-environment
    ;; Below is the list of packages that will show up in your
@@ -177,21 +181,134 @@
 
    ;; Below is the list of Home services.  To search for available
    ;; services, run 'guix home search KEYWORD' in a terminal.
-   ;; TODO: Implement the following
-   ;; 1. (service home-dotfiles-service-type ..)
-   ;; 2. (service home-files-service-type ...)
-   ;; 3. (service home-xdg-configuration-files-service-type ...)
    (services
     (list
      (service home-pipewire-service-type)
      (service home-dbus-service-type) ;; for bluetooth --> system
+     (simple-service 'home-impure-symlinks-dotfiles
+                     home-impure-symlinks-service-type
+                     `(;; Guix Configuration Scaffolding
+                       (".config/guix/guix-config.scm"
+                        ,(string-append
+                          *home-path*
+                          "config/guix/guix-config.scm"))
+                       (".config/guix/home-impure-symlinks.scm"
+                        ,(string-append
+                          *home-path*
+                          "config/guix/home-impure-symlinks.scm"))
+                       (".config/guix/manifests"
+                        ,(string-append
+                          *home-path*
+                          "config/guix/manifests"))
+                       (".config/guix/dot-bashrc.sh"
+                        ,(string-append
+                          *home-path*
+                          "config/guix/dot-bashrc.sh"))
+                       (".config/guix/dot-bash_profile.sh"
+                        ,(string-append
+                          *home-path*
+                          "config/guix/dot-bash_profile.sh"))
+                       ;; Common Lisp Configration Scaffolding
+                       (".config/common-lisp/source-registry.conf.d"
+                        ,(string-append
+                          *home-path*
+                          "config/common-lisp/source-registry.conf.d"))
+                       (".sbclrc"
+                        ,(string-append
+                          *home-path*
+                          "config/common-lisp/dot-sbclrc.lisp"))
+                       (".clasprc"
+                        ,(string-append
+                          *home-path*
+                          "config/common-lisp/dot-clasprc.lisp"))
+                       ;; StumpWM Configuration Scaffolding
+                       (".config/stumpwm/config"
+                        ,(string-append
+                          *home-path*
+                          "config/stumpwm/config.lisp"))
+                       (".config/stumpwm/libraries"
+                        ,(string-append
+                          *home-path*
+                          "config/stumpwm/libraries"))
+                       (".config/stumpwm/modules"
+                        ,(string-append
+                          *home-path*
+                          "config/stumpwm/modules"))
+                       ;; Xorg Configuration Scaffolding
+                       (".Xdefaults"
+                        ,(string-append
+                          *home-path*
+                          "config/xorg/dot-Xdefaults"))
+                       (".Xresources"
+                        ,(string-append
+                          *home-path*
+                          "config/xorg/dot-Xresources"))
+                       (".icons"
+                        ,(string-append
+                          *home-path*
+                          "config/xorg/dot-icons"))
+                       (".config/xorg/start-xterm.sh"
+                        ,(string-append
+                          *home-path*
+                          "config/xorg/start-xterm.sh"))
+                       ;; Emacs Configuration Scaffolding
+                       (".config/emacs/init.el"
+                        ,(string-append
+                          *home-path*
+                          "config/emacs/init.el"))
+                       (".config/emacs/early-init.el"
+                        ,(string-append
+                          *home-path*
+                          "config/emacs/early-init.el"))
+                       (".config/emacs/modules"
+                        ,(string-append
+                          *home-path*
+                          "config/emacs/modules"))
+                       (".config/emacs/elisp"
+                        ,(string-append
+                          *home-path*
+                          "config/emacs/elisp"))
+                       (".config/emacs/docs"
+                        ,(string-append
+                          *home-path*
+                          "config/emacs/docs"))
+                       ;; Nyxt Configuration Scaffolding
+                       (".config/nyxt/config.lisp"
+                        ,(string-append
+                          *home-path*
+                          "config/nyxt/config.lisp"))
+                       (".config/nyxt/passwords.lisp"
+                        ,(string-append
+                          *home-path*
+                          "config/nyxt/passwords.lisp"))
+                       (".config/nyxt/passwords-dev.lisp"
+                        ,(string-append
+                          *home-path*
+                          "config/nyxt/passwords-dev.lisp"))
+                       (".config/nyxt/utilities.lisp"
+                        ,(string-append
+                          *home-path*
+                          "config/nyxt/utilities.lisp"))
+                       (".config/nyxt/bookmarks.lisp"
+                        ,(string-append
+                          *home-path*
+                          "config/nyxt/bookmarks.lisp"))
+                       (".config/nyxt/start-nyxt.sh"
+                        ,(string-append
+                          *home-path*
+                          "config/nyxt/start-nyxt.sh"))
+                       (".local/share/nyxt/extensions"
+                        ,(string-append
+                          *home-path*
+                          "config/nyxt/extensions"))
+                       ))
      (simple-service 'env-vars home-environment-variables-service-type
                      '(("EDITOR" . "emacs")
                        ("BROWSER" . "nyxt")
                        ("XDG_SESSION_TYPE" . "x11")
                        ("XDG_SESSION_DESKOP" . "stumpwm")
                        ("XDG_CURRENT_DESKTOP" . "stumpwm")
-                       ("XDG_DOWNLOAD_DIR" . "/home/logoraz/Downloads/")))
+                       ("XDG_DOWNLOAD_DIR" . "/home/logoraz/Downloads")))
      (service home-bash-service-type
               (home-bash-configuration
                (guix-defaults? #f)
@@ -201,10 +318,10 @@
                           ("la"   . "ls -la")
                           ("gsr"  . "sudo guix system reconfigure")))
                (bashrc
-                (list (local-file "./dot-bashrc.sh"
+                (list (local-file "config/guix/dot-bashrc.sh"
                                   #:recursive? #t)))
                (bash-profile
-                (list (local-file "./dot-bash_profile.sh"
+                (list (local-file "config/guix/dot-bash_profile.sh"
                                   #:recursive? #t)))))))))
 
 
