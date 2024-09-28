@@ -28,9 +28,16 @@
 
   The config directory comprises of those applications/frameworks which I have
   personaly setup (and not all my 'dot files' are therein).
-  Currently using a shell script to deploy, but am working on setting up a
-  full Guix deployment, however, maintaining original source code rather
-  than writting it in Guile as some do.
+
+  Guix OS is now fully deployed via Guix using
+  =home-impure-symlinks-service-type=! All I need to do is clone this repo and
+  run =sudo guix system reconfigure guix-config.scm= and everything will be
+  ready to go! No more bash scripts for deploying my config scaffolding.
+
+  While this is considered an 'impure' approach, personally I like my
+  configuration to be flexible as opposed to immutable. I am constantly
+  experimenting and would rather have changes readily available - so I am open
+  to a hybrid (aka "impure") approach when it comes to Guix on this front.
 
 ** Guix OS (System + Home + Channels)
 
@@ -69,9 +76,9 @@ symbols, not using =specifications->packages=:
   - =home-dbus-service-type=
   - =home-pipewire-service-type=
   - =home-bash-service-type=
-  - TODO: Implement =home-xdg-configuration-files-service-type=
-  - TODO: Implment =home-files-service-type=
-  - TODO: Modularize services, i.e. define list outside =home-environment= in variable.
+  - =home-impure-symlinks-service-type= via =home-impure-symlinks.scm=
+    - TODO: find reference to original source
+    - ref: https://github.com/aurtzy/guix-config
 
 Current list of defined channels and whether they are active and/or pinned at a specific commit:
 - Guix
@@ -80,7 +87,7 @@ Current list of defined channels and whether they are active and/or pinned at a 
 - flatwhatson
 - rde
 - benoitj
-- TBD
+- aadcg
 
 ** Manifests (=./config/guix/manifests/=)
 - =devtools-manifest.scm=  - Dev Packages in general and for Common Lisp
