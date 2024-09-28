@@ -25,8 +25,8 @@
 ;; https://stumpwm.github.io/git/stumpwm-git_67.html
 ;; stumpwm still saves stuff to ~/.stumpwm.d, want it to go to
 ;; ~/.config/stumpwm/data/ instead.
-(setf *data-dir* (concat (getenv "HOME")
-                         "/.config/stumpwm/data/"))
+;; (setf *data-dir* (concat (getenv "HOME")
+;;                          "/.config/stumpwm/data/"))
 
 ;; A startup message can be used when initializing StumpWM, for now set to nil.
 (setf *startup-message* nil)

@@ -43,10 +43,6 @@
 (define-configuration :buffer
     ((default-modes `(emacs-mode ,@%slot-value%))))
 
-;; Looks horrible...
-;; (define-configuration :web-buffer
-;;     ((default-modes `(dark-mode ,@%slot-value%))))
-
 ;; Drastically impacts Nyxt startup...
 (define-configuration :web-buffer
     ((default-modes `(blocker-mode ,@%slot-value%))))
@@ -65,13 +61,13 @@
 
 
 ;;; Nyxt Extensions
-
+;;; ~/.local/share/nyxt/extensions/*
 (define-nyxt-user-system-and-load nyxt-user/nx-invader-2-proxy
   :description "Dark style theme for Nyxt"
   :depends-on ("nx-invader-2"))
 
 ;; A simple extension that you can use to test your Nyxt installation (i.e. can you load extensions).
-(define-nyxt-user-system-and-load nyxt-user/nx-fruit-proxy
-  :description "This proxy system saves us if nx-fruit fails to load.
-Otherwise it will break all the config loading."
-  :depends-on ("nx-fruit"))
+;; (define-nyxt-user-system-and-load nyxt-user/nx-fruit-proxy
+;;   :description "This proxy system saves us if nx-fruit fails to load.
+;; Otherwise it will break all the config loading."
+;;   :depends-on ("nx-fruit"))

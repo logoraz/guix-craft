@@ -23,9 +23,6 @@
                         :subfamily "Regular" :size 11 :antialias t)))
 
 ;;; Colors
-;; Load in colors module to set theme.
-;; (load "~/.config/stumpwm/modules/colors.lisp")
-
 (setq *colors* (list
                 logoraz-nord1           ; 0 Black
                 logoraz-nord11          ; 1 Red
