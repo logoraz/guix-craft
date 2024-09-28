@@ -151,9 +151,20 @@ Followed =SystemCrafters= prescription for installation:
 
 *** Initial setup/deployment (WIP)
 
-Plan is to configure system/home services to deloy, i.e create all
-necessary locations and copy configs to their proper locations -> still working on refining this to follow the =Guix Way=. Currently using shell scripts to either establish hard and/or soft links to the desired
-locations, i.e. `~/.config/`, `~/.`, etc.
+I've set up Guix OS such that I only need to clone this repo, after a
+fresh Guix SD install (described above), and run a system reconfigure.
+This is possible using =guix-home-service-type= to setup system and home
+concurrently. Deployment of my configuration herein is possible using
+=home-impure-symlinks-service-type=.
+
+In the future I plan to refactor and make this setup modular by defining
+modules appropriately and perhaps creating a channel. Ultimate goal is
+have this setup be available as a custom Guix Distrobution that anyone
+can deploy - it is basically setup as a distribution, however, it is
+limited to this specific machine and my specific user...
+See: https://systemcrafters.net/live-streams/january-13-2023/
+
+
 
 #+begin_src sh
 
@@ -163,38 +174,8 @@ locations, i.e. `~/.config/`, `~/.`, etc.
   git clone https://github.com/logoraz/guix-craft.git
   cd guix-craft/
 
-  # Deploy the configuration to ~/.config/
-  # Use the deployment scripts in each config module:
-
-  # Setup Guix files
-  ./config/guix/deploy-guix.sh
-
-  # Setup StumpWM config files
-  ./config/stumpwm/deploy-stumpwm.sh
-
-  # Setup X11 (Xorg) environment files for StumpWM
-  ./config/xorg/deploy-xorg.sh
-
-  # Setup Emacs config files
-  ./config/emacs/deploy-emacs.sh
-
-  # Setup Nyxt config files
-  ./config/nyxt/deploy-nyxt.sh
-
-  # Setup Common Lisp Environment (quicklisp, FFI (WIP), etc.)
-  ./config/common-lisp/deploy-cl.sh
-
-  guix pull
-  sudo guix system reconfigure system.scm
-  guix home reconfigure home.scm
-
-  # Optional Clean-up afterwards when everything is working
-  guix pull --delete-generations
-  guix package --delete-generations
-  guix home delete-generations
-  sudo guix system delete-generations
-  guix gc
-  # guix gc -d1w # delete generations older than 1 week
+  # Reconfigure to instantiate this setup
+  sudo guix system reconfigure guix-config.scm
 
 #+end_src
 
@@ -353,13 +334,15 @@ These are the =stumpwm-contrib= modules available in Guix that I am using.
 * References
 
 
-1. Guix System Installation & Home Configurations:
+1. Guix System & Home Configuration:
 
    - [[https://systemcrafters.net/craft-your-system-with-guix/full-system-install/][Craft Your System with Guix - Full System Install]]
 
    - [[https://github.com/SystemCrafters/guix-installer][SystemCrafters: guix-installer]]
 
    - https://github.com/iambumblehead/guix-home
+
+   - https://systemcrafters.net/live-streams/january-13-2023/
 
 2. StumpWM Configurations & Hacks:
 
