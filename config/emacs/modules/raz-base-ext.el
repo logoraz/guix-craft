@@ -145,17 +145,8 @@
   :config
   (beframe-mode 1))
 
-(use-package tabspaces
-  ;; Not available in Guix so need to use melpa...
-  :disabled
-  :diminish tabspaces-mode
-  :custom
-  (tabspaces-use-filtered-buffers-as-default t)
-  (tabspaces-session t)
-  ;; (tabspaces-session-auto-restore t)
-  :config
-  (tabspaces-mode 1))
-
+(use-package ace-window
+  :bind ("M-o" . 'ace-window))
 
 
 
