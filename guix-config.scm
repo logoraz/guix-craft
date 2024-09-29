@@ -98,7 +98,8 @@
 ;; nyxt --> (latest-nyxt nyxt)
 (define latest-nyxt
   (options->transformation
-   '((with-latest . "nyxt"))))
+   '((without-tests . "nyxt")
+     (with-latest   . "nyxt"))))
 
 ;;; Home User Configuration Definitions & Services
 (define logoraz-packages
@@ -107,7 +108,7 @@
         font-google-noto
         font-google-noto-emoji
         font-google-noto-sans-cjk
-        nyxt      ;;|--> gnu packages web-browsers :www-mail
+        (latest-nyxt nyxt) ;;|--> gnu packages web-browsers :www-mail
         icecat    ;;|--> gnu packages gnuzilla
         keepassxc ;;|--> gnu packages password-utils
         gnupg     ;;|--> gnu packages gnupg
@@ -131,9 +132,7 @@
         gimp      ;;|--> gnu packages gimp
         inkscape  ;;|--> gnu packages inkscape
         blender   ;;|--> gnu packages graphics
-        ;; zip       ;;|--> gnu packages compression :utilities
-        ;; unzip
-        git))           ;;|--> gnu packages version-control
+        git))     ;;|--> gnu packages version-control
 
 (define emacs-packages
   (list  guile-next      ;;|--> gnu packages guile
@@ -151,6 +150,7 @@
          emacs-undo-tree
          emacs-paredit
          emacs-visual-fill-column
+         emacs-ace-window
          emacs-mct
          emacs-orderless
          emacs-corfu
@@ -351,6 +351,7 @@
 (define stumpwm-packages
   (list sbcl       ;;|--> gnu packages lisp
         sbcl-slynk ;;|--> gnu packages lisp-xyz
+        sbcl-zippy
         sbcl-parse-float
         sbcl-local-time
         sbcl-cl-ppcre
