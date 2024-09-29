@@ -160,21 +160,20 @@ concurrently. Deployment of my configuration herein is possible using
 In the future I plan to refactor and make this setup modular by defining
 modules appropriately and perhaps creating a channel. Ultimate goal is
 have this setup be available as a custom Guix Distrobution that anyone
-can deploy - it is basically setup as a distribution, however, it is
-limited to this specific machine and my specific user...
+can deploy - though it is already set up this way for the most part,
+I would like to take it one step further and create a bootable image.
 See: https://systemcrafters.net/live-streams/january-13-2023/
-
 
 
 #+begin_src sh
 
-  # Get guix home setup
+  # Get Guix OS Distrobution
   mkdir ~/repos/
   cd ~/repos
   git clone https://github.com/logoraz/guix-craft.git
   cd guix-craft/
 
-  # Reconfigure to instantiate this setup
+  # Deploy/Install
   sudo guix system reconfigure guix-config.scm
 
 #+end_src
