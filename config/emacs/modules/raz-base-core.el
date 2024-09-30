@@ -86,7 +86,7 @@
 (setq-default global-auto-revert-non-file-buffers t)
 (setq-default indent-tabs-mode nil) ; use spaces instead of tabs
 (setq-default ;cursor-type 'bar
-              fill-column 81
+
               large-file-warning-threshold 100000000
               find-file-visit-truename t)
 (global-auto-revert-mode 1)
@@ -100,6 +100,7 @@
   :hook ((lisp-mode . display-fill-column-indicator-mode)
          (scheme-mode . display-fill-column-indicator-mode))
   :custom
+  (fill-column 94)
   (display-fill-column-indicator-column fill-column))
 
 (defun raz/switch-to-minibuffer ()
