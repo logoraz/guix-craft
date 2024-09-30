@@ -28,7 +28,8 @@
   ;; Invoke SLY with a negative prefix argument, M-- M-x sly,
   ;; and you can select a program from that list.
   (setq sly-lisp-implementations
-        `((sbcl (,(executable-find "sbcl")) :coding-system utf-8-unix)
+        `((sbcl (,(executable-find "sbcl")))
+          (ccl (,(executable-find "ccl")))
           (clasp (,(executable-find "clasp")))))
 
   (defun raz/stumpwm-sly-connect ()

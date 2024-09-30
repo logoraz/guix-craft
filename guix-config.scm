@@ -348,6 +348,9 @@
          (type "ext4"))))
 
 ;; Define Core System Wide Packages & Services
+(define cl-packages
+  (list ccl))
+
 (define stumpwm-packages
   (list sbcl       ;;|--> gnu packages lisp
         sbcl-slynk ;;|--> gnu packages lisp-xyz
@@ -478,6 +481,7 @@
 
    ;; Use 'guix search KEYWORD' to search for packages.
    (packages (append
+              cl-packages
               stumpwm-packages
               x11-util-packages
               %base-packages))
