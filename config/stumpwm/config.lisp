@@ -12,6 +12,7 @@
 ;; Define Guix profiles
 (defconstant +guix-system-path+ "/run/current-system/profile/share/"
   "Define Guix System profile PATH.")
+
 (defconstant +guix-home-path+ "/home/logoraz/.guix-home/profile/share/"
   "Define Guix Home profile PATH.")
 
