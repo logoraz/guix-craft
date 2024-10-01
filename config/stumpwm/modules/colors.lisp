@@ -1,8 +1,16 @@
 ;;;; colors.lisp --> StumpWM Nord Colors Module
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
 ;;; Commentary:
+;;;
 
 ;;; References:
+;;;
 
 (in-package :stumpwm)
 

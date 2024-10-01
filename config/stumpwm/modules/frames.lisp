@@ -1,8 +1,16 @@
 ;;;; frames.lisp --> Frames & Windows Configuration for StumpWM
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
 ;;; Commentary:
+;;;
 
 ;;; References:
+;;;
 
 (in-package :stumpwm)
 

@@ -1,6 +1,13 @@
 ;;;; modeline.lisp --> Modeline Configuration for StumpWM
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
 ;;; Commentary:
+;;;
 
 ;;; References:
 ;;; 1. StumpWM Contrib: https://github.com/stumpwm/stumpwm-contrib

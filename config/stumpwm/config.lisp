@@ -1,11 +1,16 @@
 ;;;; StumpWM Initialization File (config.lisp --> config)
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
 ;;; Commentary:
 ;;;
 
 ;;; References:
 ;;;
-
 
 (in-package :stumpwm)
 

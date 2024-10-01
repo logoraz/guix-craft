@@ -1,8 +1,16 @@
 ;;;; syntax.lisp --> StumpWM Macro's, Helpers, & Commands
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
 ;;; Commentary:
+;;;
 
 ;;; References:
+;;;
 
 (in-package :stumpwm)
 

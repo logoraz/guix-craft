@@ -1,10 +1,20 @@
 ;;;; keybindings --> Keybindings for StumpWM
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
 ;;; Commentary:
-;; TODO - Skinny down StumpWM's original Top Level keymap, don't need every option
-;;        that is present, also - it takes a while to load...
+;;;
+
+;;; Commentary:
+;;; TODO - Skinny down StumpWM's original Top Level keymap, don't need every option
+;;;        that is present, also - it takes a while to load...
 
 ;;; References:
+;;;
 
 (in-package :stumpwm)
 

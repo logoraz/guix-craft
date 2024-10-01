@@ -21,13 +21,13 @@
 (use-system-modules keyboard)
 
 (use-package-modules lisp lisp-xyz wm xorg xdisorg linux fonts
-                     cups suckless networking package-management
+                     ssh cups suckless networking package-management
                      fonts web-browsers gnuzilla password-utils gnupg mail
                      gstreamer video compton image-viewers linux music
                      gnucash gimp inkscape graphics compression version-control
                      guile guile-xyz emacs emacs-xyz)
 
-(use-service-modules guix cups ssh desktop xorg)
+(use-service-modules guix cups networking ssh desktop xorg)
 
 (primitive-load "home-impure-symlinks.scm")
 
@@ -437,10 +437,15 @@
              (web-interface? #t)
              (default-paper-size "Letter")
              (extensions (list cups-filters hplip-minimal))))
-   (service openssh-service-type)
+   (service dhcp-client-service-type)
+   ;; ssh user@host -p 2222
+   (service openssh-service-type
+            (openssh-configuration
+             (openssh openssh-sans-x)
+             (port-number 2222)))
    ;; Set up my home configuration
    (service guix-home-service-type
-    `(("logoraz" ,logoraz-home)))
+            `(("logoraz" ,logoraz-home)))
    (modify-services %desktop-services
                     (guix-service-type
                      config =>
