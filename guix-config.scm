@@ -27,7 +27,7 @@
                      gnucash gimp inkscape graphics compression version-control
                      guile guile-xyz emacs emacs-xyz)
 
-(use-service-modules guix cups networking ssh desktop xorg)
+(use-service-modules guix cups ssh desktop xorg)
 
 (primitive-load "home-impure-symlinks.scm")
 
@@ -93,8 +93,7 @@
                 guix-channel)
           %default-channels))
 
-;; Trialing out package transformations to fetch 3.11.8 version of Nyxt
-;; Add to %lograz-packages
+;;; Home Package Transformations
 ;; nyxt --> (latest-nyxt nyxt)
 (define latest-nyxt
   (options->transformation
@@ -300,8 +299,7 @@
                        (".local/share/nyxt/extensions"
                         ,(string-append
                           *home-path*
-                          "config/nyxt/extensions"))
-                       ))
+                          "config/nyxt/extensions"))))
      (simple-service 'env-vars home-environment-variables-service-type
                      '(("EDITOR" . "emacs")
                        ("BROWSER" . "nyxt")
@@ -347,13 +345,23 @@
          (device (uuid "c0ffc6f4-dab7-4efc-8cdd-3e9d727b91ab" 'ext4))
          (type "ext4"))))
 
-;; Define Core System Wide Packages & Services
+;;; System Package Transformations
+(define latest-sbcl
+  (options->transformation
+   '((with-latest   . "sbcl"))))
+
+;;; Define Core System Wide Packages & Services
 (define cl-packages
-  (list ccl))
+  (list ccl
+        ;;clasp-cl
+        cl-iterate
+        cl-lparallel
+        cl-serapeum
+        cl-json))
 
 (define stumpwm-packages
-  (list sbcl       ;;|--> gnu packages lisp
-        sbcl-slynk ;;|--> gnu packages lisp-xyz
+  (list (latest-sbcl sbcl) ;;|--> gnu packages lisp
+        sbcl-slynk         ;;|--> gnu packages lisp-xyz
         sbcl-zippy
         sbcl-parse-float
         sbcl-local-time
@@ -437,11 +445,10 @@
              (web-interface? #t)
              (default-paper-size "Letter")
              (extensions (list cups-filters hplip-minimal))))
-   (service dhcp-client-service-type)
    ;; ssh user@host -p 2222
    (service openssh-service-type
             (openssh-configuration
-             (openssh openssh-sans-x)
+             (openssh openssh)
              (port-number 2222)))
    ;; Set up my home configuration
    (service guix-home-service-type
