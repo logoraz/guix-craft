@@ -31,6 +31,9 @@
 ;;; Commentary:
 ;;;
 
+;;; References:
+;;;
+
 (in-package #:end-session)
 
 ;;; Commands to exit out of stumpwm whie closing open programs nicely
