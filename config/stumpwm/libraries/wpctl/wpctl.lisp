@@ -1,3 +1,17 @@
+;;;; wpctl.lisp
+
+;;; Authors:
+;;; Erik P Almaraz, Dmitrii Kosenkov
+
+;;; License:
+;;; GPLv3, MIT
+
+;;; Commentary:
+;;;
+
+;;; References:
+;;;
+
 (in-package :wpctl)
 
 ;; formatters.

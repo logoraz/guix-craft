@@ -1,8 +1,17 @@
 ;;;; wpctl.asd
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3, MIT
+
+;;; Commentary:
+;;;
+
 (defsystem "wpctl"
   :description "PipeWire (WirePlumber) volume and microphone control module for StumpWM"
-  :author "Dmitrii Kosenkov, Erik P Almaraz"
+  :author "Erik P Almaraz, Dmitrii Kosenkov"
   :license  "GPLv3"
   :version "0.1.1"
   :serial t

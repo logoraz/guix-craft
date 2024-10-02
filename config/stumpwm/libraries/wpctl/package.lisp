@@ -1,5 +1,14 @@
 ;;;; package.lisp -> wpctl
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3, MIT
+
+;;; Commentary:
+;;;
+
 (uiop:define-package #:wpctl
   (:use #:cl :stumpwm)
   (:local-nicknames (:re :ppcre)
