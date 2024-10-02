@@ -1,5 +1,17 @@
 ;;;; screenshot.lisp
 
+;;; Authors:
+;;; Erik P Almaraz, Michael Filonenko
+
+;;; License:
+;;; GPLv3
+
+;;; Commentary:
+;;;
+
+;;; References:
+;;;
+
 (in-package :screenshot)
 
 (defparameter *screenshot-directory* (concatenate 'string
