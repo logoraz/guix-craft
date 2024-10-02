@@ -1,8 +1,17 @@
 ;;;; end-session.asd
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
+;;; Commentary:
+;;;
+
 (defsystem "end-session"
   :description "StumpWM UI commands for shutdown, restart, and logoff."
-  :author "Stuart Dilts, Erik P Almaraz"
+  :author "Erik P Almaraz, Stuart Dilts"
   :license "GPLv3"
   :version "0.1.1"
   :depends-on ("stumpwm")
