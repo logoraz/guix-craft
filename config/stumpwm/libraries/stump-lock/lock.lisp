@@ -1,3 +1,17 @@
+;;;; lock.lisp
+
+;;; Authors:
+;;; Erik P Almaraz, Florian Margaine
+
+;;; License:
+;;; GPLv3
+
+;;; Commentary:
+;;;
+
+;;; References:
+;;;
+
 (in-package #:stump-lock)
 
 (defvar *password* nil
