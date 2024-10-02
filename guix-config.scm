@@ -88,10 +88,15 @@
    (name 'aadcg)
    (url "https://github.com/aadcg/aadcg-guix-channel")))
 
+;; TODO - Consider creating my own channel:
+;; Ref: https://guix.gnu.org/cookbook/en/html_node/Channels.html
+;; https://guix.gnu.org/manual/en/html_node/Creating-a-Channel.html#Creating-a-Channel
 (define logoraz-channels
-  (append (list nonguix-channel
-                guix-channel)
-          %default-channels))
+  (list nonguix-channel
+        guix-channel))
+  ;; (append (list nonguix-channel
+  ;;               guix-channel)
+  ;;         %default-channels))
 
 ;;; Home Package Transformations
 ;; nyxt --> (latest-nyxt nyxt)
@@ -348,16 +353,18 @@
 ;;; System Package Transformations
 (define latest-sbcl
   (options->transformation
-   '((with-latest   . "sbcl"))))
+   '((with-latest . "sbcl"))))
 
 ;;; Define Core System Wide Packages & Services
+
 (define cl-packages
   (list ccl
         ;;clasp-cl
         cl-iterate
+        cl-bordeaux-threads
         cl-lparallel
-        cl-serapeum
-        cl-json))
+        cl-alexandria
+        cl-serapeum))
 
 (define stumpwm-packages
   (list (latest-sbcl sbcl) ;;|--> gnu packages lisp
@@ -407,7 +414,7 @@
 
 ;; System Services
 ;; Use Package substitutes instead of compiling everything & specify channels
-;; Ref: Borrowed from iambumblehead
+;; https://guix.gnu.org/manual/en/html_node/Getting-Substitutes-from-Other-Servers.html
 (define (substitutes->services config channels)
   (guix-configuration
    (inherit config)
