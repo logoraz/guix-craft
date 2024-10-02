@@ -1,6 +1,13 @@
 ;;;; bluetooth.lisp
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
 ;;; Commentary:
+;;;
 
 ;;; References:
 ;;; 1. https://config.phundrak.com/stumpwm#bluetooth

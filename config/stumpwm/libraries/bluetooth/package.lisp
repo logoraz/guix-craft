@@ -1,5 +1,14 @@
 ;;;; package.lisp --> bluetooth
 
+;;; Author:
+;;; Erik P Almaraz
+
+;;; License:
+;;; GPLv3
+
+;;; Commentary:
+;;;
+
 (uiop:define-package #:bluetooth
   (:use #:cl :stumpwm)
   (:local-nicknames (:re :ppcre))
