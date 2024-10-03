@@ -13,6 +13,4 @@
    "binutils"
    "make"
    "curl"
-   "ecl"
-   "ccl"
    "git:send-email"))
