@@ -23,18 +23,18 @@
 
 * Guix OS Configuration
 
-  I am currently configuring Guix SD for Clasp Common Lisp and Guile Scheme
-  development.
+  This "Guix OS" Configuration is set up to act as its own distribution of the
+  GNU Guix System Distribution - staging a polished StumpWM/X11 setup, and a complete
+  set of packages & services needed. I also include my configurations for Emacs
+  and Nyxt. All configurations are contained in the config directory.
 
-  The config directory comprises of those applications/frameworks which I have
-  personaly setup (and not all my 'dot files' are therein).
-
-  Guix OS is now fully deployed via Guix using
-  =home-impure-symlinks-service-type=! All I need to do is clone this repo and
+  Guix OS is now fully deployed via Guile/Guix using
+  =home-impure-symlinks-service-type= and staged as a distribution utilizing the
+  new feature =guix-home-service-type=. All that is needed is to
   run =sudo guix system reconfigure guix-config.scm= and everything will be
-  ready to go! No more bash scripts for deploying my config scaffolding.
+  set up after initial Guix SD (nonguix) installation!
 
-  While this is considered an 'impure' approach, personally I like my
+  While this is considered an 'impure' approach, I personally like my
   configuration to be flexible as opposed to immutable. I am constantly
   experimenting and would rather have changes readily available - so I am open
   to a hybrid (aka "impure") approach when it comes to Guix on this front.
