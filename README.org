@@ -28,9 +28,11 @@
   set of packages & services needed. I also include my configurations for Emacs
   and Nyxt. All configurations are contained in the config directory.
 
-  Guix OS is now fully deployed via Guix/Guile using =home-impure-symlinks-service-type=
-  and staged as a distribution utilizing the new feature =guix-home-service-type=. All that is needed is to run =sudo guix system reconfigure guix-config.scm= and everything will be
-  set up after initial Guix SD (nonguix) installation!
+  Guix OS is now fully deployed via Guix using =home-impure-symlinks-service-type=
+  and staged as a distribution utilizing the new feature =guix-home-service-type= and
+  specifying channels therein under =guix-configuration=. All that is needed is to run
+  =sudo guix system reconfigure guix-config.scm= and everything will be set up after
+  initial Guix SD (nonguix) installation!
 
   While this is considered an 'impure' approach, I personally like my config files to be
   flexible as opposed to immutable. I am constantly experimenting and would rather have
