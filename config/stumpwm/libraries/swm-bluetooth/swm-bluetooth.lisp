@@ -1,4 +1,4 @@
-;;;; bluetooth.lisp
+;;;; swm-bluetooth.lisp
 
 ;;; Author:
 ;;; Erik P Almaraz
@@ -13,7 +13,7 @@
 ;;; 1. https://config.phundrak.com/stumpwm#bluetooth
 ;;; 2. TBD
 
-(in-package :bluetooth)
+(in-package :swm-bluetooth)
 
 (defvar *bluetooth-command* "bluetoothctl"
   "Base command for interacting with bluetooth.")

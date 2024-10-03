@@ -1,4 +1,4 @@
-;;;; package.lisp --> bluetooth
+;;;; package.lisp --> swm-bluetooth
 
 ;;; Author:
 ;;; Erik P Almaraz
@@ -9,7 +9,7 @@
 ;;; Commentary:
 ;;;
 
-(uiop:define-package #:bluetooth
+(uiop:define-package #:swm-bluetooth
   (:use #:cl :stumpwm)
   (:local-nicknames (:re :ppcre))
   (:export #:bluetooth-message-command

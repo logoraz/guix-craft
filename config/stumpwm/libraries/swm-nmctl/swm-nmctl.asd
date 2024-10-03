@@ -1,4 +1,4 @@
-;;;; bluetooth.asd
+;;;; swm-nmctl.asd
 
 ;;; Author:
 ;;; Erik P Almaraz
@@ -9,12 +9,12 @@
 ;;; Commentary:
 ;;;
 
-(defsystem "bluetooth"
-  :description "Provides simple interface to connect to Bluetooth"
+(defsystem "swm-nmctl"
+  :description "Provides simple interface to connect to networks via nmcli"
   :author "Erik P Almaraz"
   :license "GPLv3"
   :version "0.1.1"
   :serial t
-  :depends-on ("stumpwm" "cl-ppcre")
+  :depends-on ("stumpwm")
   :components ((:file "package")
-               (:file "bluetooth")))
+               (:file "swm-nmctl")))

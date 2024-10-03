@@ -1,4 +1,4 @@
-;;;; wpctl.lisp
+;;;; swm-wpctl.lisp
 
 ;;; Authors:
 ;;; Erik P Almaraz, Dmitrii Kosenkov
@@ -12,7 +12,7 @@
 ;;; References:
 ;;;
 
-(in-package :wpctl)
+(in-package :swm-wpctl)
 
 ;; formatters.
 (add-screen-mode-line-formatter #\P 'modeline)

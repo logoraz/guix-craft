@@ -1,0 +1,7 @@
+** swm-nmctl
+   This module provides Network Manager UI facilities for StumpWM
+
+** Usage
+   TBD
+
+*** Commands Provided:

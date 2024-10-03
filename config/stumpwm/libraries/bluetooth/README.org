@@ -1,7 +1,0 @@
-** bluetooth
-   This module provide bluetooth UI facilities for StumpWM
-
-** Usage
-   TBD
-
-*** Commands Provided:

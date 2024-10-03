@@ -1,0 +1,13 @@
+** swm-screenshot
+
+   Provides StumpWM with UI facilities for screenshots.
+
+** Usage
+
+Add this to your =.stumpwmrc=:
+
+#+begin_src lisp
+
+  (load-module "screenshot")
+
+#+end_src

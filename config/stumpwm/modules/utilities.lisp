@@ -14,18 +14,24 @@
 
 (in-package :stumpwm)
 
-;; Pipewire/Wirepluber Audio Controls for StumpWM
+;;; Pipewire/Wirepluber Audio Controls for StumpWM
 ;; TODO: Refactor -> move to modeline file.
-(add-to-load-path #p"~/.config/stumpwm/libraries/wpctl/")
-(load-module "wpctl")
-(setf wpctl:*modeline-fmt* "α %v")
-(setf wpctl:*wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
-(setf wpctl:*mixer-command* "playerctl")
+(add-to-load-path #p"~/.config/stumpwm/libraries/swm-wpctl/")
+(load-module "swm-wpctl")
+(setf swm-wpctl:*modeline-fmt* "α %v")
+(setf swm-wpctl:*wpctl-path* "/home/logoraz/.guix-home/profile/bin/wpctl")
+(setf swm-wpctl:*mixer-command* "playerctl")
 
-;; Simple Bluetooth Controls for StumpWM
+;;; Simple Bluetooth Controls for StumpWM
 ;; TODO: Add modeline display
-(add-to-load-path #p"~/.config/stumpwm/libraries/bluetooth/")
-(load-module "bluetooth")
+(add-to-load-path #p"~/.config/stumpwm/libraries/swm-bluetooth/")
+(load-module "swm-bluetooth")
+
+;;; Screenshots via Common Lisp -> removed scrot!
+;; Modified stumpwwm-contrib package screenshot
+(add-to-load-path #p"~/.config/stumpwm/libraries/swm-screenshot/")
+(load-module "swm-screenshot")
+
 
 ;;; Stumpwm-contrib packages not available in Guix
 ;; `end-session' - Provides session control commands, i.e. shutdown, restart,
@@ -35,7 +41,3 @@
 ;; Use loginctl instead of the default systemctl
 (setf end-session:*end-session-command* "loginctl")
 
-;;; Screenshots via Common Lisp -> removed scrot!
-;;; Modified stumpwwm-contrib package screenshot
-(add-to-load-path #p"~/.config/stumpwm/libraries/screenshot/")
-(load-module "screenshot")

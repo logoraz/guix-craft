@@ -1,4 +1,4 @@
-# StumpWM wpctl
+# StumpWM wpctl (swm-wpctl)
 
 Minimalistic PipeWire volume and microphone control module for StumpWM.
 

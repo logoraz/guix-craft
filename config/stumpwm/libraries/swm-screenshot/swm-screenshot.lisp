@@ -1,4 +1,4 @@
-;;;; screenshot.lisp
+;;;; swm-screenshot.lisp
 
 ;;; Authors:
 ;;; Erik P Almaraz, Michael Filonenko
@@ -12,7 +12,7 @@
 ;;; References:
 ;;;
 
-(in-package :screenshot)
+(in-package :swm-screenshot)
 
 (defparameter *screenshot-directory* (concatenate 'string
                                                   (getenv "HOME")

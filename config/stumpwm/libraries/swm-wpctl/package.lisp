@@ -1,4 +1,4 @@
-;;;; package.lisp -> wpctl
+;;;; package.lisp -> swm-wpctl
 
 ;;; Author:
 ;;; Erik P Almaraz
@@ -9,7 +9,7 @@
 ;;; Commentary:
 ;;;
 
-(uiop:define-package #:wpctl
+(uiop:define-package #:swm-wpctl
   (:use #:cl :stumpwm)
   (:local-nicknames (:re :ppcre)
                     (:pf :parse-float))

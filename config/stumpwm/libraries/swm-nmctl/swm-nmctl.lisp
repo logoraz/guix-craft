@@ -1,4 +1,4 @@
-;;;; network.lisp --> Network Nanagement for StumpWM
+;;;; swm-nmctl.lisp --> Network Nanagement UI for StumpWM
 
 ;;; Commentary:
 
