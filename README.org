@@ -14,7 +14,7 @@
   [[file:./assets/guix+stumpwm_desktop.png]]
 
     This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
-  Gen (Type 20FB) Laptop.
+    Gen (Type 20FB) Laptop.
 
   Git Repositories:
 
@@ -28,16 +28,14 @@
   set of packages & services needed. I also include my configurations for Emacs
   and Nyxt. All configurations are contained in the config directory.
 
-  Guix OS is now fully deployed via Guile/Guix using
-  =home-impure-symlinks-service-type= and staged as a distribution utilizing the
-  new feature =guix-home-service-type=. All that is needed is to
-  run =sudo guix system reconfigure guix-config.scm= and everything will be
+  Guix OS is now fully deployed via Guix/Guile using =home-impure-symlinks-service-type=
+  and staged as a distribution utilizing the new feature =guix-home-service-type=. All that is needed is to run =sudo guix system reconfigure guix-config.scm= and everything will be
   set up after initial Guix SD (nonguix) installation!
 
-  While this is considered an 'impure' approach, I personally like my
-  configuration to be flexible as opposed to immutable. I am constantly
-  experimenting and would rather have changes readily available - so I am open
-  to a hybrid (aka "impure") approach when it comes to Guix on this front.
+  While this is considered an 'impure' approach, I personally like my config files to be
+  flexible as opposed to immutable. I am constantly experimenting and would rather have
+  changes readily available - so I am open to a hybrid (aka "impure") approach when it
+  comes to Guix on this front.
 
 ** Guix OS (System + Home + Channels)
 
