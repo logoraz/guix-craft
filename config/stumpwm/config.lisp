@@ -29,6 +29,7 @@
 
 ;;; Set PATHs: data directory, etc.
 ;; https://stumpwm.github.io/git/stumpwm-git_67.html
+;; TODO:
 ;; stumpwm still saves stuff to ~/.stumpwm.d, want it to go to
 ;; ~/.config/stumpwm/data/ instead.
 ;; (setf *data-dir* (concat (getenv "HOME")
