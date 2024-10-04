@@ -9,5 +9,5 @@ export GTK_THEME=Adwaita:dark
 /home/logoraz/.guix-home/profile/bin/nyxt &
 
 # Sleep long enough to get the window open, and set transparency
-sleep 1.75s
+sleep 2.00s
 transset -a 0.90
