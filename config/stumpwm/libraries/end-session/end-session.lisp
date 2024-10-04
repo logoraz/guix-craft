@@ -1,11 +1,7 @@
-;;;; session-ending.lisp
+;;;; end-session.lisp
 
-;;; Author:
-;;; Erik P Almaraz
-
-;;; License:
-;;; GPLv3
-;;; Copyright (c) 2018 Stuart Dilts, 2024 Erik P Almaraz
+;;; Copyright (c) 2018 Stuart Dilts
+;;; Copyright (C) 2024 Erik P Almaraz
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person
 ;;; obtaining a copy of this software and associated documentation
@@ -28,16 +24,11 @@
 ;;; DEALINGS IN THE SOFTWARE.
 ;;;
 
-;;; Commentary:
-;;;
-
-;;; References:
-;;;
-
-(in-package #:end-session)
-
 ;;; Commands to exit out of stumpwm whie closing open programs nicely
 ;;;
+
+
+(in-package #:end-session)
 
 (defvar *end-session-command* "systemctl")
 
@@ -96,8 +87,8 @@ Returns true when yes is selected"
 
 (defvar *end-session-menu*
   (list (list "Logout" #'logout)
-        (list "Shutdown" #'shutdown-computer)
         (list "Restart"  #'restart-computer)
+        (list "Shutdown" #'shutdown-computer)
         (list "Suspend" #'suspend-computer))
   "The options that are available to quit a stumpwm session.
 Entries in the list has the format of (\"item in menu\" #'function-to-call)")
