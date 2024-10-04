@@ -43,7 +43,8 @@
 (define-key *top-map* (kbd "XF86AudioMicMute") "wpctl-source-toggle-mute")
 
 ;;; Brightness Controls
-;; TODO - create a module for brightness controls that also also display on modeline.
+;; TODO - Create library for brightness controls (swm-brightnessctl) with moddline support.
+;;      - Requires dependency brightnessctl as clarified in library name!
 (define-key *top-map* (kbd "XF86MonBrightnessDown")
   "exec brightnessctl set 5%-")
 (define-key *top-map* (kbd "XF86MonBrightnessUp")
