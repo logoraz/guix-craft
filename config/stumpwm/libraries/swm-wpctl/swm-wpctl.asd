@@ -1,14 +1,5 @@
 ;;;; swm-wpctl.asd
 
-;;; Author:
-;;; Erik P Almaraz
-
-;;; License:
-;;; GPLv3, MIT
-
-;;; Commentary:
-;;;
-
 (defsystem "swm-wpctl"
   :description "PipeWire (WirePlumber) volume and microphone control module for StumpWM"
   :author "Erik P Almaraz, Dmitrii Kosenkov"

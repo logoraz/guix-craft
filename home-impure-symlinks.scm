@@ -4,6 +4,7 @@
 ;;; Copyright © 2021 Xinglu Chen <public@yoctocell.xyz>
 ;;; Copyright © 2022-2023 Ludovic Courtès <ludo@gnu.org>
 ;;; Copyright © 2023-2024 aurtzy <aurtzy@gmail.com>
+;;; Copyright © 2023-2024 Erik P Almaraz <erikalmaraz@fastmail.com>
 ;;;
 ;;; This file is NOT part of GNU Guix.
 ;;;
@@ -28,16 +29,9 @@
 ;;; that it supports "impure symlinks" - as it is dubbed here - which are
 ;;; symlinks that do not lead into the store.
 
-;;; Adapted (most likely down-graded from
-;;; Ref: https://github.com/aurtzy/guix-config
 
-(use-modules (gnu services)
-             (gnu home services)
-             (guix gexp)
-             (guix modules)
-             (guix monads)
-             (guix store)
-             (srfi srfi-1))
+;;; Adapted (most likely down-graded from)
+;;; Ref:https://github.com/aurtzy/guix-config/blob/master/modules/my-guix/home/services.scm
 
 ;; (define-module (my-guix home services)
 ;;   #:use-module (gnu services)
@@ -48,6 +42,14 @@
 ;;   #:use-module (guix store)
 ;;   #:use-module (srfi srfi-1)
 ;;   #:export (home-impure-symlinks-service-type))
+
+(use-modules (gnu services)
+             (gnu home services)
+             (guix gexp)
+             (guix modules)
+             (guix monads)
+             (guix store)
+             (srfi srfi-1))
 
 (define (compute-impure-symlinks-file init-symlinks symlinks)
   "Return a file derivation that stores an alist of SYMLINKS (combined with

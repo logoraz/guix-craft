@@ -1,14 +1,5 @@
 ;;;; swm-screenshot.asd
 
-;;; Author:
-;;; Erik P Almaraz
-
-;;; License:
-;;; GPLv3
-
-;;; Commentary:
-;;;
-
 (defsystem "swm-screenshot"
   :serial t
   :description "Takes screenshots and stores them as png files"

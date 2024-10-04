@@ -1,14 +1,5 @@
 ;;;; swm-nmctl.asd
 
-;;; Author:
-;;; Erik P Almaraz
-
-;;; License:
-;;; GPLv3
-
-;;; Commentary:
-;;;
-
 (defsystem "swm-nmctl"
   :description "Provides simple interface to connect to networks via nmcli"
   :author "Erik P Almaraz"
