@@ -28,10 +28,12 @@
 (run-shell-command "xset b off")
 (run-shell-command "xset s off")
 
-;;; Disable Trackpad
-;; To list inputs -> xinput --list
-;; xinput list-props 12 | head -n5
-(run-shell-command "xinput set-prop 12 185 0")
+;;; Disable Trackpad (set here as default)
+;; TODO: Establish as a command so the user can toggle on/off via StumpWM
+;; |---> Place in `syntax.lisp'
+;; To list inputs -> xinput --list --> needed to establish <device> aka "id"
+;; xinput list-props 10 | head -n5 --> needed to establish <propert>
+(run-shell-command "xinput set-prop 10 185 0")
 
 ;;; UI Settings
 
