@@ -357,14 +357,12 @@
 
 ;;; Define Core System Wide Packages & Services
 
+;; Ensure the fundamental Common Lisp implementations are available on my system.
+;; TODO: Later to install fundamental cl libraries that every system should have.
 (define cl-packages
   (list ccl
         ;;clasp-cl
-        cl-iterate
-        cl-bordeaux-threads
-        cl-lparallel
-        cl-alexandria
-        cl-serapeum))
+        ecl))
 
 (define stumpwm-packages
   (list (latest-sbcl sbcl) ;;|--> gnu packages lisp
