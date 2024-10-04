@@ -21,19 +21,20 @@
 (defconstant +guix-home-path+ "/home/logoraz/.guix-home/profile/share/"
   "Define Guix Home profile PATH.")
 
+(defconstant +swm-data-dir+ (concat (getenv "XDG_CACHE_HOME")
+                                    "/stumpwm/"))
+
+;;; Set PATHs: data directory, etc.
+;; https://stumpwm.github.io/git/stumpwm-git_67.html
+;; TODO: check if directory exists, else create it!
+(setf *data-dir* (concat (getenv "HOME")
+                         "/.config/stumpwm/data/"))
+
 ;; Set StumpWM modules directory - at system level!
 (set-module-dir (concat +guix-system-path+
                         "common-lisp/sbcl/"))
 
 (setf *default-package* :stumpwm)
-
-;;; Set PATHs: data directory, etc.
-;; https://stumpwm.github.io/git/stumpwm-git_67.html
-;; TODO:
-;; stumpwm still saves stuff to ~/.stumpwm.d, want it to go to
-;; ~/.config/stumpwm/data/ instead.
-;; (setf *data-dir* (concat (getenv "HOME")
-;;                          "/.config/stumpwm/data/"))
 
 ;; A startup message can be used when initializing StumpWM, for now set to nil.
 (setf *startup-message* nil)
