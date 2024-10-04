@@ -302,19 +302,22 @@ to StumpWM-Contrib packages. Note I've modiefied most of these contrib
 packages slighly to suit my use needs and updated their package definitions
 minimizing `:use` in place of `:import-from` as suggested by the
 Common Lisp Cookbook best practices:
-- =stumpwm-wpctl= - converted to package/library
+- =swm-wpctl= - Improved from stumpwm-wpctl
   - A fork of https://github.com/Junker/stumpwm-wpctl
-  - configured/loaded in "config.lisp --> config"
-- =bluetooth= - converted to a package/library
+  - configured/loaded in "utilities.lisp"
+- =swm-bluetooth= - Modified from bluetooth found on Phundrak's blog
   - Borrowed from https://config.phundrak.com/stumpwm#bluetooth
-  - configured/loaded in "config.lisp --> config"
-- =screenshot= - Improved from stumpwm-contrib/util/screenshot
+  - configured/loaded in "utilities.lisp"
+- =swm-screenshot= - Improved from stumpwm-contrib/util/screenshot
   - Enhanced functionality - no longer need to write path & filename
     into a prompt.
   - configured/loaded in "utilities.lisp"
-- =end-session= - A la carte from stumpwm-contrib/util, staged for improvements
-  - configured/loaded in "config.lisp --> config"
 - =stump-nmctl= - TODO: make a CL interface to nmcli for StumpWM
+  - configured/loaded in "utilities.lisp"
+- =swm-finder= - TODO: make a simple CL UI File System for StumWM using cl-gtk4
+  - configured/loaded in "utilities.lisp"
+- =end-session= - A la carte from stumpwm-contrib/util, staged for improvements
+  - configured/loaded in "utilities.lisp"
 
 ** Guix [[https://github.com/stumpwm/stumpwm-contrib][stumpwm-contrib]] modules:
 These are the =stumpwm-contrib= modules available in Guix that I am using.
@@ -342,6 +345,8 @@ These are the =stumpwm-contrib= modules available in Guix that I am using.
    - https://github.com/iambumblehead/guix-home
 
    - https://systemcrafters.net/live-streams/january-13-2023/
+
+   - [[https://github.com/aurtzy/guix-config/blob/master/modules/my-guix/home/services.scm][Home Impure Symlinks Service]]
 
    - [[https://systemcrafters.net/live-streams/may-10-2024/][Guix Home Service & System-Wide Channels]]
 
