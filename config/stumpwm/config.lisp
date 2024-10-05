@@ -24,16 +24,28 @@
 (defconstant +swm-data-dir+ (concat (getenv "XDG_CACHE_HOME")
                                     "/stumpwm/"))
 
-;;; Set PATHs: data directory, etc.
-;; https://stumpwm.github.io/git/stumpwm-git_67.html
-;; TODO: check if directory exists, else create it!
-(setf *data-dir* (concat (getenv "HOME")
-                         "/.config/stumpwm/data/"))
+;;; Set PATHs: modules & data directories, etc.
 
 ;; Set StumpWM modules directory - at system level!
 (set-module-dir (concat +guix-system-path+
                         "common-lisp/sbcl/"))
 
+;; Set StumpWM data directory
+;; https://stumpwm.github.io/git/stumpwm-git_67.html
+;; Turn's out you can't change creation of `~/.stumpwm.d' as it is hard coded into
+;; stumpwm's initialization process -> created before `load-rc-file', that is, before
+;; the user's config is read in...
+;; Ref: https://github.com/stumpwm/stumpwm/blob/master/stumpwm.lisp#L262
+(defun custom-data-dir ()
+  (merge-pathnames ".cache/stumpwm/" (user-homedir-pathname)))
+
+(defun ensure-custom-data-dir ()
+  (ensure-directories-exist (custom-data-dir) :mode #o700))
+
+(ensure-custom-data-dir)
+(setf *data-dir* (custom-data-dir))
+
+;; Set StumpWM as default package
 (setf *default-package* :stumpwm)
 
 ;; A startup message can be used when initializing StumpWM, for now set to nil.
