@@ -92,7 +92,8 @@
 (defvar *end-session-keymap*
   (let ((key-map (make-sparse-keymap)))
     (define-key key-map (kbd "q")   "end-session")
-    (define-key key-map (kbd "l")   "loadrc")
+    ;; FIXME - set so reload configuration if possible
+    ;; (define-key key-map (kbd "l")   "loadrc")
     (define-key key-map (kbd "R")   "restart-hard")
     key-map))
 
