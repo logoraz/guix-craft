@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Lem SDL2
+Comment="Editor/IDE well-tuned for Common Lisp"
+Exec=/home/logoraz/.guix-profile/bin/lem
+Icon=/home/logoraz/.config/lem/lem-icon.png
+Categories=Development
+Terminal=false;
