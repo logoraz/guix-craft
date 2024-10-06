@@ -50,6 +50,7 @@ Define system-level services & packages:
    - Set OpenSSH, CUPs, Screenlocker, and Bluetooth services
    - =%desktop-services= - modify-services to utilizes package substitutes now.
    - =guix-home-service-type= - concurrently updates home profile and packages.
+     - Bug: https://lists.gnu.org/archive/html/bug-guix/2024-06/msg00085.html
 - 2. =%stumpwm-packages= - Window Manager
   Note that packages are specified only as symbols and not using
   =specifications->packages=.
