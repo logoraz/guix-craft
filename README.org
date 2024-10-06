@@ -210,6 +210,13 @@ List known connections and delete them from list in Network Manager.
 
 Some Common Lisp stuff I've trialed out in Guix System:
 
+*** ChemScribe
+A work in progress of a Common Lisp (Clasp) application I am writing for
+my line of chemistry work. Right now it is a base scaffolding and scratch
+work as I learn more about Common Lisp...
+
+Reference my repo: https://github.com/logoraz/ChemScribe
+
 *** Clasp
 
 The Clasp Common Lisp compiler is a project of extreme high interest to
@@ -246,30 +253,6 @@ Installation Instructions:
   $ guix shell -D -f guix/clasp.scm -- emacs
 
 #+end_src
-
-*** Installing Lem
-
-I created a Guix package recipe for Lem, which can be found [[https://github.com/logoraz/lem-guix-package-recipe][here]], clone and install with
-Guix via:
-
-#+begin_src sh
-
-  $ guix package -f path/to/lem-guix-packaging/package.scm
-
-#+end_src
-
-*Note:* I no longer plan to contribute to Lem due to their distasteful ethics towards
-Common Lisp newcomers and Guix users. A few rude, pompous contributors to the
-project and their interactions with me on DM's is what lead to this... Not sure if I will update this package recipe any longer knowing it will contribute to that negative
-social environment.
-My Lem config is kept in the archive directory of this repo.
-
-*** ChemScribe
-A work in progress of a Common Lisp (Clasp) application I am writing for
-my line of chemistry work. Right now it is a base scaffolding and scratch
-work as I learn more about Common Lisp...
-
-Reference my repo: https://github.com/logoraz/ChemScribe
 
 
 * StumpWM Configuration
