@@ -441,10 +441,10 @@
             (screen-locker-configuration
              (name "slock")
              (program (file-append slock "/bin/slock"))))
-   ;; Don't believe there exists a home service type for bluetooth
+   ;; See: https://guix.gnu.org/manual/en/html_node/Desktop-Services.html
    (service bluetooth-service-type
             (bluetooth-configuration
-             (auto-enable? #t)))
+             (auto-enable? #f)))
    (service cups-service-type
             (cups-configuration
              (web-interface? #t)
