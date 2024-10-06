@@ -25,7 +25,7 @@
                      fonts web-browsers gnuzilla password-utils gnupg mail
                      gstreamer video compton image-viewers linux music
                      gnucash gimp inkscape graphics compression version-control
-                     guile guile-xyz emacs emacs-xyz)
+                     guile guile-xyz emacs emacs-xyz text-editors)
 
 (use-service-modules guix cups ssh desktop xorg)
 
@@ -112,6 +112,7 @@
         font-google-noto
         font-google-noto-emoji
         font-google-noto-sans-cjk
+        lem       ;;|--> gnu packages text-editors
         (latest-nyxt nyxt) ;;|--> gnu packages web-browsers :www-mail
         icecat    ;;|--> gnu packages gnuzilla
         keepassxc ;;|--> gnu packages password-utils
@@ -276,6 +277,11 @@
                         ,(string-append
                           *home-path*
                           "config/emacs/docs"))
+                       ;; Lem Configuration Scaffolding
+                       (".config/lem"
+                        ,(string-append
+                          *home-path*
+                          "config/lem"))
                        ;; Nyxt Configuration Scaffolding
                        (".config/nyxt/config.lisp"
                         ,(string-append
