@@ -28,39 +28,50 @@
 (defvar *bluetooth-command* "bluetoothctl"
   "Base command for interacting with bluetooth.")
 
-;;; Utilities
-(defun bluetooth-message (&rest message)
-  (message (format nil "^2Bluetooth:^7 ~{~A~^ ~}" message)))
+(defun format-output (value)
+  "Format output string VALUE to remove shell formatting, returning just the state identifier."
+  (let* ((regexp "\\[(.*?)\\]") ;; captures [CHG], [DEL], etc.
+         (filter "[A-Z]+") ;; filters to replace content w/o brackets.
+         (match (re:scan-to-strings regexp value))
+         (content (re:scan-to-strings filter match)))
+    (re:regex-replace-all regexp value (concat content " -"))))
+
+(defun bluetooth-message (&rest output)
+  "Bluetooth message formatting."
+  (message (format-output (format nil "^2Bluetooth:^7 ~{~a~^ ~}" output))))
 
 (defun bluetooth-make-command (&rest args)
-  (format nil "~a ~{~A~^ ~}" *bluetooth-command* args))
+  "Make bluetooth command."
+  (format nil "~a ~{~a~^ ~}" *bluetooth-command* args))
 
 (defmacro bluetooth-command (&rest args)
+  "Bluetooth command macro."
   `(run-shell-command (bluetooth-make-command ,@args) t))
 
 (defmacro bluetooth-message-command (&rest args)
+  "Bluetooth message macro for commands."
   `(bluetooth-message (bluetooth-command ,@args)))
 
-;;; Bluetooth Devices
 (defstruct (bluetooth-device
             (:constructor make-bluetooth-device (&key (address "") (name nil)))
             (:constructor make-bluetooth-device-from-command
                 (&key (raw-name "")
                  &aux (address (second (re:split " " raw-name)))
-                      (full-name (format nil "~{~A~^ ~}"
-                                         (rest (rest (re:split " " raw-name))))))))
+                   (full-name (format nil "~{~a~^ ~}"
+                                      (rest (rest (re:split " " raw-name))))))))
+  "Bluetooth device constructor."
   address
-  (full-name (progn (format nil "~{~A~^ ~}" name))))
+  (full-name (progn (format nil "~{~a~^ ~}" name))))
 
 (defun bluetooth-get-devices ()
+  "Documentation"
   (let ((literal-devices (bluetooth-command "devices")))
     (mapcar (lambda (device)
               (make-bluetooth-device-from-command :raw-name device))
-     (re:split "\\n" literal-devices))))
+            (re:split "\\n" literal-devices))))
 
-
-;;; Connect to a device
 (defun bluetooth-connect-device (device)
+  "Connect to a bluetooth device."
   (progn
     (bluetooth-turn-on)
     (cond ((bluetooth-device-p device) ;; it is a bluetooth-device structure
@@ -85,7 +96,6 @@
                                       devices)))))
        (bluetooth-connect-device choice)))))
 
-;;; Toggle Bluetooth on/off
 (defcommand bluetooth-turn-on () ()
   "Turn on bluetooth."
   (bluetooth-message-command "power" "on"))
