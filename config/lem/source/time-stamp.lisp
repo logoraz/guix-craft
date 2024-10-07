@@ -1,15 +1,12 @@
 ;;;; time-stamp.lisp
 ;; brorrowed from https://github.com/vindarel/lem-init
 
-(defpackage :lem/time-stamp
-  (:use :cl
-        :lem)
+(defpackage :config/time-stamp
+  (:use :cl :lem)
   (:export :*time-stamp-format*
            :time-stamp))
 
-;; too short for a PR.
-
-(in-package :lem/time-stamp)
+(in-package :config/time-stamp)
 
 (defvar *time-stamp-format*
   ;; Equals Emacs org-mode's default format.
