@@ -1,6 +1,6 @@
 ;;;; file-prompt.lisp
 
-(defpackage :config/file-prompt
+(uiop:define-package :config/file-prompt
   (:use :cl :lem))
 
 (in-package :config/file-prompt)

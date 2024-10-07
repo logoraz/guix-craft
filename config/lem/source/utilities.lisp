@@ -1,6 +1,6 @@
 ;;;; utilities.lisp
 
-(defpackage :config/utilities
+(uiop:define-package :config/utilities
   (:use :cl :lem))
 
 (in-package :config/utilities)

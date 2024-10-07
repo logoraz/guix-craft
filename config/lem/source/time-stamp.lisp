@@ -1,7 +1,7 @@
 ;;;; time-stamp.lisp
 ;; brorrowed from https://github.com/vindarel/lem-init
 
-(defpackage :config/time-stamp
+(uiop:define-package :config/time-stamp
   (:use :cl :lem)
   (:export :*time-stamp-format*
            :time-stamp))

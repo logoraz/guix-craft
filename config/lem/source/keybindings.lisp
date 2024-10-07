@@ -1,6 +1,6 @@
 ;;;; keybindings.lisp
 
-(defpackage :config/keybindings
+(uiop:define-package :config/keybindings
   (:use :cl :lem))
 
 (in-package :config/keybindings)

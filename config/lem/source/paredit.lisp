@@ -1,7 +1,7 @@
 ;;;; paredit.lisp
 ;;; Borrowed from @gavinok (https://github.com/Gavinok/.lem)
 
-(defpackage :config/paredit
+(uiop:define-package :config/paredit
   (:use :cl :lem)
   (:export ))
 
