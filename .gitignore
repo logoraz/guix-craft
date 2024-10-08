@@ -2,3 +2,4 @@
 
 # Lem
 /config/lem/history*
+/config/lem/config.lisp

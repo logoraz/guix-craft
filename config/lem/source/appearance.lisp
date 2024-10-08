@@ -5,9 +5,8 @@
 
 (in-package :config/appearance)
 
-;;; SDL2 specific
 ;; FIXME: Faling with the following error:
-;; The value 0.0 is not of type SINGLE-FLOAT when binding SB-ALIEN::VALUE
+;; The value 0.8 is not of type SINGLE-FLOAT when binding SB-ALIEN::VALUE
 ;; Backtrace for: #<SB-THREAD:THREAD tid=14584 "editor" RUNNING {100CE50003}>
 ;; 0: (SDL2-FFI.FUNCTIONS:SDL-SET-WINDOW-OPACITY #<SDL2-FFI:SDL-WINDOW {#X11C3BB10}> 0.0d0)
 ;; 1: (CONFIG/APPEARANCE::TOGGLE-TRANSPARENCY)
@@ -28,10 +27,11 @@
 ;; 16: ("foreign function: call_into_lisp_")
 ;; 17: ("foreign function: funcall1")
 
+;;; SDL2 specific
 #+lem-sdl2
 (progn
-  "Transparency toggler for SDL2 frontend."
-  (defvar *transparent* nil)
+  (defvar *transparent* nil
+    "Transparency toggler for SDL2 frontend.")
   (define-command toggle-transparency () ()
     (sdl2-ffi.functions:sdl-set-window-opacity
      (lem-sdl2/display::display-window lem-sdl2/display::*display*)
