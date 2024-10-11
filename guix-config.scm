@@ -20,7 +20,7 @@
 
 (use-system-modules keyboard)
 
-(use-package-modules lisp lisp-xyz wm xorg xdisorg linux fonts
+(use-package-modules lisp lisp-xyz wm xorg xdisorg linux fonts freedesktop
                      ssh cups suckless networking package-management
                      fonts web-browsers gnuzilla password-utils gnupg mail
                      gstreamer video compton image-viewers linux music
@@ -413,6 +413,7 @@
         xclip        ;;|--> gnu packages xdisorg
         xsel
         xss-lock
+        xdg-utils    ;;|--> gnu packages freedesktop
         blueman      ;;|--> gnu package networking
         bluez))
 
