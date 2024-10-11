@@ -332,6 +332,8 @@ These are the =stumpwm-contrib= modules available in Guix that I am using.
 
    - [[https://github.com/aurtzy/guix-config/blob/master/modules/my-guix/home/services.scm][Home Impure Symlinks Service]]
 
+   - [[https://github.com/SystemCrafters/guix-installer/blob/master/guix/installer.scm][SystemCrafter Guix Installer Image]]
+
    - [[https://systemcrafters.net/live-streams/may-10-2024/][Guix Home Service & System-Wide Channels]]
 
    - [[https://github.com/abcdw/rde][Guix RDE Distrobution Mirror]]
