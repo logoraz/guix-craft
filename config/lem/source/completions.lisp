@@ -3,7 +3,6 @@
 
 (uiop:define-package :config/completions
   (:use :cl :lem))
-
 (in-package :config/completions)
 
 ;; Choose the position of the completion prompt (new in May, 2024)

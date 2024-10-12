@@ -1,6 +1,11 @@
-;;;; lem-site-init.asd
+;;;; lem-config.asd
 
-(asdf/parse-defsystem:defsystem "lem-site-init"
+(asdf/parse-defsystem:defsystem "lem-config"
+  :author "Erik P Almaraz"
+  :license "GPLv3"
+  :version "0.0.1"
+  :description "Lem Configuration."
+  :serial t
   :depends-on ()
   :components ((:module "source"
                 :components ((:file "paredit")

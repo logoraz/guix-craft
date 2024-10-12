@@ -3,8 +3,7 @@
 
 (uiop:define-package :config/paredit
   (:use :cl :lem)
-  (:export ))
-
+  (:export))
 (in-package :config/paredit)
 
 (add-hook *find-file-hook*

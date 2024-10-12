@@ -5,7 +5,6 @@
   (:use :cl :lem)
   (:export :*time-stamp-format*
            :time-stamp))
-
 (in-package :config/time-stamp)
 
 (defvar *time-stamp-format*

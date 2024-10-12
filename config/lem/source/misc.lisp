@@ -2,7 +2,6 @@
 
 (uiop:define-package :config/misc
   (:use :cl :lem))
-
 (in-package :config/misc)
 
 ;;; TODO

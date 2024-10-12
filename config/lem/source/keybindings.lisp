@@ -2,7 +2,6 @@
 
 (uiop:define-package :config/keybindings
   (:use :cl :lem))
-
 (in-package :config/keybindings)
 
 ;; Make undo & redo what I am used to
