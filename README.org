@@ -9,16 +9,12 @@
 #+macro: latest-export-date '(eval (format-time-string "%F %T %z"))'
 :end:
 
-  My personal GNU Guix OS (System & Home) + StumpWM Configuration!
+My personal GNU Guix OS (System & Home) + StumpWM Configuration!
 
-  [[file:./assets/guix+stumpwm_desktop.png]]
+[[file:./assets/guix-os_stumpwm.png]]
 
-    This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
-    Gen (Type 20FB) Laptop.
-
-  Git Repositories:
-
-  - GitHub: https://github.com/logoraz/guix-craft.git
+This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
+Gen (Type 20FB) Laptop.
 
 
 * Guix OS Configuration
