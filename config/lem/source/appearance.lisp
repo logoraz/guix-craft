@@ -10,21 +10,20 @@
 ;;; SDL2 specific
 #+lem-sdl2
 (progn
-  (defvar *transparent* nil
+  (defvar *opaque* t
     "Transparency toggler for SDL2 frontend.")
-  (define-command toggle-transparency () ()
+
+  (defun set-opacity (opacity)
+    "Set SDL2 opacity, aka transparency."
     (sdl2-ffi.functions:sdl-set-window-opacity
-     (lem-sdl2/display::display-window lem-sdl2/display::*display*)
-     (if *transparent*
-         1.0
-         0.8))
-    (setf *transparent* (not *transparent*))))
+     (lem-sdl2/display::display-window lem-sdl2/display::*display*) opacity))
+
+  (define-command toggle-opacity () ()
+    (set-opacity (if *opaque* 0.8 1.0))
+    (setf *opaque* (not *opaque*))))
 
 ;; https://github.com/lem-project/lem/discussions/748
-(defun set-transparency (opacity)
-  "Set SDL2 opacity"
-  (sdl2-ffi.functions:sdl-set-window-opacity
-   (lem-sdl2/display::display-window lem-sdl2/display::*display*) opacity))
 
-;; (set-transparency 0.8)
+
+;; (set-opacity 0.8)
   
