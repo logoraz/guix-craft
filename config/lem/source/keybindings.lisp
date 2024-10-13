@@ -13,5 +13,7 @@
   (define-key *global-keymap* "C-h B" 'describe-bindings)
   (define-key *global-keymap* "C-h k" 'describe-key)
   (define-key *global-keymap* "C-h a" 'apropos-command)
-  (define-key *global-keymap* "C-h p" 'lem-lisp-mode:lisp-apropos-package))
+  (define-key *global-keymap* "C-h p" 'lem-lisp-mode:lisp-apropos-package)
+  (define-key *global-keymap* "C-x F" 'lem-core/commands/file:find-file-recursively))
+
 (custom-keybindings) ; Enable custom keybindings on initialization.
