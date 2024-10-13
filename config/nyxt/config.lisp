@@ -20,14 +20,6 @@
 ;;; everywhere.
 #+(or nyxt-3 nyxt-4) (reset-asdf-registries)
 
-;;; Load quicklisp
-#+quicklisp
-(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
-                                       (user-homedir-pathname))))
-  (when (probe-file quicklisp-init)
-    (load quicklisp-init)))
-
-
 ;; Loading files from the same directory (~/.config/nyxt/).
 (define-nyxt-user-system-and-load nyxt-user/basic-config
   ;; :config-directory (#P"~/.config/nyxt/modules/")
@@ -63,6 +55,7 @@
 ;;; Nyxt Extensions
 ;;; ~/.local/share/nyxt/extensions/*
 (define-nyxt-user-system-and-load nyxt-user/nx-invader-2-proxy
+  ;; :extensions-directory (#P"~/.config/nyxt/extensions/")
   :description "Dark style theme for Nyxt"
   :depends-on ("nx-invader-2"))
 
