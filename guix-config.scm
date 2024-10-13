@@ -359,8 +359,6 @@
         xsel
         xss-lock
         xdg-utils           ;;|--> gnu packages freedesktop
-        desktop-file-utils
-        shared-mime-info
         blueman             ;;|--> gnu package networking
         bluez))
 

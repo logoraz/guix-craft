@@ -9,6 +9,7 @@
 ;; --> nyxt.desktop
 
 ;; XDG_DATA_DIRS:
-;; /home/logoraz/.guix-home/profile/share:/run/current-system/profile/share:/home/logoraz/.guix-profile/share:/run/current-system/profile/share
+;; /home/logoraz/.guix-home/profile/share:/run/current-system/profile/share:\
+;; /home/logoraz/.guix-profile/share:/run/current-system/profile/share
 
 ;; 
