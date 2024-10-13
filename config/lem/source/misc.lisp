@@ -10,6 +10,12 @@
 ;; Logs on the terminal output:
 (log:config :info)
 
+;; Dashboard
+;; (setf lem-dashboard:*dashboard-enable* nil)
+(lem-dashboard:set-default-dashboard :project-count 3 
+                                     :file-count 7
+                                     :hide-links t)
+
 ;;; Commands
 (define-command open-init-file () ()
   ;; @sasanidas
