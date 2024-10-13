@@ -192,41 +192,7 @@
      (service home-dbus-service-type) ;; for bluetooth --> system
      (simple-service 'home-impure-symlinks-dotfiles
                      home-impure-symlinks-service-type
-                     `(;; Guix Configuration Scaffolding
-                       (".config/guix/guix-config.scm"
-                        ,(string-append
-                          *home-path*
-                          "config/guix/guix-config.scm"))
-                       (".config/guix/home-impure-symlinks.scm"
-                        ,(string-append
-                          *home-path*
-                          "config/guix/home-impure-symlinks.scm"))
-                       (".config/guix/manifests"
-                        ,(string-append
-                          *home-path*
-                          "config/guix/manifests"))
-                       (".config/guix/dot-bashrc.sh"
-                        ,(string-append
-                          *home-path*
-                          "config/guix/dot-bashrc.sh"))
-                       (".config/guix/dot-bash_profile.sh"
-                        ,(string-append
-                          *home-path*
-                          "config/guix/dot-bash_profile.sh"))
-                       ;; Common Lisp Configration Scaffolding
-                       (".config/common-lisp/source-registry.conf.d"
-                        ,(string-append
-                          *home-path*
-                          "config/common-lisp/source-registry.conf.d"))
-                       (".sbclrc"
-                        ,(string-append
-                          *home-path*
-                          "config/common-lisp/dot-sbclrc.lisp"))
-                       (".clasprc"
-                        ,(string-append
-                          *home-path*
-                          "config/common-lisp/dot-clasprc.lisp"))
-                       ;; StumpWM Configuration Scaffolding
+                     `(;; StumpWM XDG Configuration Scaffolding
                        (".config/stumpwm/config"
                         ,(string-append
                           *home-path*
@@ -256,57 +222,34 @@
                         ,(string-append
                           *home-path*
                           "config/xorg/start-xterm.sh"))
+                       ;; Common Lisp Configration Scaffolding
+                       (".config/common-lisp/source-registry.conf.d"
+                        ,(string-append
+                          *home-path*
+                          "config/common-lisp/source-registry.conf.d"))
+                       (".sbclrc"
+                        ,(string-append
+                          *home-path*
+                          "config/common-lisp/dot-sbclrc.lisp"))
+                       (".clasprc"
+                        ,(string-append
+                          *home-path*
+                          "config/common-lisp/dot-clasprc.lisp"))
                        ;; Emacs Configuration Scaffolding
-                       (".config/emacs/init.el"
+                       (".config/emacs"
                         ,(string-append
                           *home-path*
-                          "config/emacs/init.el"))
-                       (".config/emacs/early-init.el"
-                        ,(string-append
-                          *home-path*
-                          "config/emacs/early-init.el"))
-                       (".config/emacs/modules"
-                        ,(string-append
-                          *home-path*
-                          "config/emacs/modules"))
-                       (".config/emacs/elisp"
-                        ,(string-append
-                          *home-path*
-                          "config/emacs/elisp"))
-                       (".config/emacs/docs"
-                        ,(string-append
-                          *home-path*
-                          "config/emacs/docs"))
+                          "config/emacs"))
                        ;; Lem Configuration Scaffolding
                        (".config/lem"
                         ,(string-append
                           *home-path*
                           "config/lem"))
                        ;; Nyxt Configuration Scaffolding
-                       (".config/nyxt/config.lisp"
+                       (".config/nyxt"
                         ,(string-append
                           *home-path*
-                          "config/nyxt/config.lisp"))
-                       (".config/nyxt/passwords.lisp"
-                        ,(string-append
-                          *home-path*
-                          "config/nyxt/passwords.lisp"))
-                       (".config/nyxt/passwords-dev.lisp"
-                        ,(string-append
-                          *home-path*
-                          "config/nyxt/passwords-dev.lisp"))
-                       (".config/nyxt/utilities.lisp"
-                        ,(string-append
-                          *home-path*
-                          "config/nyxt/utilities.lisp"))
-                       (".config/nyxt/bookmarks.lisp"
-                        ,(string-append
-                          *home-path*
-                          "config/nyxt/bookmarks.lisp"))
-                       (".config/nyxt/start-nyxt.sh"
-                        ,(string-append
-                          *home-path*
-                          "config/nyxt/start-nyxt.sh"))
+                          "config/nyxt"))
                        (".local/share/nyxt/extensions"
                         ,(string-append
                           *home-path*
@@ -314,10 +257,12 @@
      (simple-service 'env-vars home-environment-variables-service-type
                      '(("EDITOR" . "emacs")
                        ("BROWSER" . "nyxt")
+                       ;; ("OPENER" . "opener.sh")
                        ("XDG_SESSION_TYPE" . "x11")
                        ("XDG_SESSION_DESKOP" . "stumpwm")
                        ("XDG_CURRENT_DESKTOP" . "stumpwm")
-                       ("XDG_DOWNLOAD_DIR" . "/home/logoraz/Downloads")))
+                       ;; ("XDG_DOWNLOAD_DIR" . "/home/logoraz/Downloads")
+                       ("GUILE_WARN_DEPRECATED" . "detailed")))
      (service home-bash-service-type
               (home-bash-configuration
                (guix-defaults? #f)
@@ -371,8 +316,8 @@
         ecl))
 
 (define stumpwm-packages
-  (list (latest-sbcl sbcl) ;;|--> gnu packages lisp
-        sbcl-slynk         ;;|--> gnu packages lisp-xyz
+  (list (latest-sbcl sbcl)         ;;|--> gnu packages lisp
+        sbcl-slynk                 ;;|--> gnu packages lisp-xyz
         sbcl-zippy
         sbcl-parse-float
         sbcl-local-time
@@ -389,20 +334,20 @@
         sbcl-bordeaux-threads
         sbcl-cl-fad
         sbcl-clx-truetype
-        stumpwm+slynk          ;;|--> gnu packages wm
-        sbcl-stumpwm-ttf-fonts ;;:stumpwm-contrib/util
+        stumpwm+slynk              ;;|--> gnu packages wm
+        sbcl-stumpwm-ttf-fonts     ;;:stumpwm-contrib/util
         sbcl-stumpwm-kbd-layouts
         sbcl-stumpwm-swm-gaps
         sbcl-stumpwm-globalwindows
-        sbcl-stumpwm-cpu ;;:stumpwm-contrib/modeline
+        sbcl-stumpwm-cpu           ;;:stumpwm-contrib/modeline
         sbcl-stumpwm-mem
         sbcl-stumpwm-wifi
         sbcl-stumpwm-battery-portable))
 
 (define x11-util-packages
-  (list font-hack    ;;|--> gnu packages fonts
+  (list font-hack           ;;|--> gnu packages fonts
         font-jetbrains-mono
-        xterm        ;;|--> gnu packages xorg
+        xterm               ;;|--> gnu packages xorg
         transset
         xhost
         xset
@@ -410,11 +355,13 @@
         xinput
         xrdb
         xrandr
-        xclip        ;;|--> gnu packages xdisorg
+        xclip               ;;|--> gnu packages xdisorg
         xsel
         xss-lock
-        xdg-utils    ;;|--> gnu packages freedesktop
-        blueman      ;;|--> gnu package networking
+        xdg-utils           ;;|--> gnu packages freedesktop
+        desktop-file-utils
+        shared-mime-info
+        blueman             ;;|--> gnu package networking
         bluez))
 
 ;; System Services
