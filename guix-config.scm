@@ -313,7 +313,10 @@
 (define cl-packages
   (list ccl
         ;;clasp-cl
-        ecl))
+        cl-iterate
+        cl-bordeaux-threads
+        cl-lparallel
+        cl-slime-swank))
 
 (define stumpwm-packages
   (list (latest-sbcl sbcl)         ;;|--> gnu packages lisp
@@ -334,7 +337,7 @@
         sbcl-bordeaux-threads
         sbcl-cl-fad
         sbcl-clx-truetype
-        stumpwm+slynk              ;;|--> gnu packages wm
+        stumpwm                    ;;|--> gnu packages wm
         sbcl-stumpwm-ttf-fonts     ;;:stumpwm-contrib/util
         sbcl-stumpwm-kbd-layouts
         sbcl-stumpwm-swm-gaps
