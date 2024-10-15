@@ -114,12 +114,12 @@
 
 ;;; Slynk/Swank Server Controls
 ;; FIXME: slynk not loading...
-(defvar *slynk-swank-keymap*
+(defvar *slynk-micros-keymap*
   (let ((key-map (make-sparse-keymap)))
     (define-key key-map (kbd "y") "slynk-start-server")
     (define-key key-map (kbd "z") "slynk-stop-server")
-    ;; (define-key key-map (kbd "w") "swank-start-server")
-    ;; (define-key key-map (kbd "x") "swank-stop-server")
+    ;; (define-key key-map (kbd "w") "micros-start-server")
+    ;; (define-key key-map (kbd "x") "micros-stop-server")
     key-map))
 
 (define-key *root-map* (kbd "L") '*slynk-swank-keymap*)

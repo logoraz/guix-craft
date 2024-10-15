@@ -58,26 +58,28 @@
    (lambda () (slynk:stop-server 4005)))
   (echo-string (current-screen "Closing slynk.")))
 
-;; Swank (cl-slime-swank)
-;; (defcommand swank-start-server () ()
-;;   "Start a swank server."
-;;   (require :swank)
-;;   (sb-thread:make-thread
-;;    (lambda () (swank:create-server :port 4005
-;;                                    :style swank:*communication-style*
-;;                                    :dont-close t)))
-;;   (echo-string (current-screen) "Starting swank."))
-
-;; (defcommand swank-stop-server () ()
-;;   "Stop current swank server."
-;;   (sb-thread:make-thread
-;;    (lambda () (swank:stop-server :port 4005)))
-;;   (echo-string (current-string) "Closing swank."))
-
-
 ;; Kept for archive purposes
 ;; (defcommand slynk (port) ((:string "Port number: "))
 ;;   (sb-thread:make-thread
 ;;    (lambda ()
 ;;      (slynk:create-server :port (parse-integer port) :dont-close t))
 ;;    :name "Start Slynk server process."))
+
+
+;;; micros (cl-micros)
+;; (defcommand micros-start-server () ()
+;;   "Start a swank server."
+;;   (require :swank)
+;;   (sb-thread:make-thread
+;;    (lambda () (micros:create-server :port 4005
+;;                                    :style swank:*communication-style*
+;;                                    :dont-close t)))
+;;   (echo-string (current-screen) "Starting swank."))
+
+;; (defcommand micros-stop-server () ()
+;;   "Stop current swank server."
+;;   (sb-thread:make-thread
+;;    (lambda () (micros:stop-server :port 4005)))
+;;   (echo-string (current-string) "Closing swank."))
+
+
