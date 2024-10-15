@@ -43,7 +43,8 @@
 (define-key *top-map* (kbd "XF86AudioMicMute") "wpctl-source-toggle-mute")
 
 ;;; Brightness Controls
-;; TODO - Create library for brightness controls (swm-brightnessctl) with moddline support.
+;; TODO - Create library for brightness controls (swm-brightnessctl) with moddline
+;;        support.
 ;;      - Requires dependency brightnessctl as clarified in library name!
 (define-key *top-map* (kbd "XF86MonBrightnessDown")
   "exec brightnessctl set 5%-")
@@ -92,10 +93,11 @@
 ;;; Session Controls (end-session)
 (defvar *end-session-keymap*
   (let ((key-map (make-sparse-keymap)))
-    (define-key key-map (kbd "q")   "end-session")
+    (define-key key-map (kbd "q") "end-session")
+    (define-key key-map (kbd "l") "exec slock")
     ;; FIXME - set so reload configuration if possible
     ;; (define-key key-map (kbd "l")   "loadrc")
-    (define-key key-map (kbd "R")   "restart-hard")
+    (define-key key-map (kbd "R") "restart-hard")
     key-map))
 
 (define-key *root-map* (kbd "q") '*end-session-keymap*)
@@ -109,3 +111,15 @@
     key-map))
 
 (define-key *root-map* (kbd "B") '*bluetooth-keymap*)
+
+;;; Slynk/Swank Server Controls
+;; FIXME: slynk not loading...
+(defvar *slynk-swank-keymap*
+  (let ((key-map (make-sparse-keymap)))
+    (define-key key-map (kbd "y") "slynk-start-server")
+    (define-key key-map (kbd "z") "slynk-stop-server")
+    ;; (define-key key-map (kbd "w") "swank-start-server")
+    ;; (define-key key-map (kbd "x") "swank-stop-server")
+    key-map))
+
+(define-key *root-map* (kbd "L") '*slynk-swank-keymap*)

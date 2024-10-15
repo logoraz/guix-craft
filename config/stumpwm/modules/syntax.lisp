@@ -16,7 +16,6 @@
 
 ;;; StumpWM Commands --> keybindings set in keybindings.lisp file
 
-
 ;; (defcommand firefox () ()
 ;;   "Run or raise Firefox."
 ;;   (sb-thread:make-thread (lambda () (run-or-raise "firefox" '(:class "Firefox") t nil))))
@@ -36,26 +35,49 @@
   (vsplit)
   (move-focus :down))
 
-;; (defcommand term (&optional program) ()
-;;   "Invoke a terminal, possibly with a @arg{program}."
+(defcommand term (&optional program) ()
+  "Invoke a terminal, possibly with a @arg{program}."
+  (sb-thread:make-thread
+   (lambda ()
+     (run-shell-command (if program
+                            (format nil "kitty ~A" program)
+                            "kitty")))))
+
+;;; Common Lisp Servers (Slynk & Swank)
+;; Slynk (preferred --> stumpwm+slynk package
+(defcommand slynk-start-server () ()
+  "Start a slynk server for sly."
+  (require :slynk)
+  (sb-thread:make-thread
+   (lambda () (slynk:create-server :port 4005 :dont-close t)))
+  (echo-string (current-screen) "Starting slynk."))
+
+(defcommand slynk-stop-server () ()
+  "Stop current slynk server for sly."
+  (sb-thread:make-thread
+   (lambda () (slynk:stop-server 4005)))
+  (echo-string (current-screen "Closing slynk.")))
+
+;; Swank (cl-slime-swank)
+;; (defcommand swank-start-server () ()
+;;   "Start a swank server."
+;;   (require :swank)
+;;   (sb-thread:make-thread
+;;    (lambda () (swank:create-server :port 4005
+;;                                    :style swank:*communication-style*
+;;                                    :dont-close t)))
+;;   (echo-string (current-screen) "Starting swank."))
+
+;; (defcommand swank-stop-server () ()
+;;   "Stop current swank server."
+;;   (sb-thread:make-thread
+;;    (lambda () (swank:stop-server :port 4005)))
+;;   (echo-string (current-string) "Closing swank."))
+
+
+;; Kept for archive purposes
+;; (defcommand slynk (port) ((:string "Port number: "))
 ;;   (sb-thread:make-thread
 ;;    (lambda ()
-;;      (run-shell-command (if program
-;;                             (format nil "kitty ~A" program)
-;;                             "kitty")))))
-
-;;; Define commands to create slynk server -> no need to run all the time.
-;; (require :slynk)
-;; (defcommand sly-start-server () ()
-;;   "Start a slynk server for sly."
-;;   (sb-thread:make-thread
-;;    (lambda () (slynk:create-server :port 4005 :dont-close t))))
-
-;; (defcommand sly-stop-server () ()
-;;   "Stop current slynk server for sly."
-;;   (sb-thread:make-thread
-;;    (lambda () (slynk:stop-server 4005))))
-
-;; Add to keybindings.lisp
-;; (define-key key-map (kbd "y") "sly-start-server")
-;; (define-key key-map (kbd "z") "sly-stop-server")
+;;      (slynk:create-server :port (parse-integer port) :dont-close t))
+;;    :name "Start Slynk server process."))
