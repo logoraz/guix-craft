@@ -47,3 +47,6 @@
 
 ;;; Enable screen locking on suspend
 (run-shell-command "xss-lock -- slock")
+
+;;; Additional Xorg resources
+(run-shell-command "xrdb -merge ~/.Xresources")

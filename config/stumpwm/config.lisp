@@ -51,6 +51,10 @@
 ;; A startup message can be used when initializing StumpWM, for now set to nil.
 (setf *startup-message* nil)
 
+;; Import asdf-loads
+;; ref: https://www.github.com/aartaka/stumpwm-config
+;; (asdf:load-systems :slynk :swank)
+
 ;; TODO: Determine what the value of AltGr key is and then let's set it.
 ;; (setf *altgr-offset* 4)
 ;; (register-altgr-as-modifier)
@@ -73,23 +77,6 @@
 ;; TODO: Put in modeline module?
 (when *initializing*
   (mode-line))
-
-;;; TODO maybe put in frames module...
-(setf *mouse-focus-policy* :click ; Mouse click should focus the window
-      *float-window-modifier* :SUPER) ; Set super key to move floating windows
-
-;;; Navigate between windows from all workspaces
-(load-module "globalwindows")
-
-;;; Additional Xorg resources
-(run-shell-command "xrdb -merge ~/.Xresources")
-
-;;; Start StumpWM slynk server - persistent for session
-;; Always hacking StumpWM
-;; TODO: make command to toggle connection to slynk & swank!
-;; (require :slynk)
-;; (sb-thread:make-thread
-;;  (lambda () (slynk:create-server :port 4005 :dont-close t)))
 
 ;; Notify that everything is ready!
 (setf *startup-message*

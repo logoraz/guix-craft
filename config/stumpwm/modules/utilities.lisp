@@ -32,7 +32,6 @@
 (add-to-load-path #p"~/.config/stumpwm/libraries/swm-screenshot/")
 (load-module "swm-screenshot")
 
-
 ;;; Stumpwm-contrib packages not available in Guix
 ;; `end-session' - Provides session control commands, i.e. shutdown, restart,
 ;; and logoff for StumpWM.
@@ -40,4 +39,3 @@
 (load-module "end-session")
 ;; Use loginctl instead of the default systemctl
 (setf end-session:*end-session-command* "loginctl")
-

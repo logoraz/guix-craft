@@ -71,3 +71,10 @@
       *float-window-title-height* 15
       *window-border-style*       :none
       *window-format*             "%n:%t")
+
+;;; Mouse focus/float window settings
+(setf *mouse-focus-policy* :click ; Mouse click should focus the window
+      *float-window-modifier* :SUPER) ; Set super key to move floating windows
+
+;;; Navigate between windows from all workspaces
+(load-module "globalwindows")
