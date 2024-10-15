@@ -39,3 +39,11 @@
 (load-module "end-session")
 ;; Use loginctl instead of the default systemctl
 (setf end-session:*end-session-command* "loginctl")
+
+;;; Screensaver command for slock
+(defvar *screenlock-command* "slock"
+  "Set screenlock command executable, default is slock.")
+
+(defcommand lock-screen () ()
+  "Screenlock command using slock - bound in keybindings under end-session map."
+  (run-shell-command *screenlock-command*))

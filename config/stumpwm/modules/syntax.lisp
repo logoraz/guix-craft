@@ -66,20 +66,15 @@
 ;;    :name "Start Slynk server process."))
 
 
-;;; micros (cl-micros)
-;; (defcommand micros-start-server () ()
-;;   "Start a swank server."
-;;   (require :swank)
-;;   (sb-thread:make-thread
-;;    (lambda () (micros:create-server :port 4005
-;;                                    :style swank:*communication-style*
-;;                                    :dont-close t)))
-;;   (echo-string (current-screen) "Starting swank."))
+;;; micros (cl-micros) --> ~/common-lisp
+(defcommand micros-start-server () ()
+  "Start a swank server."
+  (sb-thread:make-thread
+   (lambda () (micros:create-server :port 4005 :dont-close t)))
+  (echo-string (current-screen) "Starting micros/swank."))
 
-;; (defcommand micros-stop-server () ()
-;;   "Stop current swank server."
-;;   (sb-thread:make-thread
-;;    (lambda () (micros:stop-server :port 4005)))
-;;   (echo-string (current-string) "Closing swank."))
-
-
+(defcommand micros-stop-server () ()
+  "Stop current swank server."
+  (sb-thread:make-thread
+   (lambda () (micros:stop-server :port 4005)))
+  (echo-string (current-string) "Closing micros/swank."))

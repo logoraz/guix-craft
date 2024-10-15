@@ -94,7 +94,7 @@
 (defvar *end-session-keymap*
   (let ((key-map (make-sparse-keymap)))
     (define-key key-map (kbd "q") "end-session")
-    (define-key key-map (kbd "l") "exec slock")
+    (define-key key-map (kbd "l") "lock-screen")
     ;; FIXME - set so reload configuration if possible
     ;; (define-key key-map (kbd "l")   "loadrc")
     (define-key key-map (kbd "R") "restart-hard")
@@ -118,8 +118,8 @@
   (let ((key-map (make-sparse-keymap)))
     (define-key key-map (kbd "y") "slynk-start-server")
     (define-key key-map (kbd "z") "slynk-stop-server")
-    ;; (define-key key-map (kbd "w") "micros-start-server")
-    ;; (define-key key-map (kbd "x") "micros-stop-server")
+    (define-key key-map (kbd "w") "micros-start-server")
+    (define-key key-map (kbd "x") "micros-stop-server")
     key-map))
 
-(define-key *root-map* (kbd "L") '*slynk-swank-keymap*)
+(define-key *root-map* (kbd "L") '*slynk-micros-keymap*)
