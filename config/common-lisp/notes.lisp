@@ -27,8 +27,42 @@
   "Replace the first element of a list with ELEM."
   (cons elem (rest list)))
 
+;; NOT = NULL (predicates), NOT is reserved for logical operations and NULL for list operations.
+;; LENGTH fails for non-nil terminated lists
+
 ;; listp and consp (is this equal to scheme's pair?)
 ;; In Common Lisp (pairp '(a . b)) => T, whereas in Scheme (pair? '(a . b)) => #f
 (defun proper-listp (list)
-  "Predicate to test for proper list."
-  (and (listp list) (atom (rest list))))
+  "Predicate to test for proper list, i.e. nil terminated."
+  (loop for item in list))
+
+;;; Lem Stuff
+(defun connected-slime-message (connection)
+  (display-popup-message
+   (format nil "Swank server running on ~A ~A"
+           (connection-implementation-name connection)
+           (connection-implementation-version connection))
+   :timeout 1
+   :style '(:gravity :center)))
+
+(defun connect-to-micros (hostname port)
+  (let ((connection
+          (handler-case (if (eq hostname *localhost*)
+                            (or (ignore-errors (new-connection "127.0.0.1" port))
+                                (new-connection "localhost" port))
+                            (new-connection hostname port))
+            (error (c)
+              (editor-error "~A" c)))))
+    (add-and-change-connection connection)
+    (start-thread)
+    connection))
+
+(define-command slime-connect (hostname port &optional (start-repl t))
+    ((:splice
+      (list (prompt-for-string "Hostname: " :initial-value *localhost*)
+            (parse-integer
+             (prompt-for-string "Port: "
+                                :initial-value (princ-to-string *default-port*))))))
+  (let ((connection (connect-to-micros hostname port)))
+    (when start-repl (start-lisp-repl))
+    (connected-slime-message connection)))
