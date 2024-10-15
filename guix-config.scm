@@ -302,6 +302,7 @@
          (type "ext4"))))
 
 ;;; System Package Transformations
+;; Apply in package list (latest-sbcl sbcl)
 (define latest-sbcl
   (options->transformation
    '((with-latest . "sbcl"))))
@@ -319,9 +320,8 @@
         cl-slime-swank))
 
 (define stumpwm-packages
-  (list (latest-sbcl sbcl)         ;;|--> gnu packages lisp
-        sbcl-slynk                 ;;|--> gnu packages lisp-xyz
-        sbcl-zippy
+  (list sbcl                       ;;|--> gnu packages lisp
+        sbcl-zippy                 ;;|--> gnu packages lisp-xyz
         sbcl-parse-float
         sbcl-local-time
         sbcl-cl-ppcre
@@ -337,7 +337,7 @@
         sbcl-bordeaux-threads
         sbcl-cl-fad
         sbcl-clx-truetype
-        stumpwm                    ;;|--> gnu packages wm
+        stumpwm+slynk                    ;;|--> gnu packages wm
         sbcl-stumpwm-ttf-fonts     ;;:stumpwm-contrib/util
         sbcl-stumpwm-kbd-layouts
         sbcl-stumpwm-swm-gaps
