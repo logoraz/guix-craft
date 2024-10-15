@@ -9,13 +9,16 @@
 ;; NIL is unique in that it is simultaneously both a symbol and a list
 ;; (car nil) := nil & (cdr nil) := nil
 
+;; Note: In Common Lisp - FIRST returns the CAR of a list, REST returns the CDR of a list.
+;;
+
 ;; Stnnetrt between CONS and CAR/CDR can be expressed as:
 ;; x = (cons (car x) (cdr x)) [ x = (cons (first x) (rest x)) ]
 ;; |
 ;; |--> x /= nil, since nil /= (cons (car nil) (cdr nil) = (nil)
 
-;; Note: In Common Lisp - FIRST returns the CAR of a list, REST returns the CDR of a list.
-;;
+;; Defn: `cons' makes a single cons cell, `list' makes a new cons cell chain out of
+;;       however many inputs it receives.
 
 ;; Defining XOR function (simple):
 (defun xor (x y)
@@ -36,33 +39,3 @@
   "Predicate to test for proper list, i.e. nil terminated."
   (loop for item in list))
 
-;;; Lem Stuff
-(defun connected-slime-message (connection)
-  (display-popup-message
-   (format nil "Swank server running on ~A ~A"
-           (connection-implementation-name connection)
-           (connection-implementation-version connection))
-   :timeout 1
-   :style '(:gravity :center)))
-
-(defun connect-to-micros (hostname port)
-  (let ((connection
-          (handler-case (if (eq hostname *localhost*)
-                            (or (ignore-errors (new-connection "127.0.0.1" port))
-                                (new-connection "localhost" port))
-                            (new-connection hostname port))
-            (error (c)
-              (editor-error "~A" c)))))
-    (add-and-change-connection connection)
-    (start-thread)
-    connection))
-
-(define-command slime-connect (hostname port &optional (start-repl t))
-    ((:splice
-      (list (prompt-for-string "Hostname: " :initial-value *localhost*)
-            (parse-integer
-             (prompt-for-string "Port: "
-                                :initial-value (princ-to-string *default-port*))))))
-  (let ((connection (connect-to-micros hostname port)))
-    (when start-repl (start-lisp-repl))
-    (connected-slime-message connection)))
