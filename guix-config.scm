@@ -316,8 +316,7 @@
         ;;clasp-cl
         cl-iterate
         cl-bordeaux-threads
-        cl-lparallel
-        cl-slime-swank))
+        cl-lparallel))
 
 (define stumpwm-packages
   (list sbcl                       ;;|--> gnu packages lisp
