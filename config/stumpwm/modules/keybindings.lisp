@@ -88,6 +88,7 @@
     (define-key key-map (kbd "a") "screenshot-area")
     key-map))
 
+(define-key *root-map (kbd "V") *my-screenshot-keymap*)
 (define-key *top-map* (kbd "Print") '*my-screenshot-keymap*)
 
 ;;; Session Controls (end-session)
