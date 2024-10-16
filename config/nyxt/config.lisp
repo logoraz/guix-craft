@@ -20,6 +20,11 @@
 ;;; everywhere.
 #+(or nyxt-3 nyxt-4) (reset-asdf-registries)
 
+;;; Add ~/common-lisp to asdf registry to load in other packages.
+(let ((asdf:*central-registry*
+        (cons #P"~/common-lisp/" asdf:*central-registry*)))
+  (asdf:load-system :micros))
+
 ;; Loading files from the same directory (~/.config/nyxt/).
 (define-nyxt-user-system-and-load nyxt-user/basic-config
   ;; :config-directory (#P"~/.config/nyxt/modules/")
