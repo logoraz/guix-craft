@@ -71,7 +71,6 @@
     (define-key key-map (kbd "g") "exec gimp")
     (define-key key-map (kbd "p") "exec inkscape")
     (define-key key-map (kbd "b") "exec blender")
-    (define-key key-map (kbd "s") '*my-screenshot-keymap*)
     key-map))
 (define-key *root-map* (kbd "a") '*my-applications-keymap*)
 
@@ -87,8 +86,7 @@
     (define-key key-map (kbd "w") "screenshot-window")
     (define-key key-map (kbd "a") "screenshot-area")
     key-map))
-
-(define-key *root-map (kbd "V") *my-screenshot-keymap*)
+(define-key *root-map* (kbd "V") '*my-screenshot-keymap*)
 (define-key *top-map* (kbd "Print") '*my-screenshot-keymap*)
 
 ;;; Session Controls (end-session)
@@ -100,7 +98,6 @@
     ;; (define-key key-map (kbd "l")   "loadrc")
     (define-key key-map (kbd "R") "restart-hard")
     key-map))
-
 (define-key *root-map* (kbd "q") '*end-session-keymap*)
 
 ;;; Bluetooth Controls (bluetooth)
@@ -110,7 +107,6 @@
     (define-key key-map (kbd "i") "bluetooth-turn-on")
     (define-key key-map (kbd "o") "bluetooth-turn-off")
     key-map))
-
 (define-key *root-map* (kbd "B") '*bluetooth-keymap*)
 
 ;;; Slynk/Swank Server Controls
@@ -122,5 +118,4 @@
     (define-key key-map (kbd "w") "micros-start-server")
     (define-key key-map (kbd "x") "micros-stop-server")
     key-map))
-
 (define-key *root-map* (kbd "L") '*slynk-micros-keymap*)
