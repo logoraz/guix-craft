@@ -3,8 +3,8 @@
 ;;; Problem Statement:
 ;;  |--> When connecting to a running micros instance (outside of Lem) on new :port
 ;;       repl is successfully generated, connected to designated :port, however,
-;;       repl states:
-;;       |--> TBD
+;;       repl states is not clearly verbose about what connection was established.
+;;       |--> Try to modify code to state what connection (i.e. port was connected to)
 
 ;; lem/extensions/lisp-mode/lisp-mode.lisp
 
