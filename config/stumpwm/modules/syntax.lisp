@@ -45,18 +45,19 @@
 
 ;;; Common Lisp Servers (Slynk & Swank)
 ;; Slynk (preferred --> stumpwm+slynk package
+(defvar *stumpwm-port* 4005
+  "Default port to establish a connection to either slynk or micros")
+
 (defcommand slynk-start-server () ()
   "Start a slynk server for sly."
   (require :slynk)
-  (sb-thread:make-thread
-   (lambda () (slynk:create-server :port 4005 :dont-close t)))
+  (slynk:create-server :port *stumpwm-port* :dont-close t)
   (echo-string (current-screen) "Starting slynk."))
 
 (defcommand slynk-stop-server () ()
   "Stop current slynk server for sly."
-  (sb-thread:make-thread
-   (lambda () (slynk:stop-server 4005)))
-  (echo-string (current-screen "Closing slynk.")))
+  (slynk:stop-server *stumpwm-port*)
+  (echo-string (current-screen) "Closing slynk."))
 
 ;; Kept for archive purposes
 ;; (defcommand slynk (port) ((:string "Port number: "))
@@ -68,13 +69,11 @@
 
 ;;; micros (cl-micros) --> ~/common-lisp
 (defcommand micros-start-server () ()
-  "Start a swank server."
-  (sb-thread:make-thread
-   (lambda () (micros:create-server :port 4005 :dont-close t)))
+  "Start a micros server."
+  (micros:create-server :port *stumpwm-port* :dont-close t)
   (echo-string (current-screen) "Starting micros/swank."))
 
 (defcommand micros-stop-server () ()
-  "Stop current swank server."
-  (sb-thread:make-thread
-   (lambda () (micros:stop-server 4005)))
+  "Stop current micros server."
+  (micros:stop-server *stumpwm-port*)
   (echo-string (current-string) "Closing micros/swank."))
