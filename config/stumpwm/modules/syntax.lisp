@@ -76,4 +76,4 @@
 (defcommand micros-stop-server () ()
   "Stop current micros server."
   (micros:stop-server *stumpwm-port*)
-  (echo-string (current-string) "Closing micros/swank."))
+  (echo-string (current-screen) "Closing micros/swank."))
