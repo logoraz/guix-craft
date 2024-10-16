@@ -76,5 +76,5 @@
 (defcommand micros-stop-server () ()
   "Stop current swank server."
   (sb-thread:make-thread
-   (lambda () (micros:stop-server :port 4005)))
+   (lambda () (micros:stop-server 4005)))
   (echo-string (current-string) "Closing micros/swank."))
