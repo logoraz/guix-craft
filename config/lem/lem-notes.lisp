@@ -27,3 +27,9 @@
     (connected-slime-message connection)))
 
 
+;; Lem uses xdg-open
+;; Not sure why xdg-open opens icecate even when nyxt is set as the defaul browser.
+;; in $BROWSER env...
+;; /gnu/store/hzkdz5cagnp1a102l65cp8kp0d4mqvi6-xdg-utils-1.1.3/bin/.xdg-open-real
+;; /gnu/store/hzkdz5cagnp1a102l65cp8kp0d4mqvi6-xdg-utils-1.1.3/bin/xdg-open
+;; /gnu/store/x47i4yafqxdav838aykda9c2hhhn9sa4-bash-minimal-5.1.16/bin/bash

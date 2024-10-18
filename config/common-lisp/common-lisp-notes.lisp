@@ -1,4 +1,4 @@
-;;;; notes.lisp
+;;;; notes.lisp |--> Common Lisp
 
 ;;; Notes on Common Lisp
 ;;; 
@@ -35,7 +35,21 @@
 
 ;; listp and consp (is this equal to scheme's pair?)
 ;; In Common Lisp (pairp '(a . b)) => T, whereas in Scheme (pair? '(a . b)) => #f
-(defun proper-listp (list)
-  "Predicate to test for proper list, i.e. nil terminated."
-  (loop for item in list))
+;; TBD
+;; ref: https://stackoverflow.com/questions/60247877/check-for-proper-list-in-common-lisp
+(defun proper-list-p (x)
+  (not (null (handler-case (list-length x) (type-error () nil)))))
 
+;;; Unary Arithmetic with Lists
+;; List may be used to do unary ("base one") arithmetic.
+;; REST --> subtraction (substracts 1), CDDR substracts 2
+;; LENGTH --> translates unary into integers
+;; NULL --> acts as the ZEROP predicate
+;; FIRST/CAR --> acts as the PLUSP predicate
+
+;; Nonlist cons structures
+;; Defn: Proper List --> ends in NIL
+;; Defn: Dotted List --> A list that does not end in NIL, can only be made with CONS
+;; Defn: Dotted Pair --> A single cons cell whose CDR/REST is not NIL.
+
+;;; Circular Lists
