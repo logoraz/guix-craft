@@ -19,16 +19,19 @@ Gen (Type 20FB) Laptop.
 
 * Guix OS Configuration
 
-  This "Guix OS" Configuration is set up to act as its own distribution of the
-  GNU Guix System Distribution - staging a polished StumpWM/X11 setup, and a complete
-  set of packages & services needed. I also include my configurations for Emacs
-  and Nyxt. All configurations are contained in the config directory.
+  This setup takes a modular approach and is constructed as a Guile Scheme program
+  using modules:
 
-  Guix OS is now fully deployed via Guix using =home-impure-symlinks-service-type=
-  and staged as a distribution utilizing the new feature [[https://guix.gnu.org/manual/devel/en/html_node/Guix-Services.html#Guix-Home-Service][guix-home-service]] and
-  specifying channels therein via a [[https://guix.gnu.org/manual/devel/en/html_node/Customizing-the-System_002dWide-Guix.html][system-wide channel configuration]]. All that is
-  needed is to run =sudo guix system reconfigure guix-config.scm= and everything will be
-  set up after initial Guix SD (nonguix) installation!
+  - =~/dotfiles/=
+    - =config/= Top-level module path for Guix configuration
+      - =system= Operating system configuration(s)
+      - =services= Custom system-level services
+      - =packages= Custom package definitions
+      - =home= Custom =home-environment= configration(s)
+    - =files/= Other configurations used in my home configuration
+
+  The =files= directory comprises of the following home configurations: StumpWM, X11,
+  Emacs, Nyxt, and Lem.
 
   While this is considered an 'impure' approach, I personally like my config files to be
   flexible as opposed to immutable. I am constantly experimenting and would rather have
@@ -76,15 +79,6 @@ symbols, not using =specifications->packages=:
   - =home-impure-symlinks-service-type= via =home-impure-symlinks.scm=
     - TODO: find reference to original source
     - ref: https://github.com/aurtzy/guix-config
-
-Current list of defined channels and whether they are active and/or pinned at a specific commit:
-- Guix
-- Nonguix
-- guixrus
-- flatwhatson
-- rde
-- benoitj
-- aadcg
 
 ** Manifests (=./config/guix/manifests/=)
 - =devtools-manifest.scm=  - Dev Packages in general and for Common Lisp
@@ -148,30 +142,18 @@ Followed =SystemCrafters= prescription for installation:
 
 *** Initial setup/deployment (WIP)
 
-I've set up Guix OS such that I only need to clone this repo, after a
-fresh Guix SD install (described above), and run a system reconfigure.
-This is possible using =guix-home-service-type= to setup system and home
-concurrently. Deployment of my configuration herein is possible using
-=home-impure-symlinks-service-type=.
-
-In the future I plan to refactor and make this setup modular by defining
-modules appropriately and perhaps creating a channel. Ultimate goal is
-have this setup be available as a custom Guix Distrobution that anyone
-can deploy - though it is already set up this way for the most part,
-I would like to take it one step further and create a bootable image.
-See: https://systemcrafters.net/live-streams/january-13-2023/
-
+Setup/deploy by cloning my repo and running the following commands:
 
 #+begin_src sh
 
   # Get Guix OS Distrobution
-  mkdir ~/repos/
-  cd ~/repos
-  git clone https://github.com/logoraz/guix-craft.git
-  cd guix-craft/
+  git clone https://github.com/logoraz/guix-craft.git ~/dotfiles
 
-  # Deploy/Install
-  sudo guix system reconfigure guix-config.scm
+  # Deploy/Install System
+  sudo guix system -L ~/dotfiles reconfigure ~/dotfiles/config/system/system-config.scm
+
+  # Deploy/Install Home
+  guix home -L ~/dotfiles reconfigure ~/dotfiles/config/home/home-config.scm
 
 #+end_src
 
@@ -292,11 +274,11 @@ Common Lisp Cookbook best practices:
   - Enhanced functionality - no longer need to write path & filename
     into a prompt.
   - configured/loaded in "utilities.lisp"
-- =stump-nmctl= - TODO: make a CL interface to nmcli for StumpWM
-  - configured/loaded in "utilities.lisp"
-- =swm-finder= - TODO: make a simple CL UI File System for StumWM using cl-gtk4
-  - configured/loaded in "utilities.lisp"
 - =end-session= - A la carte from stumpwm-contrib/util, staged for improvements
+  - configured/loaded in "utilities.lisp"
+- =swm-brightnessctl= - TODO: make a CL interface to brightnessctl for StumpWM
+  - configured/loaded in "utilities.lisp"
+- =swm-nmctl= - TODO: make a CL interface to nmcli for StumpWM
   - configured/loaded in "utilities.lisp"
 
 ** Guix [[https://github.com/stumpwm/stumpwm-contrib][stumpwm-contrib]] modules:
@@ -324,7 +306,7 @@ These are the =stumpwm-contrib= modules available in Guix that I am using.
 
    - https://github.com/iambumblehead/guix-home
 
-   - https://systemcrafters.net/live-streams/january-13-2023/
+   - [[https://systemcrafters.net/craft-your-system-with-guix/how-to-organize-your-config/][Treat your Guix Configration as a program - SystemCrafters]]
 
    - [[https://github.com/aurtzy/guix-config/blob/master/modules/my-guix/home/services.scm][Home Impure Symlinks Service]]
 

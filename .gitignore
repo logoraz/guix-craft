@@ -1,13 +1,13 @@
 # Main
 
 # Emacs
-/config/emacs/etc/
-/config/emacs/var/
-/config/emacs/elisp/
+/files/emacs/etc/
+/files/emacs/var/
+/files/emacs/elisp/
 
 # Lem
-/config/lem/history/
-/config/lem/config.lisp
+/files/lem/history/
+/files/lem/config.lisp
 
 # Nyxt
-#/config/extensions/tbd
+#/files/extensions/tbd

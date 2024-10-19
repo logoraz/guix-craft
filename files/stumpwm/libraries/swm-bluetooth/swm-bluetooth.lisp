@@ -85,17 +85,17 @@
 
 ;;; StumpWM Interface
 (defcommand bluetooth-connect () ()
-  "Connect to an established device."
-  (sb-thread:make-thread
-   (lambda ()
-     (let* ((devices (bluetooth-get-devices))
-            (choice  (second (select-from-menu
-                              (current-screen)
-                              (mapcar (lambda (device)
-                                        `(,(bluetooth-device-full-name device)
-                                          ,device))
-                                      devices)))))
-       (bluetooth-connect-device choice)))))
+            "Connect to an established device."
+            (sb-thread:make-thread
+             (lambda ()
+               (let* ((devices (bluetooth-get-devices))
+                      (choice  (second (select-from-menu
+                                        (current-screen)
+                                        (mapcar (lambda (device)
+                                                  `(,(bluetooth-device-full-name device)
+                                                    ,device))
+                                                devices)))))
+                 (bluetooth-connect-device choice)))))
 
 (defcommand bluetooth-turn-on () ()
   "Turn on bluetooth."

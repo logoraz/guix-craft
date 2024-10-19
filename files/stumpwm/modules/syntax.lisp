@@ -20,6 +20,12 @@
 ;;   "Run or raise Firefox."
 ;;   (sb-thread:make-thread (lambda () (run-or-raise "firefox" '(:class "Firefox") t nil))))
 
+;; (defcommand my-eval (args) ((:rest "My Eval: "))
+;;   "Alternate EVAL function that returns theme formatted output, bind to ':'."
+;;   (message "~a" (eval args)))
+  
+;; (define-key *root-map* (kbd ":") "my-eval")
+
 (defcommand delete-window-and-frame () ()
   "Delete the current frame with its window."
   (delete-window)

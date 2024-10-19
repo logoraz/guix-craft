@@ -6,6 +6,7 @@
 (:url "https://github.com/stumpwm/mahogany" :title "stumpwm/mahogany: A stumpwm like Wayland compositor" :date "2024-07-29T03:10:42.990757Z" :tags ("StumpWM"))
 (:url "https://gitlab.com/eql/EQL5/-/tree/master?ref_type=heads" :title "eql / EQL5 · GitLab" :date "2024-07-29T03:10:11.099577Z" :tags ("CommonLisp"))
 (:url "https://gitlab.com/nonguix/nonguix" :title "Nonguix/nonguix · GitLab" :date "2024-07-28T03:38:04.022007Z" :tags ("Guix"))
+(:url "https://guild.systemcrafters.net/courses/guile-beginners/0424/#chapter-1-the-fundamentals-of-scheme" :title "Hands-On Guile Scheme for Beginners - System Crafters Guild" :date "2024-10-19T04:51:50.232928Z" :tags ("Guile"))
 (:url "https://guix.gnu.org/cookbook/en/html_node/Software-Development.html" :title "Software Development (GNU Guix Cookbook)" :date "2024-07-27T23:50:07.263023Z" :tags ("Guix"))
 (:url "https://issues.guix.gnu.org/" :title "Guix issue tracker" :date "2024-08-11T15:47:51.773885Z" :tags ("Guix"))
 (:url "https://lisp-docs.github.io/" :title "Common Lisp Docs" :date "2024-07-29T01:55:07.208193Z" :tags ("CommonLisp"))
