@@ -16,7 +16,7 @@
 
 ;; Load ~/common-lisp systems/packages
 (let ((asdf:*central-registry*
-        (cons #P"~/common-lisp/" asdf:*central-registry*)))
+        (cons #P"~/.local/share/common-lisp/" asdf:*central-registry*)))
   (asdf:load-system :micros))
 
 ;; Define Guix profiles

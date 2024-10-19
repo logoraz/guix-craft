@@ -22,7 +22,7 @@
 
 ;;; Add ~/common-lisp to asdf registry to load in other packages.
 (let ((asdf:*central-registry*
-        (cons #P"~/common-lisp/" asdf:*central-registry*)))
+        (cons #P"~/.local/share/common-lisp/" asdf:*central-registry*)))
   (asdf:load-system :micros))
 
 ;; Loading files from the same directory (~/.config/nyxt/).

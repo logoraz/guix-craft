@@ -11,16 +11,16 @@
 
 My personal GNU Guix OS (System & Home) + StumpWM Configuration!
 
-[[file:./assets/guix-os_stumpwm.png]]
+[[file:./files/assets/guix-os_stumpwm.png]]
 
 This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
 Gen (Type 20FB) Laptop.
 
 
-* Guix OS Configuration
+* My =Guix OS= Configuration
 
   This setup takes a modular approach and is constructed as a Guile Scheme program
-  using modules:
+  using modules with the following directory scaffolding:
 
   - =~/dotfiles/=
     - =config/= Top-level module path for Guix configuration
@@ -30,72 +30,18 @@ Gen (Type 20FB) Laptop.
       - =home= Custom =home-environment= configration(s)
     - =files/= Other configurations used in my home configuration
 
-  The =files= directory comprises of the following home configurations: StumpWM, X11,
-  Emacs, Nyxt, and Lem.
+  The =files= directory comprises of the following home configurations:
+  =StumpWM=, =X11=, =Emacs=, =Nyxt=, and =Lem=.
+
+  I am using a custom home-services module, =home-impure-symlinks=, that directly symlinks
+  my =files= directory configs to the necessary places, this way they are mutable.
 
   While this is considered an 'impure' approach, I personally like my config files to be
   flexible as opposed to immutable. I am constantly experimenting and would rather have
   changes readily available - so I am open to a hybrid (aka "impure") approach when it
   comes to Guix on this front.
 
-** Guix OS (System + Home + Channels)
-
-I've set up my entire config in =guix-config.scm=, which comprises of System, Home, and the channels for both. This is done using =guix-home-service-type=. With this, I only need to call =guix system reconfigure guix-confic.scm=, which replaces =guix pull=, =guix home reconfigure=, and =guix system reconfigure=.
-I am using channels subsitutes via =specifications->tranformations= function
-I defined based on the Guix manual's prescription.
-
-Define system-level services & packages:
-- 1. =%system-services=
-   - Set OpenSSH, CUPs, Screenlocker, and Bluetooth services
-   - =%desktop-services= - modify-services to utilizes package substitutes now.
-   - =guix-home-service-type= - concurrently updates home profile and packages.
-     - Bug: https://lists.gnu.org/archive/html/bug-guix/2024-06/msg00085.html
-- 2. =%stumpwm-packages= - Window Manager
-  Note that packages are specified only as symbols and not using
-  =specifications->packages=.
-  SBCL, SBCL-*, StumpWM+Slynk and stumpwm-contrib installed at the system
-  level.
-  font.
-  - =sbcl=
-  - =sbcl-*=
-  - =stumpwm+slynk=
-  - =sbcl-stumpwm-*=
-- 3. =%x11-util-packages= - Window System, X11 util packages and base fonts
-  - =font-hack=
-  - =font-jetbrains-mono=
-  - =bluez=
-  - =blueman=
-  - =x*=
-
-Define user-level services & packages - note packages are specified as
-symbols, not using =specifications->packages=:
-- 1. =%logoraz-packages= -> My everyday packages (fonts, apps, utils/tools)
-- 2. =%emacs-packages= -> Use Guix to setup Emacs (it's all there!)
-- 3. =services= -> wip (todo: modularize to separate variable definitions)
-  - =home-environment-variables-service-type=
-  - =home-dbus-service-type=
-  - =home-pipewire-service-type=
-  - =home-bash-service-type=
-  - =home-impure-symlinks-service-type= via =home-impure-symlinks.scm=
-    - TODO: find reference to original source
-    - ref: https://github.com/aurtzy/guix-config
-
-** Manifests (=./config/guix/manifests/=)
-- =devtools-manifest.scm=  - Dev Packages in general and for Common Lisp
-- =org-docs-manifest.scm=  - Latex packages for Org document generation
-
-I use these manifests as follows for consistent environments with packages I
-need without bloating my home configuration:
-
-#+begin_src sh
-
-  $ guix shell -m devtools-manifest.scm -- emacs
-  # or
-  $ guix shell -m org-docs-manifest.scm -- emacs
-
-#+end_src
-
-** Installation
+** GNU Guix System Distribution Intallation
 
 Basic Instructions on how to install Guix System
 *** Live Image/ISO
@@ -157,7 +103,7 @@ Setup/deploy by cloning my repo and running the following commands:
 
 #+end_src
 
-*** Connecting to Wifi via CLI
+** Connecting to Wifi via CLI
 
 Don't have yet a GUI for managing wifi connections in my StumpWM setup, so
 typically connect via command line, and so putting here as a reminder to myself:
@@ -184,9 +130,7 @@ List known connections and delete them from list in Network Manager.
 
 #+end_src
 
-** Common Lisp Stuff
-
-Some Common Lisp stuff I've trialed out in Guix System:
+** Guile Scheme Stuff
 
 *** ChemScribe
 A work in progress of a Common Lisp (Clasp) application I am writing for
@@ -194,6 +138,10 @@ my line of chemistry work. Right now it is a base scaffolding and scratch
 work as I learn more about Common Lisp...
 
 Reference my repo: https://github.com/logoraz/ChemScribe
+
+** Common Lisp Stuff
+
+Some Common Lisp stuff I've trialed out in Guix System:
 
 *** Clasp
 
@@ -311,8 +259,6 @@ These are the =stumpwm-contrib= modules available in Guix that I am using.
    - [[https://github.com/aurtzy/guix-config/blob/master/modules/my-guix/home/services.scm][Home Impure Symlinks Service]]
 
    - [[https://github.com/SystemCrafters/guix-installer/blob/master/guix/installer.scm][SystemCrafter Guix Installer Image]]
-
-   - [[https://systemcrafters.net/live-streams/may-10-2024/][Guix Home Service & System-Wide Channels]]
 
    - [[https://github.com/abcdw/rde][Guix RDE Distrobution Mirror]]
 
