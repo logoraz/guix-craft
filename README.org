@@ -142,7 +142,7 @@ A work in progress of a Common Lisp (Clasp) application I am writing for
 my line of chemistry work. Right now it is a base scaffolding and scratch
 work as I learn more about Common Lisp...
 
-Reference my repo: https://github.com/logoraz/ChemScribe
+Reference my repo: [[https://github.com/logoraz/guile-chemscribe]]
 
 ** Common Lisp Stuff
 
