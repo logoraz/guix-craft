@@ -14,11 +14,6 @@
 
 (in-package :stumpwm)
 
-;; Load ~/common-lisp systems/packages
-(let ((asdf:*central-registry*
-        (cons #P"~/.local/share/common-lisp/" asdf:*central-registry*)))
-  (asdf:load-system :micros))
-
 ;; Define Guix profiles
 (defconstant +guix-system-path+ "/run/current-system/profile/share/"
   "Define Guix System profile PATH.")
@@ -32,7 +27,7 @@
 ;;; Set PATHs: modules & data directories, etc.
 
 ;; Set StumpWM modules directory - at system level!
-(set-module-dir (concat +guix-system-path+
+(set-module-dir (concat +guix-home-path+
                         "common-lisp/sbcl/"))
 
 ;; Set StumpWM data directory

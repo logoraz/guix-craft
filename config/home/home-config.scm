@@ -13,27 +13,33 @@
 (use-package-modules fonts web-browsers gnuzilla password-utils gnupg mail
                      gstreamer video compton image-viewers linux music
                      gnucash gimp inkscape graphics compression version-control
-                     guile guile-xyz emacs emacs-xyz text-editors)
+                     guile guile-xyz emacs emacs-xyz sdl compression
+                     ;; added from system
+                     lisp lisp-xyz wm xorg xdisorg freedesktop
+                     ssh cups suckless networking package-management)
 
-
-;;; Home Package Transformations
+;;; Package Transformations
 (define latest-nyxt
   (options->transformation
    '((without-tests . "nyxt")
      (with-latest   . "nyxt"))))
 
+;;; Packages
 (define guile-packages
-  (list guile-next  ;;|--> gnu packages guile
-        guile-hoot  ;;|--> gnu packages guile-xyz
-        guile-ares-rs))
+  (list guile-next ;;|--> gnu packages guile
+        guile-hoot ;;|--> gnu packages guile-xyz
+        guile-ares-rs
+        sdl2 ;;|--> gnu package sdl
+        guile-sdl2))
 
 (define logoraz-packages
-  (list font-fira-code ;;|--> gnu packages fonts
+  (list font-hack ;;|--> gnu packages fonts
+        font-jetbrains-mono
+        font-fira-code
         font-iosevka-aile
         font-google-noto
         font-google-noto-emoji
         font-google-noto-sans-cjk
-        lem                ;;|--> gnu packages text-editors
         (latest-nyxt nyxt) ;;|--> gnu packages web-browsers :www-mail
         icecat             ;;|--> gnu packages gnuzilla
         keepassxc          ;;|--> gnu packages password-utils
@@ -58,7 +64,9 @@
         gimp      ;;|--> gnu packages gimp
         inkscape  ;;|--> gnu packages inkscape
         blender   ;;|--> gnu packages graphics
-        git))                     ;;|--> gnu packages version-control
+        zip       ;;|--> gnu packages compression
+        unzip
+        git))     ;;|--> gnu packages version-control
 
 (define emacs-packages
   (list  emacs                    ;;|--> gnu packages emacs
@@ -93,6 +101,49 @@
          emacs-erc-image
          emacs-emojify))
 
+(define stumpwm-packages
+  (list sbcl-parse-float          ;;|--> gnu packages lisp-xyz
+        sbcl-local-time
+        sbcl-cl-ppcre
+        sbcl-zpng
+        sbcl-salza2
+        sbcl-clx
+        sbcl-zpb-ttf
+        sbcl-cl-vectors
+        sbcl-cl-store
+        sbcl-trivial-features
+        sbcl-global-vars
+        sbcl-trivial-garbage
+        sbcl-bordeaux-threads
+        sbcl-cl-fad
+        sbcl-clx-truetype
+        sbcl-stumpwm-ttf-fonts     ;;|--> gnu packages wm; :stumpwm-contrib/util
+        sbcl-stumpwm-kbd-layouts
+        sbcl-stumpwm-swm-gaps
+        sbcl-stumpwm-globalwindows
+        sbcl-stumpwm-cpu           ;;:stumpwm-contrib/modeline
+        sbcl-stumpwm-mem
+        sbcl-stumpwm-wifi
+        sbcl-stumpwm-battery-portable))
+
+(define x11-util-packages
+  (list font-hack ;;|--> gnu packages fonts
+        font-jetbrains-mono
+        xterm ;;|--> gnu packages xorg
+        transset
+        xhost
+        xset
+        xsetroot
+        xinput
+        xrdb
+        xrandr
+        xclip ;;|--> gnu packages xdisorg
+        xsel
+        xss-lock
+        xdg-utils ;;|--> gnu packages freedesktop
+        blueman   ;;|--> gnu package networking
+        bluez))
+
 (define *home-path* "/home/logoraz/dotfiles/")
 
 
@@ -101,6 +152,8 @@
    ;; Below is the list of packages that will show up in your
    ;; Home profile, under ~/.guix-home/profile.
    (packages (append
+              x11-util-packages
+              stumpwm-packages
               guile-packages
               logoraz-packages
               emacs-packages))
@@ -153,11 +206,6 @@
                         ,(string-append
                           *home-path*
                           "files/emacs"))
-                       ;; Lem Configuration Scaffolding
-                       (".config/lem"
-                        ,(string-append
-                          *home-path*
-                          "files/lem"))
                        ;; Nyxt Configuration Scaffolding
                        (".config/nyxt"
                         ,(string-append

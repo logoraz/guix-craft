@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Launch xterm in the background
-/run/current-system/profile/bin/xterm &
+/home/logoraz/.guix-home/profile/bin/xterm &
 
 # Sleep long enough to get the window open, and set transparency
 sleep 0.30s

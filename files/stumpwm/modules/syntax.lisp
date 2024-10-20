@@ -71,15 +71,3 @@
 ;;    (lambda ()
 ;;      (slynk:create-server :port (parse-integer port) :dont-close t))
 ;;    :name "Start Slynk server process."))
-
-
-;;; micros (cl-micros) --> ~/common-lisp
-(defcommand micros-start-server () ()
-  "Start a micros server."
-  (micros:create-server :port *stumpwm-port* :dont-close t)
-  (echo-string (current-screen) "Starting micros/swank."))
-
-(defcommand micros-stop-server () ()
-  "Stop current micros server."
-  (micros:stop-server *stumpwm-port*)
-  (echo-string (current-screen) "Closing micros/swank."))

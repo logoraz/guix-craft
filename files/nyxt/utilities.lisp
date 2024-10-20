@@ -19,15 +19,3 @@
 
 (in-package #:nyxt)
 
-(defvar *micros-port* 4006
-  "default micros server port for Nyxt.")
-
-(define-command start-micros (&optional (micros-port *micros-port*))
-  "Start a micros server enabling connecting to Lem."
-  (micros:create-server :port micros-port :dont-close t)
-  (echo "Micros server started at port ~a" micros-port))
-
-(define-command stop-micros (&optional (micros-port *micros-port*))
-  "Stop current micros server."
-  (micros:stop-server micros-port)
-  (echo "Closing micros/swank server at port ~a" micros-port))

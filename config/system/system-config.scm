@@ -4,73 +4,25 @@
   #:use-module (gnu services)
   #:use-module (guix packages)
   #:use-module (guix download)
-  #:use-module (guix transformations)
   #:use-module (guix ci)
+  #:use-module (guix transformations)
   #:use-module (nongnu packages linux)
   #:use-module (nongnu system linux-initrd))
 
 (use-system-modules keyboard)
-
-(use-package-modules lisp lisp-xyz wm xorg xdisorg linux fonts freedesktop
-                     ssh cups suckless networking package-management)
-
+(use-package-modules ssh cups suckless fonts wm lisp lisp-xyz)
 (use-service-modules cups ssh desktop xorg)
 
+(define locutus-keyboard-layout
+  (keyboard-layout "us"))
 
-;; Packages
 (define latest-sbcl
   (options->transformation
    '((with-latest . "sbcl"))))
 
-(define stumpwm-packages
-  (list (latest-sbcl sbcl)         ;;|--> gnu packages lisp
-        sbcl-zippy                 ;;|--> gnu packages lisp-xyz
-        sbcl-parse-float
-        sbcl-local-time
-        sbcl-cl-ppcre
-        sbcl-zpng
-        sbcl-salza2
-        sbcl-clx
-        sbcl-zpb-ttf
-        sbcl-cl-vectors
-        sbcl-cl-store
-        sbcl-trivial-features
-        sbcl-global-vars
-        sbcl-trivial-garbage
-        sbcl-bordeaux-threads
-        sbcl-cl-fad
-        sbcl-clx-truetype
-        stumpwm+slynk              ;;|--> gnu packages wm
-        sbcl-stumpwm-ttf-fonts     ;;:stumpwm-contrib/util
-        sbcl-stumpwm-kbd-layouts
-        sbcl-stumpwm-swm-gaps
-        sbcl-stumpwm-globalwindows
-        sbcl-stumpwm-cpu           ;;:stumpwm-contrib/modeline
-        sbcl-stumpwm-mem
-        sbcl-stumpwm-wifi
-        sbcl-stumpwm-battery-portable))
-
-(define x11-util-packages
-  (list font-hack           ;;|--> gnu packages fonts
-        font-jetbrains-mono
-        xterm               ;;|--> gnu packages xorg
-        transset
-        xhost
-        xset
-        xsetroot
-        xinput
-        xrdb
-        xrandr
-        xclip               ;;|--> gnu packages xdisorg
-        xsel
-        xss-lock
-        xdg-utils           ;;|--> gnu packages freedesktop
-        blueman             ;;|--> gnu package networking
-        bluez))
-
-
-(define locutus-keyboard-layout
-  (keyboard-layout "us"))
+(define stumpwm-base-packages
+  (list (latest-sbcl sbcl)
+        stumpwm+slynk))
 
 ;; System Services
 ;; Use Package substitutes instead of compiling everything & specify channels
@@ -173,10 +125,8 @@
 		  %base-file-systems))
 
    ;; Use 'guix search KEYWORD' to search for packages.
-   (packages (append
-              stumpwm-packages
-              x11-util-packages
-              %base-packages))
+   (packages (append stumpwm-base-packages
+                     %base-packages))
 
    (services guix-system-services)))
 
