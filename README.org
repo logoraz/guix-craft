@@ -11,11 +11,16 @@
 
 My personal GNU Guix OS (System & Home) + StumpWM Configuration!
 
+[[file:./files/assets/guix+stumpwm_desktop.png]]
+
 [[file:./files/assets/guix-os_stumpwm.png]]
 
 This is specifically setup and trailed with my Lenovo ThinkPad X1 Carbon 4th
 Gen (Type 20FB) Laptop.
 
+I am currently planing on switching to SwayWM for my Guix OS setup, however,
+this it will be a while before I get to this (link below for starter reference):
+https://systemcrafters.net/live-streams/september-27-2024/
 
 * My =Guix OS= Configuration
 

@@ -27,10 +27,11 @@
 ;;; Packages
 (define guile-packages
   (list guile-next ;;|--> gnu packages guile
-        guile-hoot ;;|--> gnu packages guile-xyz
-        guile-ares-rs
-        sdl2 ;;|--> gnu package sdl
-        guile-sdl2))
+        guile-ares-rs ;;|--> gnu packages guile-xyz
+        guile-hoot
+        guile-websocket
+        guile-sdl2 ;;|--> gnu package sdl
+        sdl2))
 
 (define logoraz-packages
   (list font-hack ;;|--> gnu packages fonts
